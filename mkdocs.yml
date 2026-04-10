@@ -1,0 +1,50 @@
+site_name: MatStream Help
+site_url: https://doc.matstream.com/
+theme:
+  name: material
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - search.suggest
+    - search.highlight
+    - toc.integrate
+
+nav:
+  - Home: index.md
+  - Getting started:
+    - What is MatStream?: getting-started/what-is-matstream.md
+    - Workspaces: getting-started/workspaces.md
+    - Quick start: getting-started/quick-start.md
+  - Entities:
+    - Overview: entities/overview.md
+    - Properties: entities/properties.md
+    - Revisions: entities/revisions.md
+    - Lifecycle: entities/lifecycle.md
+  - Administration:
+    - Categories: admin/categories.md
+    - Users & groups: admin/users-groups.md
+    - Numbering schemes: admin/numbering.md
+  - Vault integration:
+    - Syncing with Vault: vault-integration/sync.md
+  - Release notes:
+    - Changelog: release-notes/changelog.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
