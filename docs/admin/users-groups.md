@@ -1,0 +1,271 @@
+# Users and groups
+
+MatStream uses a group-based permission model. Users are organised into 
+groups, and groups are the primary mechanism for controlling what users 
+can see and do in the workspace. Rather than assigning permissions to 
+individuals, administrators assign permissions to groups — and users 
+inherit those permissions through their group memberships.
+
+---
+
+## Users
+
+Every person who accesses MatStream has a **workspace user** account. 
+A workspace user account is specific to the workspace — the same person 
+can have different roles and permissions in different workspaces.
+
+### User account details
+
+Each workspace user account holds:
+
+- **Name and email address** — used for identification and notifications
+- **Group memberships** — which groups the user belongs to
+- **Personal settings** — workspace-level preferences specific to this user
+- **Audit identity** — every action taken in MatStream is stamped with 
+  the user's identity
+
+### Adding users to the workspace
+
+To add a user to your workspace:
+
+1. Navigate to **Administration → Users**
+2. Click **Invite user**
+3. Enter the user's email address
+4. Assign the user to one or more groups
+5. Send the invitation
+
+The user receives an email invitation and sets up their account on 
+first login.
+
+!!! note
+    Users cannot access any workspace data until they have been added 
+    to at least one group. A user with no group memberships has no 
+    permissions in the workspace.
+
+---
+
+## Groups
+
+Groups are named collections of users that share the same permissions. 
+A user can belong to multiple groups and inherits the combined 
+permissions of all their groups.
+
+### Planning your groups
+
+Before creating groups, think about the distinct roles in your 
+organisation and what each role needs to do in MatStream:
+
+| Role | Typical needs |
+|---|---|
+| **Administrators** | Full access to all configuration and data |
+| **Engineers** | Create and edit entities, submit for review |
+| **Senior engineers** | All engineer permissions plus approve transitions |
+| **Quality** | Review and approve lifecycle transitions |
+| **Procurement** | View released entities and commercial properties |
+| **Management** | View all released data, no editing |
+| **Read only** | View released entities only |
+
+!!! tip
+    Start with the minimum number of groups needed for your initial 
+    use case. You can always add more groups as your needs become 
+    clearer. Too many groups with overlapping permissions become 
+    difficult to manage.
+
+### Creating a group
+
+To create a group:
+
+1. Navigate to **Administration → Groups**
+2. Click **New group**
+3. Enter a name for the group
+4. Configure the group's role capabilities
+5. Save the group
+6. Add users to the group
+
+---
+
+## Role capabilities
+
+Role capabilities are broad flags that define what a group is allowed 
+to do in the workspace. They set the top-level permission boundary — 
+lifecycle state permissions and property permissions then refine those 
+boundaries further.
+
+Common role capabilities include:
+
+| Capability | What it allows |
+|---|---|
+| **View entities** | Read access to entities in the workspace |
+| **Create entities** | Create new entities |
+| **Edit entities** | Edit entity properties and attach files |
+| **Delete entities** | Delete entities (use with caution) |
+| **Manage links** | Add and remove links between entities |
+| **Trigger transitions** | Move entities between lifecycle states |
+| **Manage workspace** | Access administration settings |
+| **Manage users** | Add and remove users and groups |
+| **Issue API keys** | Create and revoke API keys for integrations |
+
+!!! warning
+    Grant capabilities conservatively. Start with the minimum 
+    capabilities needed for each group and add more only when 
+    required. It is easier to grant additional permissions than 
+    to remove them after users have become accustomed to them.
+
+---
+
+## Lifecycle state permissions
+
+Role capabilities define what a group can do in general. Lifecycle 
+state permissions refine those capabilities based on the entity's 
+current state.
+
+For example:
+
+- The **Engineers** group has the Edit capability — but lifecycle 
+  state permissions prevent them from editing a Released entity
+- The **Quality** group has the Trigger transitions capability — but 
+  lifecycle state permissions restrict which transitions they can 
+  trigger in each state
+
+Lifecycle state permissions are configured within the lifecycle 
+definition — not within the group. See [Lifecycle](../entities/lifecycle.md) 
+for details.
+
+---
+
+## Transition permissions
+
+Each lifecycle transition can be restricted to specific groups. For 
+example:
+
+| Transition | Permitted groups |
+|---|---|
+| Submit for review | Engineers, Senior engineers |
+| Approve | Quality, Senior engineers |
+| Reject | Quality, Senior engineers |
+| Release | Quality |
+| Obsolete | Administrators |
+
+Transition permissions are configured within the lifecycle definition. 
+A user who does not have permission to trigger a transition will not 
+see the transition button on the entity detail page.
+
+---
+
+## Property permissions
+
+Individual properties can be restricted to specific groups. This allows 
+you to hide sensitive fields from users who do not need them — for 
+example:
+
+- **Commercial properties** (price, margin, supplier cost) — visible 
+  only to Procurement and Management
+- **Quality properties** (rejection rate, audit findings) — visible 
+  only to Quality and Management
+- **Internal properties** (internal notes, risk rating) — visible 
+  only to Senior engineers and Administrators
+
+Property permissions are configured within the category settings. 
+See [Categories](categories.md) for details.
+
+---
+
+## Tab permissions
+
+Display tabs can also be restricted to specific groups. For example:
+
+- The **NCR tab** on a part entity — visible only to Quality users
+- The **Commercial tab** — visible only to Procurement and Management
+- The **Engineering tab** — visible only to Engineers and above
+
+Tab permissions are configured within the category display tab settings. 
+See [Categories](categories.md) for details.
+
+---
+
+## The Administrators group
+
+The **Administrators** group is a special built-in group in MatStream. 
+Members of the Administrators group have full access to all workspace 
+data and configuration — regardless of other permission settings.
+
+!!! warning
+    Keep the Administrators group small. Only users who genuinely need 
+    full administrative access should be members. For day-to-day 
+    administration tasks that do not require full access, create a 
+    separate group with only the specific capabilities needed.
+
+---
+
+## API keys
+
+API keys allow external systems — such as the Autodesk Vault sync 
+plugin, a webshop integration, or an ERP connector — to access 
+MatStream without a personal user account.
+
+### Creating an API key
+
+To create an API key:
+
+1. Navigate to **Administration → API keys**
+2. Click **New API key**
+3. Enter a name describing what the key is used for 
+   (e.g. "Vault sync plugin")
+4. Set an expiry date if required
+5. Save — the key is shown once and cannot be retrieved again
+
+!!! warning "Store API keys securely"
+    An API key is shown only once when created. Copy it immediately 
+    and store it securely — for example in a password manager or 
+    secrets vault. If you lose an API key, you must revoke it and 
+    create a new one. Never store API keys in source code or 
+    configuration files that are committed to version control.
+
+### Revoking an API key
+
+To revoke an API key:
+
+1. Navigate to **Administration → API keys**
+2. Find the key you want to revoke
+3. Click **Revoke**
+
+The key is immediately invalidated. Any system using that key will 
+lose access until a new key is provided.
+
+---
+
+## Best practices
+
+**Use groups, not individuals** — always assign permissions to groups, 
+never to individual users. This makes permission management scalable 
+and consistent as your team grows.
+
+**Name groups by role, not by person** — call a group "Quality engineers" 
+not "Anna and Tom". Groups should represent roles that persist even 
+as team members change.
+
+**Review group memberships regularly** — when a user changes role or 
+leaves the organisation, review and update their group memberships 
+promptly. Stale memberships are a common source of permission issues.
+
+**Document your group structure** — keep a simple record of what each 
+group is intended to do and which capabilities it has. This makes 
+onboarding new administrators much easier.
+
+**Test permissions before go-live** — before launching MatStream to 
+your team, test the permission configuration with a test user account 
+in each group. Verify that each group can do exactly what it should 
+and nothing more.
+
+---
+
+## Next steps
+
+- [Numbering schemes](numbering.md) — configure the numbering templates 
+  used by your categories
+- [Categories](categories.md) — configure entity types and their 
+  property and tab permissions
+- [Lifecycle](../entities/lifecycle.md) — configure lifecycle state 
+  and transition permissions
+- [API keys and Vault integration](../vault-integration/sync.md) — 
+  set up external system access

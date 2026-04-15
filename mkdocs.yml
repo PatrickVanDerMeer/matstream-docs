@@ -1,4 +1,4 @@
-site_name: MatStream Help
+site_name: MatStream
 site_url: https://doc.matstream.com/
 theme:
   name: material
@@ -20,12 +20,20 @@ theme:
 
 nav:
   - Home: index.md
+  - Platform:
+    - What is MatStream?: platform/what-is-matstream.md
+    - Core concepts: platform/core-concepts.md
+    - How it works: platform/how-it-works.md
+  - Solutions:
+    - PLM: solutions/plm.md
+    - Document Control: solutions/document-control.md
+    - Quality Management: solutions/quality-management.md
+    - Inventory Management: solutions/inventory-management.md
   - Getting started:
-    - What is MatStream?: getting-started/what-is-matstream.md
-    - Workspaces: getting-started/workspaces.md
     - Quick start: getting-started/quick-start.md
-  - Entities:
-    - Overview: entities/overview.md
+    - Workspaces: getting-started/workspaces.md
+  - Core features:
+    - Entities: entities/overview.md
     - Properties: entities/properties.md
     - Revisions: entities/revisions.md
     - Lifecycle: entities/lifecycle.md
