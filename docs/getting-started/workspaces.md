@@ -1,60 +1,118 @@
 # Workspaces
 
-A workspace is a shared environment where your team manages documents, parts, and product data together. Everything in MatStream — entities, categories, users, lifecycle states — lives inside a workspace.
+A workspace is your organisation's isolated environment in MatStream. 
+Everything in MatStream lives inside a workspace — your entities, users, 
+configurations, lifecycle definitions, and settings are all scoped to 
+the workspace and completely separated from any other organisation using 
+the platform.
+
+Think of a workspace as your company's private instance of MatStream, 
+hosted on shared infrastructure but with a strict data boundary around it.
 
 ---
 
-## Creating a workspace
+## What a workspace contains
 
-If you are not yet part of a workspace, MatStream shows a **Welcome** screen after sign-in with a **Create a workspace** button.
+| Area | What it includes |
+|---|---|
+| **Entities** | All parts, assemblies, drawings, and documents your team manages |
+| **Users** | Everyone who has access to the workspace, with their roles and group memberships |
+| **Groups** | User groups that control permissions and access rights |
+| **Categories** | The entity types configured for your workspace |
+| **Lifecycle definitions** | The approval workflows assigned to your categories |
+| **Numbering schemes** | The templates that generate entity numbers |
+| **Revision schemes** | The sequences used for revision labels |
+| **Properties** | The custom data fields defined for your entity types |
+| **Settings** | Workspace-level configuration and feature toggles |
+| **API keys** | Keys for external integrations like the Vault sync plugin |
 
-Click it and follow the steps to set up your first workspace. You will become the owner and administrator of that workspace.
+---
+
+## Users and groups
+
+Every person who accesses MatStream does so through a **workspace user** 
+account. This account is specific to the workspace — the same person 
+can have different roles and permissions in different workspaces.
+
+Users are organised into **groups**. Groups are the primary mechanism 
+for controlling what users can do in the workspace. Rather than 
+assigning permissions to individuals, your administrator assigns 
+permissions to groups, and users inherit those permissions through 
+their group memberships.
+
+A user can belong to multiple groups and will inherit the combined 
+permissions of all their groups.
+
+### Common group examples
+
+| Group | Typical permissions |
+|---|---|
+| **Administrators** | Full access to all configuration and data |
+| **Engineers** | Create and edit entities, submit for review |
+| **Quality** | Approve lifecycle transitions, view all entities |
+| **Procurement** | View released entities and BOM data |
+| **Read only** | View all released entities, no editing |
 
 !!! note
-    You can also be invited to an existing workspace by an administrator. In that case you don't need to create one yourself — see [Users & groups](../admin/users-groups.md).
+    The groups in your workspace are configured by your administrator 
+    and may have different names and permissions than the examples above.
 
 ---
 
-## Accessing a workspace
+## Role capabilities
 
-After signing in, MatStream determines which workspace to open:
+Each group in a workspace carries a set of **role capabilities** — 
+broad flags that define what the group is allowed to do. These include 
+things like:
 
-| Situation | Behaviour |
-|---|---|
-| Default workspace set | Automatic redirect after 5-second countdown |
-| One workspace, no default | Immediate redirect |
-| Multiple workspaces, no default | Workspace picker shown |
-| No workspace at all | Welcome screen with Create option |
+- Creating new entities
+- Editing entity properties
+- Deleting entities
+- Triggering lifecycle transitions
+- Managing workspace configuration
 
----
-
-## Setting a default workspace
-
-When you are inside a workspace, open the **account menu** (top right, your email address) and click **Set [workspace name] as default**.
-
-MatStream will remember this workspace and redirect you to it automatically on your next sign-in.
-
-!!! tip
-    If you belong to multiple workspaces and want to switch, use the account menu to set a different default, or navigate directly via the URL `/w/{workspace-slug}`.
+Role capabilities set the broad rules. Lifecycle state permissions then 
+refine those rules further — for example, even if a group has edit 
+capability, they may not be able to edit a Released entity because the 
+lifecycle state restricts modification.
 
 ---
 
-## Workspace URL
+## Multiple workspaces
 
-Each workspace has a unique URL slug, for example:
+MatStream supports multiple workspaces on the same platform. 
+Organisations can use this to:
 
-```
-https://app.matstream.com/w/my-company
-```
+- Separate different business units or product lines
+- Maintain a test or staging workspace alongside a production workspace
+- Give subsidiaries or partners their own isolated environment
 
-You can share this URL with colleagues who are already members of the workspace.
+Each workspace is completely independent — entities, users, and 
+configurations do not cross workspace boundaries.
 
-!!! warning
-    Navigating to a workspace URL you are not a member of will show an **Access Denied** page. Contact the workspace administrator to request access.
+!!! tip "Which workspace am I in?"
+    The workspace name is always shown in the MatStream header. If you 
+    have access to multiple workspaces, you can switch between them 
+    from your account menu.
 
 ---
 
-## What's next?
+## API keys
 
-- [Users & groups](../admin/users-groups.md) — invite colleagues to your workspace
-- [Categories](../admin/categories.md) — organise your data with categories
+Workspaces can issue **API keys** for service-to-service or integration 
+access. This is how the Autodesk Vault sync plugin authenticates with 
+MatStream — it uses an API key issued by the workspace administrator 
+rather than a personal user account.
+
+API keys are managed by administrators only. See [API keys](../admin/api-keys.md) 
+for details.
+
+---
+
+## Next steps
+
+- [Accessing a workspace](workspace-access.md) — how to open, switch, 
+  and set a default workspace
+- [Quick start](quick-start.md) — get up and running with a practical walkthrough
+- [Administration](../admin/categories.md) — configure your workspace 
+  categories, groups, and settings

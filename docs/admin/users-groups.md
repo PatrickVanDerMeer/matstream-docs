@@ -1,120 +1,216 @@
-# Users & Groups
+# Users and groups
 
-This page explains how to manage users in your workspace — inviting new members, handling email confirmations, and organising users into groups.
+MatStream uses a group-based permission model. Users are organised into 
+groups, and groups are the primary mechanism for controlling what users 
+can see and do in the workspace. Rather than assigning permissions to 
+individuals, administrators assign permissions to groups — and users 
+inherit those permissions through their group memberships.
+
+For information on adding users to the workspace, see 
+[Inviting users](inviting-users.md).
 
 ---
 
-## User roles in MatStream
+## Users
 
-Every person who accesses a workspace is a **workspace user**. Users can be organised into **groups** to manage permissions collectively.
+Every person who accesses MatStream has a **workspace user** account. 
+A workspace user account is specific to the workspace — the same person 
+can have different roles and permissions in different workspaces.
+
+### User account details
+
+Each workspace user account holds:
+
+- **Name and email address** — used for identification and notifications
+- **Group memberships** — which groups the user belongs to
+- **Personal settings** — workspace-level preferences specific to this user
+- **Audit identity** — every action taken in MatStream is stamped with 
+  the user's identity
 
 ---
 
-## Inviting users to your workspace
+## Groups
 
-There are two ways to add users to a workspace: adding them individually or using bulk add.
+Groups are named collections of users that share the same permissions. 
+A user can belong to multiple groups and inherits the combined 
+permissions of all their groups.
 
-### Add a single user
+### Planning your groups
 
-Navigate to **Settings → Users** and click **Add user**. Enter the user's details including their email address and click **Save**.
+Before creating groups, think about the distinct roles in your 
+organisation and what each role needs to do in MatStream:
 
-### Bulk add by email
-
-Navigate to **Settings → Users** and click **Add users by email** in the toolbar.
-
-Paste one or more email addresses into the text area, separated by semicolons, commas, or newlines. Outlook-style formats are also supported:
-
-```
-alice@company.com
-bob@company.com
-John Doe <john.doe@company.com>
-```
-
-Click **Add Users**. MatStream processes each address and shows a summary:
-
-| Action | Meaning |
+| Role | Typical needs |
 |---|---|
-| **AddedExistingUser** | Email matched an existing MatStream account. User added and notified by email. |
-| **InvitedPlaceholderCreated** | Email not found in MatStream. An invitation to create an account was sent. |
-| **AlreadyInWorkspace** | User is already a member of this workspace. No action taken. |
-| **InvalidEmail** | The email address format is not valid. |
+| **Administrators** | Full access to all configuration and data |
+| **Engineers** | Create and edit entities, submit for review |
+| **Senior engineers** | All engineer permissions plus approve transitions |
+| **Quality** | Review and approve lifecycle transitions |
+| **Procurement** | View released entities and commercial properties |
+| **Management** | View all released data, no editing |
+| **Read only** | View released entities only |
 
-After reviewing the results, click **Close** to dismiss the dialog. The users grid refreshes automatically.
+!!! tip
+    Start with the minimum number of groups needed for your initial 
+    use case. You can always add more groups as your needs become 
+    clearer. Too many groups with overlapping permissions become 
+    difficult to manage.
 
----
+### Creating a group
 
-## How invitation emails work
+To create a group:
 
-MatStream sends different emails depending on whether the invited person already has an account.
-
-### Existing MatStream user
-
-The user receives an email with a direct link to your workspace:
-
-> **Subject:** You've been added to a MatStream workspace  
-> The email contains an **Open workspace** button linking to `app.matstream.com/w/{your-workspace-slug}`.
-
-The user can click the link and sign in immediately — no registration required.
-
-### New user (no MatStream account yet)
-
-The user receives an invitation to create an account:
-
-> **Subject:** You've been invited to MatStream  
-> The email contains a **Create account** button linking to the registration page with their email pre-filled.
-
-After registering and confirming their email, they are directed to your workspace automatically.
+1. Navigate to **Administration → Groups**
+2. Click **New group**
+3. Enter a name for the group
+4. Configure the group's role capabilities
+5. Save the group
+6. Add users to the group
 
 ---
 
-## Email confirmation
+## Role capabilities
 
-All new MatStream accounts require email confirmation before the user can sign in.
+Role capabilities are broad flags that define what a group is allowed 
+to do in the workspace. They set the top-level permission boundary — 
+lifecycle state permissions and property permissions then refine those 
+boundaries further.
 
-After registering, the user receives a **Confirm your registration** email. They must click the **Confirm registration** button to activate their account.
+Common role capabilities include:
 
-If the user does not receive the confirmation email:
+| Capability | What it allows |
+|---|---|
+| **View entities** | Read access to entities in the workspace |
+| **Create entities** | Create new entities |
+| **Edit entities** | Edit entity properties and attach files |
+| **Delete entities** | Delete entities (use with caution) |
+| **Manage links** | Add and remove links between entities |
+| **Trigger transitions** | Move entities between lifecycle states |
+| **Manage workspace** | Access administration settings |
+| **Manage users** | Add and remove users and groups |
+| **Issue API keys** | Create and revoke API keys for integrations |
 
-1. Ask them to check their spam or junk folder.
-2. On the sign-in screen, they can click **Resend Confirmation Email** to request a new one.
-
----
-
-## Default workspace for invited users
-
-When a user is added to your workspace, MatStream records their membership. The next time they sign in:
-
-- If they have no default workspace set, MatStream checks their workspace memberships automatically.
-- If they belong to only one workspace, they are redirected there immediately.
-- If they belong to multiple workspaces, a picker is shown so they can choose.
-
-Users can set their preferred default workspace from the account menu inside any workspace.
-
----
-
-## Managing groups
-
-Groups allow you to assign permissions to multiple users at once.
-
-Navigate to **Settings → Groups** to create and manage groups. You can:
-
-- Create a new group with a name and description
-- Add or remove users from a group
-- Assign permissions to the group (applied to all members)
-
-When you add a user via bulk add or individually, you can assign them to one or more groups at the same time.
+!!! warning
+    Grant capabilities conservatively. Start with the minimum 
+    capabilities needed for each group and add more only when 
+    required. It is easier to grant additional permissions than 
+    to remove them after users have become accustomed to them.
 
 ---
 
-## Disabling and removing users
+## Lifecycle state permissions
 
-To remove a user from the workspace, select them in the Users grid and click **Remove**. This removes their workspace membership but does not delete their MatStream account.
+Role capabilities define what a group can do in general. Lifecycle 
+state permissions refine those capabilities based on the entity's 
+current state.
 
-To temporarily prevent access without removing the user, edit the user and set **Enabled** to off.
+For example:
+
+- The **Engineers** group has the Edit capability — but lifecycle 
+  state permissions prevent them from editing a Released entity
+- The **Quality** group has the Trigger transitions capability — but 
+  lifecycle state permissions restrict which transitions they can 
+  trigger in each state
+
+Lifecycle state permissions are configured within the lifecycle 
+definition — not within the group. See [Lifecycle](../entities/lifecycle.md) 
+for details.
 
 ---
 
-## What's next?
+## Transition permissions
 
-- [Categories](categories.md) — control what each group can see and do per category
-- [Numbering schemes](numbering.md) — set up automatic numbering for entities
+Each lifecycle transition can be restricted to specific groups. For 
+example:
+
+| Transition | Permitted groups |
+|---|---|
+| Submit for review | Engineers, Senior engineers |
+| Approve | Quality, Senior engineers |
+| Reject | Quality, Senior engineers |
+| Release | Quality |
+| Obsolete | Administrators |
+
+Transition permissions are configured within the lifecycle definition. 
+A user who does not have permission to trigger a transition will not 
+see the transition button on the entity detail page.
+
+---
+
+## Property permissions
+
+Individual properties can be restricted to specific groups. This allows 
+you to hide sensitive fields from users who do not need them — for 
+example:
+
+- **Commercial properties** (price, margin, supplier cost) — visible 
+  only to Procurement and Management
+- **Quality properties** (rejection rate, audit findings) — visible 
+  only to Quality and Management
+- **Internal properties** (internal notes, risk rating) — visible 
+  only to Senior engineers and Administrators
+
+Property permissions are configured within the category settings. 
+See [Categories](categories.md) for details.
+
+---
+
+## Tab permissions
+
+Display tabs can also be restricted to specific groups. For example:
+
+- The **NCR tab** on a part entity — visible only to Quality users
+- The **Commercial tab** — visible only to Procurement and Management
+- The **Engineering tab** — visible only to Engineers and above
+
+Tab permissions are configured within the category display tab settings. 
+See [Categories](categories.md) for details.
+
+---
+
+## The Administrators group
+
+The **Administrators** group is a special built-in group in MatStream. 
+Members of the Administrators group have full access to all workspace 
+data and configuration — regardless of other permission settings.
+
+!!! warning
+    Keep the Administrators group small. Only users who genuinely need 
+    full administrative access should be members. For day-to-day 
+    administration tasks that do not require full access, create a 
+    separate group with only the specific capabilities needed.
+
+---
+
+## Best practices
+
+**Use groups, not individuals** — always assign permissions to groups, 
+never to individual users. This makes permission management scalable 
+and consistent as your team grows.
+
+**Name groups by role, not by person** — call a group "Quality engineers" 
+not "Anna and Tom". Groups should represent roles that persist even 
+as team members change.
+
+**Review group memberships regularly** — when a user changes role or 
+leaves the organisation, review and update their group memberships 
+promptly. Stale memberships are a common source of permission issues.
+
+**Document your group structure** — keep a simple record of what each 
+group is intended to do and which capabilities it has. This makes 
+onboarding new administrators much easier.
+
+**Test permissions before go-live** — before launching MatStream to 
+your team, test the permission configuration with a test user account 
+in each group. Verify that each group can do exactly what it should 
+and nothing more.
+
+---
+
+## Next steps
+
+- [Inviting users](inviting-users.md) — add users to your workspace
+- [Numbering schemes](numbering.md) — configure numbering templates
+- [Categories](categories.md) — configure entity types and permissions
+- [Lifecycle](../entities/lifecycle.md) — configure lifecycle state 
+  and transition permissions
