@@ -32,6 +32,7 @@ nav:
   - Getting started:
     - Quick start: getting-started/quick-start.md
     - Create an account: getting-started/create-account.md
+    - Reset your password: getting-started/reset-password.md
     - Workspaces: getting-started/workspaces.md
     - Accessing a workspace: getting-started/workspace-access.md
   - Core features:
@@ -43,6 +44,8 @@ nav:
     - Categories: admin/categories.md
     - Inviting users: admin/inviting-users.md
     - Users & groups: admin/users-groups.md
+    - Add or edit a user: admin/workspace-user-dialog.md
+    - Group membership: admin/group-membership-dialog.md
     - API keys: admin/api-keys.md
     - Numbering schemes: admin/numbering.md
   - Vault integration:

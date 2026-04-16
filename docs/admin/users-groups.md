@@ -29,6 +29,42 @@ Each workspace user account holds:
 
 ---
 
+## Disabling and removing users
+
+### Disabling a user
+
+To temporarily prevent a user from accessing the workspace without 
+removing them, edit the user and uncheck **Enabled**. The user 
+immediately loses access but their data, history, and group memberships 
+are preserved. You can re-enable them at any time.
+
+### Deleting a user
+
+To permanently remove a user, select them in the Users grid and click 
+**Delete User**. MatStream checks whether the user has any activity in 
+the workspace before deleting:
+
+- **No activity** — the user is permanently deleted.
+- **Has activity** — the user cannot be deleted because their identity 
+  is part of the workspace audit trail (entity versions, tasks, etc.). 
+  MatStream automatically disables the account instead and shows a 
+  message explaining what happened.
+
+!!! note
+    This behaviour protects the integrity of your audit trail. A user 
+    who has created or modified entities, or been assigned tasks, is 
+    part of the permanent record of your workspace. Deleting them would 
+    leave orphaned history with no identity attached.
+
+### Deleting multiple users
+
+You can select multiple users in the grid (Ctrl+click or Shift+click) 
+and click **Delete User** to process them all at once. MatStream applies 
+the same in-use check to each user individually and shows a summary of 
+how many were deleted and how many were disabled.
+
+---
+
 ## Groups
 
 Groups are named collections of users that share the same permissions. 
@@ -195,6 +231,10 @@ as team members change.
 **Review group memberships regularly** — when a user changes role or 
 leaves the organisation, review and update their group memberships 
 promptly. Stale memberships are a common source of permission issues.
+
+**Disable before you delete** — if you are unsure whether a user should 
+be removed permanently, disable them first. You can always re-enable 
+them later.
 
 **Document your group structure** — keep a simple record of what each 
 group is intended to do and which capabilities it has. This makes 
