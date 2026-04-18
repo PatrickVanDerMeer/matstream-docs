@@ -105,32 +105,47 @@ To create a group:
 
 ---
 
-## Role capabilities
+## Grants
 
-Role capabilities are broad flags that define what a group is allowed 
-to do in the workspace. They set the top-level permission boundary — 
-lifecycle state permissions and property permissions then refine those 
-boundaries further.
+Grants are the top-level access flags assigned to a group. They control 
+which surfaces and administrative features the group can access at all. 
+Think of grants as the doors into different areas of MatStream — a group 
+that does not have a grant for a surface cannot open it, regardless of 
+any other permissions.
 
-Common role capabilities include:
+Grants are organised into four areas:
 
-| Capability | What it allows |
-|---|---|
-| **View entities** | Read access to entities in the workspace |
-| **Create entities** | Create new entities |
-| **Edit entities** | Edit entity properties and attach files |
-| **Delete entities** | Delete entities (use with caution) |
-| **Manage links** | Add and remove links between entities |
-| **Trigger transitions** | Move entities between lifecycle states |
-| **Manage workspace** | Access administration settings |
-| **Manage users** | Add and remove users and groups |
-| **Issue API keys** | Create and revoke API keys for integrations |
+**Surfaces** — control access to the main working areas of MatStream, 
+such as the Library, Explorer, Tasks, and Change Orders. A user whose 
+groups do not include a surface grant will not see that surface in the 
+navigation.
+
+**Administration** — control access to workspace configuration features 
+such as managing users, managing groups, and changing workspace settings. 
+Grant these only to users who genuinely need to administer the workspace.
+
+**Catalog** — control access to the structural configuration of the 
+workspace: categories, numbering schemes, revision schemes, custom 
+properties, and lifecycle definitions. These are typically reserved 
+for the workspace administrator and senior configuration owners.
+
+**Reports** — control access to reporting and export features.
+
+Grants are assigned to groups from the **Grants** tab in the 
+[Edit Workspace Group dialog](workspace-group-dialog.md).
 
 !!! warning
-    Grant capabilities conservatively. Start with the minimum 
-    capabilities needed for each group and add more only when 
-    required. It is easier to grant additional permissions than 
-    to remove them after users have become accustomed to them.
+    Assign grants conservatively. Start with the minimum set of 
+    surfaces and features each group genuinely needs and add more 
+    only when required. It is easier to grant additional access than 
+    to remove it after users have become accustomed to it.
+
+!!! note "Grants vs. category permissions"
+    Grants operate at the feature level — they determine whether a 
+    group can open a surface at all. Once inside a surface, category 
+    permissions and lifecycle state permissions determine which 
+    specific entities and states the group can see and interact with. 
+    Both layers must be configured for a group to be fully functional.
 
 ---
 
