@@ -48,6 +48,11 @@ nav:
     - Group membership: admin/group-membership-dialog.md
     - API keys: admin/api-keys.md
     - Numbering schemes: admin/numbering.md
+  - Billing:
+    - Overview: billing/overview.md
+    - Upgrading your plan: billing/upgrading.md
+    - Invoices: billing/invoices.md
+    - Organisation settings: billing/organisation.md
   - Vault integration:
     - Syncing with Vault: vault-integration/sync.md
   - Release notes:
