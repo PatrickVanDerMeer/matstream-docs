@@ -34,20 +34,26 @@ nav:
     - Create an account: getting-started/create-account.md
     - Reset your password: getting-started/reset-password.md
     - Workspaces: getting-started/workspaces.md
+    - Workspace setup: getting-started/workspace-setup.md
     - Accessing a workspace: getting-started/workspace-access.md
-  - Core features:
-    - Entities: entities/overview.md
-    - Properties: entities/properties.md
-    - Revisions: entities/revisions.md
-    - Lifecycle: entities/lifecycle.md
   - Administration:
-    - Categories: admin/categories.md
     - Inviting users: admin/inviting-users.md
     - Users & groups: admin/users-groups.md
     - Add or edit a user: admin/workspace-user-dialog.md
     - Group membership: admin/group-membership-dialog.md
     - API keys: admin/api-keys.md
+  - Configuration:
+    - Overview: admin/configuration.md
+    - Categories: admin/categories.md
+    - Property definitions: admin/properties.md
+    - Lifecycle definitions: admin/lifecycle.md
+    - Revision schemes: admin/revision-schemes.md
     - Numbering schemes: admin/numbering.md
+  - Core features:
+    - Entities: entities/overview.md
+    - Properties: entities/properties.md
+    - Revisions: entities/revisions.md
+    - Lifecycle: entities/lifecycle.md
   - Billing:
     - Overview: billing/overview.md
     - Upgrading your plan: billing/upgrading.md
