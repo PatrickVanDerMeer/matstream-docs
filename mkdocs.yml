@@ -45,6 +45,7 @@ nav:
   - Configuration:
     - Overview: admin/configuration.md
     - Categories: admin/categories.md
+    - Categories Editor: admin/categories-editor-dialog.md
     - Property definitions: admin/properties.md
     - Lifecycle definitions: admin/lifecycle.md
     - Revision schemes: admin/revision-schemes.md
@@ -63,6 +64,8 @@ nav:
     - Syncing with Vault: vault-integration/sync.md
   - Release notes:
     - Changelog: release-notes/changelog.md
+  - Developer:
+    - Deferred save pattern: dev/deferred-save-pattern.md
 
 plugins:
   - search
