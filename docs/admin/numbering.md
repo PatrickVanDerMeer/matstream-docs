@@ -112,19 +112,31 @@ numbering scheme for each category so that counters are independent.
 
 To assign a numbering scheme to a category:
 
-1. Navigate to **Administration → Categories**
+1. Navigate to **Configuration → Categories**
 2. Open the category
 3. Select the numbering scheme from the dropdown
 4. Save the category
 
 ---
 
-## Creating a numbering scheme
+## Managing numbering schemes
 
-To create a new numbering scheme:
+Numbering schemes are managed under **Configuration → Numbering Schemes**.
 
-1. Navigate to **Administration → Numbering schemes**
-2. Click **New numbering scheme**
+### Available actions
+
+| Action | Description |
+|---|---|
+| **New** | Opens the editor to create a new scheme |
+| **Edit** | Opens the editor for the selected scheme |
+| **Copy** | Duplicates the selected scheme and opens the editor on the copy |
+| **Delete** | Deletes the selected scheme (with confirmation dialog) |
+| **Refresh** | Reloads the list from the server |
+
+### Creating a numbering scheme
+
+1. Navigate to **Configuration → Numbering schemes**
+2. Click **New**
 3. Enter a name for the scheme (e.g. "Purchased parts")
 4. Enter the template (e.g. `PP-{YYYY}-{NNNN}`)
 5. Configure the counter settings:
@@ -136,6 +148,29 @@ To create a new numbering scheme:
 
 MatStream shows a preview of what the next generated number will 
 look like based on your template and current counter value.
+
+### Copying a numbering scheme
+
+Select a scheme in the list and click **Copy**. MatStream creates a 
+duplicate of the scheme with all settings preserved and immediately 
+opens the editor on the copy. Rename it and adjust settings as needed, 
+then save. The copy is selected in the list after saving.
+
+This is the recommended way to create a new scheme that is similar to 
+an existing one — copy, rename, and adjust rather than creating from scratch.
+
+### Editing a numbering scheme
+
+Select a scheme and click **Edit**, or **double-click** any row in the 
+list — including rows that are not yet selected. The editor opens for 
+the row you double-click, regardless of which row was previously selected.
+
+### Deleting a numbering scheme
+
+Select a scheme and click **Delete**. A confirmation dialog appears 
+before the scheme is removed. Schemes that are currently assigned to 
+one or more categories cannot be deleted — unassign them from all 
+categories first.
 
 ---
 

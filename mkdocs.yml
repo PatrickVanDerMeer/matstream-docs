@@ -50,22 +50,29 @@ nav:
     - Lifecycle definitions: admin/lifecycle.md
     - Revision schemes: admin/revision-schemes.md
     - Numbering schemes: admin/numbering.md
+    - Import Definitions: features/import-definitions.md
   - Core features:
     - Entities: entities/overview.md
     - Properties: entities/properties.md
     - Revisions: entities/revisions.md
     - Lifecycle: entities/lifecycle.md
+  - Features:
+    - Explorer: features/explorer.md
+    - Search: features/search.md
+    - Import Definitions: features/import-definitions.md
+  - Integrations:
+    - MatStreamConnect: integrations/matstream-connect.md
+    - Syncing with Vault: vault-integration/sync.md
   - Billing:
     - Overview: billing/overview.md
     - Upgrading your plan: billing/upgrading.md
     - Invoices: billing/invoices.md
     - Organisation settings: billing/organisation.md
-  - Vault integration:
-    - Syncing with Vault: vault-integration/sync.md
   - Release notes:
     - Changelog: release-notes/changelog.md
   - Developer:
     - Deferred save pattern: dev/deferred-save-pattern.md
+    - Coding agreements: dev/coding-agreements.md
 
 plugins:
   - search
