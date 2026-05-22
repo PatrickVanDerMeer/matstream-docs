@@ -51,6 +51,9 @@ nav:
     - Revision schemes: admin/revision-schemes.md
     - Numbering schemes: admin/numbering.md
     - Import Definitions: features/import-definitions.md
+    - Print Templates:
+      - Managing templates: print-templates/print-templates-admin.md
+      - Authoring Word & Excel templates: print-templates/print-templates-authoring.md
   - Core features:
     - Entities: entities/overview.md
     - Properties: entities/properties.md
@@ -60,6 +63,7 @@ nav:
     - Explorer: features/explorer.md
     - Search: features/search.md
     - Import Definitions: features/import-definitions.md
+    - Print Templates: print-templates/print-templates-user.md
   - Integrations:
     - MatStreamConnect: integrations/matstream-connect.md
     - Syncing with Vault: vault-integration/sync.md
