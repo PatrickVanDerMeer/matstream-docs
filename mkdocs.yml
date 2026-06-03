@@ -45,27 +45,42 @@ nav:
   - Configuration:
     - Overview: admin/configuration.md
     - Categories: admin/categories.md
-    - Categories Editor: admin/categories-editor-dialog.md
+    - Categories Editor: admin/category-editor-dialog.md
     - Property definitions: admin/properties.md
     - Lifecycle definitions: admin/lifecycle.md
     - Revision schemes: admin/revision-schemes.md
     - Numbering schemes: admin/numbering.md
+    - Display Tabs: admin/display-tabs.md
+    - Units of Measure: admin/units-of-measure.md
+    - Text Templates: admin/text-templates.md
+    - Automations: admin/automations-admin.md
     - Import Definitions: features/import-definitions.md
     - Print Templates:
-      - Managing templates: print-templates/print-templates-admin.md
-      - Authoring Word & Excel templates: print-templates/print-templates-authoring.md
+      - Managing templates: admin/print-templates-admin.md
+      - Authoring Word & Excel templates: admin/print-templates-authoring.md
   - Core features:
     - Entities: entities/overview.md
     - Properties: entities/properties.md
     - Revisions: entities/revisions.md
     - Lifecycle: entities/lifecycle.md
+    - Files & documents: entities/files.md
   - Features:
+    - Dashboard: features/dashboard.md
+    - Library: features/library.md
     - Explorer: features/explorer.md
+    - Folders: features/folders.md
     - Search: features/search.md
     - Import Definitions: features/import-definitions.md
     - Print Templates: print-templates/print-templates-user.md
+    - Automations: features/automations.md
+    - AI Assistant: features/ai-assistant.md
+    - Tasks: features/tasks.md
+    - Stock management: features/stock.md
+    - Unit Converter: features/unit-converter.md
+    - Collaborate: features/collaborate.md
   - Integrations:
     - MatStreamConnect: integrations/matstream-connect.md
+    - Inventor BOM import: integrations/inventor-bom.md
     - Syncing with Vault: vault-integration/sync.md
   - Billing:
     - Overview: billing/overview.md
