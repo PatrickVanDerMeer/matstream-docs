@@ -29,11 +29,58 @@ Go to **Configuration → Automations**. The grid lists all automations in the w
 
 | Context type | Fires when |
 |---|---|
+| Universal | Available in any context |
 | Lifecycle transition | An entity version changes lifecycle state |
-| Import completed | An import batch finishes (success or with errors) |
-| Entity created | A new entity is created |
-| Entity updated | An entity's properties are saved |
-| Feature | A specific UI button or action is triggered |
+| Category lifecycle switch | An entity is switched from one lifecycle to another |
+| Inventory | A stock event occurs |
+| Scheduled | On a timed schedule |
+| On create | A new entity is created |
+| On save | An entity's properties are saved |
+| On delete / Before delete | An entity is deleted |
+
+---
+
+## Feature automations
+
+Alongside scripted automations, MatStream ships a set of **feature automations** — built-in actions written in the product rather than in script. They appear with a **lightning bolt** icon and cannot be edited or deleted; you attach them to a lifecycle transition and configure their settings.
+
+| Automation | What it does | Status |
+|---|---|---|
+| **Create Material Requirement** | Raises a Material Requirement line for the occurrence that changed state, linked back to it | Working |
+| **PO: Add to On Order** | When a purchase-order line enters Ordered, adds its quantity to On Order | Working |
+| **PO: Release from On Order** | When a purchase-order line leaves Ordered, releases the On Order quantity | Working |
+| **Bump Revision** | Bumps the entity to its next revision | Not implemented |
+| **Set Assignee** | Assigns the entity to a group or user | Not implemented |
+| **Notify** | Sends a notification | Not implemented |
+| **Switch Lifecycle** | Moves the entity onto a different lifecycle | Not implemented |
+
+!!! warning "Four of these do nothing yet"
+    `Bump Revision`, `Set Assignee`, `Notify` and `Switch Lifecycle` are registered and can be ticked on, but their implementations are still stubs — attaching them has no effect and produces no error. Only the three marked *Working* above actually run.
+
+    To switch an entity between lifecycles today, use the **lifecycle dropdown** in the Change State dialog, which is fully implemented — see [Lifecycle](../entities/lifecycle.md).
+
+### Attaching and configuring a feature automation
+
+1. Go to **Configuration → Lifecycle Definitions**, open the lifecycle and select a **state**.
+2. In the **Transitions** grid, select the transition you want.
+3. Open the **Automations** tab and tick **On** next to the automation.
+4. If the automation needs settings, a **gear** appears next to its name — click it.
+5. Fill in the settings and click **Apply**.
+
+A **warning triangle** next to an automation means a required setting is still missing. That automation will do nothing until it is configured — it stops silently rather than reporting an error, so the triangle is your only warning.
+
+### Settings by automation
+
+| Automation | Setting | Notes |
+|---|---|---|
+| Create Material Requirement | **MR line category** *(required)* | Restricted to Occurrence categories with **Material Requirement** behaviour |
+| | **Target folder** *(optional)* | Normally leave empty — the owning project is found automatically by walking up the folder tree. Only used when the entity has no project above it. |
+| Set Assignee | **Assign to group** | |
+| Notify | **Notify group**, **Message** | |
+| Switch Lifecycle | **Target lifecycle** | |
+
+!!! note "Folder, lifecycle and group settings show an id until re-picked"
+    When you reopen the settings dialog, a previously saved folder, lifecycle or group shows as `#123` rather than its name. Click the **…** button to re-pick it and the name appears. The saved value is correct either way — only the label is missing.
 
 ---
 

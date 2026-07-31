@@ -171,20 +171,64 @@ for details.
 
 ## Transition permissions
 
-Each lifecycle transition can be restricted to specific groups. For 
-example:
+Each lifecycle transition can be restricted to specific groups. A user 
+without permission for a transition is not offered that state in the 
+Change State dialog.
 
-| Transition | Permitted groups |
-|---|---|
-| Submit for review | Engineers, Senior engineers |
-| Approve | Quality, Senior engineers |
-| Reject | Quality, Senior engineers |
-| Release | Quality |
-| Obsolete | Administrators |
+Transition permissions are configured inside the lifecycle definition — 
+**Configuration → Lifecycle Definitions → [lifecycle] → [state] → 
+Transitions → [transition] → Permissions**.
 
-Transition permissions are configured within the lifecycle definition. 
-A user who does not have permission to trigger a transition will not 
-see the transition button on the entity detail page.
+### How the rule works
+
+There are only two cases, and the second one catches people out:
+
+- **A transition with no permission rows is open to everyone.**
+- **Adding a single permission row closes that transition to everyone 
+  except the groups granted Allow on it.**
+
+So permissions are not additive restrictions layered onto an open system — 
+the first grant you add *switches that transition from open to closed*. 
+The practical consequence is that you should grant your administrator 
+group on every transition first, then open individual paths to the groups 
+that need them. Otherwise the moment you grant Engineers the ability to 
+submit for review, you have removed it from everyone else including 
+yourself.
+
+!!! warning "Deny does not override Allow"
+    A row set to **Deny** does not block a user who is granted **Allow** 
+    through some other group — it simply fails to grant. Its only real 
+    effect is to make the transition restricted. To stop a group doing 
+    something, remove their Allow; do not add a Deny.
+
+### Engineering Lifecycle permissions
+
+The [Setup Wizard](../getting-started/workspace-setup.md) seeds a worked 
+example. It creates two groups — **Senior Engineers** and **Junior 
+Engineers** — and configures the Engineering Lifecycle so that every one 
+of its 20 transitions is granted to Administrators, with these additions:
+
+| Transition | Senior Engineers | Junior Engineers |
+|---|---|---|
+| Work in Progress → For Review | ✔ | ✔ |
+| For Review → Approved | ✔ | |
+| For Review → Work in Progress *(reject)* | ✔ | |
+| Approved → Released | ✔ | ✔ |
+| Approved → Work in Progress *(reject)* | ✔ | |
+| Approved → For Review *(re-review)* | ✔ | |
+| Released → Work in Progress *(revise)* | ✔ | |
+| *any state* → Obsolete | ✔ | |
+
+Juniors submit work and release what has been approved; seniors own the 
+review loop, revision and retirement; the remaining paths — the shortcuts 
+that skip review entirely — stay with administrators.
+
+!!! note "The seeded groups start empty"
+    Creating a group does not add anyone to it. Until you add members to 
+    Senior Engineers and Junior Engineers, only administrators can move 
+    anything through the Engineering Lifecycle. This is the most common 
+    "the wizard broke my workspace" report and it is a two-minute fix — 
+    add the members.
 
 ---
 

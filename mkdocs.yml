@@ -22,6 +22,7 @@ nav:
   - Home: index.md
   - Platform:
     - What is MatStream?: platform/what-is-matstream.md
+    - PDM vs PLM: getting-started/what-is-matstream.md
     - Core concepts: platform/core-concepts.md
     - How it works: platform/how-it-works.md
   - Solutions:
@@ -29,6 +30,7 @@ nav:
     - Document Control: solutions/document-control.md
     - Quality Management: solutions/quality-management.md
     - Inventory Management: solutions/inventory-management.md
+    - Project Management: solutions/project-management.md
   - Getting started:
     - Quick start: getting-started/quick-start.md
     - Create an account: getting-started/create-account.md
@@ -40,7 +42,10 @@ nav:
     - Inviting users: admin/inviting-users.md
     - Users & groups: admin/users-groups.md
     - Add or edit a user: admin/workspace-user-dialog.md
+    - Add or edit a group: admin/workspace-group-dialog.md
     - Group membership: admin/group-membership-dialog.md
+    - Group members: admin/group-members-dialog.md
+    - Group grants: admin/group-grants-dialog.md
     - API keys: admin/api-keys.md
   - Configuration:
     - Overview: admin/configuration.md
@@ -70,7 +75,6 @@ nav:
     - Explorer: features/explorer.md
     - Folders: features/folders.md
     - Search: features/search.md
-    - Import Definitions: features/import-definitions.md
     - Print Templates: print-templates/print-templates-user.md
     - Automations: features/automations.md
     - AI Assistant: features/ai-assistant.md

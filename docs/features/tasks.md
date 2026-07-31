@@ -66,8 +66,56 @@ Administrators define available task types in workspace settings.
 
 ---
 
+## Milestones
+
+Milestones are checkpoints on a Project — a specific, dated event like 
+"Design Freeze" or "Delivery" that the project needs to hit. They share 
+the same underlying mechanism as Tasks (a due date, a responsible 
+person, and a status), but represent a single point in time rather 
+than a piece of work with duration.
+
+| Field | Description |
+|---|---|
+| Name | Short label for the milestone (e.g. "Design Freeze") |
+| Due date | The date this milestone needs to be reached |
+| Responsible | The workspace user accountable for this milestone |
+| State | Current status — see below |
+
+### Milestone states
+
+Milestones follow their own lifecycle, separate from a Task's Open/In 
+Progress/Done states:
+
+| State | Meaning |
+|---|---|
+| **Planned** | The default starting state for a new milestone |
+| **At Risk** | Flag a milestone that may not be reached on time |
+| **Reached** | The milestone has been achieved (final state) |
+| **Missed** | The milestone's due date passed without being reached |
+
+### Creating a milestone
+
+Milestones are created from a Project's **Milestones** tab:
+
+1. Open the Project.
+2. Navigate to the **Milestones** tab.
+3. Click **New Milestone** in the tab's toolbar.
+4. Enter a name, due date, and (optionally) the responsible person.
+5. Save.
+
+The new milestone appears immediately in the Milestones tab, showing 
+its due date, responsible person, and state as columns.
+
+!!! note
+    Milestones are not library items — you don't search for or reuse 
+    an existing milestone definition. Each one is created fresh, 
+    specific to the project it belongs to.
+
+---
+
 ## Related
 
 - [Dashboard](dashboard.md) — the Tasks widget shows your open tasks
 - [Lifecycle management](../entities/lifecycle.md) — tasks are often created as part of lifecycle workflows
-- [Display Tabs](../admin/display-tabs.md) — add a Tasks tab to a category
+- [Display Tabs](../admin/display-tabs.md) — add a Tasks or Milestones tab to a category
+- [Workspace setup](../getting-started/workspace-setup.md) — the Setup Wizard's Projects template seeds Milestones automatically

@@ -37,6 +37,29 @@ Choosing the right data type matters — it determines how the value is stored, 
 
 Some properties are marked as system properties. These are created automatically by MatStream and are available in every workspace. System properties cannot be deleted but can be assigned to categories like any other property.
 
+### Derived system properties
+
+A second kind of system property is not stored at all — it is **calculated when the entity is read**. Stock figures are the clearest example: a purchase-order line's *Ordered Qty*, *Received Qty* and *Line Total* are summed from the stock ledger every time you look at the line, and cannot be typed into.
+
+Which derived properties an entity has depends on its category's **behaviour**:
+
+| Behaviour | Derived properties |
+|---|---|
+| Stock Line | Ordered Qty, Received Qty, Reserved Qty, Shipped Qty, Unit Price, Line Total |
+| Material Requirement | Reserved Qty, Ordered Qty, Open Qty |
+| Stock Location | On Hand, Reserved, Available, On Order |
+
+These appear in the property browser and the column chooser like any other property, but are read-only.
+
+### System keys
+
+Every system property has a stable **system key** — a short identifier such as `RequiredQty` or `OnHandQty` — used internally to find that property regardless of its display name or which workspace it is in.
+
+A stored property definition can also carry a system key. That is how a normal, editable property becomes something the platform can locate reliably: *Required Qty* on a Material Requirement Line is an ordinary decimal property that a buyer can change, but it carries the system key `RequiredQty` so the procurement process knows where to write the quantity.
+
+!!! warning "A system key must be unique across the workspace"
+    A key can belong to a derived system property **or** to a stored property definition, never both. Two properties sharing a key will cause the column chooser to fail to open. If the column chooser reports an error mentioning a duplicate key, this is the cause — find the two properties sharing that key and clear it from one of them.
+
 ---
 
 ## Managing property definitions

@@ -14,19 +14,21 @@ A root folder entity is created automatically. This is the top-level container i
 
 ### Base categories
 
-One base category is created for each entity family type:
+A small set of base categories is created:
 
 | Category | Family type | Notes |
 |---|---|---|
+| **Root** | Root | System category for the workspace root. Not selectable. |
 | **Folder** | Folder | Used for folder browser entities. No lifecycle assigned. |
-| **Task** | Task | General-purpose task category. |
-| **Document** | File | For file-based entities. |
-| **Occurrence** | Occurrence | For linked occurrence entities. |
+| **Task** | Occurrence | Carries the **Task** behaviour — due date, assignee, estimated hours. |
+| **Occurrence** | Occurrence | Generic linked occurrence. |
+| **File Occurrence** | Occurrence | An occurrence that carries a file. |
+| **Document** | Definition | For file-based library entities. |
 | **Item** | Definition | Generic item definition. |
 | **Person** | Definition | For person records. |
-| **Company** | Definition | For company/supplier records. |
+| **Company** | Definition | For company / supplier / customer records. |
 
-All categories except Folder are assigned the default lifecycle (see below).
+All of these except **Root** and **Folder** are assigned the default lifecycle (see below).
 
 !!! note
     These are starting-point categories. Your administrator can add, rename, and configure additional categories to match your organisation's specific requirements.
@@ -84,15 +86,128 @@ After workspace creation, your administrator should:
 5. **Configure numbering schemes** — set up automatic numbering for each category
 6. **Set up user groups** — configure groups with appropriate permissions and add workspace users
 
-!!! tip "Setup wizard — coming soon"
-    A guided setup wizard is planned that will walk administrators through configuring common domain templates — Document Control, PLM, Quality Management, Inventory Management, and Project Management — with pre-configured categories, lifecycles, and schemes appropriate for each domain.
+Most of this can be done faster with the **Setup Wizard**, described below.
+
+---
+
+## Setup Wizard
+
+The Setup Wizard, available from the workspace's **Setup** page in 
+MatStream Manage, seeds ready-made configuration templates instead of 
+building categories, lifecycles, and properties by hand. It is organized 
+into groups — **Explorer**, **Library**, and **Integrations** — and 
+each item can be checked independently.
+
+### Using the wizard
+
+1. Open the workspace in **MatStream Manage** and go to **Setup**.
+2. In the **Choose** step, check the templates you want to apply. 
+   Checking a group header selects everything under it; you can also 
+   check individual items within a group on their own.
+3. Click a tree item to see a short explanation of what it sets up in 
+   the panel on the right.
+4. Click **Next** to review your selection, then **Apply**.
+
+The wizard is safe to re-run — items that already exist in the 
+workspace are skipped, not duplicated.
+
+### Projects template
+
+**Explorer → Projects** is the main template, and it sets up considerably 
+more than its name suggests — it builds a complete engineering and 
+procurement workspace.
+
+**The project itself**
+
+- A **Project** folder category with the **Project** behaviour, its own 
+  lifecycle (In Preparation → Work in Progress → On Hold → Closed / 
+  Cancelled), and core properties (Title, Description, Client PO Number, 
+  SO Number, Shipping Address, Client).
+- **Contact Persons**, **Documents**, **Tasks** and **Milestones** tabs, so 
+  a Project immediately has somewhere to track people, files, work and 
+  dated checkpoints.
+- A **Company** library with Is Client / Is Supplier / Is a Lead flags — the 
+  same record serves as customer and supplier.
+
+**The engineering model**
+
+- Definition categories **Part**, **Assembly**, **Weld Assembly**, 
+  **Instrument**, **Equipment** and **WPS**, grouped in the category tree 
+  under a parent called **Item**.
+- A shared **Stock Number** numbering scheme, so an item's number *is* its 
+  name.
+- **BOM** / **Uses** tabs on Part, Assembly and Weld Assembly, plus a 
+  **Welds** tab on Weld Assembly, and Documents and Drawings tabs throughout.
+- An **Engineering Lifecycle** (Work in Progress → For Review → Approved → 
+  Released → Obsolete) applied to all six definition categories, with 
+  **Senior Engineers** and **Junior Engineers** groups and per-transition 
+  permissions already configured.
+- A **BOM Folder** folder category, so the placed BOM sits in its own folder 
+  inside the project and can carry its own Explorer column layout.
+
+**Procurement**
+
+- **Purchase Order**, with **Material Requirement Line** and **Purchase 
+  Order Line** grouped underneath it.
+- A **Procurement Lifecycle** (Engineering → Ready for Procurement → 
+  Reserved / Ordered → Delivered → Assembled) attached to BOM Position, so 
+  an engineer can flag an item as ready to buy.
+- A **Purchase Order Lifecycle** (Open → Issued → Received → Closed).
+
+Checking **Create Sample Project Data** additionally seeds a *Sample 
+Engineering Project* containing a real piping BOM (a Lube Oil system with 
+around 30 parts and a welded header), example milestones and tasks, a client 
+and a supplier company. It is the fastest way to see the whole model working 
+before you configure anything of your own.
+
+!!! tip "Expand the BOM to see it"
+    In the sample project, the BOM folder contains one item — the Lube Oil 
+    system. **Expand it** and its bill of materials is materialised into the 
+    Explorer tree as individual parts, each one a real entity with its own 
+    lifecycle that a buyer can act on.
+
+### Steps the wizard does not do
+
+Two things still need a person after the wizard runs:
+
+1. **Add users to the Senior Engineers and Junior Engineers groups.** The 
+   groups are created empty, so until someone is a member, only 
+   administrators can move items through the Engineering Lifecycle. See 
+   [Users & groups](../admin/users-groups.md).
+2. **Attach and configure the Create Material Requirement automation** on 
+   the Procurement Lifecycle's *Engineering → Ready for Procurement* 
+   transition, if you want requirements raised automatically. See 
+   [Automations](../admin/automations-admin.md#feature-automations).
+
+!!! tip
+    Other domain templates — Document Control, Quality Management, 
+    Inventory Management — are added over time. Check the wizard tree 
+    for what's currently available in your version of MatStream.
+
+### Re-running the wizard
+
+Everything the wizard creates is matched **by name**, so re-running it is 
+safe — existing items are skipped rather than duplicated, and the summary 
+tells you how many of each were created versus skipped.
+
+The flip side is that matching by name means the wizard will **not update** 
+something that already exists. If a category, property or lifecycle is 
+already present, its settings are left exactly as they are — even if the 
+template would now create it differently. To pick up changed template 
+settings you either adjust the item by hand or start from a new workspace.
+
+If the wizard reports *"did not fully apply"*, fix the reported problem and 
+click **Run again** — it resumes from where it stopped.
 
 ---
 
 ## Related
 
-- [Categories](categories.md) — configure category structure, properties, and schemes
-- [Users & groups](users-groups.md) — set up user groups and permissions
-- [Revision schemes](revision-schemes.md) — configure revision label sequences
-- [Numbering schemes](numbering.md) — configure automatic entity numbering
-- [Inviting users](inviting-users.md) — add users to your workspace
+- [Categories](../admin/categories.md) — configure category structure, properties, and schemes
+- [Users & groups](../admin/users-groups.md) — set up user groups and permissions
+- [Lifecycle definitions](../admin/lifecycle.md) — states, transitions and who may move between them
+- [Automations](../admin/automations-admin.md) — attach and configure built-in automations
+- [Revision schemes](../admin/revision-schemes.md) — configure revision label sequences
+- [Numbering schemes](../admin/numbering.md) — configure automatic entity numbering
+- [Inviting users](../admin/inviting-users.md) — add users to your workspace
+- [Tasks](../features/tasks.md) — how Milestones work once a Project is set up

@@ -23,13 +23,30 @@ The top section of the dialog contains the category's core settings:
 
 | Field | Description |
 |---|---|
-| **Name** | Required. The display name of the category. |
-| **Description** | Optional. A description of the category's purpose. |
-| **Lifecycle** | The lifecycle definition that governs this category's approval workflow. |
+| **Name** | Required. The display name of the category. Must be unique in the workspace — MatStream matches categories by name, so two categories cannot share one. Maximum 100 characters. |
+| **Description** | Optional. A description of the category's purpose. Maximum 255 characters. |
+| **Behavior type** | An optional extra capability — Project, Task, Stock Line, Material Requirement, Stock Location or Filter Item. See [Category behaviors](categories.md#category-behaviors). |
 | **Numbering scheme** | The template used to generate unique entity numbers. |
 | **Revision scheme** | The sequence used for formal revision labels. |
+| **Version creation policy** | When editing an entity creates a new version rather than updating the current one. |
+| **Is a file** | Whether entities of this category carry an attached file. |
+| **Show in New dialog** | When unticked, the category is hidden from the New dialog, Change Category, document upload and data import. It remains fully editable here. Use it for heading categories and for anything whose entities must only be created by a process. |
+| **Suppress children in Explorer** | Stops the Explorer expanding this category's entities into sub-items. |
 
 Changes to these fields mark the dialog as dirty immediately.
+
+!!! note "Lifecycles are on their own tab"
+    A category can carry more than one lifecycle, with one marked as the 
+    default that new entities start in. Use the **Lifecycles** tab rather 
+    than the General tab to assign them.
+
+!!! warning "Changing the behaviour of a category in use"
+    Behaviour determines which derived properties an entity has and how the 
+    platform treats it. Changing it on a category that already has entities 
+    can leave existing rows without the data the new behaviour expects — for 
+    example, switching a line category from Stock Line to Material 
+    Requirement leaves old lines with ledger entries but no stored quantity. 
+    Decide the behaviour before creating entities where you can.
 
 ---
 

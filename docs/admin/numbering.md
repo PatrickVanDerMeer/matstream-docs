@@ -21,10 +21,9 @@ For example:
 
 | Number | What it tells you |
 |---|---|
-| `PP-2026-0042` | Purchased part, created in 2026, 42nd in the sequence |
-| `AS-2026-0007` | Assembly, created in 2026, 7th in the sequence |
-| `NCR-2026-0134` | Non-conformance report, created in 2026, 134th raised |
-| `WI-001` | Work instruction, number 1 in a simple sequence |
+| `PR.2026.000042` | Project, created in 2026, 42nd in the sequence |
+| `ITEM-00007` | Item, 7th in the sequence |
+| `NCR-2026-00134` | Non-conformance report, created in 2026, 134th raised |
 
 Numbers are assigned automatically on entity creation — no user input 
 required, no risk of duplicates.
@@ -33,33 +32,82 @@ required, no risk of duplicates.
 
 ## Numbering scheme templates
 
-A numbering scheme is built from a template that combines static text 
-and dynamic tokens. The template is evaluated at the moment a new 
-entity is created to produce the final number.
+A numbering scheme is built from a **Template** that combines static text 
+and dynamic tokens, plus an optional **Number Format** mask that reformats 
+the result. The template is evaluated at the moment a new entity is 
+created to produce the final number.
 
 ### Available tokens
 
+Tokens are written in curly braces and are **not** case-sensitive — 
+`{yyyy}`, `{YYYY}` and `{Yyyy}` all work. Three tokens are recognized:
+
 | Token | What it produces | Example |
 |---|---|---|
-| `{YYYY}` | Four-digit current year | 2026 |
-| `{YY}` | Two-digit current year | 26 |
-| `{MM}` | Two-digit current month | 04 |
-| `{WW}` | Two-digit current week number | 15 |
-| `{NNNN}` | Auto-incrementing counter, zero-padded to 4 digits | 0042 |
-| `{NNN}` | Auto-incrementing counter, zero-padded to 3 digits | 042 |
-| `{NN}` | Auto-incrementing counter, zero-padded to 2 digits | 42 |
-| `{N}` | Auto-incrementing counter, no padding | 42 |
+| `{yyyy}` | Four-digit current year | 2026 |
+| `{week}` | Two-digit current ISO week number | 08 |
+| `{0...0}` | Auto-incrementing counter, zero-padded to the number of zeros in the token | `{0000}` → 0042 |
+
+The counter token can be any width — `{00}` pads to 2 digits, `{000000}` 
+pads to 6 digits, and so on. Only the *first* zero-padded token in a 
+template is treated as the counter.
+
+!!! warning "Unrecognised tokens are printed literally"
+    Any other `{...}` text is left in the output exactly as typed — a 
+    template of `PO{yy}{0000}` produces `PO{yy}0001`, because `{yy}` is not 
+    one of the three tokens. There is no error and no warning; the **Preview** 
+    column in the numbering schemes grid is where you will see it. Always 
+    check the preview after editing a template.
+
+    The tokens `{yy}`, `{ww}` and `{weeknr}` are **not** supported, despite 
+    looking plausible.
+
+!!! tip "Insert variable"
+    The Template field in the numbering scheme editor has an **Insert 
+    variable** button that lists all three tokens with a short 
+    description. Click one to append it to whatever you've already 
+    typed — this is the easiest way to build a template without 
+    memorizing the exact token syntax.
 
 ### Template examples
 
-| Template | Example output | Typical use |
+| Template | Raw output | Typical use |
 |---|---|---|
-| `PP-{YYYY}-{NNNN}` | PP-2026-0042 | Purchased parts with year |
-| `AS-{YYYY}-{NNNN}` | AS-2026-0007 | Assemblies with year |
-| `NCR-{YYYY}-{NNNN}` | NCR-2026-0134 | Non-conformance reports |
-| `WI-{NNN}` | WI-042 | Work instructions, simple sequence |
-| `{YYYY}-{WW}-{NNNN}` | 2026-15-0001 | Week-based numbering |
-| `PART-{NN}` | PART-07 | Simple short sequence |
+| `PR{yyyy}{000000}` | PR2026000001 | Projects, year + 6-digit sequence |
+| `ITEM-{00000}` | ITEM-00042 | Items, simple 5-digit sequence |
+| `{yyyy}-{week}-{0000}` | 2026-08-0001 | Week-based numbering |
+| `WI-{000}` | WI-042 | Work instructions, simple sequence |
+
+---
+
+## Number Format — reformatting the raw number
+
+The **Number Format** field is optional and separate from the Template. 
+Where the Template controls *what data* goes into the number (year, 
+week, sequence), Number Format controls *how it's visually grouped* — 
+adding separators like dots or dashes without changing the underlying 
+data.
+
+The mask uses only two kinds of characters:
+
+- **`#`** — consumes the next character from the raw (Template) output
+- Anything else — a literal character (e.g. `.`, `-`) inserted at that position
+
+For example, a Template of `PR{yyyy}{000000}` produces the raw string 
+`PR2026000001` (2 letters + 4-digit year + 6-digit sequence = 12 
+characters). A Number Format of `##.####.######` (2 + 4 + 6 = 12 `#` 
+placeholders) reformats that into:
+
+```
+PR.2026.000001
+```
+
+!!! note "Only `#` is supported"
+    The mask must use `#` as its placeholder character — not `0`. Use 
+    `\` to escape a literal `#` or `\` character if you ever need one 
+    as a literal in the output.
+
+Leave Number Format blank to use the raw Template output unformatted.
 
 ---
 
@@ -72,8 +120,8 @@ number that advances each time a new entity is created using that scheme.
 
 | Setting | What it controls |
 |---|---|
-| **Start value** | The first number in the sequence (default: 1) |
-| **Step** | How much the counter advances per entity (default: 1) |
+| **Index step** | How much the counter advances per entity (default: 1) |
+| **Range start** | The first number in the sequence |
 | **Range end** | An optional maximum value — MatStream warns when approaching the limit |
 
 ### Period resets
@@ -85,17 +133,17 @@ you want the sequence to restart each year or week.
 | Reset period | When the counter resets | Typical use |
 |---|---|---|
 | **None** | Never — the counter increments indefinitely | Simple sequences |
-| **Annual** | At the start of each calendar year | Year-embedded numbers (PP-{YYYY}-{NNNN}) |
-| **Weekly** | At the start of each calendar week | Week-embedded numbers ({YYYY}-{WW}-{NNNN}) |
+| **Annual** | At the start of each calendar year | Year-embedded numbers (`PR{yyyy}{000000}`) |
+| **Weekly** | At the start of each calendar week | Week-embedded numbers (`{yyyy}-{week}-{0000}`) |
 
 !!! warning "Annual reset and existing numbers"
     When a counter resets annually, the sequence starts again from 
     the configured start value. This means you could have both 
-    PP-2025-0042 and PP-2026-0042 in your catalogue — which is 
+    PR2025000042 and PR2026000042 in your catalogue — which is 
     intentional and correct, since the year makes them unique. 
     However, if you use a template without a year token and reset 
-    annually, you will get duplicate numbers. Always include a 
-    year or week token when using period resets.
+    annually, you will get duplicate numbers. Always include the 
+    `{yyyy}` or `{week}` token when using period resets.
 
 ---
 
@@ -137,17 +185,14 @@ Numbering schemes are managed under **Configuration → Numbering Schemes**.
 
 1. Navigate to **Configuration → Numbering schemes**
 2. Click **New**
-3. Enter a name for the scheme (e.g. "Purchased parts")
-4. Enter the template (e.g. `PP-{YYYY}-{NNNN}`)
-5. Configure the counter settings:
-   - Start value
-   - Step
-   - Range end (optional)
-   - Period reset (none, annual, weekly)
-6. Save the scheme
-
-MatStream shows a preview of what the next generated number will 
-look like based on your template and current counter value.
+3. Enter a name for the scheme (e.g. "Projects")
+4. Enter the template (e.g. `PR{yyyy}{000000}`) — use **Insert variable** 
+   to build it without memorizing token syntax
+5. Optionally enter a Number Format mask to add separators (e.g. `##.####.######`)
+6. Configure the counter settings:
+   - Index step
+   - Range start / Range end (optional)
+7. Save the scheme
 
 ### Copying a numbering scheme
 
@@ -185,32 +230,31 @@ its own counters.
 
 ## Best practices
 
-**Use a distinct prefix for each category** — prefixes like PP-, AS-, 
-NCR-, WI- make entity numbers self-describing. A user seeing PP-2026-0042 
-immediately knows it is a purchased part without needing to look it up.
+**Use a distinct prefix for each category** — prefixes make entity 
+numbers self-describing. A user seeing PR.2026.000042 immediately 
+knows it is a Project without needing to look it up.
 
 **Include the year for high-volume categories** — for categories where 
-you expect to create many entities, including {YYYY} in the template 
-keeps numbers shorter and makes it easy to see at a glance when an 
+you expect to create many entities, including `{yyyy}` in the template 
+keeps numbers meaningful and makes it easy to see at a glance when an 
 item was created.
 
 **Use annual resets for year-embedded schemes** — if your template 
-includes {YYYY}, configure an annual reset so the counter restarts 
-each year and numbers stay short (PP-2026-0042 rather than PP-2026-5842 
-after five years of use).
+includes `{yyyy}`, configure an annual reset so the counter restarts 
+each year and numbers stay short.
 
 **Keep sequences simple for low-volume categories** — for categories 
 where you create only a handful of entities per year, a simple 
-`WI-{NNN}` template without a year is often cleaner and easier to 
-communicate than `WI-{YYYY}-{NNN}`.
+`WI-{000}` template without a year is often cleaner and easier to 
+communicate than one with a year token.
 
 **Do not reuse prefixes** — each category should have a unique prefix. 
 Reusing a prefix across categories makes it impossible to identify 
 the entity type from the number alone.
 
-**Plan your range** — if you use a fixed-width counter like {NNN} 
+**Plan your range** — if you use a narrow counter token like `{000}` 
 (max 999), make sure your expected volume will not exceed that range. 
-Use {NNNN} (max 9999) or {N} (unlimited) for high-volume categories.
+Use a wider token like `{000000}` for high-volume categories.
 
 **Do not change schemes on active categories** — changing the numbering 
 scheme on a category that already has entities will not renumber 

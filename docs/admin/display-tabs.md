@@ -26,6 +26,15 @@ The tab list shows all display tabs currently assigned to this category. Drag ro
 | **Inherit** | Properties inherited from a linked Definition entity (for Occurrence entities) |
 | **Filter Result** | Results of a configurable filter query scoped to this entity |
 
+**Uses** comes in two forms — *Uses (flat list)* and *Uses (tree)* — chosen by the tab type itself rather than by a setting.
+
+!!! warning "Filter Result cannot filter on lifecycle state"
+    A Filter Result tab can filter by category and by property values, but **not 
+    by lifecycle state** — a state condition is silently ignored and the tab 
+    returns everything. You can still *show* Lifecycle and Occ. State as columns 
+    and sort on them, which is the usual workaround for a list like "open 
+    requirements".
+
 ---
 
 ## Adding a tab to a category
@@ -45,13 +54,57 @@ Each tab type has its own settings stored as a JSON object. The category editor 
 
 ### Uses / Where-Used settings
 
+A Uses tab is configured across three places in the display tab dialog.
+
+**General tab — what gets created**
+
 | Setting | Description |
 |---|---|
-| Show as tree | Display children in a hierarchical tree rather than a flat grid |
-| Show toolbar | Show the Add / Remove / Details toolbar above the grid |
-| Bump revision on link | Automatically increment the entity revision when a link is added or removed |
-| Filter categories | Only show linked entities that belong to selected categories |
-| Default columns | Which columns are visible by default in the grid |
+| Default Occurrence Category | The category created when a user adds a row. This is what the new line *becomes*. |
+
+**Settings tab — what the user may do**
+
+| Setting | Description |
+|---|---|
+| Allow Add | Show the **Add from Library** button. Turn this **off** for tabs whose rows must be created by a process rather than by hand. |
+| Allow Remove | Allow rows to be unlinked |
+| Allow Reorder | Allow rows to be dragged into a different order |
+| Bump version when link is added | Create a new entity version whenever a row is added |
+| Bump version when link is removed | Create a new entity version whenever a row is removed |
+| Default Columns | Which columns are visible by default. Leave empty to show all. |
+
+**Filter tab — which rows appear**
+
+A category tree with checkboxes, plus an optional property filter.
+
+!!! danger "Tick the occurrence category, not the definition"
+    The Filter tab decides **which rows the tab displays**, so it must list the 
+    **occurrence** categories the rows *are* — `BOM Position`, `Purchase Order 
+    Line` — and never the definition categories they point at (`Part`, 
+    `Assembly`). Ticking the definition category is the single most common 
+    configuration mistake and produces a tab that is **completely empty**, with 
+    no error to explain why.
+
+    The category tree also **cascades**: ticking a parent category ticks all its 
+    children. If your line categories are grouped under a parent — as Material 
+    Requirement Line and Purchase Order Line are under Purchase Order — tick the 
+    child on its own, then confirm only one category ended up selected.
+
+!!! note "Library search scope is not editable here"
+    Which *definition* categories the **Add from Library** picker offers is a 
+    separate setting from the row filter, and the display tab dialog does not 
+    expose it. Tabs created by the Setup Wizard have it set correctly; a tab you 
+    create by hand falls back to offering the row-filter categories. If you need 
+    a hand-made tab to search a different library scope, ask for it to be seeded 
+    rather than configured.
+
+!!! example "The Milestones tab"
+    The Milestones tab on the Project category (seeded by the Setup Wizard) is a 
+    regular Uses tab with its Default Occurrence Category set to Milestone, a 
+    row filter of Milestone, and default columns of Name / State / Due / 
+    Responsible. Library search is switched off in the seeded configuration, 
+    since milestones aren't library items — they're created directly with the 
+    tab's **New Milestone** button.
 
 ### General tab settings
 
@@ -98,3 +151,4 @@ Tabs appear in the entity detail page in ascending sort order. Set the **Sort Or
 - [Properties](properties.md) — define the properties shown on General tabs
 - [Lifecycle definitions](lifecycle.md) — lifecycle-state permissions that apply on General tabs
 - [Stock management](../features/stock.md) — set up Ledger tabs for inventory entities
+- [Tasks — Milestones](../features/tasks.md#milestones) — how the Milestones tab is used day-to-day

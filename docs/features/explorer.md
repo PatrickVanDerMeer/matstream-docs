@@ -61,7 +61,7 @@ Right-clicking a folder node opens a context menu with:
 
 ## Explorer Tree Grid (centre pane)
 
-`ExplorerTreeGridBrowser` displays the entities within the selected folder as a lazy-loading tree grid. It uses `EntityTreeGridLoadOnDemand`.
+`ExplorerTreeGridBrowser` displays the entities within the selected folder as a lazy-loading tree grid, rendered by `EntityTreeGridWebApi`.
 
 ### Ribbon
 
@@ -75,15 +75,37 @@ The Explorer ribbon (simplified layout) contains:
 
 ### Columns
 
-Default columns: Icon, Name, Description, State. Additional columns can be toggled via the column chooser. Conditional formatting rules highlight lifecycle states: Released (green), In Work (amber), Obsolete (red).
+Columns are chosen from the **column chooser** and include built-in fields (Icon, Name, Version, Revision, Category, Lifecycle, Occ. State, Created/Modified), stock figures where relevant, and any property definition in the workspace.
 
-### Show Folders toggle
+#### Column layouts are saved per folder category
 
-A toggle controls whether folder entities appear inline in the entity grid alongside regular entities. The preference is persisted per user via `WorkspaceUserSettingKeys.ExplorerShowFolders`.
+This is the important part, and it is easy to miss: **your column layout is remembered separately for each folder *category*, not for the Explorer as a whole.**
+
+So if your workspace has a *Project* folder category and a *BOM Folder* category, standing in a project shows one set of columns and stepping into its BOM folder shows another — each remembers its own widths, order and visibility. Change columns while in a BOM folder and you have changed them for every BOM folder, not for projects.
+
+Folders with no category fall back to a single shared Explorer layout.
+
+This is deliberate: a project folder wants Client, Milestones and dates, while a BOM folder wants Part Number, Material and Manufacturer. Giving a folder type its own category is the supported way to give it its own view.
+
+An administrator can seed sensible starting columns for a folder category, which apply until a user customises their own. Once a user changes anything, their layout wins from then on.
+
+### Object visibility
+
+The **Object Visibility** dropdown in the ribbon controls which categories appear in the grid — untick a category and its entities are hidden from the tree. The choice is remembered per user for the workspace.
 
 ### Child expansion suppression
 
 For entity types that represent order lines (e.g. Sales Order Lines, Purchase Order Lines), child expansion is suppressed in the Explorer grid — the tree does not attempt to expand these nodes into sub-items. This is controlled by the `SuppressChildExpansion` parameter passed to the SQL query, resolved dynamically by checking whether the parent entity's category matches known order-line category names rather than hardcoding IDs.
+
+### Bills of materials appear when you expand
+
+When an entity in the Explorer is linked to a Library definition that has a BOM, **expanding it materialises that BOM into the tree**. Each BOM line becomes a real entity in the project — with its own lifecycle, properties and history — rather than a read-only preview of the library structure.
+
+This happens on first expand and needs no action from you. Rows created this way are marked as **inherited**, showing they came from the definition's BOM rather than being placed by hand.
+
+It matters because those rows are what procurement acts on: an engineer expands an assembly, selects a part, and moves it to *Ready for Procurement*. Until the assembly has been expanded at least once, its parts do not exist as individual entities and cannot be actioned separately.
+
+If a line is later removed from the Library BOM but the project entity has already been ordered against, the row is kept and flagged as **orphaned** rather than deleted, so procurement history is not lost.
 
 ### Linking entities
 
@@ -139,6 +161,8 @@ The placeholder checkbox is only visible in the edit dialog for File family enti
 ## Related
 
 - [Library](library.md) — flat search surface for entities
-- [Folders API](../api/folders.md) — REST endpoints for folder operations
+- [Folders](folders.md) — folder tree and folder operations
 - [Categories](../admin/categories.md) — configure entity types shown in the Explorer
-- [Entity placeholder](../entities/placeholder.md) — file placeholder entities
+- [Files & documents](../entities/files.md) — file entities and placeholders
+- [Lifecycle](../entities/lifecycle.md) — moving entities between states from the Explorer
+- [Stock management](stock.md) — how requirements and orders reach the ledger

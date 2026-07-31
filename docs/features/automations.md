@@ -112,7 +112,13 @@ if (context.toState === "Released") {
 
 ## Feature automations
 
-Feature automations are a special type tied to specific UI actions rather than system events. They allow workspace administrators to add custom behaviour to buttons or ribbon commands without changing the application code. Feature automations are listed alongside regular automations but have their own context type and are invoked by the UI component directly.
+Feature automations are **built into MatStream** rather than written in script. They perform actions the platform already knows how to do — raising a material requirement, updating on-order stock — and are shown with a **lightning bolt** icon.
+
+You do not create or edit them. Instead you attach one to a lifecycle transition and, where it needs settings, configure it with the **gear** button beside its name.
+
+They exist because some actions need to reach into stock, links and versioning in ways a sandboxed script cannot safely do. Where a scripted automation gives you flexibility, a feature automation gives you a supported, tested behaviour with no script to maintain.
+
+See [Automations — Administrator Guide](../admin/automations-admin.md#feature-automations) for the full list, what each one does, and which are still unimplemented.
 
 ---
 

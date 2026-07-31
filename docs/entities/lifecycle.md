@@ -45,6 +45,36 @@ For example:
 This controlled transition model prevents accidental or unauthorised 
 state changes that could compromise your approval process.
 
+## Changing state
+
+Select one or more entities and choose **Change State**. The dialog lists 
+each entity with its current state and lets you pick the new one.
+
+- The **New State** dropdown offers only states you are permitted to move to 
+  from where the entity is now. If a state you expected is missing, either no 
+  transition is configured for it or your group does not have permission.
+- **Assign to** optionally creates a task for the person who should act next.
+- **Comment** is recorded against the change.
+
+You can change several entities at once — use the **new state** dropdown at 
+the top to apply the same state to all of them.
+
+!!! note "Changing state usually creates a new version"
+    Depending on the category's version policy, moving an entity to a new 
+    state creates a new version rather than editing the current one, with the 
+    reason recorded as the state change. This is what keeps the history 
+    complete.
+
+### Switching to a different lifecycle
+
+The **lifecycle** dropdown at the top of the Change State dialog moves an 
+entity onto an entirely different lifecycle — for example handing a design 
+from an engineering process to a procurement one. The entity starts in the 
+new lifecycle's initial state.
+
+Only switches your administrator has configured for the category are offered, 
+and a switch can optionally create a task for whoever picks the work up next.
+
 ## Who can trigger a transition?
 
 Each transition can be restricted to specific user groups. For example:
@@ -53,9 +83,15 @@ Each transition can be restricted to specific user groups. For example:
 - Only the Quality team can approve **In review → Released**
 - Only administrators can move an entity to **Obsolete**
 
-If you do not see a transition button on an entity, your user group does 
-not have permission to trigger that transition. Contact your workspace 
-administrator if you believe this is incorrect.
+If a state you expect is not offered, your user group does not have 
+permission for that transition. Contact your workspace administrator if you 
+believe this is incorrect.
+
+!!! note "Conditions are not checked yet"
+    Your administrator can describe conditions on a transition — such as 
+    "all linked items must be Released" — but MatStream does not currently 
+    enforce them. A transition will succeed even if its conditions are not 
+    met. Permissions are the only enforced control today.
 
 ## Lifecycle state permissions
 

@@ -44,17 +44,35 @@ Each transition has:
 
 ### Transition permissions
 
-Each transition can be restricted to specific user groups. Only users in a permitted group will see the transition button on the entity detail page. If no groups are assigned, the transition is available to all users.
+Each transition can be restricted to specific user groups, in the **Permissions** tab of the transition. The rule is deliberately simple, and it has one consequence that surprises people:
+
+- **A transition with no permission rows is open to everyone.**
+- **As soon as you add a single permission row, that transition becomes closed by default** — only members of a group granted **Allow** on it can make the move.
+
+So granting a group on one transition does not just open it for that group; it simultaneously closes it for everyone else. The usual pattern is therefore to grant your administrator group on *every* transition first, then open individual paths to the groups that need them.
+
+!!! warning "Deny does not override Allow"
+    A permission row set to **Deny** does not block a user who is granted **Allow** through another group. It only fails to grant. Its real effect is to make the transition *restricted* — the same as any other row. If you need to positively block a group, remove their Allow rather than adding a Deny.
 
 ### Transition criteria
 
-Transitions can have **criteria** — conditions that must be met before the transition can be triggered. For example, a transition to Released might require that all required properties are filled in, or that at least one file is attached.
+Transitions can be given **criteria** — conditions such as "all linked items are Released" or a property check.
 
-If a criterion is not met, the transition is blocked and the user sees a message explaining what is required.
+!!! danger "Criteria are not enforced yet"
+    The criteria editor saves your configuration, but **nothing evaluates it at transition time**. A transition with unmet criteria will still succeed. The predefined checks (`All children are Released`, `No children are Obsolete`, `All linked items are Released`, `Has an attached file`, `Has no open tasks`) are currently names and descriptions only — no evaluator has been implemented.
+
+    Until that lands, use **transition permissions** to control who may move an entity, and treat criteria as documentation of intent rather than an enforced rule.
 
 ### Transition automations
 
-Transitions can trigger **automations** — actions that happen automatically when the transition is executed. For example, automatically moving linked entities to a specific state, or sending a notification.
+Transitions can trigger **automations** — actions that happen automatically when the transition is executed, such as raising a material requirement or adding an ordered quantity to stock.
+
+Open the transition's **Automations** tab. Every automation available for lifecycle transitions is listed; tick **On** to attach one. Automations that need configuring show a **gear** next to their name — click it to set their parameters, and a warning triangle appears while a required setting is still missing.
+
+!!! note "A failed automation does not fail the transition"
+    Each automation runs inside its own error handler. If one throws, the state change still commits and the failure is written to the API log. So a state that changed successfully is not proof that its automations ran — check the log if the expected side effect is missing.
+
+See [Automations — Administrator Guide](automations-admin.md#feature-automations) for what each built-in automation does.
 
 ---
 
@@ -92,13 +110,13 @@ All entities of that category will follow the configured lifecycle.
 
 ---
 
-## Default lifecycle
+## Seeded lifecycles
 
-When a new workspace is created, MatStream seeds a **Default Lifecycle** with the following states and transitions:
+### Default Lifecycle
 
-**States:** Work in Progress → For Review → Approved → Released
+Every new workspace is created with a **Default Lifecycle**:
 
-**Transitions:**
+**States:** Work in Progress *(initial)* → For Review → Approved → Released *(final)*
 
 | From | To |
 |---|---|
@@ -108,7 +126,31 @@ When a new workspace is created, MatStream seeds a **Default Lifecycle** with th
 | Approved | Released |
 | Released | Work in Progress (new revision cycle) |
 
-All base categories except Folder are assigned this lifecycle. You can modify the default lifecycle or create additional ones to match your specific approval processes.
+It is assigned to the base categories Task, Occurrence, File Occurrence, Document, Item, Person and Company. Root and Folder deliberately have no lifecycle.
+
+### Lifecycles added by the Setup Wizard
+
+Depending on which options you tick, the [Setup Wizard](../getting-started/workspace-setup.md) adds more:
+
+| Lifecycle | States | Applied to |
+|---|---|---|
+| **Engineering Lifecycle** | Work in Progress *(initial)* → For Review → Approved → Released *(final)* → Obsolete | Part, Assembly, Weld Assembly, Instrument, Equipment, WPS |
+| **Procurement Lifecycle** | Engineering *(initial)* → Ready for Procurement → Reserved / Ordered → Delivered → Assembled *(final)* | BOM Position, Material Requirement Line |
+| **Purchase Order Lifecycle** | Open *(initial)* → Issued → Received → Closed *(final)* | Purchase Order |
+| **Project Lifecycle** | In Preparation *(initial)* → Work in Progress → On Hold → Closed *(final)* / Cancelled | Project |
+| **Weld Lifecycle** | Work in Progress *(initial)* → Welded → NDT → Accepted *(final)* / Rejected | Weld |
+| **Drawing Lifecycle** | Draft → In Review → Released → Superseded *(final)* | Drawing |
+| **Milestone Lifecycle** | Planned → At Risk → Reached *(final)* / Missed | Milestone |
+
+!!! note "Naming convention"
+    Every seeded lifecycle name ends in **" Lifecycle"**. This is deliberate: without it, most lifecycles shared a name with a category (a *Purchase Order* lifecycle and a *Purchase Order* category), which made the Explorer **Lifecycle** and **Occ. State** columns ambiguous. Follow the same convention for lifecycles you create.
+
+**Engineering Lifecycle is fully connected.** Because engineers may need to move between states in any order, every state pair has a transition — 20 in total — and access is controlled entirely by transition permissions rather than by restricting the paths. See [Users & groups](users-groups.md#engineering-lifecycle-permissions) for the groups it seeds and what each may do.
+
+You can modify any seeded lifecycle or create your own.
+
+!!! warning "Only one final state per lifecycle"
+    A lifecycle may have exactly one state marked **Final**. In the Engineering Lifecycle, `Released` is final and `Obsolete` comes *after* it — Obsolete is not marked final. Design accordingly: "final" means the successful end of the process, not the last state in the list.
 
 ---
 

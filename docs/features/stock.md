@@ -73,11 +73,44 @@ The ledger distinguishes the following movement types:
 
 ---
 
-## Stock lines
+## Demand and supply lines
 
-Stock lines represent open order quantities — material requirements, sales order lines, or purchase order lines. They write `OnOrderAdd` or reservation ledger entries when created, and `OnOrderRelease` entries when closed.
+Two different kinds of line feed the stock picture, and the distinction matters.
 
-Stock lines are created programmatically (e.g. from an import or automation) or manually from the entity detail page.
+### Material Requirement lines — demand
+
+A **Material Requirement** records that something is *needed*: four of this part, by this date, for this project. Nothing has moved in stock, so **no ledger entry is written when a requirement is raised**.
+
+A requirement carries:
+
+| Field | Where it comes from |
+|---|---|
+| **Required Qty** | The quantity needed — taken from the BOM line when raised automatically |
+| **Required By** | When it is needed |
+| **Reserved Qty** | How much has been reserved from existing stock (from the ledger) |
+| **Ordered Qty** | How much has been put on a purchase order |
+| **Open Qty** | Required − Reserved − Ordered — what still needs sourcing |
+
+**Open Qty is the buyer's working number.** A requirement is finished when it reaches zero, regardless of how it got there — partly from the shelf, partly bought.
+
+### Purchase and sales order lines — supply and commitment
+
+These categories carry the **Stock Line** behaviour, meaning the line *is* a stock movement. Their quantities are computed live from the ledger:
+
+- A purchase-order line writes `OnOrderAdd` when it enters Ordered, and `OnOrderRelease` when it leaves.
+- A sales-order line reserves and then ships.
+
+### How a requirement gets satisfied
+
+1. An engineer moves a part in the Explorer to **Ready for Procurement**. If the *Create Material Requirement* automation is configured, a requirement line is raised automatically against the owning project.
+2. A buyer reviews open requirements and decides per line:
+    - **Reserve from stock** — writes an `MR Reservation` movement, raising Reserved Qty.
+    - **Order it** — creates a purchase-order line, which writes `OnOrderAdd` and raises Ordered Qty.
+3. Both routes can be used on the same requirement, so partial coverage works: 4 needed, 2 reserved, 2 ordered, 0 open.
+4. Receipt of the purchase order posts `PO Receipt`, moving the quantity from On Order to On Hand.
+
+!!! warning "Do not create requirement or order lines by hand"
+    Both category types are hidden from the New dialog for a reason. A line created by hand has no matching ledger entry, so its quantities read zero and stock figures are wrong. Always let the procurement process create them.
 
 ---
 

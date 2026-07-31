@@ -102,21 +102,37 @@ in the platform.
 
 ## Stock management
 
-Stock levels in MatStream are properties on stock item entities — 
-updated as stock moves in and out. Properties might include:
+Stock is not stored as a property you overwrite. Every change is written 
+to an immutable **ledger**, and the quantities you see — on hand, 
+reserved, on order, available — are derived from it. That means a stock 
+figure can always be explained: who changed it, when, by how much, and 
+which order or adjustment caused it.
 
-| Property | Description |
-|---|---|
-| Current stock | The current quantity on hand |
-| Reorder point | The level at which a reorder is triggered |
-| Reorder quantity | The standard quantity to order |
-| Unit of measure | Pieces, metres, kg, litres, etc. |
-| Stock location | Linked to a stock location entity |
-| Batch / lot | Linked to a specific batch or lot entity |
+Quantities are tracked per item **per location**, so the same part can be 
+held on several shelves and in several warehouses with a separate balance 
+for each.
 
-Stock movements can be captured as linked entities — a goods receipt 
-linked to a purchase order and a supplier, or a stock adjustment linked 
-to a non-conformance that resulted in scrapped material.
+Alongside the ledger, stock item entities carry the descriptive properties 
+you would expect — reorder point, reorder quantity, unit of measure, 
+batch or lot links — as ordinary editable properties.
+
+### From demand to delivery
+
+MatStream distinguishes what is *needed* from what is *ordered*:
+
+1. An engineer marks an item in a project as ready to procure. A 
+   **material requirement** is raised automatically, recording the 
+   quantity and the date it is needed. Nothing has moved in stock yet.
+2. A buyer reviews open requirements and decides per line whether to 
+   **reserve** existing stock or **order** it from a supplier. Both routes 
+   can be used on the same requirement.
+3. Ordering writes an on-order quantity; receipt turns that into on-hand 
+   stock.
+
+Each requirement tracks how much of it is still uncovered, so a buyer's 
+working list is simply everything not yet fully sourced.
+
+See [Stock management](../features/stock.md) for the detail.
 
 ---
 

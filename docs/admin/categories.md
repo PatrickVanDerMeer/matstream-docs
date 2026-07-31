@@ -27,6 +27,70 @@ is determined by that category's configuration.
 
 ---
 
+## Category behaviors
+
+Beyond the family type (Folder, Occurrence, Definition), a category can 
+optionally be given a **behavior** — an extra capability layered on top 
+of the plain entity model. A category without a behavior is a normal 
+entity type; a category with a behavior gets extra data and extra 
+built-in logic.
+
+| Behavior | What it adds |
+|---|---|
+| **Project** | Marks a folder category as a project root. Anything created underneath it — parts, tasks, milestones, sub-folders — can be traced back up to the project it belongs to. |
+| **Task** | Gives the category a plan (due date, assigned user, estimated hours) and its own status. Used for both work Tasks and Milestones — a Milestone is simply a Task-behavior category with a zero-duration lifecycle. |
+| **Stock Line** | Marks the category as *being* a stock movement. Ordered, received, reserved and shipped quantities are computed live from the stock ledger. Use it for purchase-order and sales-order lines. |
+| **Material Requirement** | Marks the category as a statement of *demand* rather than a movement. Required quantity and required-by date are stored on the line itself; nothing is posted to stock until a buyer reserves or orders against it. |
+| **Stock Location** | Marks the category as a physical or logical stock location, showing on-hand, reserved, available, and on-order quantities. |
+| **Filter Item** | Gives entities of this category a saved, re-runnable search instead of fixed content — used for smart, query-driven folders. |
+
+Most categories don't need a behavior at all. Assign one only when the 
+category needs the specific extra data or logic listed above — for 
+example, assign **Project** to your top-level project folder category, 
+and **Task** to both your Task and Milestone categories.
+
+!!! note "Stock Line vs Material Requirement"
+    The distinction matters. **Stock Line** means *"this row's numbers come from the ledger"* — true of a purchase-order line, whose ordered and received quantities are sums of stock movements. A **Material Requirement** is a statement of need: someone has said they want four of something by a date. Nothing has moved in stock, so its quantity lives on the line as a normal property and it posts no ledger entry. Using Stock Line for requirements makes stock appear to be on order when no order exists.
+
+!!! note "Filter Item is still being finished"
+    The Filter Item behavior is scaffolded but not yet fully functional 
+    in the current build. Avoid relying on it until a future release.
+
+---
+
+## Grouping categories
+
+Categories can be nested under a **parent category** purely to organise the 
+list. In the Categories tree you might see *Part*, *Assembly*, *Weld Assembly*, 
+*Instrument* and *Equipment* gathered under a parent called **Item**, or 
+*Material Requirement Line* and *Purchase Order Line* under **Purchase Order**.
+
+This grouping is presentation only:
+
+- Children do **not** inherit properties, tabs or lifecycles from the parent. Every category stands alone.
+- Filtering or searching for the parent does **not** return entities of its children.
+- A parent may hold its own entities like any other category — being a parent does not make it abstract.
+
+!!! warning "A parent must be the same family type as its children"
+    A Definition category can only be nested under another Definition category, an Occurrence under an Occurrence, and so on. If you set a parent of a different family, the setting is saved but silently ignored — the category simply appears at the top of its own family instead. If a category refuses to nest where you put it, this is almost always why.
+
+You can also drag categories onto one another in the Categories tree to re-parent them.
+
+### Hiding a category from the New dialog
+
+A category used purely as a heading, or one whose entities are only ever 
+created by the system, should have **Show in New dialog** unticked in the 
+category editor. That removes it from the New dialog, the Change Category 
+dialog, document upload and data import — while leaving it fully editable in 
+Configuration.
+
+Material Requirement Line and Purchase Order Line are both hidden this way: 
+their entities must be created through the procurement process so that the 
+matching stock ledger entries are written. One created by hand would show zero 
+quantities.
+
+---
+
 ## Planning your categories
 
 Before configuring categories in MatStream, it is worth spending time
@@ -51,29 +115,42 @@ For each type, ask:
 
 | Category | Lifecycle | Revision scheme | Numbering |
 |---|---|---|---|
-| Raw Material | Engineering workflow | Alphabetic (A, B, C) | RM-{YYYY}-{NNNN} |
-| Purchased Part | Engineering workflow | Alphabetic (A, B, C) | PP-{YYYY}-{NNNN} |
-| Manufactured Part | Engineering workflow | Alphabetic (A, B, C) | MP-{YYYY}-{NNNN} |
-| Assembly | Engineering workflow | Alphabetic (A, B, C) | AS-{YYYY}-{NNNN} |
-| Drawing | Drawing workflow | Numeric (1, 2, 3) | DWG-{YYYY}-{NNNN} |
+| Raw Material | Engineering workflow | Alphabetic (A, B, C) | RM{yyyy}{0000} |
+| Purchased Part | Engineering workflow | Alphabetic (A, B, C) | PP{yyyy}{0000} |
+| Manufactured Part | Engineering workflow | Alphabetic (A, B, C) | MP{yyyy}{0000} |
+| Assembly | Engineering workflow | Alphabetic (A, B, C) | AS{yyyy}{0000} |
+| Drawing | Drawing workflow | Numeric (1, 2, 3) | DWG{yyyy}{0000} |
 
 **Quality management:**
 
 | Category | Lifecycle | Revision scheme | Numbering |
 |---|---|---|---|
-| Non-conformance | NCR workflow | Numeric (1, 2, 3) | NCR-{YYYY}-{NNNN} |
-| Corrective action | CAPA workflow | Numeric (1, 2, 3) | CAPA-{YYYY}-{NNNN} |
-| Audit finding | Audit workflow | Numeric (1, 2, 3) | AF-{YYYY}-{NNNN} |
-| Customer complaint | Complaint workflow | Numeric (1, 2, 3) | CC-{YYYY}-{NNNN} |
+| Non-conformance | NCR workflow | Numeric (1, 2, 3) | NCR{yyyy}{0000} |
+| Corrective action | CAPA workflow | Numeric (1, 2, 3) | CAPA{yyyy}{0000} |
+| Audit finding | Audit workflow | Numeric (1, 2, 3) | AF{yyyy}{0000} |
+| Customer complaint | Complaint workflow | Numeric (1, 2, 3) | CC{yyyy}{0000} |
 
 **Document control:**
 
 | Category | Lifecycle | Revision scheme | Numbering |
 |---|---|---|---|
-| Work instruction | Document workflow | Numeric (1, 2, 3) | WI-{YYYY}-{NNN} |
-| Quality manual | Document workflow | Numeric (1, 2, 3) | QM-{NNN} |
-| Engineering spec | Document workflow | Numeric (1, 2, 3) | ES-{YYYY}-{NNN} |
-| Test procedure | Document workflow | Numeric (1, 2, 3) | TP-{NNN} |
+| Work instruction | Document workflow | Numeric (1, 2, 3) | WI{yyyy}{000} |
+| Quality manual | Document workflow | Numeric (1, 2, 3) | QM{000} |
+| Engineering spec | Document workflow | Numeric (1, 2, 3) | ES{yyyy}{000} |
+| Test procedure | Document workflow | Numeric (1, 2, 3) | TP{000} |
+
+**Project management** (seeded by the Setup Wizard's Projects template):
+
+| Category | Lifecycle | Numbering | Behavior |
+|---|---|---|---|
+| Project | Project (In Preparation → Work in Progress → On Hold → Closed / Cancelled) | PR{yyyy}{000000} | Project |
+| Milestone | Milestone (Planned → At Risk → Reached / Missed) | — | Task |
+| Task | — | — | Task |
+
+!!! tip
+    Numbering templates use `{yyyy}` for the year and `{0000}`-style 
+    zero tokens for the auto-incrementing sequence — see 
+    [Numbering schemes](numbering.md) for the full token reference.
 
 ---
 
@@ -262,3 +339,5 @@ an established catalogue.
   definitions work
 - [Properties](../entities/properties.md) — understand how properties
   work from a user perspective
+- [Project Management](../solutions/project-management.md) — a worked
+  example of the Project behavior in action
