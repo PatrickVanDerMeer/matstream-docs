@@ -1,6 +1,42 @@
 # Changelog
 
-## July 2026 — Current build
+## August 2026 — Current build
+
+### Changes
+
+**Setup Wizard reorganised**
+The wizard now offers two templates — **Engineering Project** and 
+**Integrations** — instead of the previous Explorer / Library / Integrations 
+groups. Each template's options appear directly in the tree and can be 
+checked on their own, with a description of the selected item in the panel 
+on the right. **Engineering Project Sample Data** is now a separate option, 
+checked by default, so the sample project can be left out without giving up 
+the configuration.
+
+**User groups seeded with the Engineering Project**
+Applying the Engineering Project configuration now creates **Engineering**, 
+**Purchasing**, **Production** and **Document Control** groups, ready to be 
+granted lifecycle transition permissions. The **Administrators** group is 
+unchanged — it is still created with the workspace itself, whether or not the 
+wizard is ever run.
+
+**Setup progress and summary**
+The wizard shows a progress bar while it runs, and the summary reports how 
+many items each part of the setup created. Items that already exist advance 
+the bar but stay out of the log, so the log shows only what was actually 
+added.
+
+**Faster setup**
+A full setup with sample data now completes in around 45 seconds, roughly a 
+third faster than before, after removing duplicated work from the seeding 
+sequence.
+
+**Document Control temporarily unavailable in the wizard**
+The Document Control option has been withdrawn while it is folded into the 
+Engineering Project configuration. Workspaces that already have controlled 
+documents are unaffected.
+
+## July 2026
 
 ### New features
 

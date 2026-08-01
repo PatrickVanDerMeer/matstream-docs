@@ -61,6 +61,10 @@ All base categories (except Folder) are assigned this lifecycle by default.
 !!! note
     The default lifecycle is a starting point. Your administrator can create additional lifecycle definitions and assign them to specific categories to match your approval processes.
 
+### Administrators group
+
+An **Administrators** user group is created and the workspace owner is added to it. This happens as part of workspace creation, so a workspace always has an administrator whether or not anyone runs the Setup Wizard. It is a system group and cannot be deleted.
+
 ### Base properties
 
 The following properties are created and available across all categories:
@@ -94,31 +98,36 @@ Most of this can be done faster with the **Setup Wizard**, described below.
 
 The Setup Wizard, available from the workspace's **Setup** page in 
 MatStream Manage, seeds ready-made configuration templates instead of 
-building categories, lifecycles, and properties by hand. It is organized 
-into groups — **Explorer**, **Library**, and **Integrations** — and 
-each item can be checked independently.
+building categories, lifecycles, and properties by hand. It offers two 
+templates — **Engineering Project** and **Integrations** — each with 
+options you can check independently.
 
 ### Using the wizard
 
 1. Open the workspace in **MatStream Manage** and go to **Setup**.
-2. In the **Choose** step, check the templates you want to apply. 
-   Checking a group header selects everything under it; you can also 
-   check individual items within a group on their own.
-3. Click a tree item to see a short explanation of what it sets up in 
-   the panel on the right.
+2. In the **Choose** step, check what you want to apply. Checking a 
+   template selects everything under it; you can also check its options 
+   individually.
+3. Click any item in the tree to see a short explanation of what it sets 
+   up in the panel on the right.
 4. Click **Next** to review your selection, then **Apply**.
 
-The wizard is safe to re-run — items that already exist in the 
-workspace are skipped, not duplicated.
+While it runs, a progress bar shows how far along it is and the log 
+below lists each item as it is created. Anything that already exists is 
+skipped silently — it advances the progress bar but stays out of the 
+log, so what you see listed is what was actually added. That also makes 
+the wizard safe to re-run.
 
-### Projects template
+### Engineering Project
 
-**Explorer → Projects** is the main template, and it sets up considerably 
-more than its name suggests — it builds a complete engineering and 
-procurement workspace.
+**Engineering Project → Engineering Project Configuration** is the main 
+option, and it sets up considerably more than its name suggests — it 
+builds a complete engineering and procurement workspace.
 
 **The project itself**
 
+- **Engineering**, **Purchasing**, **Production** and **Document Control** 
+  user groups, ready to be granted lifecycle transition permissions.
 - A **Project** folder category with the **Project** behaviour, its own 
   lifecycle (In Preparation → Work in Progress → On Hold → Closed / 
   Cancelled), and core properties (Title, Description, Client PO Number, 
@@ -154,11 +163,12 @@ procurement workspace.
   an engineer can flag an item as ready to buy.
 - A **Purchase Order Lifecycle** (Open → Issued → Received → Closed).
 
-Checking **Create Sample Project Data** additionally seeds a *Sample 
-Engineering Project* containing a real piping BOM (a Lube Oil system with 
-around 30 parts and a welded header), example milestones and tasks, a client 
-and a supplier company. It is the fastest way to see the whole model working 
-before you configure anything of your own.
+**Engineering Project Sample Data**, checked by default, additionally seeds a 
+*Sample Engineering Project* containing a real piping BOM (a Lube Oil system 
+with around 30 parts and a welded header), example milestones and tasks, and a 
+client and a supplier company. It is the fastest way to see the whole model 
+working before you configure anything of your own. Uncheck it if you want the 
+configuration only — an empty workspace ready for your own data.
 
 !!! tip "Expand the BOM to see it"
     In the sample project, the BOM folder contains one item — the Lube Oil 

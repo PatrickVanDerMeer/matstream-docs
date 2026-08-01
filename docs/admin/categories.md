@@ -139,7 +139,7 @@ For each type, ask:
 | Engineering spec | Document workflow | Numeric (1, 2, 3) | ES{yyyy}{000} |
 | Test procedure | Document workflow | Numeric (1, 2, 3) | TP{000} |
 
-**Project management** (seeded by the Setup Wizard's Projects template):
+**Project management** (seeded by the Setup Wizard's Engineering Project configuration):
 
 | Category | Lifecycle | Numbering | Behavior |
 |---|---|---|---|

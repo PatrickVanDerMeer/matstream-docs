@@ -66,10 +66,10 @@ the project the same way tasks attach to any other entity. See
 The fastest way to get a working Project setup is the **Setup Wizard**:
 
 1. Open the workspace in MatStream Manage and go to **Setup**.
-2. Check **Explorer → Projects**.
-3. Optionally also check **Create Sample Project Data** to seed a 
-   worked example (a sample project with a few milestones and tasks 
-   already in place).
+2. Check **Engineering Project → Engineering Project Configuration**.
+3. Leave **Engineering Project Sample Data** checked to seed a worked 
+   example (a sample project with milestones, tasks and a real piping 
+   BOM already in place), or uncheck it for the configuration only.
 4. Apply.
 
 See [Workspace setup](../getting-started/workspace-setup.md#setup-wizard) 
@@ -90,12 +90,12 @@ for the full wizard walkthrough.
 
 ## Getting started with project management
 
-1. **Run the Setup Wizard** — check Explorer → Projects (and, if you 
-   want a worked example, Create Sample Project Data).
-2. **Set up your Companies** — projects link to a Client, so make sure 
-   the Companies template is also applied.
-3. **Create your first project** — give it a Title, PO/SO numbers, and 
-   a Client.
+1. **Run the Setup Wizard** — check Engineering Project → Engineering 
+   Project Configuration (leave Engineering Project Sample Data checked 
+   if you want a worked example).
+2. **Create your first project** — give it a Title, PO/SO numbers, and 
+   a Client. The Company library that Client points at is set up for you 
+   as part of the same option.
 4. **Add milestones and tasks** — use the Milestones and Tasks tabs on 
    the project to track what needs to happen and by when.
 
@@ -104,7 +104,7 @@ for the full wizard walkthrough.
 ## Next steps
 
 - [Workspace setup](../getting-started/workspace-setup.md) — the Setup 
-  Wizard and what the Projects template seeds
+  Wizard and what the Engineering Project configuration seeds
 - [Tasks](../features/tasks.md) — Tasks and Milestones in detail
 - [Categories](../admin/categories.md) — how the Project category and 
   its behavior work under the hood

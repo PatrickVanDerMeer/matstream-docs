@@ -118,4 +118,4 @@ its due date, responsible person, and state as columns.
 - [Dashboard](dashboard.md) — the Tasks widget shows your open tasks
 - [Lifecycle management](../entities/lifecycle.md) — tasks are often created as part of lifecycle workflows
 - [Display Tabs](../admin/display-tabs.md) — add a Tasks or Milestones tab to a category
-- [Workspace setup](../getting-started/workspace-setup.md) — the Setup Wizard's Projects template seeds Milestones automatically
+- [Workspace setup](../getting-started/workspace-setup.md) — the Setup Wizard's Engineering Project configuration seeds Milestones automatically
