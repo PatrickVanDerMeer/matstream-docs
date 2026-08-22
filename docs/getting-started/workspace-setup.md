@@ -97,9 +97,9 @@ Most of this can be done faster with the **Setup Wizard**, described below.
 ## Setup Wizard
 
 The Setup Wizard, available from the workspace's **Setup** page in 
-MatStream Manage, seeds ready-made configuration templates instead of 
-building categories, lifecycles, and properties by hand. It offers two 
-templates — **Engineering Project** and **Integrations** — each with 
+MatStream Manage, seeds ready-made configuration templates instead of
+building categories, lifecycles, and properties by hand. It offers three
+templates — **Engineering Project**, **Document Control** and **Integrations** — each with
 options you can check independently.
 
 ### Using the wizard
@@ -176,6 +176,33 @@ configuration only — an empty workspace ready for your own data.
     Explorer tree as individual parts, each one a real entity with its own 
     lifecycle that a buyer can act on.
 
+### Document Control
+
+**Document Control → Document Control Configuration** installs a complete,
+revision-aware issue process:
+
+- **Controlled Document**, **Transmittal**, **Submittal** and hidden
+  **Document Issue Line** categories.
+- Separate controlled-document, outgoing-transmittal and incoming-submittal
+  lifecycles.
+- Alphabetic document revisions and DOC / TR / SUB numbering schemes.
+- A Documents tab on each package for adding controlled documents through
+  Library Search.
+- An issue automation which pins every package line to the exact document
+  version visible when the transmittal is issued or the submittal is received.
+- A4 landscape Word print templates for outgoing and incoming document
+  registers.
+- Live worklists for open packages, awaiting and overdue responses, and
+  rejected document lines that require an update.
+
+**Document Control Sample Project** seeds
+`Projects/2026/P-2026-0042 - Cooling Water Pump Skid`. It contains five
+controlled documents, client / supplier / third-party companies, four outgoing
+transmittals and two incoming submittals. One transmittal is issued while the
+General Arrangement is revision A; the document is then advanced to revision B.
+Opening or printing the original transmittal still resolves revision A. The
+sample also includes received remarks, a rejected manual and overdue responses.
+
 ### Steps the wizard does not do
 
 Two things still need a person after the wizard runs:
@@ -190,7 +217,7 @@ Two things still need a person after the wizard runs:
    [Automations](../admin/automations-admin.md#feature-automations).
 
 !!! tip
-    Other domain templates — Document Control, Quality Management, 
+    Other domain templates — Quality Management,
     Inventory Management — are added over time. Check the wizard tree 
     for what's currently available in your version of MatStream.
 

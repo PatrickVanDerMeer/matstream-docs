@@ -40,13 +40,18 @@ created to produce the final number.
 ### Available tokens
 
 Tokens are written in curly braces and are **not** case-sensitive — 
-`{yyyy}`, `{YYYY}` and `{Yyyy}` all work. Three tokens are recognized:
+`{yyyy}`, `{YYYY}` and `{Yyyy}` all work.
 
 | Token | What it produces | Example |
 |---|---|---|
 | `{yyyy}` | Four-digit current year | 2026 |
 | `{week}` | Two-digit current ISO week number | 08 |
 | `{0...0}` | Auto-incrementing counter, zero-padded to the number of zeros in the token | `{0000}` → 0042 |
+
+These three are the ones offered by the **Insert variable** button. Three 
+further aliases also work, though they are not in the picker: `{year}` 
+(same as `{yyyy}`), `{iso-week}` (same as `{week}`), and `{month}` — a 
+two-digit month, which has no equivalent in the picker at all.
 
 The counter token can be any width — `{00}` pads to 2 digits, `{000000}` 
 pads to 6 digits, and so on. Only the *first* zero-padded token in a 
@@ -55,12 +60,16 @@ template is treated as the counter.
 !!! warning "Unrecognised tokens are printed literally"
     Any other `{...}` text is left in the output exactly as typed — a 
     template of `PO{yy}{0000}` produces `PO{yy}0001`, because `{yy}` is not 
-    one of the three tokens. There is no error and no warning; the **Preview** 
-    column in the numbering schemes grid is where you will see it. Always 
-    check the preview after editing a template.
+    one of the recognised tokens. There is no error and no warning; the 
+    **Preview** column in the numbering schemes grid is where you will see 
+    it. Always check the preview after editing a template.
 
-    The tokens `{yy}`, `{ww}` and `{weeknr}` are **not** supported, despite 
-    looking plausible.
+    `{yy}`, `{ww}` and `{weeknr}` are the plausible-looking ones that do 
+    **not** print. Worse, they are not entirely inert: `{yy}` still triggers 
+    the annual counter reset and `{ww}`/`{weeknr}` still trigger the weekly 
+    one (see [Counter resets](#counter-resets)). A template using `{yy}` 
+    therefore resets every January while printing no year at all — which 
+    produces duplicate numbers. Use `{yyyy}`.
 
 !!! tip "Insert variable"
     The Template field in the numbering scheme editor has an **Insert 
@@ -107,6 +116,19 @@ PR.2026.000001
     `\` to escape a literal `#` or `\` character if you ever need one 
     as a literal in the output.
 
+!!! tip "The mask consumes letters too"
+    `#` consumes the next character of the raw output whatever it is — 
+    the prefix letters as much as the digits. That is why the mask in 
+    the example above starts with `##`: those two placeholders take the 
+    `P` and the `R`. Forget them and the mask will slice the number in 
+    the wrong places.
+
+    If the counter grows past the width of its token, the raw output 
+    simply gets longer and the mask runs out of placeholders — the 
+    leftover characters are appended unformatted (`MR-2026.0999` becomes 
+    `MR-2026.10000`, not an error). Widen the counter token if you want 
+    fixed-width numbers at that volume.
+
 Leave Number Format blank to use the raw Template output unformatted.
 
 ---
@@ -124,26 +146,31 @@ number that advances each time a new entity is created using that scheme.
 | **Range start** | The first number in the sequence |
 | **Range end** | An optional maximum value — MatStream warns when approaching the limit |
 
-### Period resets
+### Counter resets
 
-Counters can be configured to reset automatically at the start of a 
-new period. This is useful for date-embedded numbering schemes where 
-you want the sequence to restart each year or week.
+**There is no reset setting.** Resets are decided entirely by the tokens 
+in the template — if the template carries a date token, the counter 
+resets for that period automatically, and if it does not, the counter 
+runs indefinitely.
 
-| Reset period | When the counter resets | Typical use |
-|---|---|---|
-| **None** | Never — the counter increments indefinitely | Simple sequences |
-| **Annual** | At the start of each calendar year | Year-embedded numbers (`PR{yyyy}{000000}`) |
-| **Weekly** | At the start of each calendar week | Week-embedded numbers (`{yyyy}-{week}-{0000}`) |
+| Template contains | What happens |
+|---|---|
+| Neither a year nor a week token | The counter never resets — it increments indefinitely |
+| A year token (`{yyyy}`) | The counter resets to **Range start** on the first number issued in a new calendar year |
+| A week token (`{week}`) | The counter resets on the first number issued in a new ISO week |
+| Both | The counter resets on either boundary |
 
-!!! warning "Annual reset and existing numbers"
-    When a counter resets annually, the sequence starts again from 
-    the configured start value. This means you could have both 
-    PR2025000042 and PR2026000042 in your catalogue — which is 
-    intentional and correct, since the year makes them unique. 
-    However, if you use a template without a year token and reset 
-    annually, you will get duplicate numbers. Always include the 
-    `{yyyy}` or `{week}` token when using period resets.
+So `MR{yyyy}{0000}` restarts at 0001 every January without any further 
+configuration, while `MR{00000}` counts on forever. Nothing resets at 
+midnight on 1 January — the reset happens when the *next number is 
+issued*, so a scheme that sits unused until March resets then.
+
+!!! note "Resetting is what makes year-embedded numbers short"
+    An annually reset counter means both PR2025000042 and PR2026000042 
+    can exist in your catalogue. That is intentional and correct — the 
+    year makes them unique. It is also why you must never pair a reset 
+    with a template that does not print its date token: see the warning 
+    about `{yy}` above.
 
 ---
 
@@ -239,9 +266,11 @@ you expect to create many entities, including `{yyyy}` in the template
 keeps numbers meaningful and makes it easy to see at a glance when an 
 item was created.
 
-**Use annual resets for year-embedded schemes** — if your template 
-includes `{yyyy}`, configure an annual reset so the counter restarts 
-each year and numbers stay short.
+**Decide resets by choosing your tokens** — there is nothing to 
+configure. Including `{yyyy}` gives you a counter that restarts each 
+year and numbers that stay short; leaving it out gives you one 
+continuous sequence. Pick whichever suits the category and let the 
+template do the rest.
 
 **Keep sequences simple for low-volume categories** — for categories 
 where you create only a handful of entities per year, a simple 

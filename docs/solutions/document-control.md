@@ -32,6 +32,20 @@ The key requirements of document control are:
 MatStream meets all of these requirements out of the box — configured 
 to match your process, not a vendor-defined template.
 
+## Install the worked example
+
+The Setup Wizard can install the full model and an optional sample in one pass:
+
+1. Open the workspace in **MatStream Manage** and go to **Setup**.
+2. Select **Document Control Configuration**.
+3. Leave **Document Control Sample Project** selected for the worked
+   `P-2026-0042 - Cooling Water Pump Skid` scenario.
+4. Review the selection and click **Apply**.
+
+The configuration creates controlled documents, outgoing transmittals,
+incoming submittals, document issue lines, three lifecycles, numbering and
+revision schemes, print templates, and operational worklists.
+
 ---
 
 ## How MatStream handles document control
@@ -67,6 +81,24 @@ revision label — for example:
 The revision label is immutable once assigned. Superseded revisions 
 are retained in full — you can always view the exact content and 
 approval history of any previous issue.
+
+### Transmittals and submittals
+
+A **Transmittal** records documents sent to work preparation, a client,
+third party or supplier. A **Submittal** records an incoming package expected
+from a supplier or third party. Both use **Document Issue Line** occurrences as
+their contents.
+
+When a transmittal moves from *Ready to Issue* to *Issued*, or a submittal from
+*Expected* to *Received*, MatStream pins every line's definition link to its
+current document version. If the document later advances from revision A to B,
+the historic package continues to open and print A. This is the core audit
+boundary: current library content may change, an issued package may not.
+
+Package properties record the recipient, distribution channel, purpose, issue
+date, response due date, external reference, internal owner and response
+status. Live worklists expose open packages, expected and overdue responses,
+and rejected lines requiring a new document revision.
 
 ### Approval workflows
 
