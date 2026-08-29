@@ -73,20 +73,34 @@ The following fields are included in the Lucene index per entity:
 | Entity number (EV_Name) | Always indexed |
 | Entity name / description | Always indexed |
 | Key property values | Properties marked as searchable in the category definition |
+| Attached file content | Text extracted from PDF attachments — see below |
 
 Properties not marked searchable in the category configuration are not indexed and cannot be found via the search bar.
+
+### Searching document content
+
+Text is extracted from PDF attachments by a background job and indexed alongside the entity's own data. A search for a tag number, a note or a specification written *inside* a drawing therefore returns the drawing, not just entities whose number happens to match.
+
+Two details make this work in practice:
+
+- **CAD-plotted PDFs are read word by word.** Drawings exported from CAD place each glyph individually, so a naive read returns `H a l f  C o u p l i n g`. MatStream groups glyphs into words by position, which is what makes plotted title blocks and part callouts searchable at all.
+- **File content is indexed in its own field**, with an analyser suited to document prose rather than to part numbers. Identifier matching keeps its own behaviour — separator normalisation and prefix matching — and is not diluted by the surrounding text of a document.
+
+Extraction runs after upload, so a very recently attached file may not be searchable for a few moments. Only PDF attachments are extracted today.
 
 ---
 
 ## When to rebuild the index
 
-The Lucene index is updated automatically on entity create/update. A manual index rebuild may be needed after:
+The Lucene index is updated automatically on entity create/update. Changes are queued and processed by a background job rather than written inline, so a bulk change never blocks the interface — and a large import may take a little while to become fully searchable.
+
+A manual index rebuild may be needed after:
 
 - Bulk data imports
 - Schema migrations that affect indexed fields
 - Restoring a database backup
 
-Workspace administrators can trigger an index rebuild from workspace settings (if enabled).
+Workspace administrators can trigger a rebuild from workspace settings, which posts to `/api/wid/{wid}/search-index/rebuild`.
 
 ---
 

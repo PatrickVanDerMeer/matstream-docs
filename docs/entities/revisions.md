@@ -75,6 +75,43 @@ revision ever created, with:
 This gives you a complete, immutable record of what the entity looked 
 like at every official milestone.
 
+## Working with a past version
+
+The History tab is not just a list to read. Right-click any row for three 
+actions:
+
+| Action | What it does |
+|---|---|
+| **Details** | Opens that version read-only, so you can inspect it without any risk of editing it |
+| **Restore** | Brings that version's content forward as a **new** current version |
+| **Purge** | Permanently deletes that historic version |
+
+### Restore
+
+Restore never edits in place. It copies the chosen version's content forward 
+as a new version at the tip, stamped with the reason *"Restored from version 
+N"*. The versions in between are left exactly as they were, so the history 
+still shows what happened and when — including the restore itself.
+
+The current version cannot be restored over itself.
+
+### Purge
+
+Purge is permanent, and MatStream refuses it in three cases, each with its 
+reason stated:
+
+- **The current version cannot be purged.** Restore it first if you want it gone.
+- **An entity must keep at least one version.** The last one always stays.
+- **A pinned version cannot be purged.** If a parent occurrence is pinned to 
+  that specific version, purging it would break the reference — the message 
+  names how many parents are holding it.
+
+After a purge the entity is re-queued for search indexing, because what is 
+current may now carry different values.
+
+Whether purging is available at all, and how much history is retained, is 
+controlled by workspace settings and by the lifecycle configuration.
+
 ## Revisions and files
 
 File attachments in MatStream are linked to specific entity versions. 

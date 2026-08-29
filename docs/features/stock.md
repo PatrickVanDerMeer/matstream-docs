@@ -141,3 +141,5 @@ These categories carry the **Stock Line** behaviour, meaning the line *is* a sto
 - [Display Tabs](../admin/display-tabs.md) — configure the Stock and Ledger tabs on categories
 - [Entities overview](../entities/overview.md) — entity concepts
 - [Explorer](explorer.md) — navigate to item and location entities
+- [Procurement](procurement.md) — requirements, purchase orders, receiving and vendor documents
+- [Barcode scanning](barcode.md) - scanning items onto orders and pick lists

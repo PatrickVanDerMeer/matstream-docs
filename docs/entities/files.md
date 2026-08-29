@@ -93,7 +93,26 @@ To mark an entity as a placeholder:
 
 ## Storage
 
-Files are stored by an internal storage key, decoupling the logical attachment from the physical storage backend. The backend can be local disk, cloud blob storage, or another provider depending on your deployment. Contact your MatStream administrator for storage configuration.
+Files are stored by an internal storage key, decoupling the logical attachment from the physical file. Attachments reference a stored file; they do not own it.
+
+### Identical files are stored once
+
+Every upload is hashed with **SHA-256** as it is written, and matched against the workspace's existing files on both hash and byte length. If the content is already held, the new copy is discarded before it reaches permanent storage and the attachment simply points at the file that was already there.
+
+This is why:
+
+- Attaching the same specification to fifty items costs the storage of one file.
+- Re-uploading a file you already uploaded is free, and instant to store.
+- Checking a file back in **unchanged** creates no new stored content.
+
+Deduplication is scoped to the workspace — one tenant's files are never matched against another's.
+
+!!! note "Deduplication does not merge your attachments"
+    Two entities attached to the same content still have their own attachment rows, their own names and their own version history. Only the bytes are shared, and only inside one workspace.
+
+### Reclaiming space
+
+Stored content that no entity version references any longer is cleaned up by a background sweep, so deleting attachments eventually returns the disk space without any manual step.
 
 ---
 

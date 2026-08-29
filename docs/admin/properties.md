@@ -132,3 +132,4 @@ These are available immediately and can be assigned to any category.
 - [Categories](categories.md) — assign properties to categories and configure display settings
 - [Configuration overview](configuration.md) — recommended configuration order
 - [Properties](../entities/properties.md) — how users interact with properties on entities
+- [Barcode scanning](../features/barcode.md) - the Barcode data type and the scanner dialogs

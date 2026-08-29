@@ -81,3 +81,6 @@ Click **New** in the Library ribbon. Select a category from the picker, fill in 
 - [Explorer](explorer.md) — structure-based hierarchical navigation
 - [Entities overview](../entities/overview.md) — entity concepts and versioning
 - [Categories](../admin/categories.md) — configure categories and their properties
+- [Property Browser](property-browser.md) — editing properties, including across many rows
+- [Grids, columns & defaults](grid-defaults.md) — saved layouts and workspace defaults
+- [Uses & Where Used](where-used.md) — what a catalogue item is used by

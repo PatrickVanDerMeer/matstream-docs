@@ -38,8 +38,8 @@ The Setup Wizard can install the full model and an optional sample in one pass:
 
 1. Open the workspace in **MatStream Manage** and go to **Setup**.
 2. Select **Document Control Configuration**.
-3. Leave **Document Control Sample Project** selected for the worked
-   `P-2026-0042 - Cooling Water Pump Skid` scenario.
+3. Leave **Document Control Sample Project** selected to add the worked
+   `P-2026-0042` scenario below **Sample Engineering Project**.
 4. Review the selection and click **Apply**.
 
 The configuration creates controlled documents, outgoing transmittals,

@@ -14,7 +14,7 @@ The Explorer page (`/w/{workspaceSlug}/explorer`) is a three-pane splitter:
 | Centre (60%) | `ExplorerTreeGridBrowser` | Entity tree grid — shows entities in the selected folder |
 | Right (remaining) | `PropertyBrowser` | Property detail — shows properties of the selected entity |
 
-All three panes are resizable by dragging their splitter borders. Pane sizes are not currently persisted across sessions.
+All three panes are resizable by dragging their splitter borders, and the sizes you set are remembered per user for the next time you open the page. The preview and properties panels can also be hidden entirely; that choice is remembered too.
 
 ---
 
@@ -91,7 +91,11 @@ An administrator can seed sensible starting columns for a folder category, which
 
 ### Object visibility
 
-The **Object Visibility** dropdown in the ribbon controls which categories appear in the grid — untick a category and its entities are hidden from the tree. The choice is remembered per user for the workspace.
+The **Object Visibility** dropdown in the ribbon controls which categories appear in the grid — untick a category and its entities are hidden from the tree.
+
+Like column layouts, this choice is remembered **per folder category**, not once for the whole Explorer. A *Project* folder can hide Material Requirement lines while a buyer's folder shows nothing else. Folders with no category fall back to a single shared setting.
+
+An administrator can seed the visibility for a folder category as the workspace default, and any user can still override it for themselves — see [Grids, columns & defaults](grid-defaults.md).
 
 ### Child expansion suppression
 
@@ -166,3 +170,7 @@ The placeholder checkbox is only visible in the edit dialog for File family enti
 - [Files & documents](../entities/files.md) — file entities and placeholders
 - [Lifecycle](../entities/lifecycle.md) — moving entities between states from the Explorer
 - [Stock management](stock.md) — how requirements and orders reach the ledger
+- [Property Browser](property-browser.md) — the right-hand pane, including multi-row editing
+- [Grids, columns & defaults](grid-defaults.md) — column layouts, object visibility and workspace defaults
+- [Filter Items & Snapshots](filter-items.md) — saved queries placed in the tree
+- [Uses & Where Used](where-used.md) — structure and impact analysis

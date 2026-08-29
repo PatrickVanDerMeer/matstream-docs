@@ -2,6 +2,84 @@
 
 ## August 2026 — Current build
 
+### New features
+
+**Purchase orders, receiving and cancellation**
+Selected material requirements now become purchase orders — **one order per 
+vendor** — with an option to merge identical items into a single order line 
+(quantities summed, earliest date kept, coverage still tracked per 
+requirement). Receiving posts to the stock ledger against a chosen location 
+and settles the ordered quantity on the originating requirement. Cancelling 
+keeps the order — it may already have been sent — and returns its uncovered 
+requirements to *Requested*. Requirements with no vendor anywhere in the 
+line → source → definition chain are reported and skipped instead of blocking 
+the rest of the order. See [Procurement](../features/procurement.md).
+
+**Required vendor documents**
+A library item can declare the documents its vendor must supply — datasheets, 
+material certificates, ITPs, FAT reports, declarations of conformity. Each 
+project occurrence receives its own document rows from those templates, with 
+their own *Required → Submitted → Accepted* lifecycle, so vendor paperwork is 
+chased per project rather than per catalogue item.
+
+**Edit a property across many rows**
+Selecting several entities makes the Property Browser aggregate their values: 
+a shared value shows as itself, a mixed one as `<varies>`. Setting a value 
+writes it to every selected entity in one operation and reports how many were 
+written and which were skipped, with the reason. Works across categories, on 
+the properties the selection has in common. See 
+[Property Browser](../features/property-browser.md).
+
+**PDF content in the search index**
+Text is now extracted from PDF attachments and indexed alongside entity data, 
+so a search for a tag number or a note *inside* a drawing returns the drawing. 
+CAD-plotted PDFs are read word by word rather than glyph by glyph — without 
+that, plotted title blocks index as `H a l f  C o u p l i n g` and are 
+effectively unsearchable. File content sits in its own field so identifier 
+matching keeps its own behaviour.
+
+**Files are stored once, by content**
+Uploads are hashed with SHA-256 and matched against the workspace's existing 
+files on hash and byte length. Identical content is stored once however many 
+entities, versions or revisions reference it, and the duplicate is discarded 
+before it reaches permanent storage. A background sweep reclaims content no 
+version references any more.
+
+**Version history: Details, Restore and Purge**
+The History tab gained three row actions. **Details** opens a past version 
+read-only; **Restore** brings its content forward as a new version at the tip 
+(never editing in place, so the intervening history survives); **Purge** 
+permanently removes a historic version, refused with a stated reason when it 
+is the current version, the last remaining version, or pinned by a parent.
+
+**Workspace defaults for new users**
+The gear in any column chooser now offers **Save as initial default (new 
+users)** and **Reset to default settings**. Grid state resolves in three 
+tiers — your own layout, then the workspace default, then the built-in 
+fallback — so changing the default does not disturb colleagues who have 
+already customised the view. See 
+[Grids, columns & defaults](../features/grid-defaults.md).
+
+**Category visibility per folder category**
+Object Visibility in the Explorer ribbon is now scoped to the folder category 
+you are standing in, the same way column layouts already were, and is 
+seedable as a workspace default. A Project folder can hide Material 
+Requirement lines while a buyer's folder shows nothing else.
+
+**Filter snapshots**
+A filter's membership can be frozen at a point in time by attaching the 
+**Capture Filter Snapshot** automation to a lifecycle transition, which pins 
+the membership to the released revision. Filters also gained a self-anchoring 
+**Parent subtree** scope, so one filter category can be dropped into any 
+project and scope itself to that project with nothing to configure per 
+instance. See [Filter Items & Snapshots](../features/filter-items.md).
+
+**Lifecycle criteria are now evaluated**
+Transition criteria were configurable but never enforced. They are now 
+evaluated on every transition, graded as **error** (blocks) or **warning** 
+(reports and lets the user proceed), and include predefined checks such as 
+*the entity has a stored file* and *all linked items are released*.
+
 ### Changes
 
 **Setup Wizard reorganised**

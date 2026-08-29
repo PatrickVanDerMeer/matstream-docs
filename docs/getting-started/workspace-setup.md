@@ -195,8 +195,10 @@ revision-aware issue process:
 - Live worklists for open packages, awaiting and overdue responses, and
   rejected document lines that require an update.
 
-**Document Control Sample Project** seeds
-`Projects/2026/P-2026-0042 - Cooling Water Pump Skid`. It contains five
+**Document Control Sample Project** adds its folders and records below
+`Projects/<current year>/Sample Engineering Project`, creating that shared
+project folder if it does not exist. The scenario uses project number
+`P-2026-0042` and contains five
 controlled documents, client / supplier / third-party companies, four outgoing
 transmittals and two incoming submittals. One transmittal is issued while the
 General Arrangement is revision A; the document is then advanced to revision B.

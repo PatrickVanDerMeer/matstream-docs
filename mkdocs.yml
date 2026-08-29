@@ -75,12 +75,19 @@ nav:
     - Library: features/library.md
     - Explorer: features/explorer.md
     - Folders: features/folders.md
+    - Property Browser: features/property-browser.md
+    - Grids, columns & defaults: features/grid-defaults.md
     - Search: features/search.md
+    - Uses & Where Used: features/where-used.md
+    - Filter Items & Snapshots: features/filter-items.md
     - Print Templates: print-templates/print-templates-user.md
     - Automations: features/automations.md
     - AI Assistant: features/ai-assistant.md
     - Tasks: features/tasks.md
+    - Milestones: features/milestones.md
     - Stock management: features/stock.md
+    - Procurement: features/procurement.md
+    - Barcode scanning: features/barcode.md
     - Unit Converter: features/unit-converter.md
     - Collaborate: features/collaborate.md
   - Integrations:

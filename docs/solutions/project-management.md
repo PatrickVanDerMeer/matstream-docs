@@ -109,3 +109,4 @@ for the full wizard walkthrough.
 - [Categories](../admin/categories.md) — how the Project category and 
   its behavior work under the hood
 - [PLM](plm.md) — managing the parts and assemblies a project might deliver
+- [Milestones](../features/milestones.md) - dated checkpoints on a project
