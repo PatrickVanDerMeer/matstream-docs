@@ -1,6 +1,8 @@
 # Automations
 
-Automations let administrators define scripted event-driven actions that run automatically when things happen in MatStream — for example, sending a notification when an entity transitions to Released, or updating a property when an import completes.
+Automations let administrators define event-driven actions that run automatically when things happen in MatStream — for example, assigning a reviewer when an item moves to In Review, or filling in a property when it is released.
+
+Two kinds exist side by side. **Feature automations** are built-in actions you configure on a lifecycle transition and hand parameters to — create a material requirement, bump the revision, assign a task. **Script automations** run JavaScript you write yourself, for the cases the built-in list does not cover.
 
 ---
 
@@ -76,37 +78,85 @@ When you click **Test**, the script runs and the result is shown here. Any error
 
 ## Script context
 
-Each automation script receives a `context` object whose properties depend on the context type:
+A script talks to MatStream through a single `matstream` object:
 
-**Lifecycle transition context:**
 ```js
-context.entityId        // ID of the entity version that transitioned
-context.entityNumber    // Entity number string
-context.fromState       // Name of the previous lifecycle state
-context.toState         // Name of the new lifecycle state
-context.workspaceSlug   // Current workspace slug
+matstream.entity.getName()                  // the item's name
+matstream.entity.getRevision()              // its revision letter
+matstream.entity.getVersion()               // its version number
+matstream.entity.getCategory()              // its category name
+matstream.entity.getLifecycleState()        // its current state
+matstream.entity.getProperty("Material")    // a property value, by display name
+matstream.entity.setProperty("Checked", "yes")
+
+matstream.log.info("...")                   // and .warn() / .error()
+matstream.vars.set("key", value)            // scratch values within one run
+matstream.vars.get("key")
+matstream.env.get("REGION")                 // allow-listed settings only
 ```
 
-**Import completed context:**
-```js
-context.batchId         // Import batch ID
-context.profileName     // Import definition name
-context.insertCount     // Number of entities created
-context.updateCount     // Number of entities updated
-context.errorCount      // Number of rows that failed
-```
+Property names are matched without regard to case, and a property the item does
+not have reads as nothing.
+
+### Reads are a snapshot; writes are applied at the end
+
+Everything readable is loaded **before** the script starts, and every change is
+collected and applied **after** it finishes. Two things follow, and both are
+useful:
+
+- A script sees a consistent picture. Reading a property it set earlier in the
+  same run gives back what it set; reading anything else gives what was true
+  when the run began.
+- **A script that fails part way changes nothing.** Nothing is written unless
+  the whole script completes.
+
+### There is no network access
+
+A script cannot make HTTP requests. Scripts are written by whoever can edit an
+automation rather than by whoever deploys MatStream, and a script that could
+post to any address could reach anything the server can — internal services
+included. Calling out to another system belongs in an integration, not in a
+stored script.
+
+`matstream.env.get` reads only settings an administrator has explicitly
+allow-listed. It cannot see the server's environment, so it can never return a
+connection string or an API key.
+
+### What a script can change
+
+Property values. `bumpRevision`, `switchLifecycle` and `setAssignee` are
+accepted by the editor but not yet performed — each of them fires automations of
+its own, and running them from inside a transition needs a re-entrancy decision
+that has not been made. A script that calls one is reported rather than
+half-applied.
 
 ---
 
-## Example: notify on release
+## Example: flag a released item
 
 ```js
-// Send a log message when an entity moves to Released
-if (context.toState === "Released") {
-  await api.log.info(`Entity ${context.entityNumber} was released.`);
-  // Additional actions: update properties, call webhooks, etc.
+if (matstream.entity.getLifecycleState() === "Released") {
+  matstream.log.info(matstream.entity.getName() + " was released.");
+  matstream.entity.setProperty("Released By Script", "yes");
 }
 ```
+
+Use **Test** in the editor to run a script immediately. It runs against sample
+values rather than a real item, so it proves the script parses and behaves —
+not what it will do to your data.
+
+---
+
+## Run history
+
+Every automation run is recorded: which automation, on what, when, how long it
+took, and the error if it failed. Before this, a failing automation put a
+sentence on the dialog of whoever triggered it and then vanished — so "did that
+notification fire on Tuesday" had no answer, even though the state change it
+followed was permanent.
+
+A failure does not roll back the transition that triggered it. The state change
+stands, the person is told, and the run is recorded for somebody to look at.
 
 ---
 
@@ -142,3 +192,4 @@ See [Automations — Administrator Guide](../admin/automations-admin.md#feature-
 - [Lifecycle definitions](../admin/lifecycle.md) — configure the states and transitions that trigger lifecycle automations
 - [Import Definitions](import-definitions.md) — configure imports that trigger import automations
 - [Configuration overview](../admin/configuration.md) — all configuration areas
+- [Properties](../entities/properties.md) — calculated properties handle simple arithmetic without a script

@@ -37,6 +37,39 @@ MatStream supports the following property types:
 | **Date** | A calendar date | Approval date, expiry date |
 | **Boolean** | A yes/no toggle | Is approved, is hazardous |
 | **List** | A dropdown with administrator-defined allowed values | Surface finish, colour |
+| **User** | A person picked from the workspace's members | Project Manager, Rate Person |
+| **Item reference** | A link to another item, picked from a chosen category | Client, Preferred Vendor |
+| **Calculated** | Arithmetic over the other properties of the same item | Line Total, Weighted Revenue |
+
+## Calculated properties
+
+A calculated property has no editor. Its value is worked out from the other
+properties on the same item, using a formula an administrator writes once on
+the property definition:
+
+```
+[Quantity] * [Unit Price]
+[Estimated Value] * [Probability %] / 100
+```
+
+Property names go in square brackets and are matched without regard to case.
+The formula understands numbers, `+`, `-`, `*`, `/`, brackets and a leading
+minus — and nothing else. Anything more involved belongs in an automation.
+
+The value is recalculated and stored whenever the item is saved, so a
+calculated property sorts, filters, exports and prints exactly like any other
+number.
+
+> **Note:** If any property the formula refers to is empty, the result is
+> **blank rather than zero**. An opportunity with no probability entered has an
+> unknown weighted revenue, not one of nought — and a report that showed 0.00
+> would understate the total while looking complete. Dividing by zero is blank
+> for the same reason.
+
+Administrators are prevented from saving a formula that refers to a property
+that does not exist, to a property that is not a number, to the calculated
+property itself, or to another calculated property in a way that would form a
+loop.
 
 ## Required properties
 

@@ -85,6 +85,8 @@ nav:
     - AI Assistant: features/ai-assistant.md
     - Tasks: features/tasks.md
     - Milestones: features/milestones.md
+    - Time tracking: features/time-tracking.md
+    - Opportunities & quotations: features/opportunities-quotations.md
     - Stock management: features/stock.md
     - Procurement: features/procurement.md
     - Barcode scanning: features/barcode.md

@@ -1,10 +1,11 @@
 # Project Management
 
 MatStream includes project management as a built-in solution — Projects 
-with Milestones, Tasks, People, and Documents, all built on the same 
-entity and category model as the rest of the platform. Unlike PLM (which 
-manages a single part's lifecycle), Project Management manages the 
-initiative that wraps many parts, deliverables, and dates together.
+with Milestones, Tasks, People, Documents, recorded time and the 
+commercial trail that led to them, all built on the same entity and 
+category model as the rest of the platform. Unlike PLM (which manages a 
+single part's lifecycle), Project Management manages the initiative that 
+wraps many parts, deliverables, dates and costs together.
 
 ---
 
@@ -30,13 +31,31 @@ The Project category (seeded by the Setup Wizard) carries:
 |---|---|
 | **Title** | The project's name |
 | **Description** | Free-text summary |
-| **PO Number / SO Number** | Purchase and sales order references |
-| **Shipping Address** | Where deliverables ship to |
+| **Project Number** | Your own reference for it |
 | **Client** | A link to a Company entity |
+| **Customer Contact** | The person you deal with there |
+| **Client PO Number / SO Number** | Purchase and sales order references |
+| **Project Manager** | Who is running it, picked from workspace members |
+| **Project Type** | Fixed Price, Time & Materials, Internal or Warranty |
+| **Priority** | Low, Normal, High or Critical |
+| **Start Date / Due Date** | When it runs |
+| **Progress %** | The project manager's own judgement, not a calculation |
+| **Project Currency** | The currency it is contracted in |
+| **Contracted Revenue** | What it is worth |
+| **Forecast Comment** | Why the numbers say what they say |
+| **Shipping Address** | Where deliverables ship to |
 
 Projects follow their own lifecycle: **In Preparation → Work in 
-Progress → On Hold → Closed / Cancelled**, and are numbered 
-automatically via a numbering scheme (e.g. `PR.2026.000042`).
+Progress → On Hold → Closed / Cancelled**.
+
+> **Note:** *Progress %* is a field somebody fills in, not a roll-up. It 
+> exists so a project manager can say what they believe when it differs 
+> from what the task list implies.
+
+> **Note:** Projects are **not** numbered automatically. *Project Number* 
+> is an ordinary property you fill in — there is no numbering scheme on 
+> the Project category. Quotations and opportunities do get numbers 
+> allocated for them.
 
 ### Milestones
 
@@ -58,6 +77,73 @@ the project the same way tasks attach to any other entity. See
 - The **Documents** tab holds project-related files — quotes, 
   specifications, correspondence — separate from engineering drawings 
   attached to individual parts.
+
+### Activities
+
+Calls, meetings, emails, site visits and notes logged against the 
+project, dated by when they happened rather than when they were typed. 
+See [Opportunities & quotations](../features/opportunities-quotations.md#activities-the-timeline).
+
+---
+
+## Where a project comes from
+
+A project can be created directly, or it can arrive from the commercial 
+side: a **Company** you are selling to, an **Opportunity** you are 
+pursuing, a **Quotation** you offered, and — once the customer accepts 
+it — a project carrying the client, the contact, the currency and the 
+contracted revenue across.
+
+The project records **which version of the quotation it was sold on**, 
+not just which quotation. Quotations get revised after they are won, and 
+a project that pointed at "the quotation" would silently start describing 
+a document nobody agreed to.
+
+See [Opportunities & quotations](../features/opportunities-quotations.md).
+
+---
+
+## Time and cost
+
+People record hours on a weekly timesheet and pick the project — or a 
+task, which fills in its project for them. Once a week is approved, each 
+entry is priced from the hour rate that applied on the day the work was 
+done, and the cost, the sale price and the currency are **copied onto the 
+entry**.
+
+That is what makes a cost report stay still. A rate card edited next year 
+cannot restate what last year's hours cost, because the figures are on 
+the entries rather than joined at read time.
+
+The **hours by project** report totals approved hours and their cost 
+across a date range. It counts approved hours only — draft hours are 
+somebody's intention, and a report that included them would move when 
+nobody had done any work.
+
+See [Time tracking](../features/time-tracking.md).
+
+> **Note:** Where a project has an hour with no rate behind it, the 
+> report shows **no cost rather than a partial total**. A figure that 
+> quietly omitted the hours it could not price would be too low and look 
+> complete.
+
+---
+
+## Seeing the whole portfolio
+
+Two views sit over every project in the workspace:
+
+| View | Shows |
+|---|---|
+| **Project Portfolio** | Every project, with number, client, manager, type, priority, state, dates, progress and contracted revenue |
+| **Active Projects** | The same, minus anything Closed or Cancelled |
+
+Both are live views rather than saved reports, so they always show what 
+is true now. Open them from the folder tree like any other folder.
+
+A **Company** also gains tabs listing its projects, quotations, 
+opportunities and purchase orders — everything that points at it, in one 
+place.
 
 ---
 
@@ -81,10 +167,12 @@ for the full wizard walkthrough.
 
 | Role | How they use MatStream |
 |---|---|
-| **Project manager** | Creates the project, sets milestones, tracks task progress |
-| **Team member** | Completes assigned tasks, updates status |
-| **Sales / commercial** | Maintains PO/SO numbers, shipping details, and the linked Client |
-| **Administrator** | Configures the Project category, lifecycle, and numbering scheme |
+| **Project manager** | Creates the project, sets milestones, tracks task progress, judges Progress % and forecast |
+| **Team member** | Completes assigned tasks, records hours on the weekly timesheet |
+| **Approver** | Reviews and approves other people's weeks — never their own |
+| **Sales / commercial** | Runs the opportunity and quotation, turns an accepted quotation into the project |
+| **Finance** | Reads hours by project, and maintains the hour rate cards |
+| **Administrator** | Configures the Project category, lifecycle, properties and permissions |
 
 ---
 
@@ -93,11 +181,16 @@ for the full wizard walkthrough.
 1. **Run the Setup Wizard** — check Engineering Project → Engineering 
    Project Configuration (leave Engineering Project Sample Data checked 
    if you want a worked example).
-2. **Create your first project** — give it a Title, PO/SO numbers, and 
-   a Client. The Company library that Client points at is set up for you 
-   as part of the same option.
-4. **Add milestones and tasks** — use the Milestones and Tasks tabs on 
+2. **Create your first project** — give it a Title, a Project Number, a 
+   Client and a Project Manager. The Company library that Client points 
+   at is set up for you as part of the same option.
+3. **Add milestones and tasks** — use the Milestones and Tasks tabs on 
    the project to track what needs to happen and by when.
+4. **Enter an hour rate** — create an Hour Rate in the Library with an 
+   *Effective From* date and approve it, so approved hours have something 
+   to be priced from. The sample data seeds one to start from.
+5. **Record some time** — open Timesheet, put hours against the project, 
+   submit the week, and have somebody else approve it.
 
 ---
 
@@ -110,3 +203,7 @@ for the full wizard walkthrough.
   its behavior work under the hood
 - [PLM](plm.md) — managing the parts and assemblies a project might deliver
 - [Milestones](../features/milestones.md) - dated checkpoints on a project
+- [Time tracking](../features/time-tracking.md) — timesheets, approval and 
+  hour rates
+- [Opportunities & quotations](../features/opportunities-quotations.md) — 
+  the commercial trail that produces a project

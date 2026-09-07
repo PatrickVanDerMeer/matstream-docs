@@ -1,6 +1,110 @@
 # Changelog
 
-## August 2026 — Current build
+## September 2026 — Current build
+
+### New features
+
+**Time tracking**
+Hours are entered on a weekly grid, submitted as a week, and approved by
+somebody else — nobody can approve their own timesheet, whatever permissions
+they hold. Approved entries are never edited: a correction is a new entry
+carrying negative hours and pointing at the one it reverses. Entering your own
+hours needs no permission beyond an Editor seat; everything about somebody
+else's time is gated. See [Time tracking](../features/time-tracking.md).
+
+**Hour rates, and hours that cost something**
+An Hour Rate is a Library item saying what one hour costs and sells for from a
+given date. Changing a rate means saving a **new version** with a new
+*Effective From* — the card's version history is the rate history. When a week
+is approved each entry is priced from the version that applied on the day it
+was worked, so a week straddling a rise costs two different amounts, and the
+figures are copied onto the entry so a later edit to the card cannot restate
+them. Where no rate applies the hours are approved with **no cost** rather than
+a cost of zero.
+
+**Opportunities and quotations**
+Company → Opportunity → Quotation → Project, as ordinary entities. Opportunities
+carry value, probability and a calculated weighted revenue, and move through a
+pipeline that lets you record a loss from any live stage and step backwards when
+a deal does. Quotations are numbered, have priced lines, and are **revised rather
+than edited** once issued — the customer is holding a copy. An accepted quotation
+becomes a project carrying the client, currency and contract value, and recording
+which *version* of the quotation it was sold on. See
+[Opportunities & quotations](../features/opportunities-quotations.md).
+
+**Calculated properties**
+A property whose value is arithmetic over the other properties of the same item
+— `[Quantity] * [Unit Price]`, `[Estimated Value] * [Probability %] / 100`. The
+result is stored, so it sorts, filters, exports and prints like any other number.
+A missing input gives a **blank rather than a zero**. See
+[Properties](../entities/properties.md).
+
+**Activities and a timeline**
+Calls, emails, meetings, site visits and notes can be logged against
+opportunities, companies and projects, dated by when they *happened* rather than
+when they were typed. The timeline merges those with the events the system
+recorded — state changes, timesheet decisions, file check-ins — newest first.
+
+**Project fields and portfolio views**
+Projects gain a Project Manager, start and due dates, priority, type, currency,
+contracted revenue, progress and a forecast comment, with **Project Portfolio**
+and **Active Projects** views over them. Companies gain tabs showing their
+opportunities, quotations, projects and purchase orders.
+
+**Assigned to me**
+The dashboard's task widget showed everyone's most recently changed tasks under
+a "Tasks to do" heading. It now shows the tasks assigned to you, with overdue
+ones marked.
+
+### Changes
+
+**Property permissions are enforced**
+Property-level permissions were configurable but had no effect. They are now
+applied wherever property values are read or written, including exports and
+print templates. A restricted property is **redacted rather than hidden**, so a
+grid keeps its shape.
+
+**Items under approval, or in a locked state, refuse edits everywhere**
+The rule that a lifecycle state can forbid editing was applied on one save path
+only, so a released drawing could not be renamed but could have its whole bill
+of materials rewritten. It now applies to structure and quantity edits, line
+removal, renaming, category changes, both property paths, file upload,
+check-in, file removal and check-out.
+
+**Saved views that filtered on "not equals" matched everything**
+Several seeded document-control views exclude closed or cancelled items. That
+operator was never implemented, so those rules were ignored and the views showed
+everything. Fixed, along with eight other missing filter operators — and an
+unrecognised operator is now refused instead of silently matching every row.
+
+**Lifecycle criteria that check a property value now work**
+Property-based transition criteria could be configured and were never
+evaluated. They are evaluated now, and a criterion that could never be satisfied
+is refused when it is saved rather than sitting there looking enforced.
+
+**A cleaner background scheduler**
+Scheduled jobs now hold a lease and remember their own state, so two instances
+of the API no longer each run every job, and a job that has been failing keeps
+backing off instead of restarting at its shortest retry after a recycle.
+
+### Not yet reachable
+
+Some of this release's work is in place but has no screen yet, and is listed
+here so it is not mistaken for missing:
+
+- **Notification rules** exist, with delivery on the scheduler, but can only be
+  created directly in the database — there is no administration screen.
+- **Approval requests** are recorded and locked correctly, but nothing raises
+  one yet.
+- **Quotation → project conversion**, the **activity timeline**, the
+  **bill-of-materials cost roll-up** and the **back-dated rate-change report**
+  are available through the API only.
+- **Quotations cannot be printed**: the field mapping is ready and the Word
+  template is not.
+
+---
+
+## August 2026
 
 ### New features
 
