@@ -90,6 +90,56 @@ groups can view and edit that property. Permissions are loaded lazily
 from the API the first time you select a property. Changes are held
 in memory until you save.
 
+#### How access is decided
+
+A property is either **open** or **restricted**, and which one it is
+depends only on whether the pane contains any rows:
+
+| Permission rows | Who can see the property |
+|---|---|
+| **None** | Everyone who can open the Library |
+| **One or more** | Only members of the groups you granted, plus administrators |
+
+A property with no rows is not restricted — it is simply unconfigured,
+and every user sees it. Adding the **first** row therefore does two
+things at once: it grants access to that group, and it removes access
+from everyone else. Groups you never mention lose the property.
+
+> **Note:** Grant every group that needs the property in one pass. It is
+> easy to add Purchasing, save, and only later discover that Engineering
+> quietly lost a column they used daily.
+
+#### View and Edit
+
+| Checkboxes | Group can |
+|---|---|
+| View | Read the value; the field is shown read-only |
+| Edit | Read and change the value (View is implied) |
+| Neither | Nothing — the group is listed but granted no access |
+
+A row with neither box ticked is still a rule. It keeps the property
+restricted while granting that group nothing, which is how you make a
+property visible to administrators only: add the groups, tick nothing.
+
+Grants add up. A user in a view-only group and an edit group can edit.
+There is no "deny" — access comes only from a granting row.
+
+#### Administrators
+
+Members of the Administrators group always see and edit every property,
+whatever the rows say. You cannot lock an administrator out, and there is
+no need to grant them anything.
+
+#### Removing a restriction
+
+**Deleting the last row makes the property visible to everyone again.**
+That is the only way to un-restrict a property, and it is easy to do by
+accident while tidying up: the pane looks like you are removing access,
+but you are publishing the value to the whole workspace.
+
+To take access away from a group, untick its boxes or delete just that
+group's row while leaving at least one other row in place.
+
 ---
 
 ## Display Tabs tab
@@ -131,6 +181,12 @@ When you select a tab row, the right pane shows which workspace groups
 can view and edit that tab. Permissions are loaded lazily from the API
 the first time you select a tab. Changes are held in memory until you
 save.
+
+Tab permissions follow exactly the same rules as
+[property permissions](#how-access-is-decided): no rows means every user
+sees the tab, the first row restricts it to the groups you name,
+administrators always see it, and deleting the last row makes the tab
+visible to everyone again.
 
 ---
 

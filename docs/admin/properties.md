@@ -96,9 +96,17 @@ For each property assigned to a category you can configure:
 
 - **Sort order** — the order in which the property appears on the entity detail page
 - **Group** — optionally group related properties under a heading
-- **Read-only groups** — restrict which user groups can edit this property
+- **Permissions** — which workspace groups can view and edit this property
 
-→ See [Categories](categories.md) for details on assigning properties.
+Permissions are set **per assignment**, not per property. The same property
+assigned to two categories is restricted separately in each, so restricting
+`Unit Price` on Purchase Order Line does nothing to `Unit Price` elsewhere.
+
+A property with no permission rows is visible to everyone; adding the first
+row restricts it to the groups named there and removes it from all others.
+
+→ See [Category editor — property permissions](category-editor-dialog.md#property-permissions)
+for the full rules, and [Categories](categories.md) for details on assigning properties.
 
 ---
 
