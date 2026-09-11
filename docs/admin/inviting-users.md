@@ -24,6 +24,12 @@ on whether they already have a MatStream account — see
     and will see an empty workspace. Always assign at least one group 
     when adding a user.
 
+!!! note "Seats are assigned automatically"
+    A new user is given an editor seat if your plan still has one free, 
+    and is added as a Viewer if every seat is taken. A Viewer can see 
+    the workspace but cannot change anything. See 
+    [Editor seats](editor-seats.md).
+
 ---
 
 ## Bulk add by email
@@ -112,5 +118,7 @@ lose access immediately.
 
 - [Users & groups](users-groups.md) — configure groups and permissions 
   for your workspace users
+- [Editor seats](editor-seats.md) — decide who can edit and who can 
+  only view
 - [API keys](api-keys.md) — set up access for external systems and 
   integrations

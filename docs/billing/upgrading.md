@@ -89,6 +89,9 @@ No refund is issued for the current period. If you have more active
 editors than your new seat count allows, you will need to revoke 
 access from some editors before the change takes effect.
 
+For how to hand an individual seat to someone, and how to move one 
+between people, see [Editor seats](../admin/editor-seats.md).
+
 ---
 
 ## Upgrading between paid plans

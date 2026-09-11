@@ -38,6 +38,15 @@ removing them, edit the user and uncheck **Enabled**. The user
 immediately loses access but their data, history, and group memberships 
 are preserved. You can re-enable them at any time.
 
+A disabled user cannot open the workspace at all — it disappears from 
+their workspace list, and a direct link is refused. Their editor seat 
+is released so you can give it to someone else; see 
+[Editor seats](editor-seats.md).
+
+!!! note
+    You cannot disable or remove your own account — you would lose the 
+    workspace, and the Users grid with it. Ask another administrator.
+
 ### Deleting a user
 
 To permanently remove a user, select them in the Users grid and click 

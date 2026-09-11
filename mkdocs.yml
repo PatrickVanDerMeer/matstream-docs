@@ -41,6 +41,7 @@ nav:
     - Accessing a workspace: getting-started/workspace-access.md
   - Administration:
     - Inviting users: admin/inviting-users.md
+    - Editor seats: admin/editor-seats.md
     - Users & groups: admin/users-groups.md
     - Add or edit a user: admin/workspace-user-dialog.md
     - Add or edit a group: admin/workspace-group-dialog.md
@@ -48,6 +49,7 @@ nav:
     - Group members: admin/group-members-dialog.md
     - Group grants: admin/group-grants-dialog.md
     - API keys: admin/api-keys.md
+    - Backup and restore: admin/backup-restore.md
   - Configuration:
     - Overview: admin/configuration.md
     - Categories: admin/categories.md

@@ -109,10 +109,23 @@ for details.
 
 ---
 
+## Backup and restore
+
+Administrators can download the tenant data and referenced files for one
+workspace as a portable `.msworkspace` package. The package can replace an
+existing workspace or populate a newly created test workspace, including when
+the target is hosted by a different tenant server.
+
+See [Backup and restore](../admin/backup-restore.md) for the safe restore
+workflow, package contents, and tenant deployment requirements.
+
+---
+
 ## Next steps
 
 - [Accessing a workspace](workspace-access.md) — how to open, switch, 
   and set a default workspace
 - [Quick start](quick-start.md) — get up and running with a practical walkthrough
+- [Backup and restore](../admin/backup-restore.md) — protect, copy, or move a workspace
 - [Administration](../admin/categories.md) — configure your workspace 
   categories, groups, and settings

@@ -4,6 +4,14 @@
 
 ### New features
 
+**Workspace backup and restore**
+MatStream Manage can now stream a complete workspace to a versioned
+`.msworkspace` package and restore it into a selected workspace. Packages carry
+workspace-owned tenant data and referenced files, verify file checksums, and
+remap identifiers when restored to another workspace or tenant server. The new
+**Backup and Restore** tab also keeps a durable history of completed and failed
+operations. See [Backup and restore](../admin/backup-restore.md).
+
 **Time tracking**
 Hours are entered on a weekly grid, submitted as a week, and approved by
 somebody else — nobody can approve their own timesheet, whatever permissions
