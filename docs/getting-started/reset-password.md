@@ -1,7 +1,9 @@
 # Reset your password
 
 If you have forgotten your password, you can request a reset link 
-from the sign in screen.
+from the sign in screen. The same steps set a first password for an 
+account that was created with **Continue with Microsoft** or 
+**Continue with Google** and never had one.
 
 ---
 

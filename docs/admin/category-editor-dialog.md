@@ -56,7 +56,7 @@ The Properties tab shows the properties assigned to this category.
 It is split into two panes:
 
 - **Left pane** — the assigned properties grid
-- **Right pane** — the permissions for the selected property
+- **Right pane** — two tabs for the selected property: **Permissions** and **Automations**
 
 ### Assigned properties grid
 
@@ -69,8 +69,38 @@ Each row represents one property assignment. Columns:
 | Required | Yes | Whether the field is mandatory |
 | Default Value | Yes | Pre-filled value for new entities |
 
+Toggle **Enabled** directly in the row. Changes use the category editor save flow. There is no pencil button or separate sort-order/enable dialog, and double-clicking a row does not open one.
+
 Rows can be dragged to change sort order. The sort order determines
 the sequence in which properties appear on the entity detail page.
+
+### Property automations
+
+The **Automations** tab on the right lists the automations that can run when the selected property
+changes. Tick **On** to attach one; the gear next to its name opens its settings. Automations attach
+to a *saved* property assignment, so save the category first when you have just added the property.
+
+An automation runs **the moment the value changes in an editor**, not when the entity is saved. What
+it writes appears in the open dialog straight away, can be edited like anything the user typed, and
+is discarded by **Cancel**. Nothing is stored until **Save**.
+
+Today there is one: **Copy Property Values**. Put it on a property that holds a reference to another
+entity (a Purchase Order's *Vendor* or *Supplier Contact*). Each row of its settings reads a property
+of the referenced entity and writes it to a property of the entity being edited:
+
+| Setting | Meaning |
+|---|---|
+| Source | A property of the referenced entity. **(clear the target)** has no source: the target is emptied. |
+| Target | A property of this category. |
+| Keep if blank | When the source has no value, leave the target as it is instead of blanking it. |
+
+Both properties must hold the same kind of value (text to text, number to number). References and
+thumbnails are never copied, though a reference can be cleared. Properties the user may not edit are
+skipped, and the values the source shows follow the usual read permissions and inheritance, so a
+contact's address that falls back to its company is copied as the company's address.
+
+When the referenced entity is cleared, rows without **Keep if blank** clear their targets as well.
+
 
 ### Adding properties
 
@@ -156,10 +186,12 @@ Each row represents one display tab assignment. Columns:
 
 | Column | Description |
 |---|---|
-| Enabled | Whether the tab is enabled |
+| Enabled | Checkbox to enable or disable the tab directly; disabled in read-only mode |
 | Display Tab | The name of the display tab definition |
 | Type | The tab type (Uses, Where-Used, etc.) |
 | Display Name | An optional override for the tab label shown to users |
+
+Toggle **Enabled** directly in the row. Changes use the category editor save flow. There is no pencil button or separate sort-order/enable dialog, and double-clicking a row does not open one.
 
 Rows can be dragged to change sort order. The sort order determines
 the sequence in which tabs appear on the entity detail page.

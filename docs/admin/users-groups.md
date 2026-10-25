@@ -85,15 +85,26 @@ permissions of all their groups.
 Before creating groups, think about the distinct roles in your 
 organisation and what each role needs to do in MatStream:
 
-| Role | Typical needs |
+| Seeded role | Purpose |
 |---|---|
 | **Administrators** | Full access to all configuration and data |
-| **Engineers** | Create and edit entities, submit for review |
-| **Senior engineers** | All engineer permissions plus approve transitions |
-| **Quality** | Review and approve lifecycle transitions |
-| **Procurement** | View released entities and commercial properties |
-| **Management** | View all released data, no editing |
-| **Read only** | View released entities only |
+| **Engineering Authors** | Create and revise definitions, drawings, files, and engineering BOMs |
+| **Engineering Approvers** | Review, approve, release, and retire engineering definitions; normally combined with Engineering Authors |
+| **Project Management** | Plan projects, manage tasks and reservations, review all time, and share externally |
+| **Project Controls** | Read project, stock, cost, progress, and time information without approval authority |
+| **Timesheet Approvers** | Approve or reject submitted timesheets within their reporting scope |
+| **Sales & CRM** | Manage leads, customers, opportunities, activities, and quotations |
+| **Purchasing** | Release requirements and create or cancel purchase orders |
+| **Material Planning / Work Preparation** | Plan demand, reservations, and production work packages |
+| **Warehouse** | Receive goods, adjust stock, and manage reservations and locations |
+| **Quality Assurance & Inspection** | Review certificates and inspections and control release decisions |
+| **Production Planning** | Create, plan, release, and close work orders and routings |
+| **Production** | Consume released work and report shop-floor progress |
+| **Document Control** | Review and release controlled documents and manage their files |
+
+The Setup Wizard creates the relevant roles for the templates you select. Groups start empty; add
+members deliberately. Some narrow roles are intended to be combined with a base role—for example,
+an Engineering Approver normally also belongs to Engineering Authors.
 
 !!! tip
     Start with the minimum number of groups needed for your initial 
@@ -108,7 +119,7 @@ To create a group:
 1. Navigate to **Administration → Groups**
 2. Click **New group**
 3. Enter a name for the group
-4. Configure the group's role capabilities
+4. Configure the group's grants
 5. Save the group
 6. Add users to the group
 
@@ -122,10 +133,17 @@ Think of grants as the doors into different areas of MatStream — a group
 that does not have a grant for a surface cannot open it, regardless of 
 any other permissions.
 
-Grants are organised into four areas:
+The API enforces these grants for every protected operation and returns **403 Forbidden** when a
+grant is missing. The web app mirrors that decision by hiding navigation and tabs and disabling
+buttons. Users inherit the union of grants from all enabled groups; there is no group-level deny
+that subtracts a grant supplied by another group.
 
-**Surfaces** — control access to the main working areas of MatStream, 
-such as the Library, Explorer, Tasks, and Change Orders. A user whose 
+Grants are organised by feature area. The catalog includes Surfaces, Tasks, Entities, Files,
+BOM, Catalog, Automation, Administration, Stock, Integration, Reports, Sharing, Time, Printing,
+Procurement, and the AI assistant.
+
+**Surfaces** — control access to the main working areas of MatStream,
+such as the Library, Explorer, and Tasks. A user whose
 groups do not include a surface grant will not see that surface in the 
 navigation.
 
@@ -138,7 +156,10 @@ workspace: categories, numbering schemes, revision schemes, custom
 properties, and lifecycle definitions. These are typically reserved 
 for the workspace administrator and senior configuration owners.
 
-**Reports** — control access to reporting and export features.
+The other areas separate each operation from its surface. For example, `stock.view` opens stock
+information, `stock.manage` changes quantities, and `stock.reserve` controls reservations.
+Likewise, import-definition maintenance and running an import are separate grants. This lets an
+administrator give people the smallest useful capability set.
 
 Grants are assigned to groups from the **Grants** tab in the 
 [Edit Workspace Group dialog](workspace-group-dialog.md).
@@ -156,19 +177,24 @@ Grants are assigned to groups from the **Grants** tab in the
     specific entities and states the group can see and interact with. 
     Both layers must be configured for a group to be fully functional.
 
+!!! warning "Sharing and AI need deliberate owners"
+    The Setup Wizard adds `share.create` only to roles that collaborate externally. It adds
+    `ai.use` to no ordinary role group. The system Administrators group has every grant; review
+    both capabilities explicitly when adapting the template roles for your workspace.
+
 ---
 
 ## Lifecycle state permissions
 
-Role capabilities define what a group can do in general. Lifecycle 
-state permissions refine those capabilities based on the entity's 
+Workspace grants define what a group can do in general. Lifecycle
+state permissions refine those capabilities based on the entity's
 current state.
 
 For example:
 
-- The **Engineers** group has the Edit capability — but lifecycle 
+- The **Engineering Authors** group has the Edit capability — but lifecycle
   state permissions prevent them from editing a Released entity
-- The **Quality** group has the Trigger transitions capability — but 
+- The **Quality Assurance & Inspection** group has the Trigger transitions capability — but
   lifecycle state permissions restrict which transitions they can 
   trigger in each state
 
@@ -210,32 +236,38 @@ yourself.
     effect is to make the transition restricted. To stop a group doing 
     something, remove their Allow; do not add a Deny.
 
-### Engineering Lifecycle permissions
+### Definition Lifecycle permissions
 
 The [Setup Wizard](../getting-started/workspace-setup.md) seeds a worked 
-example. It creates two groups — **Senior Engineers** and **Junior 
-Engineers** — and configures the Engineering Lifecycle so that every one 
+example. It creates **Engineering Authors** and **Engineering Approvers** and configures the
+Definition Lifecycle so that every one
 of its 20 transitions is granted to Administrators, with these additions:
 
-| Transition | Senior Engineers | Junior Engineers |
+| Transition | Engineering Authors | Engineering Approvers |
 |---|---|---|
-| Work in Progress → For Review | ✔ | ✔ |
-| For Review → Approved | ✔ | |
-| For Review → Work in Progress *(reject)* | ✔ | |
-| Approved → Released | ✔ | ✔ |
-| Approved → Work in Progress *(reject)* | ✔ | |
-| Approved → For Review *(re-review)* | ✔ | |
+| Work in Progress → For Review | ✔ | |
+| For Review → Approved | | ✔ |
+| For Review → Work in Progress *(reject)* | | ✔ |
+| Approved → Released | | ✔ |
+| Approved → Work in Progress *(reject)* | | ✔ |
+| Approved → For Review *(re-review)* | | ✔ |
 | Released → Work in Progress *(revise)* | ✔ | |
-| *any state* → Obsolete | ✔ | |
+| *any state* → Obsolete | | ✔ |
 
-Juniors submit work and release what has been approved; seniors own the 
-review loop, revision and retirement; the remaining paths — the shortcuts 
-that skip review entirely — stay with administrators.
+Authors submit and revise work; Approvers own review, release, and retirement. The remaining
+paths — the shortcuts that skip review entirely — stay with administrators.
+
+### Project Lifecycle permissions
+
+The same wizard secures the **Project Lifecycle** more simply: every
+enabled transition (start, pause, resume, close, cancel and reopen) is
+granted to Administrators and to the **Project Management** group. Nobody
+outside those two groups can move a project.
 
 !!! note "The seeded groups start empty"
-    Creating a group does not add anyone to it. Until you add members to 
-    Senior Engineers and Junior Engineers, only administrators can move 
-    anything through the Engineering Lifecycle. This is the most common 
+    Creating a group does not add anyone to it. Until you add members to
+    Engineering Authors, Engineering Approvers and Project Management, only
+    administrators can move definitions or projects through their lifecycles. This is the most common
     "the wizard broke my workspace" report and it is a two-minute fix — 
     add the members.
 
@@ -251,11 +283,26 @@ example:
   only to Procurement and Management
 - **Quality properties** (rejection rate, audit findings) — visible 
   only to Quality and Management
-- **Internal properties** (internal notes, risk rating) — visible 
-  only to Senior engineers and Administrators
+- **Internal properties** (internal notes, risk rating) — visible
+  only to Engineering Approvers and Administrators
 
 Property permissions are configured within the category settings. 
 See [Categories](categories.md) for details.
+
+### Property permissions seeded by the wizard
+
+The [Setup Wizard](../getting-started/workspace-setup.md) governs two
+sets of properties out of the box. A group that is not in the table
+does not see the column at all.
+
+| Property | Edit | View |
+|---|---|---|
+| **Unit Price** *(Purchase Order Line)* | Purchasing | Engineering Authors, Production, Project Management |
+| **Is Stock Item**, **Minimum Stock Qty**, **Maximum Stock Qty** *(every stockable item category)* | Warehouse, Purchasing | Engineering Authors, Production, Project Management |
+
+Document Control is absent from both — it releases documents and has no
+reason to see pricing or stock levels — and Warehouse never sees vendor
+pricing. Administrators bypass property permissions entirely.
 
 ---
 

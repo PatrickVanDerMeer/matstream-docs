@@ -4,6 +4,27 @@ The Configuration section covers the structural settings that define how your wo
 
 Configuration is the responsibility of the workspace administrator. Most configuration is done once during initial setup and then refined over time as your process matures.
 
+## Access to Configuration
+
+The **Configuration** navigation item appears when you have at least one grant for a configuration area. Each tab is controlled independently, so a group can manage one area without receiving access to every workspace setting.
+
+| Configuration tab | Required grant |
+|---|---|
+| Categories | `catalog.categories.manage` |
+| Display Tabs | `catalog.display-tabs.manage` |
+| Property Definitions | `catalog.properties.manage` |
+| Lifecycle Definitions | `catalog.lifecycle.manage` |
+| Revision Schemes | `catalog.revision.manage` |
+| Numbering Schemes | `catalog.numbering.manage` |
+| Automations | `automation.manage` |
+| Print Templates | `print.templates.manage` |
+| Import Definitions | `import.definitions.manage` to manage definitions; `import.run` to run them |
+| System Settings | `admin.workspace.settings`, `admin.workspace.purge`, or `admin.search-index.rebuild`, depending on the action |
+
+The API enforces these grants even if a request is made without using the MatStream interface. The interface hides or disables unavailable tabs and actions to make the user's access clear. Members of the system **Administrators** group pass all grant checks.
+
+See [Group grants](group-grants-dialog.md) to assign grants and understand how grants from multiple groups are combined.
+
 ---
 
 ## Configuration areas

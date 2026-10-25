@@ -1,5 +1,9 @@
 site_name: MatStream
 site_url: https://doc.matstream.com/
+
+exclude_docs: |
+  /dev/
+  /test-stock-and-procurement.md
 theme:
   name: material
   custom_dir: overrides
@@ -76,11 +80,13 @@ nav:
     - Dashboard: features/dashboard.md
     - Library: features/library.md
     - Explorer: features/explorer.md
+    - Copy Structure: features/copy-structure.md
     - Folders: features/folders.md
     - Property Browser: features/property-browser.md
     - Grids, columns & defaults: features/grid-defaults.md
     - Search: features/search.md
     - Uses & Where Used: features/where-used.md
+    - 3D Model viewer: features/3d-model.md
     - Filter Items & Snapshots: features/filter-items.md
     - Print Templates: print-templates/print-templates-user.md
     - Automations: features/automations.md
@@ -89,6 +95,7 @@ nav:
     - Milestones: features/milestones.md
     - Time tracking: features/time-tracking.md
     - Opportunities & quotations: features/opportunities-quotations.md
+    - Price Lists: features/price-lists.md
     - Stock management: features/stock.md
     - Procurement: features/procurement.md
     - Barcode scanning: features/barcode.md
@@ -97,6 +104,7 @@ nav:
   - Integrations:
     - MatStreamConnect: integrations/matstream-connect.md
     - Inventor BOM import: integrations/inventor-bom.md
+    - Inventor 3D model: integrations/inventor-3d-model.md
     - Syncing with Vault: vault-integration/sync.md
   - Billing:
     - Overview: billing/overview.md
@@ -106,9 +114,10 @@ nav:
   - Release notes:
     - Changelog: release-notes/changelog.md
   - Developer:
-    - Internal authentication and Tenant deployments: dev/internal-api-authentication.md
-    - Deferred save pattern: dev/deferred-save-pattern.md
-    - Coding agreements: dev/coding-agreements.md
+    - API overview: api/index.md
+    - Authentication: api/authentication.md
+    - First API request: api/first-request.md
+    - Errors and troubleshooting: api/errors.md
 
 plugins:
   - search

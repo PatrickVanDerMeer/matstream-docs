@@ -2,7 +2,8 @@
 
 API keys allow external systems — such as the Autodesk Vault sync 
 plugin, a webshop integration, or an ERP connector — to access 
-MatStream without a personal user account.
+MatStream using integration credentials bound to a user email address.
+The associated user must have the required workspace access and permissions.
 
 ---
 
@@ -19,7 +20,8 @@ read from or write to MatStream. Common use cases:
   automatically
 
 API keys are workspace-scoped — each key belongs to a specific 
-workspace and can only access data within that workspace.
+workspace for management. Use the intended workspace and a user with the
+appropriate permissions when configuring an integration.
 
 ---
 
@@ -31,10 +33,13 @@ To create an API key:
 2. Click **New API key**
 3. Enter a descriptive name for the key — for example, *Vault sync plugin* 
    or *ERP integration*
-4. Optionally set an expiry date
-5. Click **Save**
+4. Enter the user email address to bind to the key
+5. Optionally set an expiry date
+6. Click **Save**
 
-The key is displayed once immediately after creation.
+Creation returns a **client ID** and **client secret**. Copy the secret
+immediately; it is only returned at creation. Your integration also needs
+the bound user email to request an access token.
 
 !!! warning "Copy the key immediately"
     An API key is shown only once when created. Copy it immediately 
@@ -55,8 +60,9 @@ To revoke an API key:
 2. Find the key you want to revoke
 3. Click **Revoke**
 
-The key is invalidated immediately. Any system using that key will 
-lose access until a new key is provided and configured.
+Revoking a key prevents it from being used to request new access tokens.
+Previously issued access tokens can remain usable until they expire.
+Update integrations with replacement credentials before revoking an old key.
 
 ---
 
@@ -75,6 +81,9 @@ been exposed.
 ---
 
 ## Next steps
+
+- [API authentication](../api/authentication.md) — exchange credentials for an access token
+- [First API request](../api/first-request.md) — connect using PowerShell
 
 - [Users & groups](users-groups.md) — manage user access and permissions
 - [Syncing with Vault](../vault-integration/sync.md) — configure the 

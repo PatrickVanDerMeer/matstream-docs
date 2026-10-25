@@ -21,6 +21,43 @@ A **stock position** is the current quantity of a specific item at a specific lo
 | On Order | Units on open purchase or manufacturing orders, not yet received |
 | Available | On Hand minus Reserved — what is freely available to allocate |
 
+### Automatic stock replenishment
+
+On a definition's **Stock** tab, enable **Is Stock Item** and enter **Minimum Stock Qty** and
+**Maximum Stock Qty**. Both limits must be filled in, the minimum must be nonnegative, and
+maximum must exceed minimum. Saving the settings makes the item eligible for the next check;
+it does not immediately create a requirement.
+
+The API's **StockReplenishment** background job (type 16) defaults to every minute in Development
+for testing, and every five minutes otherwise. It calculates:
+
+- Projected stock = On Hand minus Reserved + On Order.
+- If projected stock is strictly below Minimum, required quantity = Maximum minus projected stock.
+- At or above Minimum, an existing unfulfilled replenishment requirement is deleted.
+
+Example: Minimum 10, Maximum 30, Available 6, On Order 3, no pending replenishment →
+create a requirement for 21. The next check keeps that same requirement at 21. Changes to stock or Min/Max update
+the existing unfulfilled line instead of creating another line. Older duplicate unfulfilled
+lines are consolidated into the oldest one. Ordered lines and lines with stock ledger history
+are preserved.
+Creating a requirement does not write a stock movement or place a purchase order.
+
+Requirements are regular Material Requirement Lines and appear in
+**Purchasing → Pending Material Requirements (MR)**, whose filter searches the whole workspace.
+They have no source project occurrence and no project number. The buyer orders them through
+normal procurement; the resulting on-order quantity counts as supply in the calculation.
+Replenishment requirements cannot be reserved from existing stock: that would consume the stock
+they are intended to refill.
+
+**Setup and operation:** re-run the Engineering Project template to create the dedicated
+**Purchasing → Stock Replenishment** storage folder. Restart the updated API to register the job.
+The scheduler has a five-minute startup delay. Existing enabled/interval settings on the job are preserved.
+The job requires exactly one enabled Material Requirement category and exactly one replenishment
+folder under a Purchasing-category folder per workspace. It uses the folder creator as its workspace
+actor, who must still be enabled. Missing or ambiguous setup is skipped. Stock properties are resolved
+by their seeded names; preserve those names. Custom project requirements are not counted as replenishment.
+Unchecking Is Stock Item stops future checks for that definition and preserves existing requirements.
+
 ### Stock ledger
 
 Every change to a stock position is recorded as an immutable ledger entry. The ledger provides full traceability: who made the change, when, why (via a note), and what the delta was.
@@ -124,6 +161,20 @@ These categories carry the **Stock Line** behaviour, meaning the line *is* a sto
 | `GET` | `/api/wid/{slug}/stock/ledger/by-location/{locationEntityId}` | Movement ledger for a location |
 | `POST` | `/api/wid/{slug}/stock/adjustments` | Post a manual adjustment |
 | `POST` | `/api/wid/{slug}/stock/lines` | Create a stock line |
+
+---
+
+## Permissions
+
+| Grant | Effect |
+|---|---|
+| `stock.view` | View stock positions, quantities, ledgers, and reservation holders; makes the contextual Stock tab available |
+| `stock.manage` | Adjust quantities, create stock lines, and add or remove an item at a location |
+| `stock.reserve` | Reserve stock against a requirement and release a reservation |
+
+Receiving a purchase order also needs `procurement.receive`; creating or cancelling one needs
+`procurement.order`. These grants are enforced by the API. Entity and lifecycle permissions still
+apply to the item, location, requirement, or order being acted on.
 
 ---
 

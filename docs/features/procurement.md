@@ -81,6 +81,21 @@ When the dialog finishes it reports three things:
 
 Requirements that were covered move to **Ordered**, and their Ordered Qty rises.
 
+### The supplier block of an order
+
+An order carries the supplier's **Address**, **Email** and **Phone**, which print on the document.
+You do not type them; they follow two fields while the order is open:
+
+1. Choose the **Vendor**. The company's address, email and phone appear in the supplier fields, and
+   any **Supplier Contact** from a previous vendor is cleared.
+2. Optionally choose a **Supplier Contact**. The list offers only the contacts placed on that vendor
+   (its **Contacts** tab), so a Sales department can carry its own mailbox. The contact's address,
+   email and phone replace the company's; a field the contact leaves empty keeps the company's value.
+
+The values are filled in before you save, so you can correct them by hand, and **Cancel** throws them
+away. A contact's own email and phone fall back to the person it points at, and its address falls
+back to the company it sits under; type a value on the contact to override either.
+
 ### How the vendor is chosen
 
 Two vendor properties are in play, and they mean different things:
@@ -144,9 +159,27 @@ Buying an item often means chasing paperwork as well as goods. A library item ca
 
 ## Permissions
 
-Procurement is gated the same way as everything else: by group membership on lifecycle transitions. The Setup Wizard's Engineering Project configuration seeds a **Purchasing** group for exactly this purpose.
+Procurement uses feature grants and lifecycle permissions together:
 
-Restrict the transitions that raise requirements, place orders and receive goods to the groups that should perform them. A transition with no permission rows is open to everyone.
+| Action | Required grant |
+|---|---|
+| View stock availability | `stock.view` |
+| Reserve from stock or remove a reservation | `stock.reserve` |
+| Create a purchase order from requirements | `procurement.order` |
+| Cancel a purchase order | `procurement.order` |
+| Receive purchase-order lines into stock | `procurement.receive` |
+
+The contextual Procurement ribbon appears only when the selected row represents a requirement,
+purchase order, or order line and the user holds a relevant grant. The API enforces the same
+requirements even when called directly.
+
+Grants answer whether someone may use the operation at all. Lifecycle transition permissions
+still decide whether that group may move this particular requirement or order through its current
+state. A transition with no permission rows is open to everyone; adding the first permission row
+restricts it to groups granted Allow.
+
+The Setup Wizard seeds **Purchasing** with `procurement.order`, **Warehouse** with
+`procurement.receive`, and the appropriate planning and warehouse roles with `stock.reserve`.
 
 ---
 

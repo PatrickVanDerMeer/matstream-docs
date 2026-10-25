@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# Documentation preview environments and generated output
+.venv-zensical/
+site/

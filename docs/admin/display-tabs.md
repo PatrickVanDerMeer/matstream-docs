@@ -25,6 +25,10 @@ The tab list shows all display tabs currently assigned to this category. Drag ro
 | **Ledger** | Stock movement history (on-hand delta, reserved delta, on-order delta per movement) |
 | **Inherit** | Properties inherited from a linked Definition entity (for Occurrence entities) |
 | **Filter Result** | Results of a configurable filter query scoped to this entity |
+| **Stock** | Where the item is stocked and what is promised against it (Definition categories) |
+| **Shares** | Who the entity is shared with outside the workspace |
+| **Sales Pricing** | Price List periods and prices, or an item's Sales prices, depending on the category's tab setup. See [Price Lists](../features/price-lists.md). |
+| **3D Model** | The entity's geometry as a rotatable, measurable model — uploaded as a GLB or published from Inventor. See [3D Model viewer](../features/3d-model.md) |
 
 **Uses** comes in two forms — *Uses (flat list)* and *Uses (tree)* — chosen by the tab type itself rather than by a setting.
 
@@ -133,9 +137,9 @@ Tabs can be toggled on or off without deleting their configuration. This is usef
 
 ## Tab permissions
 
-Tab visibility can be restricted per user group. In the Display Tabs section of a category, select a tab and click **Permissions** to set which groups can see it. If a user is not in any permitted group, the tab is hidden from them.
+Tab access can be restricted per user group. In the Display Tabs section of a category, select a tab and set its **View** and **Edit** permissions. A user with View but not Edit can read the tab without changing it. A user with neither permission does not see the tab. If no group permissions are defined, the tab has no additional group restriction; normal entity and workspace grants still apply.
 
-This is useful for hiding internal or sensitive tabs (e.g. cost data, stock levels) from users who do not need them.
+For an item's **Sales** tab, these permissions control whether prices are editable, view-only, or hidden. This is useful for limiting access to sensitive price or stock information. See [Price Lists](../features/price-lists.md#permissions).
 
 ---
 
@@ -151,4 +155,5 @@ Tabs appear in the entity detail page in ascending sort order. Set the **Sort Or
 - [Properties](properties.md) — define the properties shown on General tabs
 - [Lifecycle definitions](lifecycle.md) — lifecycle-state permissions that apply on General tabs
 - [Stock management](../features/stock.md) — set up Ledger tabs for inventory entities
+- [3D Model viewer](../features/3d-model.md) — what the 3D Model tab shows and how models get there
 - [Tasks — Milestones](../features/tasks.md#milestones) — how the Milestones tab is used day-to-day

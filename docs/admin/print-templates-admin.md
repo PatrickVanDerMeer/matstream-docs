@@ -8,6 +8,10 @@ Administrators can create, manage, and link print templates through the Configur
 
 Go to **Configuration** and select the **Print Templates** tab in the ribbon. The grid shows all templates available in your workspace, including system templates provided by MatStream.
 
+The tab and its create, edit, copy, upload, and delete operations require
+`print.templates.manage`. Generating output from an assigned template is a separate capability,
+`print.render`, so users can print without being allowed to redesign templates.
+
 ## What is the difference between a system template and a workspace template?
 
 System templates are provided by MatStream and are visible to all workspaces. They are read-only — you cannot edit or delete them. You can recognise them by the tick in the **System** column.

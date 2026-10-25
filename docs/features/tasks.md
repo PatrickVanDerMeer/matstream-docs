@@ -53,6 +53,20 @@ Completed tasks remain visible in the task history but no longer appear in the a
 
 ---
 
+## Permissions
+
+| Grant or rule | Effect |
+|---|---|
+| `tasks.view` | Open the Tasks surface, search tasks, view task progress, and load the Dashboard Tasks widget |
+| `tasks.manage` | Create tasks and milestones, update plans, and reassign work |
+| Task ownership | An assignee may add progress, complete, or reopen their own task without `tasks.manage` |
+
+The Setup Wizard gives `tasks.manage` to project-management and planning roles that organise work;
+ordinary assignees generally need only `tasks.view`. A user without `tasks.view` can still enter
+their own timesheet, but the optional task picker is empty.
+
+---
+
 ## Task types
 
 Task types are workspace-configured labels that distinguish between different kinds of work. Common examples:

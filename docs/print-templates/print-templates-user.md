@@ -14,7 +14,11 @@ Most templates produce a **PDF**, which is suitable for sending to suppliers, cu
 
 ## Why is the Print button empty or disabled?
 
-The Print button shows only templates that an administrator has linked to the category of the current record. If no templates have been linked yet, the menu will show "No templates assigned". Contact your administrator to have a template added for that document type.
+Generating a document requires `print.render` as well as `entity.read`. Without `print.render`, the
+print controls are disabled. The Print button otherwise shows only templates that an administrator
+has linked to the category of the current record. If no templates have been linked yet, the menu
+will show "No templates assigned". Contact your administrator to check both the grant and the
+category assignment.
 
 ## Can I choose which template to use?
 

@@ -98,8 +98,8 @@ Most of this can be done faster with the **Setup Wizard**, described below.
 
 The Setup Wizard, available from the workspace's **Setup** page in 
 MatStream Manage, seeds ready-made configuration templates instead of
-building categories, lifecycles, and properties by hand. It offers three
-templates — **Engineering Project**, **Document Control** and **Integrations** — each with
+building categories, lifecycles, and properties by hand. It offers four
+templates — **CRM**, **Engineering Project**, **Document Control** and **Integrations** — each with
 options you can check independently.
 
 ### Using the wizard
@@ -126,13 +126,22 @@ builds a complete engineering and procurement workspace.
 
 **The project itself**
 
-- **Engineering**, **Purchasing**, **Production** and **Document Control** 
-  user groups, ready to be granted lifecycle transition permissions.
+- Twelve role groups: **Engineering Authors**, **Engineering Approvers**, **Project
+  Management**, **Project Controls**, **Timesheet Approvers**, **Purchasing**, **Material Planning /
+  Work Preparation**, **Warehouse**, **Quality Assurance & Inspection**, **Production Planning**,
+  **Production**, and **Document Control**. Together with **Sales & CRM**, which is added by the
+  independently selectable CRM template, these form the thirteen-role catalog. The applicable
+  groups are wired into lifecycle transition and property permissions.
+- Role-appropriate feature grants for Library, Explorer, entities, files, BOM, stock, tasks,
+  printing, imports, and procurement. The wizard adds missing defaults when it is re-run but
+  preserves grants an administrator assigned manually. External sharing is limited to selected
+  collaboration roles, while AI remains administrator-only until it is deliberately granted.
 - A **Project** folder category with the **Project** behaviour, its own 
   lifecycle (In Preparation → Work in Progress → On Hold → Closed / 
-  Cancelled), and core properties (Title, Description, Client PO Number, 
-  SO Number, Shipping Address, Client).
-- **Contact Persons**, **Documents**, **Tasks** and **Milestones** tabs, so 
+  Cancelled) whose every transition is granted to **Project Management**,
+  and core properties (Title, Description, Client PO Number, SO Number,
+  Shipping Address, Client).
+- **Contacts**, **Documents**, **Tasks** and **Milestones** tabs, so 
   a Project immediately has somewhere to track people, files, work and 
   dated checkpoints.
 - A **Company** library with Is Client / Is Supplier / Is a Lead flags — the 
@@ -145,12 +154,15 @@ builds a complete engineering and procurement workspace.
   under a parent called **Item**.
 - A shared **Stock Number** numbering scheme, so an item's number *is* its 
   name.
-- **BOM** / **Uses** tabs on Part, Assembly and Weld Assembly, plus a 
-  **Welds** tab on Weld Assembly, and Documents and Drawings tabs throughout.
-- An **Engineering Lifecycle** (Work in Progress → For Review → Approved → 
+- **BOM** tabs on Assembly and Weld Assembly, plus a **Welds** tab on Weld Assembly.
+- **Part** display tabs in this order: General, Documents, Tasks, Suppliers,
+  RVD, Stock, Sales, 3D. Part has no Uses or Services assignment. Re-running
+  the engineering setup reconciles older Part assignments to this order and
+  removes those two assignments; shared tab definitions remain available.
+- A **Definition Lifecycle** (Work in Progress → For Review → Approved →
   Released → Obsolete) applied to all six definition categories, with 
-  **Senior Engineers** and **Junior Engineers** groups and per-transition 
-  permissions already configured.
+  per-transition permissions for **Engineering Authors** and **Engineering Approvers** already
+  configured. Authors submit and revise; Approvers review, release, and retire.
 - A **BOM Folder** folder category, so the placed BOM sits in its own folder 
   inside the project and can carry its own Explorer column layout.
 
@@ -162,6 +174,10 @@ builds a complete engineering and procurement workspace.
   Reserved / Ordered → Delivered → Assembled) attached to BOM Position, so 
   an engineer can flag an item as ready to buy.
 - A **Purchase Order Lifecycle** (Open → Issued → Received → Closed).
+- **Unit Price** on Purchase Order Line editable by Purchasing only, and
+  **Is Stock Item** / **Minimum** / **Maximum Stock Qty** on every
+  stockable item editable by Warehouse and Purchasing — the other groups
+  read them. See [Users & groups](../admin/users-groups.md#property-permissions-seeded-by-the-wizard).
 
 **Engineering Project Sample Data**, checked by default, additionally seeds a 
 *Sample Engineering Project* containing a real piping BOM (a Lube Oil system 
@@ -209,9 +225,10 @@ sample also includes received remarks, a rejected manual and overdue responses.
 
 Two things still need a person after the wizard runs:
 
-1. **Add users to the Senior Engineers and Junior Engineers groups.** The 
-   groups are created empty, so until someone is a member, only 
-   administrators can move items through the Engineering Lifecycle. See 
+1. **Add users to Engineering Authors, Engineering Approvers and Project
+   Management groups.** The groups are created empty, so until someone is
+   a member, only administrators can move definitions through the Definition
+   Lifecycle or a project through the Project Lifecycle. See
    [Users & groups](../admin/users-groups.md).
 2. **Attach and configure the Create Material Requirement automation** on 
    the Procurement Lifecycle's *Engineering → Ready for Procurement* 
@@ -227,13 +244,15 @@ Two things still need a person after the wizard runs:
 
 Everything the wizard creates is matched **by name**, so re-running it is 
 safe — existing items are skipped rather than duplicated, and the summary 
-tells you how many of each were created versus skipped.
+tells you how many of each were created versus skipped. Role grants are deliberately additive:
+when a template role already exists, the wizard adds any missing template grants without removing
+extra grants an administrator assigned manually.
 
-The flip side is that matching by name means the wizard will **not update** 
-something that already exists. If a category, property or lifecycle is 
-already present, its settings are left exactly as they are — even if the 
-template would now create it differently. To pick up changed template 
-settings you either adjust the item by hand or start from a new workspace.
+The flip side is that matching by name means the wizard will **not update most configuration**
+that already exists. If a category, property or lifecycle is already present, its settings are
+left exactly as they are — even if the template would now create it differently. Grants are the
+intentional exception described above. To pick up other changed template settings you either
+adjust the item by hand or start from a new workspace.
 
 If the wizard reports *"did not fully apply"*, fix the reported problem and 
 click **Run again** — it resumes from where it stopped.

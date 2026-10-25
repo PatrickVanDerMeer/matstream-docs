@@ -155,16 +155,19 @@ fine-grained control over who can do what:
 
 | Level | What it controls |
 |---|---|
-| **Role capabilities** | Broad actions a group can perform (create, edit, delete, approve) |
+| **Workspace grants** | Broad surfaces and operations a group can use (Library, entity update, stock, procurement, administration, AI) |
 | **Lifecycle state permissions** | What a group can do when an entity is in a specific state |
 | **Transition permissions** | Which groups can trigger specific lifecycle transitions |
 | **Property permissions** | Which groups can see specific properties |
 | **Tab permissions** | Which groups can see specific display tabs |
-| **Entity-level grants** | Per-entity overrides for sensitive or project-scoped items |
+| **Entity permission list** | Per-entity access rules for sensitive or project-scoped items |
 
 This layered model means you can express complex real-world permission 
 requirements — for example, engineers can edit Draft entities but not 
 Released ones, and only the quality team can trigger the Release transition.
+
+Workspace grants are enforced by the API; client-side hidden tabs and disabled buttons only make
+the same policy easier to understand. See [Users and groups](../admin/users-groups.md#grants).
 
 ---
 

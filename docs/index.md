@@ -45,10 +45,12 @@ Unlike generic platforms, MatStream is built with engineering rigour:
 
 ---
 
-## Developer and deployment documentation
+## Developer API
 
-- [Internal API authentication](dev/internal-api-authentication.md) — asymmetric request signing, key ownership, and normalized Tenant deployment routing
-- [Coding agreements](dev/coding-agreements.md) — conventions for developers and AI agents working with the MatStream codebase
+Connect your scripts and external systems to MatStream using the API.
+
+- [API overview](api/index.md) - understand credentials and workspace routing
+- [First API request](api/first-request.md) - authenticate and search workspace data
 
 ---
 

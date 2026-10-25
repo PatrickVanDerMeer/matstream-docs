@@ -6,7 +6,11 @@ MatStream AI is a built-in chat assistant that answers questions about MatStream
 
 ## Opening the assistant
 
-Click the **MatStream AI** button (✦ icon) in the top navigation bar. A panel slides in from the right side of the screen without navigating away from your current page.
+The AI button is offered only when your groups supply the `ai.use` grant. The system
+Administrators group has every grant; the Setup Wizard does not give `ai.use` to ordinary role
+groups. A workspace administrator must assign it deliberately.
+
+Click the floating **MatStream AI** button (✦ icon) near the lower-right corner. A panel slides in from the right side of the screen without navigating away from your current page.
 
 Close the panel by clicking the ✕ button or clicking outside it. Your conversation is preserved for the session — reopening the panel shows the same conversation thread.
 

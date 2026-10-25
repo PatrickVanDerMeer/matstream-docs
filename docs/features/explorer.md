@@ -2,6 +2,10 @@
 
 The Explorer is a hierarchical tree browser for navigating and managing entities in a structured, folder-based layout. It complements the Library, which is a flat search-based surface — the Explorer is for structure-first navigation: assemblies, BOMs, projects, stock locations, and any other hierarchy your workspace uses.
 
+The Explorer navigation entry requires `explorer.view`, and reading its entity tree requires
+`entity.read`. If either grant is missing, the navigation or data is not offered; the API returns
+**403 Forbidden** for a direct unauthorised request.
+
 ---
 
 ## Layout
@@ -159,6 +163,30 @@ The placeholder checkbox is only visible in the edit dialog for File family enti
 - Renaming a folder preserves its position in the tree without full reload.
 - Moving a folder via `MoveToFolderDialog` triggers a `FullRefreshAsync` on the folder tree after success to reflect the new position.
 - The search overlay in the Explorer ribbon applies quick text filtering to the entity grid.
+
+---
+
+## Grants used by Explorer actions
+
+| Action | Required grant |
+|---|---|
+| Open Explorer | `explorer.view` |
+| Read the tree | `entity.read` |
+| Create or insert an entity | `entity.create` |
+| Delete | `entity.delete` |
+| Link or unlink a definition | `entity.update` |
+| Change category / lifecycle / state | `entity.category.change` / `entity.lifecycle.change` / `entity.state.change` |
+| Share externally or manage share recipients | `share.create` |
+| Export to Excel | `reports.export` |
+| View the Stock tab | `stock.view` |
+| Adjust stock and add or remove stock positions | `stock.manage` |
+| Reserve or release stock | `stock.reserve` |
+| Create or cancel a purchase order | `procurement.order` |
+| Receive a purchase order | `procurement.receive` |
+
+The Stock and Procurement ribbon tabs appear only when both the selected row and the effective
+grants make them relevant. Record-level and lifecycle permissions remain in force as a second
+layer.
 
 ---
 

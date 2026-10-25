@@ -48,7 +48,7 @@ A quotation is what you offered, at what price, until when. It sits under the op
 | Client / Customer Contact | Who it is addressed to |
 | Opportunity | The pursuit it belongs to |
 | Valid Until | When the offer expires |
-| Payment Terms / Delivery Terms | The commercial conditions |
+| Payment Terms / Delivery Terms | The commercial conditions; Delivery Terms uses the seeded Incoterms 2020 dropdown |
 | Sales Currency | The currency of the whole quotation |
 
 The quotation's **name is its number**, allocated automatically — `Q2026 0001`.
@@ -58,6 +58,12 @@ The quotation's **name is its number**, allocated automatically — `Q2026 0001`
 Each line carries a description, a **Quantity** and a **Unit Price**. **Line Total** is calculated for you and cannot be typed.
 
 Lines can be added by hand or picked from the Library, so a quotation can quote catalogue items directly.
+
+### Price Lists
+
+Where the quotation's **Pricing** tab is configured, choose a [Price List](price-lists.md). The quotation date selects an enabled period, and a new line copies its item's price from that period. The period currency must match the quotation currency. If the item has no price in that period, the line is unpriced rather than using an older price.
+
+Changing the Price List later does not silently rewrite saved lines. On an editable quotation, deliberately saving a different list or date refreshes existing line prices. Review the refreshed lines before issuing the quotation.
 
 ### Revising a quotation
 
@@ -69,22 +75,22 @@ There is deliberately no way back from Issued to Draft. The customer is holding 
 
 ---
 
-## Turning an accepted quotation into a project
+## Creating an output from an accepted quotation
 
-An accepted quotation becomes a project, carrying its client, contact, currency and contract value across.
+An accepted quotation can trigger an ordinary stored automation on its lifecycle transition. The script chooses an enabled Folder- or Occurrence-family category and a fixed Explorer landing folder, then calls the controlled generic **Create Entity** action.
 
-The new project records **which version of the quotation it was sold on** — the number, the revision letter, and the exact version. That matters because quotations get revised after they are won, and a project that simply pointed at "the quotation" would silently start describing a document nobody agreed to.
+The output can therefore be a Project, Sales Order, Spare-Part Order or Service Order. The automation does not assume that every accepted quotation needs a Project.
 
-The conversion refuses rather than guesses:
+The created entity receives a pinned **Generated From** link to the exact source version. The entity, its Explorer placement and that link are written in one transaction.
 
-- The quotation must be **Accepted**.
-- It must have lines.
-- **Every line must have a Line Total.** An unpriced line stops the conversion and names itself, because a contract value that quietly omits the lines somebody had not finished is too low and looks complete.
-- The total cannot be negative.
+The action refuses rather than guesses when:
 
-Converting the same quotation twice returns the project that was already made rather than a second one. Converting a *later revision* does make a new project — a re-accepted revision is a different sale.
+- the configured category is missing, disabled or not an Explorer category;
+- the configured landing folder is missing or belongs to another workspace;
+- the output name is blank;
+- the exact source version no longer exists.
 
-> **Note:** This runs through the API today; there is no button for it yet.
+Refreshing does not create another output. Automation retry protection uses the lifecycle event identifier. An administrator can deliberately use the configured Accepted → Draft recovery transition, delete a test output, and accept again; that is a new event and produces a replacement.
 
 ---
 
@@ -124,17 +130,17 @@ An event type the timeline has never seen still appears, described from its own 
 
 | Grant | Effect |
 |---|---|
-| Entity create | Create opportunities, quotations and activities; convert an accepted quotation into a project |
+| Entity create | Manually create opportunities, quotations and activities |
 | Entity update | Edit them |
 | Entity state change | Move an opportunity through the pipeline, or issue and settle a quotation |
 
-Category and lifecycle-state permissions apply as they do to any other item — a workspace can restrict who edits a quotation once it is Issued in the ordinary way.
+Category and lifecycle-state permissions apply as they do to any other item. For a lifecycle automation, the user must be allowed to perform the exact transition. The configured automation then runs through its narrow action API; it does not give that user general permission to create arbitrary Projects or orders.
 
 ---
 
 ## Known limitations
 
 - **No print template for quotations.** The field mapping is ready; what is missing is a Word document with the merge fields in it. Until one exists, a quotation cannot be printed or sent as a PDF from MatStream.
-- **Quotation → project has no button**, only an API call.
+- Property copying and financial posting are not yet generic script actions; the first Create Entity action creates, places and links the output only.
 - **The timeline has no tab**, only an API call.
 - Sales currency is a per-item field. There is no workspace base currency and no conversion, so a workspace quoting in more than one currency must total each separately.

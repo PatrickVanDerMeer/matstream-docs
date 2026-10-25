@@ -8,7 +8,7 @@ The Property Browser is the right-hand pane in the Explorer and the Library. It 
 
 Properties are shown in grouped accordion sections, in the order and grouping the category defines. Which sections you leave open is remembered per user, and separately for the Explorer and the Library, so each surface keeps the shape you gave it.
 
-Properties you do not have permission to see are not shown. Property-level permissions are set on the property definition — see [Property definitions](../admin/properties.md).
+Properties you do not have permission to see are not shown. Property-level permissions are set on the property's category assignment — see [Property definitions](../admin/properties.md).
 
 ---
 
@@ -17,6 +17,12 @@ Properties you do not have permission to see are not shown. Property-level permi
 Click the **pencil** beside a value, or **double-click** the value itself. A small edit dialog opens for that one property, with the editor its data type and configuration call for: a date picker for dates, a list for list properties, a checkbox for Booleans, a barcode-aware editor for barcode properties.
 
 **Save** writes the value; **Cancel** discards it. Each property is saved on its own — there is no pending-changes state across the pane.
+
+### Editing a thumbnail
+
+A **Thumbnail** property opens an image editor rather than a text field. Click **Choose image**, or focus the editor and paste an image from the clipboard. Click the preview for a larger view, or **Remove** to clear the picture. **Save** applies the change; **Cancel** discards it.
+
+The same editor works on a multi-selection: saving applies the chosen image, or its removal, to the editable selected items. Read-only items are skipped and reported like other batch property edits. See [Thumbnail properties](../entities/properties.md#thumbnail-properties) for supported formats and upload limits.
 
 !!! note "Read-only in a locked state"
     If the entity's lifecycle state forbids modification, the editors do not open. This is the lifecycle doing its job — released data is not editable in place.

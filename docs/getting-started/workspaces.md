@@ -59,10 +59,10 @@ permissions of all their groups.
 
 ---
 
-## Role capabilities
+## Workspace grants
 
-Each group in a workspace carries a set of **role capabilities** — 
-broad flags that define what the group is allowed to do. These include 
+Each group in a workspace carries a set of **grants** — broad flags that define what the group is
+allowed to do. These include
 things like:
 
 - Creating new entities
@@ -71,10 +71,13 @@ things like:
 - Triggering lifecycle transitions
 - Managing workspace configuration
 
-Role capabilities set the broad rules. Lifecycle state permissions then 
-refine those rules further — for example, even if a group has edit 
-capability, they may not be able to edit a Released entity because the 
-lifecycle state restricts modification.
+The API enforces grants, and the web app hides or disables unavailable features. Lifecycle state,
+transition, property, display-tab, and entity permissions then refine those broad rules—for
+example, even if a group has `entity.update`, it may not be able to edit a Released entity because
+the lifecycle state restricts modification.
+
+See [Users and groups](../admin/users-groups.md#grants) for the model and
+[Editing group grants](../admin/group-grants-dialog.md) for the complete catalog.
 
 ---
 

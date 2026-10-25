@@ -34,6 +34,7 @@ Go to **Configuration → Automations**. The grid lists all automations in the w
 | Category lifecycle switch | An entity is switched from one lifecycle to another |
 | Inventory | A stock event occurs |
 | Scheduled | On a timed schedule |
+| Property change | A property's value changes in an open editor (see [Property automations](category-editor-dialog.md#property-automations)) |
 | On create | A new entity is created |
 | On save | An entity's properties are saved |
 | On delete / Before delete | An entity is deleted |

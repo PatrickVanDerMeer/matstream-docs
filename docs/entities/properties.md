@@ -32,14 +32,38 @@ MatStream supports the following property types:
 
 | Type | Description | Example |
 |---|---|---|
-| **Text** | Free-form text input | Material grade, description |
+| **Text** | Short free-form text, sometimes with suggestions or checked as an e-mail address | Material grade, e-mail |
+| **Memo** | Long text, plain or formatted (rich text) | Description, notes |
 | **Number** | Numeric value, optionally with a unit of measure | Weight (kg), length (mm) |
-| **Date** | A calendar date | Approval date, expiry date |
+| **Date / time** | A date, a time, a date with time, or a date with quick ranges from today | Approval date, due date |
 | **Boolean** | A yes/no toggle | Is approved, is hazardous |
 | **List** | A dropdown with administrator-defined allowed values | Surface finish, colour |
+| **Link** | A web address | Datasheet URL |
+| **Icon** | An icon picked from the icon set | Status icon |
+| **Barcode** | A value shown as a scannable symbol; accepts scanner input | EAN, stock number |
 | **User** | A person picked from the workspace's members | Project Manager, Rate Person |
 | **Item reference** | A link to another item, picked from a chosen category | Client, Preferred Vendor |
 | **Calculated** | Arithmetic over the other properties of the same item | Line Total, Weighted Revenue |
+| **Thumbnail** | A small image that visually identifies the item | Contact portrait, product picture |
+
+Which editor you get for a property is chosen by your administrator — see [Editor types](../admin/properties.md#editor-types). Barcode scanning is described in [Barcode scanning](../features/barcode.md).
+
+## Thumbnail properties
+
+If your category has a Thumbnail property, its editor shows a picture preview and image controls:
+
+1. Open an existing item and find the thumbnail property. Save a newly created item before adding its thumbnail.
+2. Click **Choose image**, or focus the thumbnail editor and paste an image from the clipboard.
+3. Check the preview. Click the picture to open a larger preview; click **Remove** to clear it.
+4. Click **Save and Close** to store changes made in the item dialog. **Cancel** discards those pending thumbnail changes.
+
+From the [Property Browser](../features/property-browser.md), open the property's edit dialog instead. Its **Save** button writes the thumbnail immediately; **Cancel** leaves the saved image unchanged. A multi-selection can set or remove the same thumbnail on several items, subject to their permissions and lifecycle locks.
+
+Supported formats are **PNG, JPEG, WebP, BMP, and GIF**, with a **25 MB** upload limit. MatStream centre-crops the image to a square and stores a **512 × 512 WebP** thumbnail. Animated GIFs use the first frame. This is a visual identifier, not storage for the full original image.
+
+Thumbnails follow category-property view/edit permissions. A read-only editor lets you view the picture but not replace or remove it. If the property is hidden by permissions, it is not displayed.
+
+To see images beside item names, add the thumbnail property through the Library or Explorer [column chooser](../features/grid-defaults.md). An empty thumbnail stays blank in the grid. Images are not text-searchable, and the thumbnail column does not support sorting or filtering.
 
 ## Calculated properties
 

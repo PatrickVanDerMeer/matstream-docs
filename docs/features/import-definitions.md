@@ -110,41 +110,21 @@ Entities that exist in MatStream but are not present in the import file are **no
 
 ## Inventor Drawing BOM import (via MatStreamConnect)
 
-MatStream supports importing a drawing's BOM directly from Autodesk Inventor using an iLogic rule and the **MatStreamConnect** desktop companion app.
-
-### Flow
+Drawings and their parts lists can be published straight from Autodesk Inventor: an iLogic rule writes the drawing's iProperties to a metadata file, exports the PDF and the parts list, and calls the **MatStreamConnect** desktop app, which runs the matching Import Definitions:
 
 ```
 Inventor (iLogic rule)
-  → Exports BOM to Excel in %TEMP%
-  → Reads iProperties (Part Number, Description, Revision, Author, etc.)
-  → Launches MatStreamConnect via process call
-      → MatStreamConnect reads the Excel + metadata
-      → Calls POST /api/wid/{workspaceSlug}/imports/{profileName}/run
-      → Attaches the drawing PDF (if configured)
-      → MatStream creates/updates the main entity + BOM children
+  → %TEMP%\<drawing>_meta.json  (iProperties, keys = field-mapping source columns)
+  → %TEMP%\<drawing>.pdf        (drawing PDF)
+  → %TEMP%\<drawing>_BOM.xlsx   (parts list)
+  → MatStreamConnect.exe --publish-drawing  --profile "Inventor Main Item" --metadata … --file <pdf>
+  → MatStreamConnect.exe --publish-children --profile "Inventor Parts List" --metadata … --bom  <xlsx>
+      → MatStream creates/updates the drawing entity, attaches the PDF, upserts the BOM rows
 ```
 
-### iLogic rule
+Two definitions are involved: a `File` one for the drawing (`--profile "Inventor Main Item"`) and a `ChildrenFromExcel` one for its rows (`--profile "Inventor Parts List"`). The `--profile` names must match the definitions' **Name** fields exactly.
 
-The iLogic rule in Inventor:
-1. Checks that MatStreamConnect is installed.
-2. Reads iProperties from the active drawing document.
-3. Exports the BOM from the active drawing to a temporary Excel file.
-4. Builds a metadata JSON string from the iProperties.
-5. Calls MatStreamConnect with the profile name, Excel path, metadata JSON, and optionally the drawing PDF path.
-
-The profile name must match an Import Definition configured in MatStream with `Source = "Inventor Drawing BOM"` (or whichever name the iLogic rule passes).
-
-### MatStreamConnect
-
-MatStreamConnect is a Windows desktop companion application that:
-- Runs as a system tray application.
-- Can be opened by double-clicking the tray icon or via the **Open** context menu item.
-- Reads its workspace connection from `%APPDATA%\MatStream\MatStreamConnect\connection.json`.
-- `connection.json` stores: `WorkspaceSlug`, `WorkspaceId`, `TenantApiBaseUrl`, `CoreApiBaseUrl`, `WorkspaceName`.
-- The `CoreApiBaseUrl` is preserved when the user re-authenticates (not overwritten with the default).
-- Accepts command-line arguments from iLogic rules to trigger import runs without user interaction.
+The rules, the argument reference and the definition settings are in [Inventor BOM import](../integrations/inventor-bom.md); installation and setup of the desktop app in [MatStreamConnect](../integrations/matstream-connect.md).
 
 ---
 
@@ -156,6 +136,25 @@ Imports can be triggered:
 - **From MatStreamConnect** (triggered by iLogic or other automation).
 
 After a run, an `ImportBatch` record is created with counters: `InsertCount`, `UpdateCount`, `SkipCount`, `ErrorCount`, and a `Notes` field with row-level error details.
+
+---
+
+## Permissions
+
+Import configuration and execution are deliberately separate:
+
+| Grant | Effect |
+|---|---|
+| `import.definitions.manage` | Open and maintain import definitions, mappings, criteria, and profiles |
+| `import.run` | Stage, validate, commit, publish, and inspect import batches |
+
+Someone may therefore run an approved profile without being able to redesign it. Imports also need
+the entity and file capabilities used by that definition, such as `entity.create`, `entity.update`,
+or `file.upload`.
+
+MatStreamConnect and CAD/iLogic-triggered imports run under the signed-in user's token. That user
+must hold `import.run` and the applicable entity/file grants; an integration does not bypass the
+workspace grant model.
 
 ---
 

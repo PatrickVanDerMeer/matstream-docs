@@ -4,6 +4,54 @@
 
 ### New features
 
+**Workspace grants are now enforced end to end**
+The complete grant catalog now protects Library, Explorer, entities, files, BOMs, catalog
+configuration, administration, stock, imports, exports, external sharing, time, printing,
+procurement, tasks, and the AI assistant. The API is the security boundary and returns 403 for a
+missing grant; the web app mirrors it by hiding unavailable navigation and tabs and disabling
+protected actions. Grants from enabled group memberships combine, while category, property,
+display-tab, lifecycle-state, and transition permissions remain a second, narrower layer.
+
+The Setup Wizard now gives its thirteen role groups additive, role-appropriate grant sets. Re-running
+the wizard adds missing template grants without removing administrator customisations. Existing
+tenant groups receive the compatible read baseline during the rollout migration. See
+[Users and groups](../admin/users-groups.md),
+[Editing group grants](../admin/group-grants-dialog.md), and
+[Workspace setup](../getting-started/workspace-setup.md).
+
+**Sign in with Microsoft or Google**
+The sign-in screen — in the app, in MatStream Manage and in MatStreamConnect's
+setup window — now offers **Continue with Microsoft** and **Continue with
+Google** next to the password form (Connect hands off to your browser and picks
+the session up when you return). An existing account with the same verified email address is linked and
+keeps its password; an unknown address becomes a new, already-confirmed account
+without one. The provider always shows its account picker so work and personal
+accounts can be told apart. See
+[Create an account](../getting-started/create-account.md#sign-in-with-microsoft-or-google).
+
+**3D Model viewer**
+A new **3D Model** display tab shows an item's geometry in the browser: rotate,
+standard views, feature edges, and point-to-point measuring with vertex snap in
+mm, cm, m or inches. The model is a viewer file attached to the entity version —
+not a document, no category, no revision — uploaded as a GLB from the tab or
+published straight from Inventor with the new `MatStreamConnect --publish-model`
+command and the `MatStream_Publish3DModel` iLogic rule. Older versions keep the
+model they had; purging a version hands its model to the next version that was
+inheriting it. See [3D Model viewer](../features/3d-model.md) and
+[Inventor 3D model](../integrations/inventor-3d-model.md).
+
+**MatStreamConnect**
+The setup window accepts the workspace address pasted from the browser
+(`…/w/<slug>`) and shows where it will sign in; *Remember me* now decides whether
+the session survives a restart (previously every start signed in silently); an
+empty or corrupt settings file opens setup instead of crashing on start. The
+iLogic rules and the Connect documentation were reworked for **Inventor 2027**
+(fully qualified `System.IO` names, registry read through `WScript.Shell`) and
+now describe the commands Connect actually accepts (`--publish-drawing`,
+`--publish-children`, `--publish-entity`, `--publish-model`). See
+[MatStreamConnect](../integrations/matstream-connect.md) and
+[Inventor BOM import](../integrations/inventor-bom.md).
+
 **Workspace backup and restore**
 MatStream Manage can now stream a complete workspace to a versioned
 `.msworkspace` package and restore it into a selected workspace. Packages carry
@@ -256,7 +304,7 @@ Previously these automations could be switched on but not configured, so they
 silently did nothing.
 
 **Transition security seeded by the wizard**
-The Setup Wizard now creates **Senior Engineers** and **Junior Engineers** 
+The Setup Wizard now creates **Engineering** and **Engineers (Junior)**
 groups and configures per-transition permissions on the Engineering Lifecycle, 
 giving a working example of role-based release control out of the box.
 
@@ -397,7 +445,7 @@ A Collaborate page providing a tree view of Clients, Suppliers, and Third Partie
 New workspaces and users are guided through a structured onboarding flow on first access.
 
 **MatStreamConnect — File check-out / check-in**
-MatStreamConnect now registers the `matstream://` URI scheme. Clicking an Open link in the browser downloads the file, locks it on the server, and opens it with the Windows default application. When the file is closed, MatStreamConnect prompts to check it back in. Manual check-in and undo-checkout are available from the tray menu.
+MatStreamConnect now registers the `matstream://` URI scheme. Clicking an Open link in the browser downloads the file, locks it on the server, and opens it with the Windows default application. Current close handling automatically checks in changed files and releases unchanged checkouts without creating a version. Manual check-in and undo-checkout are available from the tray menu. See [Files & documents](../entities/files.md#checking-in) for current behavior.
 
 **Import Definitions — Category assignment rules**
 Import definitions now support category assignment rules: logic evaluated per BOM row that assigns different categories based on source column values, with operators Eq, NotEq, Contains, Regex, and IsEmpty.

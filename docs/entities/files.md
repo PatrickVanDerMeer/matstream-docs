@@ -51,13 +51,31 @@ On a file attachment, click the **Open** link. This launches `matstream://` in t
 
 ### Checking in
 
-When you close the application that has the file open, MatStreamConnect detects this and prompts:
+Connect watches whether the local file is still locked by an application. Once it can open the file exclusively, it compares the bytes with the original download using SHA-256:
 
-> *"filename.dwg has been closed. Check it back in to MatStream?"*
+- **Changed:** automatically upload the file, release checkout, and create the check-in version. There is no confirmation prompt and no success popup for automatic check-in.
+- **Unchanged:** automatically undo checkout and release the lock, without creating a new version.
+- **Check-in failed:** keep the checkout available for manual retry, except when ownership has been removed or taken over (see recovery below).
 
-Click **Yes** to upload the modified file and release the lock. The new file version is attached to the entity.
+Save the file before closing it. File-lock detection is not application-exit detection; an application that releases the lock early can trigger the watcher while its window remains open.
 
-You can also check in manually from the MatStreamConnect tray icon at any time.
+To check in manually, right-click the Connect tray icon, select the file, and choose **Check in…**. Manual check-in uploads the local copy and reports success; the unchanged-file shortcut above belongs to automatic close handling. **Show in Explorer** selects the local copy.
+
+Checkout tracking and watchers are held in memory. Exiting or restarting Connect does not restore the tray list or watchers, and can leave local copies and server checkouts behind. Preserve unsaved/local edits before restarting; do not assume restart releases the server lock.
+
+### Recovery after a rejected check-in
+
+If the server returns 403 or 409 because checkout was removed or taken over, Connect removes its stale tray entry and attempts to move the edited local file to:
+
+```text
+Documents\MatStream Connect\Recovered\<name>_recovered_<timestamp>.<extension>
+```
+
+A warning displays the recovered path. If moving the file fails, the local copy remains in `%LOCALAPPDATA%\MatStream\MatStreamConnect\Checkout`. These edits have **not** been saved to MatStream. Keep the recovered file, resolve access/checkout ownership, and arrange a new authorized upload. Other check-in failures show an error and retain the tracked checkout for retry.
+
+### Inventor assets after check-in
+
+A successful check-in of `.ipt` or `.iam` starts background GLB generation for the version returned by check-in. With an Inventor Thumbnail property configured, Connect also extracts and uploads the embedded thumbnail. Asset failures are logged and do not undo the file check-in. See [Inventor automatic previews](../integrations/inventor-3d-model.md#automatic-preview-after-inventor-check-in) and [Connect application settings](../integrations/matstream-connect.md#application-settings-and-inventor-thumbnails).
 
 ### Undo checkout
 
@@ -75,7 +93,7 @@ If someone else has already checked out a file, clicking Open shows a prompt:
 
 > *"This file is already checked out by [user]. Do you want to open it read-only?"*
 
-Choosing Yes downloads the file without locking it. Read-only files cannot be checked back in.
+Choosing Yes downloads the file without locking it and sets its Windows read-only attribute. An explicit `matstream://open?storedFileId=…&fileName=…&mode=readonly` link requests the same behavior directly. Read-only downloads are not listed in the checkout tray, cannot be checked back in through Connect, and have no automatic cleanup watcher.
 
 ---
 

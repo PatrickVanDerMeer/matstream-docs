@@ -66,7 +66,10 @@ Visual indicators in the Explorer grid distinguish placeholders from entities th
 
 ## Folder permissions
 
-Folder access follows the same permission model as all other entities: role capabilities, lifecycle-state permissions, and entity-level grants. If a user does not have read access to a folder entity, it does not appear in their Explorer tree.
+Folder access follows the same permission model as all other entities: workspace grants,
+lifecycle-state permissions, and the entity permission list all apply. Opening the tree needs
+`explorer.view` and `entity.read`; if the user cannot read a folder entity, it does not appear in
+their Explorer tree.
 
 ---
 

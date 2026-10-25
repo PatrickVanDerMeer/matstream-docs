@@ -134,7 +134,7 @@ Depending on which options you tick, the [Setup Wizard](../getting-started/works
 
 | Lifecycle | States | Applied to |
 |---|---|---|
-| **Engineering Lifecycle** | Work in Progress *(initial)* → For Review → Approved → Released *(final)* → Obsolete | Part, Assembly, Weld Assembly, Instrument, Equipment, WPS |
+| **Definition Lifecycle** | Work in Progress *(initial)* → For Review → Approved → Released *(final)* → Obsolete | Part, Assembly, Weld Assembly, Instrument, Equipment, WPS |
 | **Procurement Lifecycle** | Engineering *(initial)* → Ready for Procurement → Reserved / Ordered → Delivered → Assembled *(final)* | BOM Position, Material Requirement Line |
 | **Purchase Order Lifecycle** | Open *(initial)* → Issued → Received → Closed *(final)* | Purchase Order |
 | **Project Lifecycle** | In Preparation *(initial)* → Work in Progress → On Hold → Closed *(final)* / Cancelled | Project |
@@ -145,12 +145,12 @@ Depending on which options you tick, the [Setup Wizard](../getting-started/works
 !!! note "Naming convention"
     Every seeded lifecycle name ends in **" Lifecycle"**. This is deliberate: without it, most lifecycles shared a name with a category (a *Purchase Order* lifecycle and a *Purchase Order* category), which made the Explorer **Lifecycle** and **Occ. State** columns ambiguous. Follow the same convention for lifecycles you create.
 
-**Engineering Lifecycle is fully connected.** Because engineers may need to move between states in any order, every state pair has a transition — 20 in total — and access is controlled entirely by transition permissions rather than by restricting the paths. See [Users & groups](users-groups.md#engineering-lifecycle-permissions) for the groups it seeds and what each may do.
+**Definition Lifecycle is fully connected.** Because engineers may need to move between states in any order, every state pair has a transition — 20 in total — and access is controlled entirely by transition permissions rather than by restricting the paths. See [Users & groups](users-groups.md#definition-lifecycle-permissions) for the groups it seeds and what each may do.
 
 You can modify any seeded lifecycle or create your own.
 
 !!! warning "Only one final state per lifecycle"
-    A lifecycle may have exactly one state marked **Final**. In the Engineering Lifecycle, `Released` is final and `Obsolete` comes *after* it — Obsolete is not marked final. Design accordingly: "final" means the successful end of the process, not the last state in the list.
+    A lifecycle may have exactly one state marked **Final**. In the Definition Lifecycle, `Released` is final and `Obsolete` comes *after* it — Obsolete is not marked final. Design accordingly: "final" means the successful end of the process, not the last state in the list.
 
 ---
 
