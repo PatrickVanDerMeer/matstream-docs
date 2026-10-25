@@ -37,14 +37,12 @@ Work with your engineering information.
 
 <section class="help-topic" markdown="1">
 
-## Follow a workflow
+## Work Flows
 
-Complete everyday tasks from start to finish.
+Follow the steps to complete a task from start to finish.
 
+- [About Work Flows](workflows/index.md)
 - [Sales Order flow](features/sales-orders.md)
-- [Opportunities and quotations](features/opportunities-quotations.md)
-- [Stock management](features/stock.md)
-- [Procurement](features/procurement.md)
 
 </section>
 

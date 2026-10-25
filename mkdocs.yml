@@ -39,6 +39,9 @@ nav:
     - Workspaces: getting-started/workspaces.md
     - Workspace setup: getting-started/workspace-setup.md
     - Accessing a workspace: getting-started/workspace-access.md
+  - Work Flows:
+    - Overview: workflows/index.md
+    - Sales Order flow: features/sales-orders.md
   - Administration:
     - Inviting users: admin/inviting-users.md
     - Editor seats: admin/editor-seats.md
@@ -91,7 +94,6 @@ nav:
     - Milestones: features/milestones.md
     - Time tracking: features/time-tracking.md
     - Opportunities & quotations: features/opportunities-quotations.md
-    - Sales Order flow: features/sales-orders.md
     - Price Lists: features/price-lists.md
     - Stock management: features/stock.md
     - Procurement: features/procurement.md

@@ -1,0 +1,24 @@
+# Work Flows
+
+Follow a process from start to finish to get something done in MatStream.
+
+Each workflow gives you the steps in the order you need them: where to start, what to do, and what result to expect. A workflow can take you across several features, such as sales orders, stock, purchasing, and shipping.
+
+Detailed topic pages explain individual features, fields, and settings. Workflow guides keep those details brief and link to topic pages when you need more information.
+
+## Available workflows
+
+### Sales Order flow
+
+Create a customer order, add and price its articles, check stock, confirm the order, arrange missing stock, pick, pack, and ship. The guide also covers partial deliveries and completing the outstanding quantities.
+
+[Follow the Sales Order flow](../features/sales-orders.md)
+
+## How to use a workflow
+
+1. Check **Before you start** for setup and access requirements.
+2. Follow the numbered steps in order.
+3. Check the result of each step before continuing.
+4. Open linked topic help when you need more detail, then return to the workflow.
+
+Your workspace may have different field names or actions if its configuration has been customized.
