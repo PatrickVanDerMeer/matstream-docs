@@ -1,5 +1,5 @@
 site_name: MatStream
-site_url: https://doc.matstream.com/
+site_url: https://help.matstream.com/
 
 exclude_docs: |
   /test-stock-and-procurement.md
