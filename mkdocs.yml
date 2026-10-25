@@ -2,7 +2,6 @@ site_name: MatStream
 site_url: https://doc.matstream.com/
 
 exclude_docs: |
-  /dev/
   /test-stock-and-procurement.md
 theme:
   name: material
@@ -114,10 +113,10 @@ nav:
   - Release notes:
     - Changelog: release-notes/changelog.md
   - Developer:
-    - API overview: api/index.md
-    - Authentication: api/authentication.md
-    - First API request: api/first-request.md
-    - Errors and troubleshooting: api/errors.md
+    - API overview: dev/index.md
+    - Authentication: dev/authentication.md
+    - First API request: dev/first-request.md
+    - Errors and troubleshooting: dev/errors.md
 
 plugins:
   - search

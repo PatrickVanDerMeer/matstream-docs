@@ -82,8 +82,8 @@ been exposed.
 
 ## Next steps
 
-- [API authentication](../api/authentication.md) — exchange credentials for an access token
-- [First API request](../api/first-request.md) — connect using PowerShell
+- [API authentication](../dev/authentication.md) — exchange credentials for an access token
+- [First API request](../dev/first-request.md) — connect using PowerShell
 
 - [Users & groups](users-groups.md) — manage user access and permissions
 - [Syncing with Vault](../vault-integration/sync.md) — configure the 

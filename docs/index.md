@@ -49,8 +49,8 @@ Unlike generic platforms, MatStream is built with engineering rigour:
 
 Connect your scripts and external systems to MatStream using the API.
 
-- [API overview](api/index.md) - understand credentials and workspace routing
-- [First API request](api/first-request.md) - authenticate and search workspace data
+- [API overview](dev/index.md) - understand credentials and workspace routing
+- [First API request](dev/first-request.md) - authenticate and search workspace data
 
 ---
 
