@@ -94,6 +94,7 @@ nav:
     - Milestones: features/milestones.md
     - Time tracking: features/time-tracking.md
     - Opportunities & quotations: features/opportunities-quotations.md
+    - Sales Order flow: features/sales-orders.md
     - Price Lists: features/price-lists.md
     - Stock management: features/stock.md
     - Procurement: features/procurement.md
