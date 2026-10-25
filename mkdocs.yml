@@ -1,4 +1,4 @@
-site_name: MatStream
+site_name: MatStream Help
 site_url: https://help.matstream.com/
 
 exclude_docs: |
@@ -16,11 +16,8 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
   features:
-    - navigation.tabs
-    - navigation.sections
     - search.suggest
     - search.highlight
-    - toc.integrate
 
 nav:
   - Home: index.md
@@ -122,7 +119,11 @@ nav:
 plugins:
   - search
 
+extra_css:
+  - stylesheets/help.css
+
 markdown_extensions:
+  - md_in_html
   - admonition
   - pymdownx.superfences
   - pymdownx.tabbed:

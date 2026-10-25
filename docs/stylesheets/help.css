@@ -1,0 +1,28 @@
+/* MatStream help: topic tree, product banner, and a compact task directory. */
+:root { --md-primary-fg-color: #14263f; --md-accent-fg-color: #1261d8; }
+.md-header { background: #14263f; color: #fff; border-bottom: 3px solid #3984ef; box-shadow: none; }
+.md-header__title { font-weight: 650; }
+.md-header .md-search__button { background: #ffffff18; color: #fff; border: 1px solid #ffffff38; }
+.md-header .md-search__button:hover { background: #ffffff28; }
+.md-grid { max-width: 84rem; }
+.md-typeset { font-size: .8rem; line-height: 1.7; }
+.md-typeset h1 { font-size: 1.75rem; font-weight: 550; letter-spacing: -.025em; margin-bottom: .8rem; }
+.md-typeset h2 { font-size: 1.2rem; font-weight: 550; }
+.md-typeset a { text-underline-offset: .18em; }
+.help-topics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; row-gap: 1.7rem; margin-top: 1.6rem; }
+.help-topic { border-top: 1px solid var(--md-default-fg-color--lightest); padding-top: .8rem; }
+.md-typeset .help-topic h2 { margin: 0 0 .35rem; }
+.md-typeset .help-topic p { color: var(--md-default-fg-color--light); margin: 0 0 .65rem; font-size: .75rem; }
+.md-typeset .help-topic ul { list-style: none; margin: 0; padding: 0; }
+.md-typeset .help-topic li { margin: .22rem 0; padding: 0; }
+.md-typeset .help-topic a { text-decoration: none; }
+.md-typeset .help-topic a:hover { text-decoration: underline; }
+@media (min-width: 76.25em) {
+  .md-sidebar--primary { width: 14rem; border-right: 1px solid var(--md-default-fg-color--lightest); }
+  .md-sidebar--primary .md-sidebar__inner { padding-right: .9rem; }
+  .md-content { margin-left: 1.4rem; }
+}
+@media (max-width: 44em) {
+  .help-topics { grid-template-columns: 1fr; gap: 1.1rem; }
+  .md-typeset h1 { font-size: 1.5rem; }
+}
