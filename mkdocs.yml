@@ -76,30 +76,30 @@ nav:
     - Lifecycle: entities/lifecycle.md
     - Files & documents: entities/files.md
   - Features:
-    - Dashboard: features/dashboard.md
-    - Library: features/library.md
-    - Explorer: features/explorer.md
-    - Copy Structure: features/copy-structure.md
-    - Folders: features/folders.md
-    - Property Browser: features/property-browser.md
-    - Grids, columns & defaults: features/grid-defaults.md
-    - Search: features/search.md
-    - Uses & Where Used: features/where-used.md
     - 3D Model viewer: features/3d-model.md
-    - Filter Items & Snapshots: features/filter-items.md
-    - Print Templates: print-templates/print-templates-user.md
-    - Automations: features/automations.md
     - AI Assistant: features/ai-assistant.md
-    - Tasks: features/tasks.md
+    - Automations: features/automations.md
+    - Barcode scanning: features/barcode.md
+    - Collaborate: features/collaborate.md
+    - Copy Structure: features/copy-structure.md
+    - Dashboard: features/dashboard.md
+    - Explorer: features/explorer.md
+    - Filter Items & Snapshots: features/filter-items.md
+    - Folders: features/folders.md
+    - Grids, columns & defaults: features/grid-defaults.md
+    - Library: features/library.md
     - Milestones: features/milestones.md
-    - Time tracking: features/time-tracking.md
     - Opportunities & quotations: features/opportunities-quotations.md
     - Price Lists: features/price-lists.md
-    - Stock management: features/stock.md
+    - Print Templates: print-templates/print-templates-user.md
     - Procurement: features/procurement.md
-    - Barcode scanning: features/barcode.md
+    - Property Browser: features/property-browser.md
+    - Search: features/search.md
+    - Stock management: features/stock.md
+    - Tasks: features/tasks.md
+    - Time tracking: features/time-tracking.md
     - Unit Converter: features/unit-converter.md
-    - Collaborate: features/collaborate.md
+    - Uses & Where Used: features/where-used.md
   - Integrations:
     - MatStreamConnect: integrations/matstream-connect.md
     - Inventor BOM import: integrations/inventor-bom.md
