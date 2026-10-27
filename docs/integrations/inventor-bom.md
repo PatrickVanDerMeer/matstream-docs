@@ -1,5 +1,7 @@
 # Inventor BOM import
 
+For a step-by-step example using existing fittings and a new part, follow the [Inventor assembly and BOM workflow](../workflows/inventor-assembly-bom.md).
+
 MatStream imports drawings and their bills of materials straight from Autodesk Inventor: an iLogic rule exports what Inventor knows, and the [MatStreamConnect](matstream-connect.md) desktop app hands it to MatStream through an [Import Definition](../features/import-definitions.md). No manual data entry, no Excel round-trip by hand.
 
 ```

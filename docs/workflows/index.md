@@ -8,6 +8,12 @@ Detailed topic pages explain individual features, fields, and settings. Workflow
 
 ## Available workflows
 
+### Inventor assembly and BOM workflow
+
+Create an assembly with existing fittings and a new part, fill in its information in Inventor, create a drawing with a parts list, and publish the drawing and BOM to MatStream using iLogic.
+
+[Follow the Inventor workflow](inventor-assembly-bom.md)
+
 ### Sales Order flow
 
 Create a customer order, add and price its articles, check stock, confirm the order, arrange missing stock, pick, pack, and ship. The guide also covers partial deliveries and completing the outstanding quantities.

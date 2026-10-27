@@ -41,6 +41,7 @@ nav:
     - Accessing a workspace: getting-started/workspace-access.md
   - Work Flows:
     - Overview: workflows/index.md
+    - Inventor assembly and BOM: workflows/inventor-assembly-bom.md
     - Sales Order flow: features/sales-orders.md
     - Share a PO with a vendor: workflows/vendor-purchase-order.md
     - Supplier portal workflow: workflows/supplier-portal.md
