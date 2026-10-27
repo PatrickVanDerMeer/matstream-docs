@@ -12,7 +12,7 @@ Build an assembly in Autodesk Inventor using existing fittings and a newly creat
 - Confirm that the **Inventor Main Item** and **Inventor Parts List** Import Definitions are configured. If your rules use different profile names, those names must match your Import Definitions.
 - Check which properties and parts-list columns your workspace requires, and make sure the target drawing can have its BOM edited in its current lifecycle state.
 
-If you also seed **Engineering Project Sample Data**, finish that setup before publishing. The sample catalogue includes `023.713.101` as a **Weld Assembly**. For that sample, configure the main-item profile to use **Weld Assembly**, so the drawing PDF and BOM belong to the existing engineering item. Creating a separate Drawing with the same Library name prevents the sample catalogue from completing.
+If you also seed **Engineering Project Sample Data**, finish that setup before publishing. The sample catalogue includes `023.713.101` as a **Weld Assembly**. For that sample, configure the main-item profile to use **Weld Assembly** so the existing engineering item remains the BOM parent. The PDF is published as a separate **Drawing** entity named `023.713.101.pdf` and linked under that parent. Do not create another Drawing named `023.713.101` without the extension.
 
 The sample also includes a drawing document named `023.713.101.pdf` with the same Part Number. To publish to the assembly, map the metadata source `Part Number` to **Name** as the search key in both the main-item profile and the BOM profile's **Parent Item** configuration. Keep a separate field mapping to the Part Number property. This distinguishes the assembly's Name (`023.713.101`) from the drawing document's Name (`023.713.101.pdf`).
 
@@ -98,6 +98,10 @@ Create a drawing from the assembly using your normal drawing template. Add the v
 
 Add an Inventor **Parts List** based on the assembly. Choose the BOM view appropriate for your process, then check that the list includes both the existing fittings and the new part. Add balloons where needed and check that they correspond to the parts list.
 
+![Inventor drawing 023.713.101 with its views, balloons, parts list, and MatStream external iLogic rules](../images/inventor-workflow/inventor-drawing.png)
+
+*The drawing used for publication testing. Its parts list uses STOCK NR for the component number and includes a pipe quantity of 496 mm.*
+
 Make the parts-list column headings match the source columns expected by **Inventor Parts List**. Typical columns are **Part Number**, **Description**, **QTY**, and **Material**. The import profile must map the quantity column correctly.
 
 For an existing drawing whose part-number column is titled **STOCK NR**, use `STOCK NR` as the source column for both the child search key and the Part Number field mapping. Keep the parent metadata key as `Part Number`: the drawing metadata and the exported parts list use separate source names. A quantity such as `496 mm` carries both the numeric quantity and its unit; check both in the imported BOM.
@@ -127,6 +131,19 @@ The existing rules:
 2. Export the drawing to PDF and publish it through **Inventor Main Item**.
 3. Export the drawing's parts list to Excel and publish its rows through **Inventor Parts List**.
 
+The drawing command creates or updates the parent from the main-item profile, then publishes the PDF as a separate Library **Drawing** entity using its filename, including `.pdf`. For example:
+
+```text
+023.713.101                 Weld Assembly / BOM parent
+  023.713.101.pdf           Drawing document, with the PDF attached
+  100.080.420               BOM component
+  ...
+```
+
+Later publishes reuse the Drawing entity and its current parent link; changed PDF content updates that document through the normal file versioning behavior. The PDF is not attached directly to the assembly. The paperclip therefore appears on the drawing document, while the assembly only shows one if it has another direct file attachment.
+
+Use updated versions of both MatStreamConnect and the tenant API. The workspace must have a Library **Drawing** category that allows direct file attachment; the Inventor setup provides it. If the old publishing behavior attached a PDF with the same filename directly to the parent, a successful publish stores and links the separate document first, then removes that matching parent attachment. Unrelated attachments, such as a native assembly model, remain in place.
+
 MatStreamConnect handles the transfer. Open its **Activity** log and check the results of both `publish-drawing` and `publish-children`. Wait for both operations to finish and resolve any row errors before treating the transfer as complete.
 
 If your setup already runs this rule on **After Save Document**, saving the drawing may start publication automatically. Check the Activity log before running it again.
@@ -136,7 +153,7 @@ If your setup already runs this rule on **After Save Document**, saving the draw
 Find the parent using the drawing key configured in your Import Definitions, then verify:
 
 - Its properties match the drawing information entered in Inventor.
-- The attached PDF opens and shows the expected drawing and parts list.
+- A separate Drawing entity named after the PDF appears under the parent's **Uses**; its attached PDF opens and shows the expected drawing and parts list.
 - Its **Uses** tab, or your configured BOM view, contains the expected components and quantities.
 - The existing fittings resolve to the intended existing items.
 - The new part is present with the correct number, description, material, and other mapped information.
@@ -144,7 +161,11 @@ Find the parent using the drawing key configured in your Import Definitions, the
 
 For the example, check for two elbows, two flanges, and one connecting pipe. The drawing profile determines the parent category; with the documented setup, the BOM belongs to the drawing entity identified by the metadata.
 
-**Result:** MatStream contains the published drawing PDF and its BOM, with existing fittings reused by their mapped keys and the new part created or updated from its exported row.
+**Result:** MatStream contains a separate PDF drawing document linked to the BOM parent, with existing fittings reused by their mapped keys and the new part created or updated from its exported row.
+
+![Published assembly and separate PDF Drawing entity in the Library, with the PDF linked in Uses](../images/inventor-workflow/published-drawing.png)
+
+*Example after publishing: the assembly remains the BOM parent, while the PDF has its own Drawing entity and attachment.*
 
 ## 8. Update the design and publish again
 
@@ -194,11 +215,29 @@ For `023.713.101.idw`, the tested BOM contained the following components:
 | `100.161.120` | 3 |
 | `100.210.120` | 496 mm |
 
-The starting **Uses** view also contained thirteen supporting links: `023.713.101.pdf`, **Inspection and Test Plan**, **Material Certificates (EN 10204 3.1)**, **My Company BV**, **Pressure Test Certificate**, and eight weld placements displayed as **WPS-001 GTAW 316L**. These links are outside the BOM profile's imported membership and must remain linked.
+The starting **Uses** view also contained thirteen supporting links: `023.713.101.pdf`, **Inspection and Test Plan**, **Material Certificates (EN 10204 3.1)**, **My Company BV**, **Pressure Test Certificate**, and eight weld placements linked to **WPS-001 GTAW 316L**. These links are outside the BOM profile's imported membership and must remain linked.
+
+Welds retain their own names, **Weld W-01** through **Weld W-08**. Their **Part Number** (`WPS-001`) and **Description** (`GTAW welding procedure for 316L stainless steel`) fall back to the linked WPS through property-level inheritance. Weld No, Welder ID, Weld Date, NDT Method, NDT Result, and lifecycle state stay specific to each weld. The WPS uses the shared Part Number property instead of a separate WPS Number field; migration `20261027_wps_weld_properties.sql` preserves existing WPS numbers and authored descriptions when upgrading an existing workspace.
+
+![Freshly seeded Welds tab showing Weld W-01 through Weld W-08, inherited WPS-001 Part Numbers and descriptions, and individual Weld Numbers and Welder IDs](../images/inventor-workflow/welds-inherit-wps.png)
+
+*Fresh-workspace verification: each weld keeps its own Name; the procedure reference and description come from the WPS.*
+
+![WPS General tab with Part Number WPS-001 and the procedure description](../images/inventor-workflow/wps-properties.png)
+
+*The shared values are maintained on the WPS record rather than copied into every weld.*
+
+Engineering sample setup also attaches **WPS-001-GTAW-316L-DEMO.pdf** directly to the sample WPS record. Open that WPS's **Attached File** tab to view it. The document is marked **DUMMY / TRAINING ONLY - NOT FOR PRODUCTION** and contains no qualified welding parameters. Rerunning setup fills an empty WPS attachment slot but preserves any file already attached.
+
+![Freshly seeded WPS Attached File tab showing the demonstration PDF filename](../images/inventor-workflow/wps-attachment.png)
+
+*The sample PDF is attached directly to the WPS entity. It is not an extra BOM component.*
+
+![One-page demonstration WPS PDF, clearly marked as a dummy document not for production](../images/inventor-workflow/sample-wps.png)
 
 | Check | Verified result |
 |---|---|
-| Run `MatStream_PublishDrawing` | PDF attached, zero BOM row errors; five components plus thirteen supporting links (18 Uses rows) |
+| Run `MatStream_PublishDrawing` | PDF published on the separate linked Drawing document, zero BOM row errors; five components plus thirteen supporting links (18 Uses rows) |
 | Publish the same BOM again | All 18 Uses rows and their quantities unchanged |
 | Publish a test export with one invalid child key and the pipe row omitted | Row error reported; cleanup skipped; all 18 Uses rows and the previous five-component membership retained |
 | Publish a valid test export with the pipe row omitted | Only `100.210.120` unlinked; four components plus thirteen supporting links (17 Uses rows) |

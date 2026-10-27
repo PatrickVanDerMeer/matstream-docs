@@ -12,8 +12,9 @@ Inventor drawing
       → exports the parts list to Excel
       → MatStreamConnect.exe --publish-drawing  --profile "Inventor Main Item"       … --file <pdf>
       → MatStreamConnect.exe --publish-children --profile "Inventor Parts List" … --bom  <xlsx>
-          → MatStream creates or updates the drawing entity, attaches the PDF,
-            and upserts the BOM rows as its children
+          → MatStream creates or updates the BOM parent from metadata,
+            publishes a separate <number>.pdf Drawing document linked under it,
+            and upserts the BOM rows as the parent's children
 ```
 
 For the part or assembly's 3D model, see [Inventor 3D model](inventor-3d-model.md) — a separate, simpler rule.
@@ -23,7 +24,7 @@ For the part or assembly's 3D model, see [Inventor 3D model](inventor-3d-model.m
 ## Prerequisites
 
 1. **MatStreamConnect installed and started at least once** on the Inventor workstation, logged in to the workspace. The rules find the executable through the registry entry Connect writes on first start.
-2. **Import Definitions configured** in MatStream — one for the drawing entity, one for its BOM children (below).
+2. **Import Definitions configured** in MatStream — one for the BOM parent, one for its BOM children (below). A Library **Drawing** category allowing direct file attachment is required for the separate PDF document; Inventor setup provides it. Use matching updated versions of Connect and the tenant API.
 3. **iLogic rules deployed** as external rules in Inventor's rule folder.
 
 ---
@@ -35,7 +36,7 @@ MatStreamConnect accepts these publish commands from the command line. Connect n
 | Command | What it does |
 |---|---|
 | `--publish-entity` | Creates or updates one entity from the metadata; optionally attaches `--file` to it |
-| `--publish-drawing` | Same as above for a drawing; `--file` is the PDF to attach |
+| `--publish-drawing` | Creates or updates the parent from metadata, then publishes `--file` as a separate Drawing document linked under it |
 | `--publish-children` | Upserts the rows of an Excel BOM as children of the entity the metadata identifies |
 | `--publish-model` | Attaches a GLB as an existing entity's 3D model — see [Inventor 3D model](inventor-3d-model.md) |
 
@@ -43,7 +44,7 @@ MatStreamConnect accepts these publish commands from the command line. Connect n
 |---|---|---|
 | `--profile "<name>"` | entity, drawing, children | Name of the Import Definition — must match exactly |
 | `--metadata <path or JSON>` | entity, drawing, children | The iProperties: a path to a JSON file (recommended — no quoting problems) or an inline JSON object |
-| `--file "<path>"` | entity, drawing | File to attach to the main entity (the drawing PDF) |
+| `--file "<path>"` | entity, drawing | Entity command: direct attachment. Drawing command: PDF for a separate linked Drawing document named after the file |
 | `--bom "<path>"` | children | The Excel parts-list export |
 | `--update-latest-version` | children | Update the parent's current version in place instead of creating a new one |
 
@@ -75,14 +76,16 @@ The metadata file is a flat JSON object. Its **keys are the source column names*
 
 Two definitions in **Configuration → Import Definitions**:
 
-**Drawing** (used by `--publish-drawing`)
+**Main item / BOM parent** (used by `--publish-drawing`)
 
 | Setting | Value |
 |---|---|
 | Name | Must match `--profile` exactly, e.g. `Inventor Main Item` |
-| Configuration | `File` — an entity created or updated from metadata, carrying a file |
-| Target category | The drawing category (e.g. *Drawing*) |
-| Field mappings | metadata key → property; one mapping is the **key field** that finds an existing drawing on re-publish |
+| Configuration | `MainItem` — the parent created or updated from metadata; existing `File` profiles remain supported |
+| Target category | The parent category, e.g. *Weld Assembly* for the engineering sample |
+| Field mappings | metadata key → property; one mapping is the **key field** that finds the existing parent on re-publish |
+
+For the engineering sample, map metadata `Part Number` to system **Name** as the parent search key. The BOM stays on `023.713.101`; the PDF is stored on a separate Drawing named `023.713.101.pdf`, linked in the parent's Uses. Re-publishing reuses that document by filename within the Drawing category. A matching PDF left directly on the parent by the old publisher is removed after the separate document is safely published and linked. Other direct attachments are preserved.
 
 **BOM children** (used by `--publish-children`)
 
@@ -277,8 +280,8 @@ Everything Connect does appears in its **Activity** log:
 [publish-drawing] Profile: Inventor Main Item
 [publish-drawing] Profile resolved (id: 12)
 [publish-drawing] Update: Drawing D-1042 updated
-[publish-drawing] Attaching PDF: D-1042.pdf
-[publish-drawing] ✔ PDF attached
+[publish-drawing] Publishing drawing document: D-1042.pdf
+[publish-drawing] ✔ Drawing document 501 linked to parent 500
 [publish-children] Profile: Inventor Parts List
 [publish-children] BOM: D-1042_BOM.xlsx
 [publish-children] ✔ 3 inserted, 9 updated, 0 errors
