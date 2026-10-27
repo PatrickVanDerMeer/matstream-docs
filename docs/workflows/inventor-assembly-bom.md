@@ -12,7 +12,9 @@ Build an assembly in Autodesk Inventor using existing fittings and a newly creat
 - Confirm that the **Inventor Main Item** and **Inventor Parts List** Import Definitions are configured. If your rules use different profile names, those names must match your Import Definitions.
 - Check which properties and parts-list columns your workspace requires, and make sure the target drawing can have its BOM edited in its current lifecycle state.
 
-If you also seed **Engineering Project Sample Data**, finish that setup before publishing. The sample catalogue includes `023.713.101` as a **Weld Assembly**. For that sample, configure the main-item profile to use **Weld Assembly** so the existing engineering item remains the BOM parent. The PDF is published as a separate **Drawing** entity named `023.713.101.pdf` and linked under that parent. Do not create another Drawing named `023.713.101` without the extension.
+Install **Engineering Project Configuration** before **Inventor Integration**, or select both in the same Setup Wizard run; Engineering runs first. When its **Weld Assembly** category is present, newly created Inventor profiles automatically receive the engineering settings below, including the Name search keys and `STOCK NR` source columns. This also works without sample data. Standalone Inventor setup keeps its Drawing target, Part Number property search keys, and `Part Number` Excel source columns.
+
+If you also seed **Engineering Project Sample Data**, finish that setup before publishing. The sample catalogue includes `023.713.101` as a **Weld Assembly**, which remains the BOM parent. The PDF is published as a separate **Drawing** entity named `023.713.101.pdf` and linked under that parent. Do not create another Drawing named `023.713.101` without the extension.
 
 The sample also includes a drawing document named `023.713.101.pdf` with the same Part Number. To publish to the assembly, map the metadata source `Part Number` to **Name** as the search key in both the main-item profile and the BOM profile's **Parent Item** configuration. Keep a separate field mapping to the Part Number property. This distinguishes the assembly's Name (`023.713.101`) from the drawing document's Name (`023.713.101.pdf`).
 
@@ -23,8 +25,8 @@ For installation, rule setup, and field mappings, see [Inventor BOM import](../i
 The local test used the existing drawing **023.713.101.idw** and its five-row parts list. The assembly-building steps below describe a separate example with elbows, flanges, and a new pipe; use the following settings when repeating the tested drawing publication.
 
 1. In **Manage → Setup Wizard**, apply **Engineering Project Configuration**, **Engineering Project Sample Data**, and **Autodesk Inventor / MatStreamConnect** under Integrations. Wait for setup to finish.
-2. Open the intended workspace in MatStream. In **Configuration → Import Definitions**, edit the two seeded profiles using the settings below. Existing profiles are skipped when setup is rerun, so check their mappings explicitly.
-3. In **MatStreamConnect**, sign in to that same workspace. For local testing, use your local MatStream address and workspace slug; verify the connected workspace name before publishing. The completed test used `https://localhost:7053/w/geob0d`.
+2. Open the intended workspace in MatStream. In **Configuration → Import Definitions**, verify the two seeded profiles against the settings below. New profiles receive these settings automatically when Engineering is installed. Existing profiles are preserved when setup is rerun: older workspaces, or workspaces where Inventor was installed before Engineering, need the profile edits below once.
+3. In **MatStreamConnect**, sign in to that same workspace. The latest local test used **WPS Seed Verification**, workspace slug `0cmro4`, at `https://localhost:7053/w/0cmro4`. Its Core API was `https://localhost:7273` and tenant API was `https://localhost:7239`. Verify the connected workspace name and slug before publishing; use your own workspace address outside this test.
 4. In Inventor, make the saved drawing active and confirm that the installed rules use the profile names shown below.
 
 | Profile setting | Inventor Main Item | Inventor Parts List |
@@ -38,6 +40,10 @@ The local test used the existing drawing **023.713.101.idw** and its five-row pa
 | Parent search key | Metadata `Part Number` → system field **Name** | **Parent Item**: metadata `Part Number` → system field **Name** |
 
 Keep the main-item field mappings `Part Number` → **Part Number**, `Description` → **Description**, and `Company` → **Manufacturer**. The Name search key and Part Number property mapping are separate mappings.
+
+In **Inventor Main Item**, make the metadata `Part Number` → **Name** mapping the search key (key order 1). The separate `Part Number` → **Part Number** property mapping must **not** be a search key. In **Inventor Parts List → Parent Item**, change the seeded Part Number property search key to metadata `Part Number` → system field **Name** (key order 1). Keep the child search key on the BOM configuration separate from this parent key.
+
+These settings are now seeded automatically for new profiles in engineering workspaces. Older profiles and standalone defaults search by the Part Number property, which is shared by the sample assembly and its PDF. During the `0cmro4` test, before this seed update, leaving those defaults produced `Key matches 2 existing items - cannot choose one` for the drawing and `Parent entity '023.713.101' is ambiguous without a resolvable project` for the BOM. For an existing profile with these errors, apply the Name keys above, the **Weld Assembly** target category, and the Excel mappings below before retrying.
 
 On the **Parts List (BOM)** configuration, use these source headings exactly:
 
@@ -159,7 +165,7 @@ Find the parent using the drawing key configured in your Import Definitions, the
 - The new part is present with the correct number, description, material, and other mapped information.
 - Supporting Uses links that were present before publishing are still present.
 
-For the example, check for two elbows, two flanges, and one connecting pipe. The drawing profile determines the parent category; with the documented setup, the BOM belongs to the drawing entity identified by the metadata.
+For the example, check for two elbows, two flanges, and one connecting pipe. The main-item profile determines the parent category; with the engineering sample settings above, the BOM belongs to the **Weld Assembly** identified by the drawing metadata.
 
 **Result:** MatStream contains a separate PDF drawing document linked to the BOM parent, with existing fittings reused by their mapped keys and the new part created or updated from its exported row.
 
@@ -203,7 +209,35 @@ Management by the BOM is recorded internally per profile and parent; it does not
 
 If the exported key differs, the importer may create a separate item instead of recognizing the manually added one. If any row fails, cleanup and the recorded BOM membership are not advanced for that run; resolve the errors and publish again. This example describes the expected behavior with the tested mappings; the live checks below used the five-component drawing BOM.
 
-### Repeat the verified publish checks
+### Latest local retest: WPS preservation in 0cmro4
+
+On **27 October 2026**, the existing `023.713.101.idw` was published through Inventor's **MatStream_PublishDrawing** iLogic rule into the newly seeded **WPS Seed Verification** workspace (`0cmro4`). Engineering sample data was seeded first, followed by Inventor Integration. After applying the profile settings above, both the drawing and five-row BOM published successfully.
+
+The test compared the stored relationships and projected property values before and after publishing, then checked the assembly's **Welds** tab and the WPS's **Attached File** tab in MatStream.
+
+| Check | Result in 0cmro4 |
+|---|---|
+| Separate drawing document | Existing `023.713.101.pdf` advanced from version **3 to 4**; its link to `023.713.101` was reused |
+| BOM publication | Five imported component memberships recorded, including **496 mm** of pipe |
+| Assembly → weld links | All eight original links preserved |
+| Weld → WPS links | All eight original links to **WPS-001 GTAW 316L** preserved |
+| WPS attachment | Same `WPS-001-GTAW-316L-DEMO.pdf` attachment and SHA-256 hash; the drawing publish did not replace it |
+| Inherited properties | Every weld still resolved **Part Number = WPS-001** and **Description = GTAW welding procedure for 316L stainless steel**, without copying those values onto the welds |
+| Weld identity and QA values | **Weld W-01** through **Weld W-08**, their Weld Numbers, and individual Welder IDs unchanged |
+
+![Welds tab after the Inventor publish in workspace 0cmro4, showing all eight own names and inherited WPS fields](../images/inventor-workflow/welds-after-publish-0cmro4.png)
+
+*After publishing: the welds keep their own identity and obtain their procedure reference and description from the linked WPS.*
+
+![WPS Attached File tab after publishing, still showing WPS-001-GTAW-316L-DEMO.pdf](../images/inventor-workflow/wps-attachment-after-publish-0cmro4.png)
+
+*The WPS attachment remains on the WPS record; the newly published drawing PDF belongs to its separate Drawing entity.*
+
+The initial successful BOM publish also preserves pre-existing links whose import ownership is unknown. The fresh sample can therefore retain older component links alongside the five newly tracked memberships. Verify link identities and quantities rather than expecting the earlier test's fixed total of 18 Uses rows; review obsolete legacy links manually.
+
+### Earlier removal and error checks
+
+The following checks were performed in the earlier local workspace `geob0d`. They describe the removal/error scenarios and their starting link counts, separately from the WPS preservation retest above.
 
 For `023.713.101.idw`, the tested BOM contained the following components:
 
@@ -261,6 +295,7 @@ Wait for each operation to finish in **Activity** before starting the next check
 - **Every row reports that its child name cannot be determined:** check the actual exported column headings. For example, `STOCK NR` does not match the seeded `Part Number` source column.
 - **The PDF rule reports that `Inventor Item` is missing:** align the installed rule's profile name with the configured definition, normally `Inventor Main Item`.
 - **Drawing properties are blank or the parent cannot be found:** check the drawing's own iProperties and the parent-key mappings in both import profiles.
+- **The key matches two items or the parent is ambiguous:** for the engineering sample, use metadata `Part Number` → system **Name** as the parent search key in both profiles. Keep the main-item Part Number property mapping as a non-key field and target **Weld Assembly**. See the verified settings above.
 - **A component or quantity is wrong:** inspect the assembly BOM and the drawing's exported parts list, including exclusions and column mappings.
 - **A row has no category:** ask the administrator to check the default child category and category assignment rules.
 - **Parts import but are not linked:** check the Activity error and whether the parent's lifecycle state permits BOM changes.

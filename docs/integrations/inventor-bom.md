@@ -76,6 +76,8 @@ The metadata file is a flat JSON object. Its **keys are the source column names*
 
 Two definitions in **Configuration → Import Definitions**:
 
+When **Engineering Project Configuration** is installed before **Inventor Integration** (or both are selected in the same Setup Wizard run), new profiles automatically target **Weld Assembly**, use metadata `Part Number` → system **Name** as the parent search key, and use `STOCK NR` for the Excel child key and Part Number field. Sample data is optional. Standalone Inventor setup retains its Drawing target, Part Number property keys, and `Part Number` Excel heading. Existing profiles are preserved on setup reruns; see the [engineering sample settings](../workflows/inventor-assembly-bom.md#settings-verified-with-the-engineering-sample) to update older profiles.
+
 **Main item / BOM parent** (used by `--publish-drawing`)
 
 | Setting | Value |
