@@ -43,6 +43,7 @@ Follow the steps to complete a task from start to finish.
 
 - [About Work Flows](workflows/index.md)
 - [Sales Order flow](features/sales-orders.md)
+- [Supplier portal workflow](workflows/supplier-portal.md)
 
 </section>
 

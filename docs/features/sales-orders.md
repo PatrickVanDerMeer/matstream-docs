@@ -60,7 +60,7 @@ For stock items, purchasing uses stock replenishment. For other articles, proces
 
 1. Open **Purchasing → Pending Material Requirements (MR)** and select the requirement.
 2. Choose **Procurement → Create Purchase Order**, review the selection, and create the order. The configured supply source determines the supplier.
-3. Open **Purchasing → Open Purchase Orders**, select the new order, and change its state to **Issued**.
+3. Open **Purchasing → Open Purchase Orders**. With the vendor-portal Word template, complete **Supplier Email** and [prepare the vendor share](../workflows/vendor-purchase-order.md) before changing the new order to **Issued**. The issue automation attaches the PO PDF with its portal QR code and URL.
 4. Expand the purchase order and select its **Purchase Order Line**, then choose **Procurement → Receive**.
 5. Choose a receiving location, check the quantity, and click **Receive**. In this example, receive **2** into **01-A**.
 
@@ -69,6 +69,16 @@ Check the receipt result, then reopen the Sales Order's **Stock availability** t
 ![Stock availability after receipt showing two pieces available and the missing-stock-unit message](../images/sales-orders/stock-after-receipt.jpg)
 
 ## 6. Pick the articles
+
+### Print a warehouse list (optional)
+
+The Sales Orders setup includes two A4 Word templates: **Sales Order - Pick List - A4 Portrait** and **Sales Order - Packing List - A4 Portrait**. They produce printable PDFs with no prices.
+
+In Explorer, select the **Sales Order**, open **Export**, choose the required template under **Print Templates**, and click **PDF**. Print the downloaded document. If the templates are missing in an existing workspace, an administrator can rerun **Sales Orders Configuration** in the setup wizard after the updated Manage application has been published.
+
+The pick list shows ordered quantities and the quantities already picked. The packing list shows ordered quantities and quantities already packed, with room for checks, names, and parcel count. Both show cumulative totals for the whole order; they do not allocate articles to individual parcels or partial deliveries. Printing a list does not record picking, packing, or shipment in MatStream.
+
+### Record picking
 
 Open the saved Sales Order's **Lines** tab and choose **Scanner → Pick**. The picking workflow opens in the scanner dialog. You can also scan its QR code on a phone, or choose **Open on this device**, and sign in with an authorized workspace account.
 
@@ -118,3 +128,11 @@ Once all quantities are delivered, move the order to **Shipped**.
 ## Cancel an unshipped order
 
 If an order will not proceed, change it from **Draft** or **Confirmed** to **Cancelled**. Cancellation releases its stock reservations. Do not use cancellation to undo goods that have already been shipped.
+
+## Print a draft invoice
+
+The setup also provides **Sales Order - Draft Invoice - A4 Portrait**. Select the Sales Order in Explorer, open **Export**, choose this template, and generate a **PDF** or editable **Word** document.
+
+It fills the order reference, delivery address, article descriptions, ordered quantities, unit prices, line amounts, currency, and net order total. It uses the full ordered quantities, not the quantities in one partial shipment.
+
+The document is marked **DRAFT INVOICE**. Complete and verify the seller and customer billing details, invoice number and date, tax/VAT, total payable, and payment details before issuing. These details are not calculated by the template. Generating it does not create an accounting invoice or mark the order as paid.

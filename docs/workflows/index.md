@@ -14,6 +14,18 @@ Create a customer order, add and price its articles, check stock, confirm the or
 
 [Follow the Sales Order flow](../features/sales-orders.md)
 
+### Supplier portal workflow
+
+Receive a Purchase Order, download the PO and applicable documents, and upload required vendor documents such as material certificates.
+
+[Follow the supplier workflow](supplier-portal.md)
+
+### Share a PO with a vendor
+
+Prepare and share a Purchase Order with its documents and supplier portal link.
+
+[Follow the buyer workflow](vendor-purchase-order.md)
+
 ## How to use a workflow
 
 1. Check **Before you start** for setup and access requirements.

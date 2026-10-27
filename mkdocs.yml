@@ -42,6 +42,8 @@ nav:
   - Work Flows:
     - Overview: workflows/index.md
     - Sales Order flow: features/sales-orders.md
+    - Share a PO with a vendor: workflows/vendor-purchase-order.md
+    - Supplier portal workflow: workflows/supplier-portal.md
   - Administration:
     - Inviting users: admin/inviting-users.md
     - Editor seats: admin/editor-seats.md

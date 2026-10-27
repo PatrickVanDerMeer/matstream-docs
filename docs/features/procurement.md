@@ -208,6 +208,8 @@ The Setup Wizard seeds **Purchasing** with `procurement.order`, **Warehouse** wi
 
 ## Related
 
+- [Share a Purchase Order with a vendor](../workflows/vendor-purchase-order.md) — PO PDF, QR link, applicable documents, and required uploads
+
 - [Stock management](stock.md) — positions, ledger, reservations and movement types
 - [Lifecycle definitions](../admin/lifecycle.md) — transitions, criteria and automations
 - [Automations](automations.md) — how the built-in procurement automations are configured
