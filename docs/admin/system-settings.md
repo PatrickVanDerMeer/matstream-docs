@@ -4,7 +4,22 @@ Open **Configuration → System Settings** for workspace defaults and administra
 
 ## Workspace defaults
 
-**Purge Retention Days** stores a non-negative retention value. **Planning time zone** defines the whole-day boundaries used for planned starts and due dates. Choose a supported zone and click **Save settings**; this requires `admin.workspace.settings`.
+Choose the settings and click **Save settings**; this requires `admin.workspace.settings`.
+
+| Setting | Effect |
+|---|---|
+| **Planning time zone** | Whole-day boundaries for planned starts and due dates. |
+| **Timesheet completeness** | Off, Warn with explicit shortfall confirmation, or Block incomplete weeks. |
+| **Require explicit hour types above the weekly target** | On submission, untyped working hours may fill the target remaining after absence; additional working hours need an explicit hour type. |
+| **Stock replenishment folder** | Select the destination by its ID. Renaming that folder does not change the selection. Leaving it unset uses the standard Stock Replenishment discovery. Its creator must remain enabled. |
+| **Enable manual history purge** | Allows the guarded manual purge action; does not schedule automatic deletion. |
+| **Purge Retention Days** | Fallback age for historical versions without a lifecycle state. State-specific purge ages take precedence. |
+
+## Units of Quantity
+
+The **Units of Quantity** panel manages units used by stock and order quantities, such as pc or kg. Add a unit with a name and symbol, or edit its workspace name and availability. Click **Save unit** or **Add unit** for that row; this is separate from **Save settings**.
+
+Names and availability are workspace-specific, including overrides for global units. Disabling a unit removes it from normal new selections; existing records keep their IDs and symbols. Symbols of existing units stay fixed because saved quantities depend on their identity. Create a new unit for a different symbol. Physical unit conversions are a separate feature.
 
 Version creation is configured on each category, not here. An unset category version policy falls back to Every change. See [Version-creation policy](../entities/revisions.md#version-creation-policy).
 
@@ -14,11 +29,16 @@ Version creation is configured on each category, not here. An unset category ver
 
 The System Settings API action is `POST /api/wid/{workspaceId}/system-settings/rebuild-search-index`, using the numeric workspace ID and the workspace's tenant API origin.
 
-## Run purge: current limitation
+## Run history purge
 
-The **Run purge** button requires `admin.workspace.purge`. In the currently reviewed implementation, its endpoint checks confirmation and returns a Started response, but does not invoke a purge job. A "Workspace purge started" message from this action is therefore not evidence that historical versions were removed. Do not rely on this button to enforce a retention policy.
+The action requires `admin.workspace.purge` and **Enable manual history purge** saved in System Settings. It processes up to 1,000 eligible historical versions per call.
 
-Lifecycle states also offer **Purge Behavior** with **Never purge records in this state** and **Purge after (days)**. These values can be saved, but saved settings alone do not demonstrate an automatic version-retention runner. An empty days value is shown as disabling purge in that control.
+1. Review each lifecycle state's **Purge Behavior**: **Never purge records in this state** protects its versions; a blank **Purge after (days)** disables bulk purge for that state. Set an age only for states whose history may be removed.
+2. Leave **Dry run only** selected and click **Run history purge**. The result reports the eligible batch without deleting anything.
+3. To delete that history, clear Dry run only and select the explicit confirmation checkbox, then run the action.
+4. Read the completed result: it reports versions actually removed and those protected or changed. Run another batch only if needed.
+
+The action protects latest versions and pinned references, and uses the existing guarded version-deletion path. Other database references can prevent deletion. It is a manual operation, not an automatic retention scheduler. Keep a workspace backup before intentional deletion.
 
 ## Manual history purge
 

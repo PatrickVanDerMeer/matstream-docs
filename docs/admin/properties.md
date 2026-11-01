@@ -106,7 +106,9 @@ A few combinations worth knowing:
 
 Editors marked with a source setting enable the **⚙** button next to the **Editor type** list. A short summary of the current settings appears below the list.
 
-- **Combo box** and **Text box + combo** — enter the options, **one per line**. Tick **Use value|label pairs** to store a value different from what users see, e.g. `1|Receipt`, `2|Issue`. For a combo box these are the only values allowed; for text box + combo they are only suggestions.
+- **Combo box** and **Text box + combo** — use **Add option** to configure **Stored value**, **Selected text**, and an optional **List description**. For example, value `EXW`, selected text `EXW`, description `Ex Works`. The description appears only in the opened list; the selected field stays compact. Leave Selected text blank to use the stored value. Stored values must be nonempty and unique. For a combo box the options are the allowed values; for text box + combo they are suggestions. Descriptions in the property form use this configuration; other views may show the selected text only.
+
+For **Stock Unit**, stored values are Unit of Quantity IDs. Keep those IDs unchanged. The Stock tab shows the unit symbol and uses the configured list description, falling back to the unit name for older options without a description. Set a description to an empty value to suppress it. Rerunning Sales Orders configuration adds descriptions to legacy simple Incoterms options but preserves configured labels and descriptions, including cleared descriptions. Save the editor source settings and then save the property definition itself.
 - **Entity picker** — choose which categories the picker searches, so a *Client* property only offers customers.
 - **Rich text (RTF)** — optional JSON settings for the editor; `{}` gives the default editor.
 

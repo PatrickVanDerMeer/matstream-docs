@@ -1,5 +1,9 @@
 # Coding Agreements
 
+## Administrator configuration
+
+Settings and defaults introduced or seeded in MatStream must also be configurable by a workspace administrator through the application UI. Seed useful defaults rather than hiding business choices, labels, option descriptions or workflow settings in application code. Preserve administrator customizations, including deliberately cleared descriptions, when setup is rerun. A feature requiring configuration is incomplete until that configuration is available to administrators.
+
 This page is the authoritative reference for MatStream coding conventions. It is intended for AI agents and developers generating or reviewing code in the MatStream codebase. Follow these agreements exactly — prefer matching existing MatStream patterns over generic best practices.
 
 ---

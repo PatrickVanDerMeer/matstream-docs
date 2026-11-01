@@ -10,7 +10,7 @@ Use configured **stock items** for the stock-controlled dispatch flow. Shipment 
 
 ## 1. Find an open Sales Order
 
-Open **Sales → Sales Orders** and use the lifecycle-state column or its filter to find **Confirmed** or **Shipped Incomplete** orders. Open the order and check its delivery address, article quantities and **Stock → Stock availability**.
+Open **Sales → Sales Orders** and use the lifecycle-state column or its filter to find **Confirmed** orders. Open the order and check its delivery address, article quantities and **Stock → Stock availability**.
 
 For a partly shipped order, arrange any missing goods and return it to **Confirmed** before continuing fulfilment. A confirmed reservation does not prove that every piece has physically arrived.
 
@@ -56,8 +56,7 @@ The current packing flow stores cumulative line quantities, not individual parce
 
 When the goods are being dispatched, close the scanner and order details. Select the Sales Order in Explorer and choose **Change State**:
 
-- Choose **Shipped** when every ordered quantity has been packed and is being sent.
-- Choose **Shipped Incomplete** when sending the packed portion while quantities remain outstanding.
+Choose **Shipped** when every ordered quantity has been packed and is being sent. Keep the order **Confirmed** while quantities remain outstanding.
 
 Set **New State**, click **Apply**, and check the result. MatStream records the newly shipped quantity and calculates **Back Order Quantity**. Fully delivered lines become **Complete**; outstanding lines become **Incomplete**.
 
@@ -71,7 +70,7 @@ Reopen **Lines** and verify Shipped, Back Order Quantity and line states. Check 
 
 ![Sales Order line marked Complete after shipment](../images/sales-orders/complete-line.jpg)
 
-For example, Ordered 7 and cumulative Packed 5 give Shipped 5 and Back Order 2 after partial shipment. When the other 2 arrive, return the order to **Confirmed**, pick and pack **2 more**, then move it to **Shipped**. Final cumulative Shipped should be 7 and Back Order 0.
+For example, if Ordered is 7 and cumulative Packed is 5, keep the order **Confirmed**. When the other 2 arrive, pick and pack **2 more**, then move the order to **Shipped**. Cumulative Shipped becomes 7 and Back Order becomes 0.
 
 If the quantities or physical contents are wrong, stop and resolve the discrepancy. The scanner has no standard unpick/unpack action, and cancellation is not a shipment reversal or customer-return workflow. Coordinate changes to an already shipped order with the responsible administrator and Sales.
 

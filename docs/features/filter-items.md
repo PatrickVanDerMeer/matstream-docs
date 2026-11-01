@@ -84,3 +84,9 @@ A filter item is an entity, so it obeys the same rules as any other: category pe
 - [Categories](../admin/categories.md) — the Filter Item category behaviour
 - [Automations](automations.md) — configuring Capture Filter Snapshot on a transition
 - [Search](search.md) — full-text search, which filters combine with
+
+## Create your own filter folder
+
+Every workspace provides a reusable **Filter Folder** category. In Explorer, choose **New**, open **Filter Items**, and select **Filter Folder**. Name the new item and configure its scope, categories, and filter rules. Save the filter on that item: another Filter Folder can use completely different criteria without changing the shared category.
+
+Sales Order setup also creates **Sales → Open Sales Orders**, excluding shipped and cancelled orders across the workspace. You can edit its saved query; rerunning setup preserves an existing configuration.

@@ -54,8 +54,7 @@ they are intended to refill.
 the replenishment job supports either Warehouse or Purchasing parent categories. Rerun the applicable
 configuration if the folder is missing. Restart the updated API to register the job.
 The scheduler has a five-minute startup delay. Existing enabled/interval settings on the job are preserved.
-The job requires exactly one enabled Material Requirement category and exactly one replenishment
-folder under a Warehouse- or Purchasing-category folder per workspace. It uses the folder creator as its workspace
+The job requires exactly one enabled Material Requirement category. Choose an explicit destination in **Configuration → System Settings → Stock replenishment folder** to keep the destination stable when its name changes. Without an explicit choice, it requires exactly one standard replenishment folder under a Warehouse- or Purchasing-role folder per workspace. It uses the folder creator as its workspace
 actor, who must still be enabled. Missing or ambiguous setup is skipped. Stock properties are resolved
 by their seeded names; preserve those names. Custom project requirements are not counted as replenishment.
 Unchecking Is Stock Item stops future checks for that definition and preserves existing requirements.

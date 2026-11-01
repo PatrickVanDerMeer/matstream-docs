@@ -340,3 +340,9 @@ an established catalogue.
   work from a user perspective
 - [Project Management](../solutions/project-management.md) — a worked
   example of the Project behavior in action
+
+## Business roles
+
+In the category editor, **Business role** identifies the sales, purchasing, article or warehouse process served by a category independently of its display name. Keep that role when renaming a standard category. For example, a category named Customer Order can retain the Sales Order role. Sales Order and Sales Order Line roles each have one category per workspace; clear an old assignment before assigning a replacement.
+
+A role identifies a process; grants, category access and lifecycle permissions still determine who can perform its actions. For custom lifecycle captions, configure the corresponding state business roles in the lifecycle editor. Explicitly configured filters using name text remain administrator configuration and may need their criteria updated when captions change.

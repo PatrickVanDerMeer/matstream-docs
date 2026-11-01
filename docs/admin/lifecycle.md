@@ -191,3 +191,11 @@ Design for the exception, not just the happy path. Make sure there is always a t
 - [Configuration overview](configuration.md) — recommended configuration order
 - [Lifecycle](../entities/lifecycle.md) — how users interact with lifecycle states and transitions
 - [Users & groups](../admin/users-groups.md) — configure group permissions for transitions
+
+## State business roles
+
+Select a state and use **General → Business role** to map its meaning independently of its name. For example, a state called Customer Approved can carry the Confirmed role. Sales and purchasing resolve the configured role when confirming, shipping, ordering, receiving or reopening demand. Each role must be unique within its lifecycle.
+
+Keep the role when changing a caption. Choosing None on a mapped state removes its operational role; do that only when intentionally replacing its role elsewhere. Existing configuration without an explicit role retains legacy name matching until migrated or configured.
+
+Setup seeds permissions for newly installed lifecycles. Existing lifecycle state and transition permissions, including an empty set, are preserved on rerun. Configure any changes deliberately in this editor.

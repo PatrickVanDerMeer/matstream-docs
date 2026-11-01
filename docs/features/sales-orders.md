@@ -7,6 +7,12 @@ A Sales Order is the customer's demand. Its lines connect the ordered articles, 
 !!! tip "Confirmation is a handoff"
     Confirmed means the order and its demand have been recorded. It does not mean the goods have arrived, been picked, or been shipped.
 
+## Find open orders
+
+Open **Sales → Open Sales Orders** to see Sales Orders across the workspace, excluding **Shipped** and **Cancelled** (also **Canceled** in workspaces using that spelling). This is a live filter folder. Its query is saved on that folder entity, and setup reruns preserve your edits.
+
+The standard **Sales Order Lifecycle** has **Draft → Confirmed → Shipped**, with **Cancelled** available from Draft or Confirmed. Keep an order Confirmed until all quantities are packed for shipment.
+
 ## Before you start
 
 In **manage.matstream.com**, create or select your workspace and open **Setup Wizard**:
