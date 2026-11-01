@@ -13,6 +13,14 @@ Portable release **1.4.0** for Windows x64. [Release notes and both downloads](h
 
 Connect registers browser links and its executable location for your Windows user on launch. Company policies may still restrict downloaded applications.
 
+## Download from the workspace setup wizard
+
+In MatStream Manage, select **Integrations → Autodesk Inventor / MatStreamConnect**, then click **Next → Apply**. After setup is applied, the wizard starts one ZIP download containing Connect and all five rules. The Done screen keeps a download link and setup instructions available.
+
+[Download the combined Connect and Inventor package](https://github.com/PatrickVanDerMeer/matstream-docs/releases/download/connect-v1.4.0/MatStream-Inventor-Integration.zip)
+
+Extract the package to a writable folder, run `MatStreamConnect.exe`, and add its `iLogic` subfolder to Inventor's External Rule Directories. If the automatic download is blocked, use the Done screen's download link.
+
 ## Inventor external rules
 
 [Download the five iLogic rules](../downloads/MatStream-Inventor-iLogic.zip)
