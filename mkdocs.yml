@@ -106,6 +106,7 @@ nav:
     - Unit Converter: features/unit-converter.md
     - Uses & Where Used: features/where-used.md
   - Integrations:
+    - Downloads and Inventor setup: integrations/inventor-downloads.md
     - MatStreamConnect: integrations/matstream-connect.md
     - Inventor BOM import: integrations/inventor-bom.md
     - Inventor 3D model: integrations/inventor-3d-model.md

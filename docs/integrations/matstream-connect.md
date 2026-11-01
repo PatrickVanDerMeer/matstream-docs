@@ -6,9 +6,9 @@ MatStreamConnect is a small Windows desktop app that bridges local tools — Aut
 
 ## Installation
 
-MatStreamConnect ships as a Windows installer and lives in the system tray after it starts.
+MatStreamConnect is a portable Windows x64 application. [Download, extract and run it](inventor-downloads.md) from a writable folder such as `%LOCALAPPDATA%\MatStream\MatStreamConnect`. No installer, administrator rights, or separate .NET installation is required.
 
-On its first start it registers itself under `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` (the *Open on Windows logon* setting) and the `matstream://` URI scheme. **The iLogic rules locate the executable through that `Run` entry**, so Connect must have been started at least once on the workstation before a rule can call it.
+On launch Connect registers the `matstream://` URI scheme and `HKCU\Software\MatStream\MatStreamConnect\ExecutablePath` for the current Windows user. The iLogic rules use that executable registration, with a fallback to the legacy startup entry. Launch Connect once after moving its folder. **Open on Windows logon** is optional and off for new users.
 
 ---
 
@@ -130,7 +130,7 @@ matstream://open?storedFileId=123&fileName=part.ipt&mode=readonly
 
 ### Calling Connect from iLogic
 
-The pattern every MatStream rule uses — find the executable via the registry, then `Shell` it with quoted arguments:
+The pattern every MatStream rule uses — find the executable via its per-user registry registration, then `Shell` it with quoted arguments:
 
 ```vb
 Dim connectPath As String = FindMatStreamConnectExe()
@@ -145,22 +145,17 @@ Shell("""" & connectPath & """ " & args)
 
 ```vb
 Function FindMatStreamConnectExe() As String
-    Dim exePath As String = ""
-    Try
-        ' WScript.Shell rather than Microsoft.Win32.Registry — not available to iLogic in Inventor 2027.
-        Dim shellObj As Object = CreateObject("WScript.Shell")
-        Dim regValue As Object = shellObj.RegRead("HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MatStreamConnect")
-        If regValue IsNot Nothing Then exePath = regValue.ToString().Trim(""""c)
-    Catch
-    End Try
-
-    If String.IsNullOrWhiteSpace(exePath) OrElse Not System.IO.File.Exists(exePath) Then
-        MsgBox("MatStreamConnect is not installed or has not been started at least once." & vbCrLf &
-               "Please install and launch MatStreamConnect first.", vbExclamation, "MatStream")
-        Return ""
-    End If
-
-    Return exePath
+    Dim shellObj As Object = CreateObject("WScript.Shell")
+    Dim keys As String() = {"HKCU\Software\MatStream\MatStreamConnect\ExecutablePath", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MatStreamConnect"}
+    For Each key As String In keys
+        Try
+            Dim exePath As String = shellObj.RegRead(key).ToString().Trim(""""c)
+            If System.IO.File.Exists(exePath) Then Return exePath
+        Catch
+        End Try
+    Next
+    MsgBox("Extract and launch MatStreamConnect first.", vbExclamation, "MatStream")
+    Return ""
 End Function
 ```
 

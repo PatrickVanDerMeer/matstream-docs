@@ -23,7 +23,7 @@ For the part or assembly's 3D model, see [Inventor 3D model](inventor-3d-model.m
 
 ## Prerequisites
 
-1. **MatStreamConnect installed and started at least once** on the Inventor workstation, logged in to the workspace. The rules find the executable through the registry entry Connect writes on first start.
+1. **MatStreamConnect extracted and started at least once** on the Inventor workstation, logged in to the workspace. The rules find the executable through the registry entry Connect writes on first start.
 2. **Import Definitions configured** in MatStream — one for the BOM parent, one for its BOM children (below). A Library **Drawing** category allowing direct file attachment is required for the separate PDF document; Inventor setup provides it. Use matching updated versions of Connect and the tenant API.
 3. **iLogic rules deployed** as external rules in Inventor's rule folder.
 
@@ -105,6 +105,8 @@ For the engineering sample, map metadata `Part Number` to system **Name** as the
 ---
 
 ## The iLogic rules
+
+[Download the complete rules ZIP and follow setup instructions](inventor-downloads.md).
 
 Four external rules in Inventor's rules folder. One does the work per step; `MatStream_PublishDrawing` just runs them in order. They are written for Inventor 2027 and run on older versions too — see [Writing iLogic rules for Inventor 2027](inventor-3d-model.md#writing-ilogic-rules-for-inventor-2027) for the two habits they follow.
 
@@ -196,7 +198,19 @@ Function ExportDrawingToPdf(tempFolder As String, drawingName As String) As Stri
     Return pdfPath
 End Function
 
-' + FindMatStreamConnectExe — see the MatStreamConnect page
+Function FindMatStreamConnectExe() As String
+    Dim shellObj As Object = CreateObject("WScript.Shell")
+    Dim keys As String() = {"HKCU\Software\MatStream\MatStreamConnect\ExecutablePath", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MatStreamConnect"}
+    For Each key As String In keys
+        Try
+            Dim exePath As String = shellObj.RegRead(key).ToString().Trim(""""c)
+            If System.IO.File.Exists(exePath) Then Return exePath
+        Catch
+        End Try
+    Next
+    MsgBox("Extract and launch MatStreamConnect first.", vbExclamation, "MatStream")
+    Return ""
+End Function
 ```
 
 ### `MatStream_PublishDrawingPartsList.iLogicVb`
@@ -251,7 +265,19 @@ Function ExportBomToExcel(tempFolder As String, drawingName As String) As String
     Return bomPath
 End Function
 
-' + FindMatStreamConnectExe — see the MatStreamConnect page
+Function FindMatStreamConnectExe() As String
+    Dim shellObj As Object = CreateObject("WScript.Shell")
+    Dim keys As String() = {"HKCU\Software\MatStream\MatStreamConnect\ExecutablePath", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MatStreamConnect"}
+    For Each key As String In keys
+        Try
+            Dim exePath As String = shellObj.RegRead(key).ToString().Trim(""""c)
+            If System.IO.File.Exists(exePath) Then Return exePath
+        Catch
+        End Try
+    Next
+    MsgBox("Extract and launch MatStreamConnect first.", vbExclamation, "MatStream")
+    Return ""
+End Function
 ```
 
 ### `MatStream_PublishDrawing.iLogicVb`

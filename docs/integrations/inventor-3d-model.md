@@ -64,6 +64,8 @@ or `❌ No entity named "…" in this workspace` / `❌ Model file not found`.
 
 ## The iLogic rule
 
+[Download the complete rules ZIP](inventor-downloads.md).
+
 Save as an external rule named `MatStream_Publish3DModel.iLogicVb`. Adjust the one **Settings** line if your workspace keys items on a different iProperty than *Stock Number*.
 
 ```vb
@@ -111,27 +113,17 @@ End Sub
 ' ── Helpers ───────────────────────────────────────────────────────────────────
 
 Function FindMatStreamConnectExe() As String
-    Dim exePath As String = ""
-    Try
-        ' WScript.Shell rather than Microsoft.Win32.Registry: that class lives in a separate
-        ' assembly on the .NET that Inventor 2027's iLogic runs on, and the rule compiler does
-        ' not reference it. COM needs nothing and works in every Inventor version.
-        Dim shellObj As Object = CreateObject("WScript.Shell")
-        Dim regValue As Object = shellObj.RegRead("HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MatStreamConnect")
-        If regValue IsNot Nothing Then
-            exePath = regValue.ToString().Trim(""""c)
-        End If
-    Catch
-        ' A missing key throws — handled by the check below.
-    End Try
-
-    If String.IsNullOrWhiteSpace(exePath) OrElse Not System.IO.File.Exists(exePath) Then
-        MsgBox("MatStreamConnect is not installed or has not been started at least once." & vbCrLf &
-               "Please install and launch MatStreamConnect first.", vbExclamation, "MatStream")
-        Return ""
-    End If
-
-    Return exePath
+    Dim shellObj As Object = CreateObject("WScript.Shell")
+    Dim keys As String() = {"HKCU\Software\MatStream\MatStreamConnect\ExecutablePath", "HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MatStreamConnect"}
+    For Each key As String In keys
+        Try
+            Dim exePath As String = shellObj.RegRead(key).ToString().Trim(""""c)
+            If System.IO.File.Exists(exePath) Then Return exePath
+        Catch
+        End Try
+    Next
+    MsgBox("Extract and launch MatStreamConnect first.", vbExclamation, "MatStream")
+    Return ""
 End Function
 
 ' Document.SaveAs(path, SaveCopyAs:=True) routes through the glTF translator that ships with
@@ -197,7 +189,7 @@ Two things that bit while porting the MatStream rules from Inventor 2023 to 2027
 
 | Symptom | Cause |
 |---|---|
-| Rule reports *MatStreamConnect is not installed or has not been started at least once* | The `Run` registry value is missing. Start Connect once; it registers itself. |
+| Rule reports *MatStreamConnect is not installed or has not been started at least once* | The executable registration is missing or stale. Launch Connect from its current folder. |
 | Rule reports *No glTF translator found* | Inventor older than 2023 without the glTF Exporter add-in. |
 | Connect logs *No entity named "…" in this workspace* | The iProperty used as key does not equal any entity Name — check the Settings line in the rule and the item's Name in the Library. |
 | Model attached but the tab still shows the old one | Refresh the entity; the tab loads once per open dialog. |
