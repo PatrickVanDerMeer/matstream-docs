@@ -68,6 +68,7 @@ nav:
     - Units of Measure: admin/units-of-measure.md
     - Text Templates: admin/text-templates.md
     - Automations: admin/automations-admin.md
+    - System settings and purge: admin/system-settings.md
     - Import Definitions: features/import-definitions.md
     - Print Templates:
       - Managing templates: admin/print-templates-admin.md
@@ -96,6 +97,7 @@ nav:
     - Price Lists: features/price-lists.md
     - Print Templates: print-templates/print-templates-user.md
     - Procurement: features/procurement.md
+    - Project planning: features/planning.md
     - Property Browser: features/property-browser.md
     - Search: features/search.md
     - Stock management: features/stock.md

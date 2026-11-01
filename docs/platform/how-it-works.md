@@ -56,12 +56,9 @@ structured data fields defined for that category. They can also:
 - **Add links** — relationships to other entities, such as the 
   assemblies this part belongs to, or the part a drawing describes
 
-Every save creates a new internal **version** — a permanent snapshot 
-of the entity's state at that point in time. This happens automatically 
-in the background. Users do not need to think about versioning — 
-MatStream handles it transparently.
+A qualifying save follows the category version-creation policy: it either creates a new internal **version** or updates the latest version in place. Every change is the default. See [Version-creation policy](../entities/revisions.md#version-creation-policy).
 
-Fill properties → Attach files → Add links → Save → Version created automatically
+Fill properties → Attach files → Add links → Save → Category version policy applied
 
 ---
 
@@ -173,17 +170,16 @@ the same policy easier to understand. See [Users and groups](../admin/users-grou
 
 ## The audit trail
 
-Every action in MatStream is permanently recorded:
+MatStream records entity and version changes. The retained detail depends on the category version policy and any permitted historical-version purge:
 
 | Event | What is recorded |
 |---|---|
-| **Save** | A new version with all property values, who saved it, and when |
+| **Save** | Property values and modification metadata; a new version when the category policy calls for one |
 | **Lifecycle transition** | From state, to state, who triggered it, and when |
 | **File attachment** | File name, version it was attached to, who attached it |
 | **Link added or removed** | Which entities were linked, who made the change, and when |
 
-The audit trail is immutable — it cannot be edited or deleted. This 
-gives you a complete, trustworthy history of every item in your catalogue.
+Some policies update the current version in place, and authorised users can permanently purge eligible historical versions. Configure versioning and retention to match your traceability requirements rather than assuming an immutable record of every save.
 
 ---
 

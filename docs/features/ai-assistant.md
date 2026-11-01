@@ -1,80 +1,44 @@
 # AI Assistant (MatStream AI)
 
-MatStream AI is a built-in chat assistant that answers questions about MatStream features, configuration, and your workspace data. It is available on every page in MatStream and is context-aware — it knows which area of the application you are working in.
-
----
+MatStream AI answers questions about how to use and configure MatStream using the published help documentation. It can receive the name of the screen you are using to help select relevant guidance. It does not query or change workspace records or configuration.
 
 ## Opening the assistant
 
-The AI button is offered only when your groups supply the `ai.use` grant. The system
-Administrators group has every grant; the Setup Wizard does not give `ai.use` to ordinary role
-groups. A workspace administrator must assign it deliberately.
+The AI button requires the `ai.use` grant and AI must be enabled on the server. The system Administrators group has every grant; ordinary role groups need this grant assigned deliberately by an administrator.
 
-Click the floating **MatStream AI** button (✦ icon) near the lower-right corner. A panel slides in from the right side of the screen without navigating away from your current page.
+Click the floating **MatStream AI** button to open the chat panel. Ask a question and press Enter or Send. Close and reopen the panel to continue while the same panel instance remains loaded. Use **Clear conversation** to start again. Do not rely on the conversation surviving a browser reload or a new session.
 
-Close the panel by clicking the ✕ button or clicking outside it. Your conversation is preserved for the session — reopening the panel shows the same conversation thread.
+## What the assistant can answer
 
----
+Ask how to perform a task, configure a feature, or understand a message. For example:
 
-## Asking questions
+- "How do I attach an automation to a lifecycle transition?"
+- "What is the difference between a version and a revision?"
+- "How do I search text inside a Word attachment?"
+- "How do I save long text as a reusable template?"
 
-Type your question in the input field at the bottom of the panel and press Enter or click Send. The assistant responds with an answer and, where possible, cites the source documentation or configuration data it used.
+The assistant retrieves relevant sections of the help and uses those sections to answer. It cannot inspect your actual categories, property definitions, users, entity data, stock balances or orders. For workspace-specific troubleshooting, describe the relevant settings or message in your question.
 
-**Example questions:**
+## Screen context
 
-- "How do I set up a revision scheme for manufacturing parts?"
-- "What permissions does a user need to release an entity?"
-- "How does the Lucene search index work?"
-- "What is the difference between a system template and a workspace template?"
-- "How do I trigger an import from iLogic?"
+The application can supply the current help page and component name. When supplied, a hint such as *I know you are working in Import Definitions* appears in the empty chat. This context helps find the right documentation; it does not give the assistant access to the screen's records or configuration values.
 
----
+## Sources and verification
 
-## Context awareness
+When the answer cites retrieved documentation, **Sources** contains links to the corresponding pages on MatStream Help. Sources appear only when the answer includes a citation; an answer without citations may have no Sources section. Open the source to check prerequisites, settings and limitations before following instructions.
 
-The assistant knows which page and component you are currently using. When you open the panel from the Import Definitions page, it knows you are working on imports. From the Automations editor, it knows you are writing an automation script.
+## Workspace data and actions
 
-This context is shown as a hint at the top of the empty chat state:
+Questions such as "How many parts are in our workspace?" or "Who approved this order?" are workspace data queries. These are not supported by the current assistant. Use the appropriate Library, Explorer, History or feature view to inspect records. The assistant cannot save settings, execute scripts, change lifecycle states or perform other actions on your behalf.
 
-> *I know you are working in **Import Definitions**.*
+## Documentation freshness and limitations
 
-Use this to ask more specific questions like "What does the key field option do here?" without needing to specify which feature you mean.
+Help answers depend on the documentation version configured on the server. A local documentation edit is not immediately available to the assistant: the configured GitHub branch must receive the change and the server's documentation cache must refresh. Website publishing must also complete for source links to show the same content.
 
----
-
-## Sources
-
-Each assistant response includes a **Sources** section listing the documentation pages or configuration data the answer was drawn from. Click a source to open the relevant documentation.
-
-This helps you verify the answer and learn more about the topic.
-
----
-
-## What the assistant knows
-
-The assistant has access to:
-
-- All MatStream documentation (the docs you are reading now)
-- Workspace configuration: your categories, properties, lifecycle definitions, numbering schemes, and import definitions
-- General MatStream feature knowledge
-
-The assistant does **not** have access to:
-
-- Entity data (it cannot read your parts, assemblies, or documents)
-- User personal data
-- External systems
-
----
-
-## Limitations
-
-- The assistant may occasionally give incomplete answers for very new or uncommonly used features.
-- Complex multi-step configuration questions may need follow-up clarification.
-- If an answer seems wrong, verify it against the linked source documentation and contact support if needed.
-
----
+The assistant may not find every relevant section. If the help does not establish an answer, supply more detail or consult an administrator; do not treat an inferred capability as a supported feature. New local code may also be newer than the deployed application.
 
 ## Related
 
-- [Getting started](../getting-started/quick-start.md) — workspace setup guide
-- [Configuration overview](../admin/configuration.md) — all admin configuration areas
+- [Quick start](../getting-started/quick-start.md)
+- [Configuration overview](../admin/configuration.md)
+- [Automations](automations.md)

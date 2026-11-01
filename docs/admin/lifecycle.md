@@ -58,10 +58,27 @@ So granting a group on one transition does not just open it for that group; it s
 
 Transitions can be given **criteria** — conditions such as "all linked items are Released" or a property check.
 
-!!! danger "Criteria are not enforced yet"
-    The criteria editor saves your configuration, but **nothing evaluates it at transition time**. A transition with unmet criteria will still succeed. The predefined checks (`All children are Released`, `No children are Obsolete`, `All linked items are Released`, `Has an attached file`, `Has no open tasks`) are currently names and descriptions only — no evaluator has been implemented.
+Enabled transition criteria are evaluated when the Change State context is loaded and checked again on the server before the state change is written.
 
-    Until that lands, use **transition permissions** to control who may move an entity, and treat criteria as documentation of intent rather than an enforced rule.
+- **Error** severity blocks the transition for that item when the check fails.
+- **Warning** severity allows the transition and returns an advisory message.
+- A configured custom message replaces the generated failure message.
+
+The built-in checks are:
+
+| Check | Evaluated behavior |
+|---|---|
+| All children are Final | Checks lifecycle-controlled child placements against the state's Final flag, rather than requiring a state literally named Released |
+| No children are Obsolete | Checks lifecycle-controlled children for the state name Obsolete |
+| All linked items are Final | Checks definition-linked items against their Final state flag |
+| Has an attached file | Checks whether the version being transitioned has a stored file |
+| Has no open tasks | Checks outstanding tasks linked to the item, including tasks on older versions; a task is open while its current state is not Final |
+
+Child checks use child placement/BOM link types and exclude filter items and snapshot memberships. Pinned links are evaluated against their pinned versions. Legacy check IDs containing `released` use the Final-state behavior.
+
+**Property checks** support Equals, Does not equal, Begins with, Ends with, Contains and Does not contain. Comparisons are case-insensitive text comparisons. Use a property key such as `pd_123` for property definition ID 123, or supported system keys such as `Name`, `Revision`, `Version`, `Lifecycle` and `LifecycleStateName`. An empty value is still compared.
+
+Unknown check types/IDs, unresolved property keys and missing/invalid conditions are skipped with a server warning. Validate configuration with both a passing and a failing test item; a saved criterion is not sufficient evidence that it is enforced.
 
 ### Transition automations
 
@@ -70,11 +87,15 @@ Transitions can trigger **automations** — actions that happen automatically wh
 Open the transition's **Automations** tab. Every automation available for lifecycle transitions is listed; tick **On** to attach one. Automations that need configuring show a **gear** next to their name — click it to set their parameters, and a warning triangle appears while a required setting is still missing.
 
 !!! note "A failed automation does not fail the transition"
-    Each automation runs inside its own error handler. If one throws, the state change still commits and the failure is written to the API log. So a state that changed successfully is not proof that its automations ran — check the log if the expected side effect is missing.
+    Each automation runs inside its own error handler. Failures are returned as state-changed/automation-failed messages and recorded by the automation runner. Inspect the result and run history; an automation failure does not undo an already applied state change. So a state that changed successfully is not proof that its automations ran — check run status, the item and the API log if the expected side effect is missing.
 
 See [Automations — Administrator Guide](automations-admin.md#feature-automations) for what each built-in automation does.
 
 ---
+
+## State purge settings
+
+The selected state's **Purge Behavior** tab stores Never purge and Purge after (days). These settings are separate from the implemented manual History Purge action. See [System settings and purge](system-settings.md) for the current automatic-purge limitations.
 
 ## Managing lifecycle definitions
 

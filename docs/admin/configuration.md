@@ -63,6 +63,12 @@ A numbering scheme is a template that automatically generates unique, human-read
 
 → [Numbering schemes](numbering.md)
 
+### System settings
+
+Set the planning time zone and workspace defaults, or rebuild the search index. Read the current limitations before relying on the Run purge action.
+
+→ [System settings and purge](system-settings.md)
+
 ---
 
 ## Recommended configuration order

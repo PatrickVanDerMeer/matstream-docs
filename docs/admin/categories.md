@@ -52,9 +52,8 @@ and **Task** to both your Task and Milestone categories.
 !!! note "Stock Line vs Material Requirement"
     The distinction matters. **Stock Line** means *"this row's numbers come from the ledger"* — true of a purchase-order line, whose ordered and received quantities are sums of stock movements. A **Material Requirement** is a statement of need: someone has said they want four of something by a date. Nothing has moved in stock, so its quantity lives on the line as a normal property and it posts no ledger entry. Using Stock Line for requirements makes stock appear to be on order when no order exists.
 
-!!! note "Filter Item is still being finished"
-    The Filter Item behavior is scaffolded but not yet fully functional 
-    in the current build. Avoid relying on it until a future release.
+!!! note "Live filters and released snapshots"
+    Filter Items support saved searches and released membership snapshots. See [Filter Items & Snapshots](../features/filter-items.md) for scopes, settings and release behavior.
 
 ---
 

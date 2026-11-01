@@ -1,182 +1,77 @@
 # Automations — Administrator Guide
 
-Automations allow workspace administrators to define scripted actions that run automatically when events occur in MatStream. This page covers how to manage automations as an administrator. For end-user context and a feature overview, see [Automations](../features/automations.md).
+Automations combine built-in feature actions and reusable JavaScript scripts. Manage stored scripts in **Configuration → Automations**. A script's context controls where it is eligible for selection; saving an enabled script alone does not attach it to every matching event.
 
----
+## Create and test a script
 
-## Where to manage automations
+1. Open **Configuration → Automations** and click **New**.
+2. Enter a name, optional description, and **Context**.
+3. Enter optional **Parameters (JSON)** as one JSON object.
+4. Write JavaScript using the `matstream` API. The API Reference panel inserts snippets into the Monaco editor.
+5. Click **Run**. Review the **Console** and **Variables** output.
+6. Set **Enabled** and save, then attach the script at the relevant configuration point.
 
-Go to **Configuration → Automations**. The grid lists all automations in the workspace:
+System scripts (gear icon) cannot be edited or deleted. **Clone** creates an editable workspace copy (person icon). Feature automations (lightning bolt) are built into MatStream and are configured where they are attached.
 
-- **System automations** (gear icon) — provided by MatStream, read-only
-- **Custom automations** (person icon) — created by your workspace, fully editable
+**Run** uses a mock entity and the supplied parameters. It does not commit workspace changes. A successful test does not prove that target categories, folders, properties or lifecycle permissions are valid in production.
 
----
+## Context and attachment
 
-## Creating an automation
-
-1. Click **New** in the ribbon.
-2. Fill in **Name**, optionally **Description**.
-3. Choose the **Context type** — this determines when the automation fires.
-4. Write the script in the Monaco editor.
-5. Use the **API Reference** panel on the left to browse available methods and click to insert snippets.
-6. Click **Test** to run the script and verify it works.
-7. Tick **Enabled** and click **Save**.
-
----
-
-## Context types
-
-| Context type | Fires when |
+| Context | Meaning |
 |---|---|
-| Universal | Available in any context |
-| Lifecycle transition | An entity version changes lifecycle state |
-| Category lifecycle switch | An entity is switched from one lifecycle to another |
-| Inventory | A stock event occurs |
-| Scheduled | On a timed schedule |
-| Property change | A property's value changes in an open editor (see [Property automations](category-editor-dialog.md#property-automations)) |
-| On create | A new entity is created |
-| On save | An entity's properties are saved |
-| On delete / Before delete | An entity is deleted |
+| Universal | Reusable across supported attachment contexts; not an automatic global trigger |
+| Lifecycle transition | Select on a lifecycle transition's Automations tab |
+| Category lifecycle switch | Select on the category's configured lifecycle switch |
+| Property change | Configure on a category property; returned values remain in the editor until saved |
+| Inventory, Scheduled Job, On create, On save, On delete, Before delete | Context values exist in the model/editor. Their presence alone does not establish a stock-event subscription, timer or entity-event runner. Do not assume these execute simply because a script is enabled. |
 
----
+For property-change configuration, see [Property automations](category-editor-dialog.md#property-automations). A lifecycle script must be enabled and have Universal or the matching lifecycle context.
 
 ## Feature automations
 
-Alongside scripted automations, MatStream ships a set of **feature automations** — built-in actions written in the product rather than in script. They appear with a **lightning bolt** icon and cannot be edited or deleted; you attach them to a lifecycle transition and configure their settings.
+The following lifecycle feature actions are implemented. Their prerequisites still apply; the action's presence in the picker does not guarantee a valid setup.
 
-| Automation | What it does | Status |
-|---|---|---|
-| **Create Material Requirement** | Raises a Material Requirement line for the occurrence that changed state, linked back to it | Working |
-| **PO: Add to On Order** | When a purchase-order line enters Ordered, adds its quantity to On Order | Working |
-| **PO: Release from On Order** | When a purchase-order line leaves Ordered, releases the On Order quantity | Working |
-| **Bump Revision** | Bumps the entity to its next revision | Not implemented |
-| **Set Assignee** | Assigns the entity to a group or user | Not implemented |
-| **Notify** | Sends a notification | Not implemented |
-| **Switch Lifecycle** | Moves the entity onto a different lifecycle | Not implemented |
+| Action | Behavior and prerequisites |
+|---|---|
+| **Generate and Attach PDF** | Generates a PDF using an assigned Word or Excel print template and attaches it to the entity. An empty Print template uses the category default. Attachment category must be a definition category allowing files; empty uses Document. |
+| **Bump Revision** | Updates the triggering version's revision to the next value in its configured revision scheme. Fails if no scheme or next revision exists. This action is different from creating a new version. |
+| **Pin Document Package Contents** | Pins direct document lines to the exact definition versions being issued. Rejects empty packages, unresolved document versions and packages over 10,000 lines. |
+| **Set Assignee** | Creates an Action task on the item for a selected user, or one task per resolved group member. A user takes precedence when both User and Group are set. Requires an enabled Task-behavior category; missing assignment or category can result in no tasks and a server warning. |
+| **Notify** | Sends an in-app notification to an enabled user or enabled group members who can read the item. User takes precedence over Group. Requires a message of 1–2,000 characters and at least one readable recipient. It does not send email. |
+| **Recompute Task Hours** | Refreshes the planning projection for a task. Booked hours are read from time entries; planned/estimated hours are preserved. |
+| **Switch Lifecycle** | Switches the triggering entity using the category's permitted lifecycle switch. Requires Target lifecycle; an optional Target state is a state name reached after the switch. |
+| **Switch Source Occurrence Lifecycle** | Follows a material requirement's source occurrence and switches that occurrence, using the same lifecycle rules. |
+| **Create Material Requirement** | Creates a requirement linked to the triggering occurrence. Requires MR line category with Occurrence family and Material Requirement behavior. Normally resolves the owning project; Target folder is the fallback when no Project ancestor exists. |
+| **PO: Add to On Order** | Adds the linked product's ordered quantity to On Order. An already outstanding quantity is not added again. |
+| **PO: Release from On Order** | Releases the outstanding On Order balance for the PO line. |
+| **Capture Filter Snapshot** | Executes the saved filter and pins its membership to the triggering filter version; rejects results above 10,000 rows. |
 
-!!! warning "Four of these do nothing yet"
-    `Bump Revision`, `Set Assignee`, `Notify` and `Switch Lifecycle` are registered and can be ticked on, but their implementations are still stubs — attaching them has no effect and produces no error. Only the three marked *Working* above actually run.
+**Copy Property Values** is a property-change feature action, not a lifecycle dispatcher action. It copies mapped properties from the referenced entity into the open editor. A mapping without a source clears its target.
 
-    To switch an entity between lifecycles today, use the **lifecycle dropdown** in the Change State dialog, which is fully implemented — see [Lifecycle](../entities/lifecycle.md).
+## Attach a lifecycle automation
 
-### Attaching and configuring a feature automation
+1. Open **Configuration → Lifecycle Definitions**, select the lifecycle and a state.
+2. Select the relevant transition in **Transitions**.
+3. Open **Automations** and enable the desired feature action or attach a library script.
+4. Use the gear button for parameters, then **Apply** and save the configuration.
+5. Test the transition on a suitable test item and inspect its result.
 
-1. Go to **Configuration → Lifecycle Definitions**, open the lifecycle and select a **state**.
-2. In the **Transitions** grid, select the transition you want.
-3. Open the **Automations** tab and tick **On** next to the automation.
-4. If the automation needs settings, a **gear** appears next to its name — click it.
-5. Fill in the settings and click **Apply**.
+Resolve warning triangles and missing settings before use. Some actions reject invalid configuration, while others log and skip; do not assume every missing parameter produces a visible error.
 
-A **warning triangle** next to an automation means a required setting is still missing. That automation will do nothing until it is configured — it stops silently rather than reporting an error, so the triangle is your only warning.
+## Scripting API and supported writes
 
-### Settings by automation
+Scripts use `matstream`, not a generic `api` or `context` object. See [Script context](../features/automations.md#script-context) for reads, logging and property writes, and [Create Entity scripts](../features/automations.md#create-an-entity-from-a-script) for the generic creation action.
 
-| Automation | Setting | Notes |
-|---|---|---|
-| Create Material Requirement | **MR line category** *(required)* | Restricted to Occurrence categories with **Material Requirement** behaviour |
-| | **Target folder** *(optional)* | Normally leave empty — the owning project is found automatically by walking up the folder tree. Only used when the entity has no project above it. |
-| Set Assignee | **Assign to group** | |
-| Notify | **Notify group**, **Message** | |
-| Switch Lifecycle | **Target lifecycle** | |
+Built-in lifecycle actions and similarly named script helpers have different support. Built-in Bump Revision, Switch Lifecycle, Set Assignee and Notify are implemented. The script runtime does not apply `matstream.lifecycle.bumpRevision`, `switchLifecycle`, `setAssignee` or `matstream.notify.send`; use a built-in action for those operations.
 
-!!! note "Folder, lifecycle and group settings show an id until re-picked"
-    When you reopen the settings dialog, a previously saved folder, lifecycle or group shows as `#123` rather than its name. Click the **…** button to re-pick it and the name appears. The saved value is correct either way — only the label is missing.
+## Run history, failures and retries
 
----
+The lifecycle automation runner records the action, trigger, entity/version, actor, timing, status and failure. It claims each automation and trigger execution before running it. Repeated delivery of the same action/event pair is skipped; a new lifecycle occurrence is a separate event.
 
-## Editing an automation
-
-Select a custom automation and click **Edit** (or double-click the row). System automations are read-only — click **Clone** to create an editable copy first.
-
----
-
-## Enabling and disabling
-
-Select an automation and use the **Enable** / **Disable** toggle in the toolbar. Disabled automations remain in the list but do not execute.
-
----
-
-## Cloning an automation
-
-Select any automation (including system automations) and click **Clone**. A copy is created with "(copy)" appended to the name. The copy is a custom automation you can edit freely.
-
----
-
-## Deleting an automation
-
-Select a custom automation and click **Delete**. System automations cannot be deleted.
-
----
-
-## Script engine
-
-Automation scripts run in the MatStream scripting engine (JavaScript). The engine provides:
-
-- A `context` object with event-specific data (entity ID, state names, batch results, etc.)
-- An `api` object with methods for reading and writing workspace data
-- Standard JavaScript globals (`Math`, `JSON`, `Date`, etc.)
-
-Scripts do not have access to `fetch`, `require`, or other Node.js/browser globals. All external interactions go through the `api` object.
-
----
-
-## Testing scripts
-
-The **Test** button runs the script immediately in a sandbox. The output panel below the editor shows:
-
-- Return value of the script
-- Any `api.log.info()` / `api.log.error()` messages
-- Runtime errors with line numbers
-
-Test runs do **not** commit any changes to workspace data. They are read-only executions for validation purposes.
-
----
-
-## Lifecycle transition automations
-
-Lifecycle transition automations receive a context with:
-
-```js
-context.entityId        // int — entity version ID
-context.entityNumber    // string — entity number
-context.fromState       // string — previous state name (null if initial)
-context.toState         // string — new state name
-context.workspaceSlug   // string
-context.userId          // int — user who triggered the transition
-```
-
-These automations are also configurable per lifecycle transition in **Configuration → Lifecycle Definitions → [definition] → Transitions → [transition] → Automations**.
-
----
-
-## Import automations
-
-Import automations receive:
-
-```js
-context.batchId       // int
-context.profileName   // string
-context.insertCount   // int
-context.updateCount   // int
-context.skipCount     // int
-context.errorCount    // int
-```
-
----
-
-## Best practices
-
-- **Always test before enabling** — use the Test runner to validate your script logic.
-- **Keep scripts focused** — one automation per concern; don't combine unrelated actions in a single script.
-- **Use `api.log` for debugging** — log messages appear in the Test output and in the workspace job monitor.
-- **Handle errors gracefully** — wrap risky operations in try/catch so a single failure does not silently abort the entire script.
-- **Clone before editing system automations** — never try to re-implement system automation behaviour; clone and extend instead.
-
----
+A run left **Running** can mean execution was interrupted or the final status could not be recorded. Do not assume it is safe to replay side effects. Review the item, generated files, tasks or notifications and the server log first. A failed automation is not proof that the triggering state change was undone; inspect the current state and history.
 
 ## Related
 
-- [Automations feature overview](../features/automations.md) — end-user documentation
-- [Lifecycle definitions](lifecycle.md) — attach automations to specific transitions
-- [Background jobs](../platform/how-it-works.md) — how async automations are tracked
+- [Automations](../features/automations.md)
+- [Lifecycle definitions](lifecycle.md)
+- [Print templates](print-templates-admin.md)

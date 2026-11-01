@@ -1,92 +1,43 @@
 # Text Templates
 
-Text Templates let administrators define reusable text strings with placeholders that are resolved at runtime against entity property values. They are used to auto-generate consistent descriptions, labels, file names, and other structured text output.
+Long-text templates provide reusable starting text for long-text property fields. Open a supported long-text field's **Edit Text** dialog to choose a workspace template or save one. These templates are separate from [Word and Excel print templates](print-templates-admin.md).
 
----
+## Apply a template to a field
 
-## Accessing text templates
+1. Open an editable long-text property.
+2. Choose a named template from the picker, or **Manual Text** to type freely.
+3. Review and edit the text.
+4. Click **Apply** to return the text to the field.
+5. Save the containing entity/editor to persist the field change.
 
-Go to **Configuration → Text Templates** in the workspace settings.
+The field stores the applied text itself, not a live reference to the template. Reusing or changing text in one entity does not update other entities. **Cancel** closes the text dialog without applying the text to the field.
 
----
+**Switch to manual text** restores the manual text held before the template was selected; it does not necessarily keep the currently displayed template text.
 
-## How text templates work
+## Save current text as a workspace template
 
-A template is a named string containing fixed text and **placeholders** in `{PropertyKey}` syntax. When the template is rendered against an entity, each placeholder is replaced with the value of the matching property from that entity.
+1. Enter the reusable text in the long-text editor.
+2. Choose **Actions → Save current text as template**.
+3. In **Save as workspace template**, enter a unique name of 1–100 characters.
+4. Save the template. It is immediately available in the workspace template picker.
+5. Click **Apply** if you also want to use the text in this field, then save the entity.
 
-**Example template:**
+Saving a template is a separate operation from applying a field value. Cancelling the naming prompt keeps the editor text. Cancelling the text editor after saving a template does not undo the template creation.
 
-```
-{PD_PartNumber} - {PD_Description} ({PD_Material})
-```
+Templates are scoped to the workspace. Reading templates requires entity-read permission; saving a template requires entity-read and entity-update permission. Body text must contain 1–100,000 characters. Duplicate names are rejected: choose a different name. The current API supports listing and creation, rather than a general template edit/delete screen.
 
-Rendered against an entity with Part Number `MAT-0042`, Description `Bracket`, Material `Aluminium 6061`:
+## Variables and text preservation
 
-```
-MAT-0042 - Bracket (Aluminium 6061)
-```
+The editor offers **Name**, **State**, **Revision** and **Version** tokens (`{{Name}}`, `{{State}}`, `{{Revision}}`, `{{Version}}`) through **Select variable… → Insert variable**. Insertion appends the selected token to the text. Saved templates preserve whitespace, line breaks and tokens exactly.
 
----
+The long-text template picker supplies starting text; selecting or saving a template does not itself establish runtime token expansion. Do not assume `{PD_Description}` placeholders, auto-description assignment, notification rendering or export filename generation are provided by this workflow. Use each consuming feature's documented syntax and behavior.
 
-## Creating a text template
+## Availability and troubleshooting
 
-1. Go to **Configuration → Text Templates**.
-2. Click **New**.
-3. Enter a **Name** (used to identify the template when selecting it in other areas of the platform).
-4. Enter the **Template** string with `{PropertyKey}` placeholders.
-5. Optionally add a **Description** for the administrator notes.
-6. Save.
-
----
-
-## Placeholder syntax
-
-Placeholders reference **property definition keys** — the internal key assigned when a property definition is created (e.g. `PD_Description`, `PD_Material`). Keys are case-sensitive.
-
-If a placeholder key does not match any property on the entity being rendered, it is left blank (not shown as an error).
-
-**Supported placeholder types:**
-
-| Property type | Rendered as |
-|---|---|
-| Text | The text value |
-| Number | Formatted number string |
-| Date | ISO date string (`YYYY-MM-DD`) |
-| Boolean | `true` or `false` |
-| List value | The selected list item label |
-
----
-
-## Use cases
-
-Text templates are used in several places across MatStream:
-
-| Use case | Description |
-|---|---|
-| Auto-generated entity descriptions | Assign a template to a category to auto-populate the description field when an entity is created or updated |
-| Part labels | Generate a formatted label string for printing or export |
-| Export file names | Use a template for the file name when exporting or generating documents |
-| Import field defaults | Use template output as the default value for a mapped field in an import definition |
-| Notification message bodies | Automation scripts can call a template to build a consistent notification string |
-
----
-
-## Assigning a template to a category
-
-To auto-populate an entity's description when it is created:
-
-1. Go to **Configuration → Categories**.
-2. Select the category.
-3. In the **General** tab, find **Auto-description template**.
-4. Select the text template from the dropdown.
-5. Save.
-
-When a new entity in this category is created or saved, the description field is automatically populated with the rendered template output.
-
----
+The long-text template workflow requires a compatible UI/API and the long-text template database migration. If templates cannot load, the dialog shows an error and still allows manual text editing. A failed save keeps your editor text available. If the actions are absent, check permissions, whether that field supports templates, and the deployed application version.
 
 ## Related
 
-- [Categories](categories.md) — assign templates to categories
-- [Properties](properties.md) — define the properties referenced in placeholder keys
-- [Automations](../features/automations.md) — use templates in automation scripts
+- [Properties](../entities/properties.md)
+- [Property definitions](properties.md)
+- [Print templates](print-templates-admin.md)

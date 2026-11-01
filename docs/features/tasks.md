@@ -134,3 +134,7 @@ its due date, responsible person, and state as columns.
 - [Display Tabs](../admin/display-tabs.md) — add a Tasks or Milestones tab to a category
 - [Workspace setup](../getting-started/workspace-setup.md) — the Setup Wizard's Engineering Project configuration seeds Milestones automatically
 - [Milestones](milestones.md) - dated checkpoints with their own lifecycle
+
+## Project and task planning
+
+See [Project planning](planning.md) for calculated schedules, baselines, dependencies, capacity and the individual task Planning details fields.

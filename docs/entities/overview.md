@@ -36,8 +36,8 @@ These two terms are related but distinct in MatStream:
 
 | Term | What it means |
 |---|---|
-| **Version** | Every save creates a new internal version record. This is MatStream's audit trail — a complete history of every change. |
-| **Revision** | A formally labelled snapshot, using your revision scheme (A, B, C or 1, 2, 3). A new revision is created when an entity completes a lifecycle cycle and is formally released. |
+| **Version** | A saved snapshot according to the category version-creation policy. Some policies update the latest version in place; not every save creates a version. |
+| **Revision** | A formally labelled snapshot, using your revision scheme (A, B, C or 1, 2, 3). Labels may advance through configured lifecycle automations or the permitted Change Revision command. |
 
 Think of versions as the full history, and revisions as the official 
 milestones within that history.

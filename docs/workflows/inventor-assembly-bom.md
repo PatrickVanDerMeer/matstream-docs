@@ -35,7 +35,7 @@ The local test used the existing drawing **023.713.101.idw** and its five-row pa
 | Source | Metadata | Excel |
 | Target category | Weld Assembly for this sample | Existing parent located from metadata |
 | Default child category | Not applicable | Part |
-| Default link category | Not applicable | Leave empty; link Library parts directly |
+| Default link category | Not applicable | Leave empty; reuse an existing matching placement, otherwise link the Library part directly |
 | Header / first data row | Not applicable to metadata | 1 / 2 |
 | Parent search key | Metadata `Part Number` → system field **Name** | **Parent Item**: metadata `Part Number` → system field **Name** |
 
@@ -181,6 +181,8 @@ Keep the mapped keys stable when updating the same drawing or part. Changing a k
 
 After removing a component, check that its old BOM line was removed in MatStream. Publishing tracks BOM membership separately for each import profile and parent. It removes only missing components previously published by that profile; supporting **Uses** links, such as drawings, certificates, suppliers, and WPS links, remain in place. A component still published by another profile also remains linked.
 
+With no Default link category, a BOM row first looks for an existing placement under this parent that references the matched Library part. A single matching placement is reused, including its Uses link and own certificates or other properties, and its quantity follows the exported BOM. If there is no placement, the Library part is linked directly. Multiple matching placements produce a row error rather than choosing one or adding another row. A successful publish tracks the reused placement for subsequent removal checks. If an older publish created a tracked direct Library duplicate, reconciliation removes that duplicate while retaining the placement; links tracked by another profile or with unknown ownership remain protected.
+
 If any row fails, the importer keeps missing old lines linked for that run; fix the errors and publish again. The first successful publish after this tracking is introduced records the current BOM without removing older links whose source is unknown. Review any obsolete legacy links manually.
 
 Administrators must apply tenant migration `20261027_import_bom_children.sql` when deploying this change. If reconciliation cannot run, publication reports a warning and preserves existing links.
@@ -209,7 +211,37 @@ Management by the BOM is recorded internally per profile and parent; it does not
 
 If the exported key differs, the importer may create a separate item instead of recognizing the manually added one. If any row fails, cleanup and the recorded BOM membership are not advanced for that run; resolve the errors and publish again. This example describes the expected behavior with the tested mappings; the live checks below used the five-component drawing BOM.
 
-### Latest local retest: WPS preservation in 0cmro4
+### Successful hosted retest: duplicate cleanup and Welds
+
+On **27 October 2026**, `023.713.101.idw` was republished through Inventor's **MatStream_PublishDrawing** rule into hosted workspace **Inventor Hosted Test** (`v4hyl7`), after deploying the API and web-app fixes. The workspace had been created through hosted Manage and seeded with **Engineering Project Configuration**, **Engineering Project Sample Data**, and **Inventor Integration**. Both Inventor profiles used the automatically seeded engineering settings above; no manual profile changes were made.
+
+MatStreamConnect connected to **Core** at `https://core.matstream.com` and the workspace's **tenant API** at `https://api.matstream.com`. Entering only `v4hyl7` selects the internet service. To test locally, enter an explicit local workspace URL instead, such as `https://localhost:7053/w/0cmro4`.
+
+| Check | Verified hosted result |
+|---|---|
+| Duplicate BOM cleanup | **23 → 18 Uses rows**: five duplicate direct Library links removed, leaving five unique BOM component placements plus thirteen supporting items |
+| Existing placements | The original placements were reused, keeping their component references and quantities: 1, 2, 2, 3, and **496 mm** of pipe |
+| Supporting relationships | Drawing, certificates, company, and all eight weld placements preserved |
+| WPS and weld properties | Same WPS PDF attachment and SHA-256 hash; weld names, WPS references, inherited Part Number and Description, and own QA values unchanged |
+| Opening Welds | Initial opening plus three rapid **General → Welds** switches passed: **four checks, zero browser errors or warnings** |
+| Profiles | Both profiles unchanged before and after publishing |
+| Versions | Assembly advanced to **version 2** after duplicate cleanup; the separate PDF Drawing remained at **version 4** |
+
+The duplicate rows came from the earlier publisher adding Library parts directly alongside the seeded placements. The updated publisher recognizes each placement's linked Library definition and reuses that placement. After every row succeeds, reconciliation removes the extra direct links owned by the same import profile. Unmanaged links and links owned by another profile remain protected; cleanup does not delete the Library parts or the retained placements.
+
+![Hosted BOM after publishing, showing five unique component rows and their quantities](../images/inventor-workflow/hosted-bom-cleanup-v4hyl7.png)
+
+*Hosted result after cleanup: one BOM row per component, with the original engineering placements retained.*
+
+The earlier Welds error occurred when switching tabs while the General tab's thumbnail editor was still loading. The thumbnail paste handler now tolerates a missing or detached editor, and initialization stops when the editor is disposed. No thumbnail error banner or console error appeared during the hosted retest.
+
+![Hosted Welds tab after repeated tab switching, showing eight welds with inherited WPS fields and no error banner](../images/inventor-workflow/hosted-welds-clean-v4hyl7.png)
+
+*Weld W-01 through Weld W-08 keep their own names, Weld Numbers and Welder IDs while inheriting the WPS reference and description.*
+
+To repeat this check after upgrading an older workspace, publish the complete drawing BOM successfully, verify that each component appears once, then open **Welds** and switch back and forth from **General**. Check the thirteen supporting items and WPS attachment as well. If a row fails, resolve its error before expecting duplicate cleanup.
+
+### Earlier local retest: WPS preservation in 0cmro4
 
 On **27 October 2026**, the existing `023.713.101.idw` was published through Inventor's **MatStream_PublishDrawing** iLogic rule into the newly seeded **WPS Seed Verification** workspace (`0cmro4`). Engineering sample data was seeded first, followed by Inventor Integration. After applying the profile settings above, both the drawing and five-row BOM published successfully.
 
@@ -233,7 +265,7 @@ The test compared the stored relationships and projected property values before 
 
 *The WPS attachment remains on the WPS record; the newly published drawing PDF belongs to its separate Drawing entity.*
 
-The initial successful BOM publish also preserves pre-existing links whose import ownership is unknown. The fresh sample can therefore retain older component links alongside the five newly tracked memberships. Verify link identities and quantities rather than expecting the earlier test's fixed total of 18 Uses rows; review obsolete legacy links manually.
+This retest preceded the placement-reuse fix: its initial publish retained seeded component placements alongside newly imported direct Library links. The updated publisher reuses those placements and removes direct duplicates previously tracked by the same profile on the next successful full publish. Unknown legacy links remain protected; review obsolete unmanaged links manually.
 
 ### Earlier removal and error checks
 
@@ -292,6 +324,7 @@ Wait for each operation to finish in **Activity** before starting the next check
 
 - **No parts list is found:** add an actual Inventor Parts List to the drawing; a manually drawn table is not the exported BOM.
 - **An existing fitting is duplicated:** compare the exported key value with the existing MatStream item and check the profile's key mapping.
+- **Multiple existing BOM placements reference the same Library item:** review those placements under the parent and resolve the intended identity/quantity before publishing. The publisher leaves missing old lines linked while any row is ambiguous.
 - **Every row reports that its child name cannot be determined:** check the actual exported column headings. For example, `STOCK NR` does not match the seeded `Part Number` source column.
 - **The PDF rule reports that `Inventor Item` is missing:** align the installed rule's profile name with the configured definition, normally `Inventor Main Item`.
 - **Drawing properties are blank or the parent cannot be found:** check the drawing's own iProperties and the parent-key mappings in both import profiles.

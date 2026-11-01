@@ -25,6 +25,8 @@ The first start — or **File → Login…** later — opens the setup window:
 
 Recently used workspaces are offered in the dropdown (up to ten entries). Click the × beside an entry to remove it from history; this does not revoke workspace access or change the active connection. Developers connecting to a local environment paste the local web-app or API address the same way (`https://localhost:7053/w/<slug>`); Connect maps it to the matching Core API.
 
+A **slug alone always selects the internet service**, even after a local test: `v4hyl7` signs in at `https://core.matstream.com`. Hosted app, Manage, and tenant API addresses also resolve to that Core server. For local testing, enter an explicit URL such as `https://localhost:7053/w/0cmro4` (local web app) or `https://localhost:7273/w/0cmro4` (local Core). The known local web and tenant ports resolve to Core on port 7273; an explicit custom Core server and port are preserved. Connect repairs the old hosted `api.matstream.com` Core setting when loading it; local settings remain local.
+
 ---
 
 ## Configuration file
@@ -33,7 +35,7 @@ Connection settings are stored next to the executable in `MatStreamConnect.json`
 
 | Field | Description |
 |---|---|
-| `CoreBaseUrl` | The Core API Connect signs in against (`https://api.matstream.com` for the hosted service) |
+| `CoreBaseUrl` | The Core API Connect signs in against (`https://core.matstream.com` for the hosted service); the workspace resolver supplies its separate tenant API address |
 | `WorkspaceSlug` / `WorkspaceId` / `WorkspaceName` | The workspace, resolved at login |
 | `TenantApiBaseUrl` | The Tenant API for that workspace, filled in by the resolve call |
 | `WorkspaceEntry` / `WorkspaceHistory` | What was typed, and the recent list |
