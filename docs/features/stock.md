@@ -49,11 +49,13 @@ normal procurement; the resulting on-order quantity counts as supply in the calc
 Replenishment requirements cannot be reserved from existing stock: that would consume the stock
 they are intended to refill.
 
-**Setup and operation:** re-run the Engineering Project template to create the dedicated
-**Purchasing → Stock Replenishment** storage folder. Restart the updated API to register the job.
+**Setup and operation:** the current Sales Orders configuration creates the dedicated
+**Warehouse → Stock Replenishment** storage folder. Older workspaces may have it under Purchasing;
+the replenishment job supports either Warehouse or Purchasing parent categories. Rerun the applicable
+configuration if the folder is missing. Restart the updated API to register the job.
 The scheduler has a five-minute startup delay. Existing enabled/interval settings on the job are preserved.
 The job requires exactly one enabled Material Requirement category and exactly one replenishment
-folder under a Purchasing-category folder per workspace. It uses the folder creator as its workspace
+folder under a Warehouse- or Purchasing-category folder per workspace. It uses the folder creator as its workspace
 actor, who must still be enabled. Missing or ambiguous setup is skipped. Stock properties are resolved
 by their seeded names; preserve those names. Custom project requirements are not counted as replenishment.
 Unchecking Is Stock Item stops future checks for that definition and preserves existing requirements.

@@ -14,11 +14,29 @@ Create an assembly with existing fittings and a new part, fill in its informatio
 
 [Follow the Inventor workflow](inventor-assembly-bom.md)
 
-### Sales Order flow
+### Sales Orders and invoice documents
 
-Create a customer order, add and price its articles, check stock, confirm the order, arrange missing stock, pick, pack, and ship. The guide also covers partial deliveries and completing the outstanding quantities.
+Sales creates a customer order, adds and prices its articles, checks stock demand, confirms the order, and prepares the draft invoice document.
 
-[Follow the Sales Order flow](../features/sales-orders.md)
+[Follow the Sales workflow](../features/sales-orders.md)
+
+### Arrange missing stock
+
+Procurement reviews shortages and replenishment requirements, creates supplier Purchase Orders, and issues the orders before handing the delivery information to Warehouse.
+
+[Follow the Procurement workflow](arrange-missing-stock.md)
+
+### Receive goods into the warehouse
+
+Warehouse receiving matches a supplier delivery to its PO, records the quantity accepted into a storage location, and checks the outstanding quantities and stock ledger.
+
+[Follow the Receiving workflow](receive-warehouse-goods.md)
+
+### Open orders picking packing and sending
+
+Warehouse dispatch finds confirmed Sales Orders, records picking and packing, confirms full or partial shipment, and checks the remaining backorder.
+
+[Follow the Dispatch workflow](pick-pack-send.md)
 
 ### Supplier portal workflow
 
