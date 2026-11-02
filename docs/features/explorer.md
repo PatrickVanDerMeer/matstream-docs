@@ -103,7 +103,7 @@ An administrator can seed the visibility for a folder category as the workspace 
 
 ### Child expansion suppression
 
-For entity types that represent order lines (e.g. Sales Order Lines, Purchase Order Lines), child expansion is suppressed in the Explorer grid — the tree does not attempt to expand these nodes into sub-items. This is controlled by the `SuppressChildExpansion` parameter passed to the SQL query, resolved dynamically by checking whether the parent entity's category matches known order-line category names rather than hardcoding IDs.
+An administrator controls expansion with **Suppress children in Explorer** on the category. Suppressed categories do not expand into sub-items, which is useful for order-line categories. Renaming the category does not change that setting.
 
 ### Bills of materials appear when you expand
 
@@ -118,6 +118,14 @@ If a line is later removed from the Library BOM but the project entity has alrea
 ### Linking entities
 
 Entities can be linked to definitions (Library entities) via drag-and-drop or the **Link Definition** context action, which opens `EntityDefinitionSearchDialog`. If a version conflict is detected on link, `DefinitionLinkOverrideDialog` offers resolution options.
+
+### Move an item to another folder
+
+Right-click a directly placed folder or occurrence and choose **Move To...**. Select the destination folder and click **Move Here**. The action requires `entity.update` and `entity.read`, plus applicable record permissions.
+
+Move is offered for placements directly under a Root or Folder. Inherited BOM rows and lines owned by another item cannot be relocated with this command. Folder moves also reject the current parent, the folder itself and its descendants. After a successful move, Explorer refreshes; a moved folder also refreshes the folder tree.
+
+For change notifications, select items and use [Subscribe](subscriptions.md).
 
 ### Selection
 

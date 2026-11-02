@@ -1,163 +1,63 @@
 # Quick start
 
-This guide walks you through the key concepts of MatStream with a 
-practical example. By the end you will have a clear picture of how 
-the platform works and be ready to start using it with your team.
+Create a part, fill in its properties, link it to an assembly, and move it through your workspace's review process. Names below are examples: categories, properties, numbering and lifecycle transitions are configured by your administrator.
 
-The example we will use is creating and releasing a simple purchased 
-part — a bearing. This touches all the core concepts: entities, 
-properties, lifecycle states, and revisions.
-
-!!! note "Prerequisites"
-    Before you can follow this guide you need a MatStream account and 
-    access to a workspace. See [Create an account](create-account.md) 
-    and [Accessing a workspace](workspace-access.md) if you have not 
-    done this yet.
-
-!!! note "Administrator setup required"
-    Your workspace administrator needs to have configured at least one 
-    category, one lifecycle definition, and one numbering scheme. If 
-    you are the administrator, start with the 
-    [Administration](../admin/categories.md) section first.
-
----
+Before starting, you need a MatStream account, workspace access, an Editor seat and the grants for the actions you perform. Administrators can begin with [Workspace setup](workspace-setup.md).
 
 ## Step 1 — Open your workspace
 
-When you log in to MatStream you land in your workspace. The main 
-navigation gives you access to:
-
-- **Library** — the full catalogue of entities in your workspace
-- **Explorer** — a tree view of entities organised in folders and 
-  assembly structures
-- **Administration** — workspace configuration (administrators only)
+Use **Library** for catalogue search and **Explorer** for folders and placed structures. **Configuration** appears for people with grants to manage its settings; **User Access** manages users and security groups.
 
 ## Step 2 — Create a new entity
 
-1. Navigate to the **Library**
-2. Click **New entity**
-3. Select a **category** — for this example, select *Purchased Part*
-4. MatStream automatically assigns a unique number from the numbering 
-   scheme configured for that category (e.g. `PP-2026-0001`)
-5. Give the entity a name — for example, *Deep groove ball bearing 6205*
-6. Click **Save**
+1. Open **Library** and choose **New**.
+2. Select a configured definition category, such as Part or your own Purchased Part category.
+3. Fill in the name and required fields, then save.
 
-The entity is created in the **Draft** lifecycle state. It now exists 
-in your workspace and is ready to be filled in.
+A numbering scheme supplies a generated number only if assigned to the category. The item starts in its configured initial lifecycle state, which may be Work in Progress rather than Draft.
 
 ## Step 3 — Fill in properties
 
-With the entity open, navigate to the **General** tab. This shows all 
-the properties defined for the *Purchased Part* category.
+Open the item and its **General** tab. Enter the properties available for that category, for example Description, Manufacturer, Material or Mass. These are examples, not mandatory fields supplied to every category.
 
-Fill in the relevant fields — for example:
-
-| Property | Value |
-|---|---|
-| Description | Deep groove ball bearing, 25mm bore |
-| Manufacturer | SKF |
-| Manufacturer part number | 6205-2RS1 |
-| Material | Chrome steel |
-| Mass (kg) | 0.085 |
-
-Required properties are marked clearly — MatStream will not allow you 
-to progress the entity until these are completed.
-
-Click **Save** when done. MatStream creates a new internal version 
-capturing all the values you entered.
+Click **Save**. Whether this produces a new internal version depends on the category's [version-creation policy](../entities/revisions.md#version-creation-policy).
 
 ## Step 4 — Attach a file
 
-If you have a datasheet or drawing for the bearing, you can attach it 
-to the entity:
+A file-carrying item has a stored file on its entity version. Supporting documents can instead be separate document entities linked through a configured **Documents** tab. A **Photo Gallery** manages multiple images. These do not require a universal Files tab.
 
-1. Navigate to the **Files** tab on the entity detail page
-2. Click **Upload file**
-3. Select the file from your computer — for example, a PDF datasheet
-4. Click **Save**
-
-The file is now linked to this specific version of the entity. If the 
-entity is revised in future, the file attachment history is preserved.
+For a folder upload, right-click the folder in **Explorer**, choose **Add Files...**, select the files and categories in the upload queue, and click **Upload**. This creates file entities in that folder. See [Files & documents](../entities/files.md) and [Folders](../features/folders.md#attaching-files-to-folders).
 
 ## Step 5 — Submit for review
 
-When the entity is ready for approval, you trigger a lifecycle transition:
+Select the item and use **Change State**. Choose an available configured transition, review criteria and results, and confirm. A typical engineering process moves Work in Progress to For Review.
 
-1. On the entity detail page, look for the **lifecycle action** button — 
-   this shows the available transitions from the current state
-2. Click **Submit for review** — this moves the entity from *Draft* to 
-   *In Review*
-3. MatStream records the transition in the entity's history — who 
-   submitted it and when
-
-The entity is now awaiting approval. Depending on your workspace 
-configuration, the relevant users will be notified.
-
-!!! note
-    The transition button you see depends on your user group permissions. 
-    If you do not see a transition option, your group may not have 
-    permission to trigger that transition. Contact your administrator.
+Only permitted transitions are offered. Error criteria can block a move; warning criteria can advise without blocking. Notification requires a configured notification or task automation; a review state alone does not notify someone.
 
 ## Step 6 — Release the entity
 
-A user with approval permissions — for example, a member of the Quality 
-group — reviews the entity and approves it:
+An authorized reviewer uses **Change State** to follow the configured approval/release path. For example, the engineering lifecycle goes through Approved before Released.
 
-1. Open the entity in *In Review* state
-2. Review the properties and attached files
-3. Click **Release** — this moves the entity from *In Review* to *Released*
-4. MatStream assigns a formal **revision label** — for example, revision **A**
-
-The entity is now officially released. It becomes read-only to most 
-users, and revision A is permanently recorded in the revision history.
+Revision advancement and read-only access depend on the category's revision scheme, lifecycle automations and permissions. A state caption called Released does not by itself guarantee a revision bump or prohibit all edits.
 
 ## Step 7 — Link to an assembly
 
-Released parts are most useful when they are linked to the assemblies 
-that use them. To link the bearing to an assembly:
+1. Open an assembly with a configured **Uses** or **BOM** tab.
+2. Choose **Add from Library** if enabled.
+3. Find and select the part and review the row quantity and unit.
+4. Save the containing item where changes are pending.
 
-1. Open the assembly entity
-2. Navigate to its **Uses** tab
-3. Click **Add link**
-4. Search for and select the bearing entity
-5. Click **Save**
-
-The bearing now appears in the assembly's Uses list. MatStream 
-automatically adds the assembly to the bearing's **Where-Used** list — 
-so you can always see which assemblies are affected if the bearing ever 
-changes.
+The relationship appears in **Where Used** on the part when that tab is configured and you have access. See [Uses & Where Used](../features/where-used.md).
 
 ## Step 8 — Make a change
 
-Suppose the bearing specification needs to change. Because it is 
-Released and read-only, you cannot edit it directly — you need to 
-create a new revision:
+Use the configured lifecycle path to return released work to an editable state. Revision labels advance through the configured automation or permitted **Change Revision** command. There is no universal New revision button that always creates Draft and advances to B on release.
 
-1. Open the released bearing entity
-2. Click **New revision** — MatStream creates a new Draft version of 
-   the entity, ready for editing
-3. The revision label will advance to **B** when this new revision 
-   is eventually released
-4. Make your changes, attach updated files, and repeat the 
-   review and release process
-
-The full history is preserved — revision A remains permanently in the 
-record, and revision B becomes the new current release.
-
-## What you have learned
-
-In this walkthrough you have seen:
-
-- How entities are created and numbered automatically
-- How properties capture structured data about an entity
-- How lifecycle states control the approval process
-- How revision labels are assigned on formal release
-- How entities are linked to build BOM structures with where-used traceability
-- How changes are managed through new revisions rather than overwriting history
+Review the [Revisions](../entities/revisions.md) guide before changing historical or inherited rows. History is subject to version policy and guarded purge; do not assume every save is an immutable snapshot.
 
 ## Next steps
 
-- [Entities](../entities/overview.md) — a deeper look at the entity model
-- [Workspaces](workspaces.md) — understand workspaces and what they contain
-- [Administration](../admin/categories.md) — configure categories, 
-  lifecycle definitions, and numbering schemes for your workspace
+- [Entities](../entities/overview.md)
+- [Workspace setup](workspace-setup.md)
+- [Categories](../admin/categories.md)
+- [Lifecycle](../entities/lifecycle.md)

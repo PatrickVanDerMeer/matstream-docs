@@ -25,18 +25,13 @@ The left panel shows a tree with three top-level categories:
 | **Suppliers** | Vendors and sub-contractors you source from |
 | **Third Parties** | Other external organisations (regulators, certification bodies, partners) |
 
-Expand a node to see individual partners within that category. Select a partner to see their details in the right panel.
+The tree contains static sample projects, partners and document groups. Select a node to read its explanatory preview. It does not load your workspace's real partner records.
 
 ---
 
-## What's coming
+## External sharing available today
 
-Planned capabilities for the Collaborate feature:
-
-- Link entities, BOMs, and documents to specific collaboration partners
-- Share selected entity data externally with controlled visibility
-- Track status of shared items (e.g. "sent to supplier for quote", "awaiting approval")
-- Audit trail of cross-organisation data exchanges
+For actual external sharing, use an item's Share/Manage Access workflow and recipient portal. The Collaborate layout demo is not the portal or the place to manage recipients. See [Share a PO with a vendor](../workflows/vendor-purchase-order.md) and [Supplier portal workflow](../workflows/supplier-portal.md) for implemented instructions.
 
 ---
 

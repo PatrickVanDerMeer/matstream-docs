@@ -38,6 +38,8 @@ Use **Non-working day** to choose a date, Workspace or a specific resource calen
 
 Whole-day start/due boundaries use the workspace **Planning time zone** in [System Settings](../admin/system-settings.md). Users can see the corresponding moments in their own local time. The planning calendar is separate from the UTC day boundary used by Daily versioning.
 
+For workspace-wide availability, working patterns, Microsoft imports and finite scheduling, see [Capacity and Availability](capacity.md). Its calendar inputs are shared across projects; recalculate the plan after changing them.
+
 ## Baselines and stale runs
 
 **Keep as baseline** records the current published run as the baseline. The Schedule view includes baseline dates for comparison. It does not freeze the underlying tasks or procurement records.

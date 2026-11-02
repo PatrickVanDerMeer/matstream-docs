@@ -1,28 +1,28 @@
 Here's the draft for solutions/quality-management.md:
 markdown# Quality Management
 
-MatStream provides a flexible foundation for managing quality records — 
-non-conformances, corrective actions, audit findings, customer complaints, 
-and any other quality-related item your organisation needs to track, 
+MatStream provides a flexible foundation for managing quality records —
+non-conformances, corrective actions, audit findings, customer complaints,
+and any other quality-related item your organisation needs to track,
 approve, and resolve.
 
-Because quality records are entities in MatStream, they are fully 
-integrated with the rest of your data — linked directly to the specific 
+Because quality records are entities in MatStream, they are fully
+integrated with the rest of your data — linked directly to the specific
 part revisions, documents, suppliers, or processes they relate to.
 
 ---
 
 ## What is quality management in MatStream?
 
-Quality management in MatStream means treating quality records as 
-first-class entities — with the same structured properties, lifecycle 
-control, revision history, and relationship tracking as any other item 
+Quality management in MatStream means treating quality records as
+first-class entities — with the same structured properties, lifecycle
+control, revision history, and relationship tracking as any other item
 in the platform.
 
-This is what sets MatStream apart from standalone quality management 
-systems: your non-conformance is not an isolated record in a separate 
-tool — it is linked directly to the exact part revision it affects, 
-the supplier who supplied it, the work instruction that was not followed, 
+This is what sets MatStream apart from standalone quality management
+systems: your non-conformance is not an isolated record in a separate
+tool — it is linked directly to the exact part revision it affects,
+the supplier who supplied it, the work instruction that was not followed,
 and the corrective action raised to address it.
 
 Everything is connected. Everything is traceable.
@@ -31,7 +31,7 @@ Everything is connected. Everything is traceable.
 
 ## Typical quality entity types
 
-Your administrator configures the quality entity types that match your 
+Your administrator configures the quality entity types that match your
 organisation's quality management process. Common examples include:
 
 | Category | What it represents |
@@ -43,21 +43,21 @@ organisation's quality management process. Common examples include:
 | **Supplier deviation** | A formal request to accept material or parts outside specification |
 | **Inspection record** | The result of an incoming, in-process, or final inspection |
 
-Each category carries the properties, lifecycle, and numbering scheme 
+Each category carries the properties, lifecycle, and numbering scheme
 appropriate to that record type — all configured by your administrator.
 
 ---
 
 ## Non-conformance management
 
-A non-conformance (NCR) is the most common quality record type. In 
+A non-conformance (NCR) is the most common quality record type. In
 MatStream an NCR is an entity that captures:
 
-- What the non-conformance is — description, detection date, detection 
+- What the non-conformance is — description, detection date, detection
   method
-- Where it was found — incoming inspection, in-process, final inspection, 
+- Where it was found — incoming inspection, in-process, final inspection,
   customer return
-- What it affects — linked directly to the specific part revision, 
+- What it affects — linked directly to the specific part revision,
   batch, or assembly
 - Who is responsible — assigned to a user or group for disposition
 - How it was resolved — disposition decision, linked corrective action
@@ -76,19 +76,19 @@ At each transition:
 
 ### Linking NCRs to affected items
 
-The most powerful aspect of NCR management in MatStream is the ability 
+The most powerful aspect of NCR management in MatStream is the ability
 to link the NCR directly to the entities it affects:
 
-- **Affected part revision** — the exact revision of the part that 
+- **Affected part revision** — the exact revision of the part that
   failed, not just the part number
-- **Affected assembly** — the assembly that contained the non-conforming 
+- **Affected assembly** — the assembly that contained the non-conforming
   part
 - **Supplier** — the supplier who provided the non-conforming material
 - **Work instruction** — the procedure that was not followed
 - **Corrective action** — the CAPA raised to address the root cause
 
-These links are bidirectional. From the part record, you can instantly 
-see all NCRs ever raised against any revision of that part — giving 
+These links are bidirectional. From the part record, you can instantly
+see all NCRs ever raised against any revision of that part — giving
 you a complete quality history for every item in your catalogue.
 
 ---
@@ -110,16 +110,16 @@ Draft → In progress → Pending review → Closed — Effective
 ↓
 Closed — Ineffective → New CAPA required
 
-CAPAs are linked to the NCRs that triggered them — giving you full 
-traceability from problem detection through root cause analysis to 
+CAPAs are linked to the NCRs that triggered them — giving you full
+traceability from problem detection through root cause analysis to
 resolution and effectiveness review.
 
 ---
 
 ## Audit management
 
-Audit findings are entities in MatStream — linked to the audit they 
-belong to, the process or document they relate to, and any corrective 
+Audit findings are entities in MatStream — linked to the audit they
+belong to, the process or document they relate to, and any corrective
 actions raised as a result.
 
 A typical audit finding entity might carry:
@@ -131,14 +131,14 @@ A typical audit finding entity might carry:
 - Required corrective action — linked to a CAPA entity
 - Target closure date and actual closure date
 
-Audit entities can also represent the audit itself — with findings 
+Audit entities can also represent the audit itself — with findings
 linked as child entities, giving you a complete audit record in one place.
 
 ---
 
 ## Customer complaint management
 
-Customer complaints are entities in MatStream — linked to the affected 
+Customer complaints are entities in MatStream — linked to the affected
 product, the customer, and any NCRs or CAPAs raised in response.
 
 A typical customer complaint workflow:
@@ -166,8 +166,8 @@ Complaint closed
 
 ## Supplier quality management
 
-Suppliers can be entities in MatStream — linked to the purchased parts 
-they supply, the NCRs raised against their components, and any supplier 
+Suppliers can be entities in MatStream — linked to the purchased parts
+they supply, the NCRs raised against their components, and any supplier
 deviation requests submitted to them.
 
 This gives you a complete supplier quality record:
@@ -181,8 +181,8 @@ This gives you a complete supplier quality record:
 
 ## Traceability across the quality system
 
-The real power of quality management in MatStream is cross-domain 
-traceability — the ability to follow a thread from any point in the 
+The real power of quality management in MatStream is cross-domain
+traceability — the ability to follow a thread from any point in the
 quality system to any other:
 Customer complaint
 └── Linked to affected product revision
@@ -192,24 +192,24 @@ Customer complaint
 └── Linked to updated work instruction
 └── Linked to parts the instruction applies to
 
-Every link is bidirectional and permanent. At any point you can navigate 
-the full chain — from complaint to corrective action to updated procedure 
+Relationships can be navigated in both directions while retained and accessible. At any point you can navigate
+the full chain — from complaint to corrective action to updated procedure
 to affected parts — without leaving MatStream.
 
 ---
 
 ## Quality records and document control
 
-Quality management and document control work naturally together in 
-MatStream. Quality records can be linked directly to the controlled 
+Quality management and document control work naturally together in
+MatStream. Quality records can be linked directly to the controlled
 documents they relate to:
 
 - An NCR linked to the work instruction that was not followed
 - A CAPA linked to the updated procedure that implements the fix
 - An audit finding linked to the quality manual clause it references
 
-When a procedure is revised as a result of a corrective action, the 
-link between the CAPA and the new document revision is maintained — 
+When a procedure is revised as a result of a corrective action, the
+link between the CAPA and the new document revision is maintained —
 giving you a complete corrective action closure record.
 
 See [Document Control](document-control.md) for more details.
@@ -218,8 +218,8 @@ See [Document Control](document-control.md) for more details.
 
 ## Satisfying QMS requirements
 
-MatStream's quality management capability is designed to support the 
-requirements of quality management standards such as ISO 9001. 
+MatStream's quality management capability is designed to support the
+requirements of quality management standards such as ISO 9001.
 Specifically:
 
 | QMS requirement | How MatStream satisfies it |
@@ -228,14 +228,14 @@ Specifically:
 | Root causes must be identified and addressed | CAPA entities linked to NCRs with effectiveness review |
 | Corrective actions must be tracked to closure | CAPA lifecycle with closure state and linked evidence |
 | Customer complaints must be managed | Customer complaint entities with full traceability |
-| Records must be retained | Immutable version history and permanent transition log |
+| Records must be retained | Category version policy, retained history and configured purge protection |
 | Traceability must be maintained | Bidirectional links across all quality record types |
 
 !!! note
-    MatStream provides the technical foundation for quality management 
-    system compliance. Whether it satisfies your specific regulatory 
-    requirements depends on your industry, jurisdiction, and the way 
-    you configure and use the platform. Consult your quality manager 
+    MatStream provides the technical foundation for quality management
+    system compliance. Whether it satisfies your specific regulatory
+    requirements depends on your industry, jurisdiction, and the way
+    you configure and use the platform. Consult your quality manager
     or compliance advisor for guidance.
 
 ---
@@ -255,25 +255,25 @@ Specifically:
 
 ## Getting started with quality management in MatStream
 
-1. **Configure quality categories** — define your NCR, CAPA, and other 
+1. **Configure quality categories** — define your NCR, CAPA, and other
    quality record types. See [Categories](../admin/categories.md).
-2. **Configure lifecycle definitions** — define your quality approval 
+2. **Configure lifecycle definitions** — define your quality approval
    workflows. See [Lifecycle](../entities/lifecycle.md).
-3. **Configure numbering schemes** — define your quality record numbering 
+3. **Configure numbering schemes** — define your quality record numbering
    templates. See [Numbering schemes](../admin/numbering.md).
-4. **Set up user groups** — define who can raise, review, and close 
+4. **Set up user groups** — define who can raise, review, and close
    quality records. See [Users & groups](../admin/users-groups.md).
-5. **Link to your engineering data** — connect quality records to the 
+5. **Link to your engineering data** — connect quality records to the
    parts, documents, and suppliers they relate to.
 
 ---
 
 ## Next steps
 
-- [Inventory Management](inventory-management.md) — manage products, 
+- [Inventory Management](inventory-management.md) — manage products,
   stock, and supplier data alongside your quality records
-- [Document Control](document-control.md) — manage controlled documents 
+- [Document Control](document-control.md) — manage controlled documents
   linked to your quality records
 - [PLM](plm.md) — manage engineering parts and assemblies
-- [Core concepts](../platform/core-concepts.md) — the building blocks 
+- [Core concepts](../platform/core-concepts.md) — the building blocks
   of the platform

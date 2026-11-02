@@ -60,6 +60,9 @@ Set up access and configure your processes.
 - [Workspace setup](getting-started/workspace-setup.md)
 - [Categories](admin/categories.md)
 - [Lifecycle definitions](admin/lifecycle.md)
+- [Time tracking and approvals](features/time-tracking.md)
+- [Capacity and Availability](features/capacity.md)
+- [Leave and time balances](features/time-balances.md)
 
 </section>
 
@@ -85,6 +88,8 @@ Explore changes and additional guidance.
 - [Release notes](release-notes/changelog.md)
 - [AI Assistant](features/ai-assistant.md)
 - [Print templates](print-templates/print-templates-user.md)
+- [Item-change subscriptions](features/subscriptions.md)
+- [Photo Gallery](features/photo-gallery.md)
 - [Billing and plans](billing/overview.md)
 
 </section>

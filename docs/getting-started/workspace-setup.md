@@ -192,6 +192,10 @@ configuration only — an empty workspace ready for your own data.
     Explorer tree as individual parts, each one a real entity with its own 
     lifecycle that a buyer can act on.
 
+### Time configuration
+
+For the engineering setup's time-budget, hour-type, balance and rate records, see [Time configuration](../admin/time-configuration.md). Review the seeded choices and use the administrator controls there to adapt them; setup defaults are not a substitute for your organization's time policies.
+
 ### Document Control
 
 **Document Control → Document Control Configuration** installs a complete,

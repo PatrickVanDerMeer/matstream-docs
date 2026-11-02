@@ -10,7 +10,7 @@ Display tabs are the panels that appear at the bottom of an entity detail page. 
 2. Select a category.
 3. Click the **Display Tabs** tab in the category editor panel.
 
-The tab list shows all display tabs currently assigned to this category. Drag rows to reorder them, or use the **Sort Order** field.
+The tab list shows all display tabs currently assigned to this category. Drag rows to reorder them and save the category.
 
 ---
 
@@ -19,7 +19,7 @@ The tab list shows all display tabs currently assigned to this category. Drag ro
 | Type | What it shows |
 |---|---|
 | **General** | Editable property fields for the entity version |
-| **Uses** | BOM children — entities this entity links to (flat grid or tree) |
+| **Uses** | BOM children — entities this entity links to |
 | **Where-Used** | BOM parents — entities that link to this entity |
 | **History** | All past revisions of the entity with dates and authors |
 | **Ledger** | Stock movement history (on-hand delta, reserved delta, on-order delta per movement) |
@@ -29,100 +29,85 @@ The tab list shows all display tabs currently assigned to this category. Drag ro
 | **Shares** | Who the entity is shared with outside the workspace |
 | **Sales Pricing** | Price List periods and prices, or an item's Sales prices, depending on the category's tab setup. See [Price Lists](../features/price-lists.md). |
 | **3D Model** | The entity's geometry as a rotatable, measurable model — uploaded as a GLB or published from Inventor. See [3D Model viewer](../features/3d-model.md) |
+| **Permissions** | Entity access rules, subject to permission-management access. |
+| **Planning** | Project schedule, or task planning details for a Task-behavior category. See [Project planning](../features/planning.md). |
+| **Photo Gallery** | Versioned photo attachments, folder photos or read-only filter results. See [Photo Gallery](../features/photo-gallery.md). |
+| **Booked Hours** | Weekly project time entries with person, task, hour type and status. Requires project/tab access and time-view or project-management authorization. |
 
-**Uses** comes in two forms — *Uses (flat list)* and *Uses (tree)* — chosen by the tab type itself rather than by a setting.
 
-!!! warning "Filter Result cannot filter on lifecycle state"
-    A Filter Result tab can filter by category and by property values, but **not 
-    by lifecycle state** — a state condition is silently ignored and the tab 
-    returns everything. You can still *show* Lifecycle and Occ. State as columns 
-    and sort on them, which is the usual workaround for a list like "open 
-    requirements".
+**General** is a system tab; the ordinary new-definition type picker does not offer it.
+
+**Uses** is the current BOM/list tab type. The old Uses Tree Grid type is retired. **Where Used** has a Renderer setting for Flat List (Grid) or Tree Grid.
+
+Filter Result supports property criteria and base fields including Name, Version, Revision, Category, Lifecycle and lifecycle state. Configure the scope and criteria, then verify the returned rows. Lifecycle-state filtering is implemented; it is not limited to a display-only state column.
 
 ---
 
 ## Adding a tab to a category
 
-1. In the **Display Tabs** tab of the category editor, click **Add**.
-2. Select a tab type from the picker.
-3. Fill in the **Name** and optionally an **Icon** (Bootstrap icon class, e.g. `bi-list`).
-4. Set the **Sort Order** to control its position in the tab bar.
-5. Configure the **Settings** (see below).
-6. Click **Save**.
+1. Open **Configuration → Display Tabs** to create or edit a reusable display-tab definition.
+2. Set its name, display name, type and applicable settings, filters and ribbon actions; save the definition.
+3. Open **Configuration → Categories**, edit the category and select **Display Tabs**.
+4. Use **+** to select existing definitions in the picker.
+5. Set the assignment's display name, enabled state and group permissions, drag to reorder, then save the category.
+
+Tab definitions and category assignments are separate. Editing a shared definition can affect every category using it. The category picker assigns existing definitions; it does not create a definition in place.
 
 ---
 
 ## Tab settings
 
-Each tab type has its own settings stored as a JSON object. The category editor provides a structured form for the most common settings:
+Each tab type has its own settings stored as a JSON object. The display-tab definition editor provides structured Filter, Settings and applicable Ribbons panels:
 
 ### Uses / Where-Used settings
 
-A Uses tab is configured across three places in the display tab dialog.
+A Uses definition separates row/source selection, display settings and ribbon commands. Category assignments then control where the shared definition appears and who can use it.
 
-**General tab — what gets created**
-
-| Setting | Description |
-|---|---|
-| Default Occurrence Category | The category created when a user adds a row. This is what the new line *becomes*. |
-
-**Settings tab — what the user may do**
+**Settings and ribbon configuration**
 
 | Setting | Description |
 |---|---|
-| Allow Add | Show the **Add from Library** button. Turn this **off** for tabs whose rows must be created by a process rather than by hand. |
+| Allow Add from Library | Show the **Add from Library** button. Turn this **off** for tabs whose rows must be created by a process rather than by hand. |
 | Allow Remove | Allow rows to be unlinked |
-| Allow Reorder | Allow rows to be dragged into a different order |
 | Bump version when link is added | Create a new entity version whenever a row is added |
 | Bump version when link is removed | Create a new entity version whenever a row is removed |
-| Default Columns | Which columns are visible by default. Leave empty to show all. |
+| Default Columns | Starting visible columns. |
+| Show rows from the linked definition (read-only) | Include definition-owned rows on occurrences; those rows cannot be edited or removed here. |
+| Show selection checkboxes | Offer row selection checkboxes. |
+| Column total / Footer label | Sum a numeric column in loaded rows; this display total is not stored on the parent. |
 
 **Filter tab — which rows appear**
 
-A category tree with checkboxes, plus an optional property filter.
+The **Filter** tab's category tree separates categories by family:
 
-!!! danger "Tick the occurrence category, not the definition"
-    The Filter tab decides **which rows the tab displays**, so it must list the 
-    **occurrence** categories the rows *are* — `BOM Position`, `Purchase Order 
-    Line` — and never the definition categories they point at (`Part`, 
-    `Assembly`). Ticking the definition category is the single most common 
-    configuration mistake and produces a tab that is **completely empty**, with 
-    no error to explain why.
+- **Definitions** limit the **Add from Library** search.
+- **Occurrences** limit displayed rows and the category templates offered by **New**.
 
-    The category tree also **cascades**: ticking a parent category ticks all its 
-    children. If your line categories are grouped under a parent — as Material 
-    Requirement Line and Purchase Order Line are under Purchase Order — tick the 
-    child on its own, then confirm only one category ended up selected.
+For an assembly BOM, select the desired definition categories such as Part and Assembly, and the occurrence category used by its rows, such as BOM Position. Selecting only a definition category does not configure the occurrence rows. Check cascaded child selections before saving. The optional Property Filter further narrows the results.
 
-!!! note "Library search scope is not editable here"
-    Which *definition* categories the **Add from Library** picker offers is a 
-    separate setting from the row filter, and the display tab dialog does not 
-    expose it. Tabs created by the Setup Wizard have it set correctly; a tab you 
-    create by hand falls back to offering the row-filter categories. If you need 
-    a hand-made tab to search a different library scope, ask for it to be seeded 
-    rather than configured.
+The Milestones tab is a Uses definition with Milestone occurrence rows and a New action for that template. Its seeded configuration does not require a Library item for each checkpoint.
 
-!!! example "The Milestones tab"
-    The Milestones tab on the Project category (seeded by the Setup Wizard) is a 
-    regular Uses tab with its Default Occurrence Category set to Milestone, a 
-    row filter of Milestone, and default columns of Name / State / Due / 
-    Responsible. Library search is switched off in the seeded configuration, 
-    since milestones aren't library items — they're created directly with the 
-    tab's **New Milestone** button.
+### Uses ribbons
+
+In **Ribbons**, configure the display name, enabled state, buttons, icons and ordered actions for this Uses tab. A New action selects from the occurrence templates chosen in Filter. Built-in actions can be combined with Open Scanner, Change State, Edit Property, Run Automation and Refresh. Dialog actions must come last. The preview is a preview, not a live execution of the action.
+
+These labels and workflow choices are administrator settings. Save the definition after editing; modifying a shared definition affects its assignments. Actions still enforce the user's grants and record permissions.
 
 ### General tab settings
 
-| Setting | Description |
-|---|---|
-| Property groups | Which property groups to show on this tab |
-| Read-only override | Force all fields on this tab to read-only regardless of lifecycle-state permissions |
+**Show Stored File** controls the stored-file section. Property assignments and their group/order belong to the category's Properties configuration; tab access is controlled by category-tab permissions.
+
+### Photo Gallery settings
+
+Choose **Photo source** (Automatic, Versioned attachments, Folder children or read-only Filter results), default upload category, visible photo categories, default Gallery/List layout, mosaic size, page size and allowed actions. The upload category must have Photo behavior. See [Photo Gallery](../features/photo-gallery.md).
 
 ### Ledger tab settings
 
 | Setting | Description |
 |---|---|
 | Balance property keys | Which numeric property keys to show as the "current balance" summary above the ledger |
-| Page size | How many ledger rows to load per page |
+| Editable Property Keys | Property keys exposed for editing by the ledger configuration. |
+| Default Columns | Starting visible columns. |
 
 ---
 
@@ -145,7 +130,7 @@ For an item's **Sales** tab, these permissions control whether prices are editab
 
 ## Sort order
 
-Tabs appear in the entity detail page in ascending sort order. Set the **Sort Order** field to a number (e.g. 10, 20, 30) to control the sequence. Leaving gaps (multiples of 10) makes it easy to insert tabs in between later.
+Drag category-tab assignment rows into the desired order and save the category. There is no separate sort-order editing dialog for each assignment.
 
 ---
 

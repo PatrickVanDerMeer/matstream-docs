@@ -11,7 +11,7 @@ Each task has:
 | Field | Description |
 |---|---|
 | Entity version | The specific entity version the task is linked to |
-| Type | Category of work (e.g. Review, Approval, Data Entry) |
+| Type | Built-in kind: Action, Notify, Milestone or Wait |
 | Assigned to | The workspace user responsible for completing the task |
 | Status | Current state of the task (Open, In Progress, Done) |
 | % Complete | Optional progress indicator |
@@ -22,9 +22,9 @@ Each task has:
 
 ## Viewing your tasks
 
-Your outstanding tasks appear on the **Dashboard** Tasks widget when you open the workspace. The widget shows project number, description, state, completion percentage, start date, and due date.
+Your outstanding tasks appear on the **Dashboard** Tasks widget when you open the workspace. The widget shows Task, About, Due and State, plus an overdue count. It lists your open tasks ordered by due date.
 
-Click any task in the widget to navigate to the linked entity.
+Use the task's containing item or project to open its task details; the current Dashboard table is a summary.
 
 ---
 
@@ -69,14 +69,9 @@ their own timesheet, but the optional task picker is empty.
 
 ## Task types
 
-Task types are workspace-configured labels that distinguish between different kinds of work. Common examples:
+The current built-in task kinds are **Action**, **Notify**, **Milestone** and **Wait**. Wait represents elapsed working days without effort or an assignee; Milestone is a zero-duration checkpoint.
 
-- **Review** — someone needs to review and comment on this entity version
-- **Approval** — someone needs to approve a lifecycle transition
-- **Data Entry** — properties need to be filled in before the entity can progress
-- **Action** — a general action item linked to this entity
-
-Administrators define available task types in workspace settings.
+Administrators customize task categories, properties, lifecycle states and display tabs through Configuration. There is no separate workspace editor for adding built-in task kinds. Review or approval work can be represented by configured task categories and labels, rather than inventing a new built-in kind.
 
 ---
 

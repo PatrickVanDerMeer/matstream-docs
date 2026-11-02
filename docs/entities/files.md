@@ -6,22 +6,13 @@ MatStream stores files against entity versions. Each revision of an entity can h
 
 ## File attachments
 
-Files can be attached to any entity version. Typical attachments include:
+A file-carrying item stores its primary file on an entity version. Categories control whether a stored file is allowed or required. Supporting documents can be separate file entities linked through a configured **Documents** tab; multiple images can be managed through a [Photo Gallery](../features/photo-gallery.md). There is no universal Files tab on every category.
 
-- PDF drawings and specifications
-- CAD files (STEP, IGES, native formats)
-- Images and photographs
-- Inspection reports and certificates
-- Spreadsheets and Word documents
+Typical files include PDF drawings, CAD files, images, inspection certificates, spreadsheets and Word documents. Use the stored-file section when available on a file-carrying item, or the configured Documents workflow for linked document records.
 
-To attach a file:
+To upload into a folder, right-click it in Explorer and choose **Add Files...**. Select files, review each queue row's name and category, then **Upload**. This creates file entities placed in the folder, rather than attaching every uploaded file to the folder's own version. Library uploads create definition records instead. Review any duplicate/new-version confirmation and individual failures.
 
-1. Open the entity detail page.
-2. Go to the **Files** tab or **Documents** section.
-3. Click **Upload** or drag files into the upload area.
-4. Each file is linked to the current entity version.
-
-When a new revision is created, attachments from the previous revision are preserved as history. New files can be added to the new revision independently.
+A new version can inherit its stored file until it is replaced. Historical versions keep their version-specific references, subject to guarded version purge and other retention controls. Check category version policy before assuming a save creates a separate snapshot.
 
 ---
 
@@ -33,7 +24,7 @@ Entity detail pages include an embedded PDF viewer (Syncfusion PdfViewer). When 
 
 ## Multi-file upload
 
-The multi-file upload dialog lets you queue and upload several files at once. A progress grid shows the upload status of each file. Files are processed in sequence and attached to the entity version on completion.
+The multi-file upload dialog lets you queue and upload several files at once. A progress grid shows the upload status of each file. The selected upload workflow determines whether files create folder occurrences or Library definitions. Inspect the per-file results; an upload batch can contain successes and failures.
 
 ---
 

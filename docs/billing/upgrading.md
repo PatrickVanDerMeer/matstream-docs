@@ -60,8 +60,7 @@ Subtotal                       = €69.80
 VAT 21%                        = €14.66
 Total first payment            = €84.46
 
-Your next invoice is generated on the 20th of April, and every 
-month thereafter on the 20th.
+Your next billing date is the 20th of April, and every month thereafter on the 20th. The recurring invoice is generated seven days before its charge date.
 
 ---
 

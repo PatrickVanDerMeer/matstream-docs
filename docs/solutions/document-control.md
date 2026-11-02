@@ -72,15 +72,12 @@ process for that document type.
 ### Revision control
 
 Every controlled document in MatStream has a formal revision history. 
-When a document is approved and released, MatStream assigns a permanent 
-revision label — for example:
+Configured revision actions identify a document release with a label — for example:
 
 - Issue 1, Issue 2, Issue 3 (numeric scheme)
 - Rev A, Rev B, Rev C (alphabetic scheme)
 
-The revision label is immutable once assigned. Superseded revisions 
-are retained in full — you can always view the exact content and 
-approval history of any previous issue.
+Revision labels can be changed through permitted actions. Retained historical versions preserve their content and approval history according to category versioning and retention. Configure those rules deliberately; history is not unconditionally immutable. See [Revisions](../entities/revisions.md).
 
 ### Transmittals and submittals
 
@@ -122,7 +119,7 @@ The actual document content — whether a Word file, PDF, or other
 format — is attached to the entity version as a file. MatStream:
 
 - Links the file to the specific revision it belongs to
-- Retains previous revision files permanently
+- Retains previous version files while their historical references are retained
 - Displays PDF documents in the built-in PDF viewer without leaving 
   MatStream
 - Tracks who uploaded each file and when
@@ -191,7 +188,7 @@ such as ISO 9001. Specifically:
 | Documents must be approved before use | Lifecycle approval workflow with transition permissions |
 | Current version must be identifiable | Revision label and lifecycle state clearly shown |
 | Changes must be reviewed and approved | New revision goes through the same approval workflow |
-| Obsolete documents must be retained | Superseded revisions are permanently retained |
+| Obsolete documents must be retained | Configure version creation and purge protection to preserve required historical versions |
 | Access must be controlled | Role-based permissions at multiple levels |
 | Changes must be traceable | Full transition history and version audit trail |
 
@@ -223,7 +220,7 @@ Reviewer approves the document
 → Transition logged: who approved and when
 Document goes live
 → Lifecycle transitions to Active
-→ Revision Issue 1 assigned — permanent and immutable
+→ Revision Issue 1 assigned through the configured revision action
 → Document becomes read-only to most users
 One year later — process changes require an update
 → New revision created — starts in Draft

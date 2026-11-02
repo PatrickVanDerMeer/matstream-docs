@@ -1,6 +1,6 @@
 # Unit Converter
 
-The Unit Converter is a built-in tool that converts values between units of measurement. It draws on the same unit and dimension definitions that back numeric property values in your workspace, so any custom units your administrator has configured are available automatically.
+The Unit Converter is a built-in tool that converts values between units of measurement. It reads the installed physical unit and dimension reference data. Its list is separate from stock and order Units of Quantity.
 
 ---
 
@@ -24,7 +24,7 @@ The last active dimension tab is remembered and restored next time you open the 
 
 ## Available dimensions and units
 
-Dimensions and units are configured by your workspace administrator in **Configuration → Units of Measure**. Common dimensions include:
+The converter lists the physical dimensions and units available to your workspace. Common dimensions include:
 
 | Dimension | Example units |
 |---|---|
@@ -35,12 +35,12 @@ Dimensions and units are configured by your workspace administrator in **Configu
 | Volume | ml, l, m³, gal |
 | Force | N, kN, lbf |
 
-If a dimension or unit you need is not listed, ask your administrator to add it.
+The current Configuration screen has no physical-dimension or conversion-unit editor. If a required unit is missing, ask your MatStream support contact about the installed reference data. Administrators can manage stock and order quantity units in **System Settings**, but that does not extend this converter.
 
 ---
 
 ## Related
 
-- [Units of Measure](../admin/units-of-measure.md) — configure dimensions and units
-- [Properties](../admin/properties.md) — link numeric properties to dimensions
+- [Units of Measure](../admin/units-of-measure.md) — quantity-unit administration and physical reference data
+- [Properties](../admin/properties.md) — numeric formats and editors
 - [Explorer](explorer.md) — the ribbon where the Unit Converter is accessible

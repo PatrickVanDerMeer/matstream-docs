@@ -64,7 +64,7 @@ data models — but they are not built for engineering. MatStream brings
 capabilities that generic platforms cannot match:
 
 - **Engineering-grade revision control** — formal revision labels, 
-  revision schemes, and immutable revision history
+  revision schemes, and version history governed by configured retention
 - **Configurable lifecycle state machines** — states, transitions, 
   permission gates, and transition history
 - **BOM management** — multi-level uses and where-used trees, 

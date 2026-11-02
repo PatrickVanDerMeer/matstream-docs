@@ -73,17 +73,13 @@ viewer — no need to open a separate application.
 
 ### Revision control
 
-Every formal release of a part or assembly is captured as a **revision** 
-with a permanent, immutable label. Revision schemes are configurable 
-per category:
+Formal releases can be identified by a **revision** label using category revision schemes and configured revision actions:
 
 - Mechanical parts: A → B → C → ...
 - Documents and drawings: 1 → 2 → 3 → ...
 - Long-lived items: AA → AB → ... → AZ → BA → ...
 
-The full revision history is always available — you can view the exact 
-state of any part at any previous revision, including its properties, 
-files, and the BOM structure at that point in time.
+Retained historical versions let you inspect properties, files and structure. Configure version creation, pinned links and retention for the traceability you need; authorized users can change revision labels or purge eligible history. See [Revisions](../entities/revisions.md).
 
 ### Lifecycle and approval workflows
 

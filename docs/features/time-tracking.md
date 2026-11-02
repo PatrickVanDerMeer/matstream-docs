@@ -1,55 +1,54 @@
 # Time tracking
 
-Time tracking records who worked on what, on which day, and for how long. Hours are entered on a weekly grid, submitted as a week, and approved by somebody else — and once approved they are priced from the rate card that applied on the day the work was done.
-
----
+Use **Timesheet → My Timesheet** to record your own hours. **Timesheet Management** provides team overviews and approval decisions for authorized team owners. Approved hours retain their costing information and applicable balance postings.
 
 ## Entering your hours
 
-Open **Timesheet** in the workspace menu.
+1. Select a week, Monday to Sunday.
+2. Add a row and choose a bookable project or task. A task determines its owning project; active project membership and task access still apply.
+3. Choose an **Hour type** where needed. A blank type means normal hours; configured types control applicability, target counting and factors. Some types require a note.
+4. Enter positive quarter hours, such as `0.25`, `1.5` or `8`, up to 24 hours per entry.
+5. Enter a description and **Save** before submitting.
 
-1. The grid opens on the current week, Monday to Sunday.
-2. Each row is one thing you worked on. Pick the **project** or the **task**; picking a task fills in its project for you.
-3. Type hours into the day columns. Half hours are fine — `3.5`.
-4. Add a description if the row needs one. It is what an approver reads.
-5. **Save**.
+Use a separate row when the same task needs another hour type. Time-budget tasks can be limited to their budget year; a time-budget project requires a time task. Submitted and approved weeks are locked. A declined week can be corrected on the existing rows and resubmitted.
 
-Rows can be added and removed freely while the week is a draft. Use **Previous** and **Next** to move between weeks; the grid loads whichever week the date falls in.
+## Targets, holidays and absence
 
-> **Note:** The timesheet always shows *your* hours. There is no way to open somebody else's week from here — that is what the approvals screen is for.
+The week shows **Target**, **Counted** and **Extra** hours, warnings and leave balances. The target comes from the person's linked Person resource and normal working calendar. Without a calendar profile, the fallback uses weekly resource capacity across Monday to Friday (40 hours if no resource is linked). Hour types determine which entries count toward it; total booked hours and counted hours can differ.
 
----
+Mapped public holidays and company closures can produce automatic system entries, which cannot be edited or removed like manual rows. Personal absence may appear as a proposal: review and accept it before submitting. Administrators configure these mappings in [Capacity and Availability](capacity.md#timesheet-task-mapping).
+
+Open **Leave balances** to inspect remaining and pending hours. See [Leave and time balances](time-balances.md) for grants, adjustments, payouts and reviewed expiry removals.
 
 ## Submitting a week
 
-**Submit** hands the whole week to an approver. From that moment the week is locked to you: entries cannot be edited, added or deleted while they are waiting on a decision.
+**Submit** sends the whole saved week for a decision and locks its entries. Workspace administrators configure submission rules in **Configuration → System Settings**:
 
-A week that is sent back returns to draft on the same rows, so you correct and resubmit rather than starting again.
+| Rule | Effect |
+|---|---|
+| **Timesheet completeness: Off** | Does not enforce a shortfall check. |
+| **Warn and require shortfall confirmation** | A short week requires **Submit this short week for the approver to review**. |
+| **Block incomplete weeks** | Complete the counted target before submitting. |
+| **Require explicit hour types above the weekly target** | Untyped work can fill the target remaining after absence; extra working hours need an explicit type. |
 
----
+A failed validation leaves the week available for correction. If another action changed it while open, reload before retrying.
 
-## Approving somebody's week
+## Timesheet Management and approval teams
 
-Open **Approvals** in the workspace menu. It lists every submitted week that has not been decided, oldest first, with the person, the period and the total.
+The **Timesheet Management** tab requires `time.viewall`. It uses a team tree, a weekly overview or read-only member timesheet, and a decision pane.
 
-1. Click a week to see the entries behind the total.
-2. **Approve** or **Reject**, with an optional comment.
+1. Select the week and an accessible team.
+2. Select a person in the overview or team tree.
+3. Review target, booked and counted hours and the entries.
+4. Enter **Approver Remarks**, then **Accept** or **Decline**.
 
-Rejecting returns the entries to draft for their owner. Approving locks them permanently.
+Decisions require `time.approve`, ownership of an active timesheet approval team containing that person, and a submitted week. A grant alone does not make someone every person's approver. Decline returns the week for correction; Accept locks entries and applies costing and balance operations. The deciding person, time and remarks remain visible.
 
-> **Note:** You cannot approve your own timesheet, whatever permissions you hold. The point of approval is a second person.
-
-The **Approvals** menu entry only appears if you hold the *Approve timesheets* grant, so most people never see it.
-
----
+With `time.teams.manage`, use **Create team**, **Add member**, **Remove member** and **Remove team** in the team toolbar or context menu. Membership changes require ownership of that team. When adding a person already in another team, choose **Move to this team** or **Keep in both teams**. Remove members before deleting a team. These teams are entity-backed approval groups; they are separate from workspace security groups.
 
 ## Correcting approved hours
 
-Approved entries are never edited or deleted. A correction is a new entry carrying negative hours and pointing at the one it reverses, so the record shows what was claimed, what was corrected, and when.
-
-This is deliberate: approved hours are what cost reports and billing are built on, and a figure that could be quietly edited afterwards would make every report a snapshot of the moment it was run.
-
----
+Approved entries cannot be edited or deleted in the normal timesheet. The current screen has no reversal command or negative-hours correction entry. Ask your workspace administrator how to handle a required correction; do not enter a negative ordinary row or change the original approved record.
 
 ## Hour rates
 
@@ -82,27 +81,21 @@ The cost, the sale price, the currency and the exact rate version are **copied o
 
 ---
 
-## Business rules
-
-- One timesheet per person per period. A rejected week is corrected on the same rows rather than becoming a second submission.
-- A day cannot hold negative hours unless the entry is a reversal.
-- Entering your own hours needs no permission beyond an Editor seat. Everything about somebody else's time is gated.
-- Approval and rejection are recorded with the deciding user, the time and the comment.
-
----
-
 ## Permissions
 
 | Grant | Effect |
 |---|---|
-| *(none)* | Enter, edit and submit your **own** hours |
-| Approve timesheets | See the Approvals screen; approve and reject other people's weeks |
-| View all time | See the hours-by-project report, which aggregates everybody's hours |
+| No additional time grant | Enter, edit and submit your own hours with an Editor seat, subject to project/task access. |
+| `time.viewall` | Open Timesheet Management and view permitted other-person time/report data. |
+| `time.approve` | Accept or decline a submitted week for a person in a team you own. |
+| `time.teams.manage` | Create approval teams and manage membership of teams you own. |
+| `time.balance.view` | View other people's leave balances. |
+| `time.balance.manage` | Grant, adjust, pay out and explicitly remove reviewed balance hours. |
 
----
+Reading another person's timesheet does not permit editing it. Workspace security grants and approval-team membership serve different purposes.
 
-## Known limitations
+## Administration and related guidance
 
-- There is no screen for editing somebody else's hours. An approver reads and decides; correcting is the owner's job.
-- Rate cards are managed as ordinary Library items. There is no dedicated rate administration screen.
-- A rate card's property-level permissions are not configured by the setup template, so cost rates are readable by anyone who can open the Library until an administrator restricts them.
+Hour-type, time-task, balance and rate records are workspace configuration managed through their configured categories and properties. Review effective dates and access before changing them. Submission choices are in [System settings](../admin/system-settings.md); calendar reasons and task mappings are in [Capacity and Availability](capacity.md). Setup supplies starting configuration; administrators should review the records for their own organization.
+
+Rate cards have no dedicated rate administration screen. Current setup seeds **Cost Rate** as administrator-only and leaves **Sales Rate** open. Review existing category property permissions, especially in older workspaces or where an administrator has customized access. See [Time configuration](../admin/time-configuration.md).

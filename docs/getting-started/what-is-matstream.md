@@ -34,8 +34,7 @@ MatStream helps your team manage:
   and their components, with full where-used traceability
 - **Approval workflows** — controlled transitions between lifecycle 
   states, with permission gates at each step
-- **Revision history** — a complete, immutable record of every formal 
-  release of every item
+- **Revision history** — formal release labels and retained versions, governed by category versioning and retention settings
 - **Files** — drawings, specifications, and CAD files attached to 
   specific entity versions
 - **Vault data** — parts and assemblies from Autodesk Vault can be 

@@ -124,13 +124,9 @@ missing, contact your administrator to have it added.
 
 ## Units of measure
 
-Numeric properties can be associated with a **unit of measure** by your 
-administrator. This links the value to a physical dimension — for 
-example, a Weight property linked to the Mass dimension, so the system 
-knows the value represents kilograms or grams.
+Physical conversions use the [Unit Converter](../features/unit-converter.md). Stock, order and BOM quantities use separate Units of Quantity, managed by an administrator in **Configuration → System Settings**. The current property-definition dialog has no physical **Dimension** assignment field. For numeric display, an administrator can set **Format** without changing stored precision. See [Units of Measure](../admin/units-of-measure.md).
 
-This is particularly important for engineering properties where the unit 
-context matters for data quality and downstream use.
+---
 
 ## Property permissions
 

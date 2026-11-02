@@ -72,6 +72,7 @@ nav:
     - Text Templates: admin/text-templates.md
     - Automations: admin/automations-admin.md
     - System settings and purge: admin/system-settings.md
+    - Time configuration: admin/time-configuration.md
     - Import Definitions: features/import-definitions.md
     - Print Templates:
       - Managing templates: admin/print-templates-admin.md
@@ -87,6 +88,7 @@ nav:
     - AI Assistant: features/ai-assistant.md
     - Automations: features/automations.md
     - Barcode scanning: features/barcode.md
+    - Capacity and Availability: features/capacity.md
     - Collaborate: features/collaborate.md
     - Copy Structure: features/copy-structure.md
     - Dashboard: features/dashboard.md
@@ -95,8 +97,10 @@ nav:
     - Folders: features/folders.md
     - Grids, columns & defaults: features/grid-defaults.md
     - Library: features/library.md
+    - Leave and time balances: features/time-balances.md
     - Milestones: features/milestones.md
     - Opportunities & quotations: features/opportunities-quotations.md
+    - Photo Gallery: features/photo-gallery.md
     - Price Lists: features/price-lists.md
     - Print Templates: print-templates/print-templates-user.md
     - Procurement: features/procurement.md
@@ -104,6 +108,7 @@ nav:
     - Property Browser: features/property-browser.md
     - Search: features/search.md
     - Stock management: features/stock.md
+    - Item-change subscriptions: features/subscriptions.md
     - Tasks: features/tasks.md
     - Time tracking: features/time-tracking.md
     - Unit Converter: features/unit-converter.md

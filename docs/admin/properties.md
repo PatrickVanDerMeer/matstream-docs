@@ -14,6 +14,7 @@ Properties are the data fields that appear on entities in MatStream. Your admini
 | **Editor type** | The control users type or pick the value with — see [Editor types](#editor-types) |
 | **Editor source settings** (⚙) | Extra configuration some editors need, such as the options of a list |
 | **Formula** | Calculated properties only: the arithmetic that produces the value |
+| **Format** | Display format, such as `0.########` for quantities or `N2` for two decimal places; does not change stored precision |
 | **Initial value** | The value a new entity starts with — see [Initial values](#initial-values) |
 | **Required** | Whether users must fill in this property before saving |
 | **Unique** | Whether two entities may share the same value — see [Unique values](#unique-values) |
@@ -45,7 +46,7 @@ The data type decides how a value is stored, validated, sorted and displayed. It
 | **Calculated** | A number computed from other properties of the same item | Line total, Weighted revenue |
 | **Thumbnail** | A small image that visually identifies the item | Contact portrait, product picture |
 
-Numbers of any numeric type can be linked to a [unit of measure](units-of-measure.md).
+For quantity units used by stock and orders, see [Units of Measure](units-of-measure.md). The current property-definition dialog does not provide a physical-dimension assignment field.
 
 ### Notes per data type
 
@@ -98,7 +99,7 @@ The editor type decides which control users see when they fill in the value — 
 
 A few combinations worth knowing:
 
-- **String + Combo box** gives a list property whose stored value is plain text; **Int + Combo box** stores a number behind each label (use `value|label` pairs, see below).
+- **String + Combo box** gives a list property whose stored value is plain text; **Int + Combo box** stores a number behind each label (configure Stored value and Selected text, see below).
 - **String + Text box + combo** suggests values but still accepts anything typed — use it when the list is a convenience, not a rule.
 - **Calculated** uses a text box only to give the value its normal shape; it is always read-only.
 
@@ -221,7 +222,7 @@ When your workspace is created, MatStream seeds the following properties automat
 
 | Property | Type | Searchable |
 |---|---|---|
-| Description | Memo | Yes |
+| Description | String (multiline editor) | Yes |
 | Birth Date | Date | No |
 | Comments | Memo | Yes |
 

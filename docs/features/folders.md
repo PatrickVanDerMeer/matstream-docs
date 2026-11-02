@@ -49,7 +49,7 @@ After a successful move, the folder tree refreshes to show the new position.
 
 ## Attaching files to folders
 
-Use **Add Files…** from the context menu to upload files directly to a folder entity. Uploaded files are attached to the folder's current entity version. This is useful for storing project-level documents, specifications, or reference files that belong to a project folder rather than a specific part.
+Use **Add Files…** from the context menu to upload files directly to a folder entity. Select the files, review their names and file-carrying occurrence categories in the upload queue, then click **Upload**. The upload creates file entities placed inside the folder; it does not attach all selected files to the folder's own current version. Where an existing file is detected, review any new-version confirmation before proceeding.
 
 ---
 

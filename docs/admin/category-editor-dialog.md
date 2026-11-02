@@ -9,7 +9,7 @@ when you click **Save** or **Save and Close**.
 
 ## Opening the dialog
 
-The dialog opens from **Administration → Categories**:
+The dialog opens from **Configuration → Categories**:
 
 - Click **New** to create a new category
 - Select an existing category and click **Edit** to edit it
@@ -25,7 +25,8 @@ The top section of the dialog contains the category's core settings:
 |---|---|
 | **Name** | Required. The display name of the category. Must be unique in the workspace — MatStream matches categories by name, so two categories cannot share one. Maximum 100 characters. |
 | **Description** | Optional. A description of the category's purpose. Maximum 255 characters. |
-| **Behavior type** | An optional extra capability — Project, Task, Stock Line, Material Requirement, Stock Location or Filter Item. See [Category behaviors](categories.md#category-behaviors). |
+| **Business role** | Identifies the sales, purchasing, article or warehouse process independently of the display name. Keep the role when renaming a standard category. See [Business roles](categories.md#business-roles). |
+| **Behavior type** | An optional extra capability — Project, Task, Stock Line, Material Requirement, Photo, Resource or an applicable time behavior. See [Category behaviors](categories.md#category-behaviors). |
 | **Numbering scheme** | The template used to generate unique entity numbers. |
 | **Revision scheme** | The sequence used for formal revision labels. |
 | **Version creation policy** | When editing an entity creates a new version rather than updating the current one. |

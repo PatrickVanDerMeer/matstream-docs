@@ -51,6 +51,8 @@ With **Parent subtree**, one filter category can be dropped into any project and
 
 The same filter mechanism is also available as a display tab. An administrator adds a **Filter Result** tab to a category, and every entity of that category shows the filtered list in its own context.
 
+Filter criteria support stored properties and base fields such as Name, Version, Revision, Category, Lifecycle and lifecycle state. A lifecycle-state criterion is evaluated by the current backend; it is not silently ignored. When using Photo Gallery results, **Include photos attached to entities in this scope** includes scoped entities' media attachments.
+
 Use the tree placement when the list is a thing people navigate to. Use the display tab when the list is an aspect of a record — the documents belonging to this equipment item, the requirements raised for this project.
 
 ---

@@ -1,34 +1,34 @@
 # Inventory Management
 
-MatStream provides a flexible foundation for managing inventory data — 
-products, stock levels, suppliers, and procurement information — fully 
+MatStream provides a flexible foundation for managing inventory data —
+products, stock levels, suppliers, and procurement information — fully
 integrated with your engineering, quality, and document control data.
 
-Because inventory items are entities in MatStream, they benefit from 
-the same structured properties, lifecycle control, revision history, 
-and relationship tracking as any other item in the platform. A product 
-in your catalogue is linked to its engineering specification, its 
-supplier, its quality records, and its stock information — all in one 
+Because inventory items are entities in MatStream, they benefit from
+the same structured properties, lifecycle control, revision history,
+and relationship tracking as any other item in the platform. A product
+in your catalogue is linked to its engineering specification, its
+supplier, its quality records, and its stock information — all in one
 place.
 
 ---
 
 ## What is inventory management in MatStream?
 
-Inventory management in MatStream means treating products, stock items, 
-and suppliers as first-class entities — connected to the rest of your 
+Inventory management in MatStream means treating products, stock items,
+and suppliers as first-class entities — connected to the rest of your
 organisational data rather than isolated in a separate system.
 
-This is what sets MatStream apart from standalone inventory management 
-systems: your product record is not just a stock count — it is linked 
-to the engineering specification it must meet, the supplier who provides 
+This is what sets MatStream apart from standalone inventory management
+systems: your product record is not just a stock count — it is linked
+to the engineering specification it must meet, the supplier who provides
 it, the quality records raised against it, and the assemblies that use it.
 
 ---
 
 ## Typical inventory entity types
 
-Your administrator configures the inventory entity types that match 
+Your administrator configures the inventory entity types that match
 your organisation's needs. Common examples include:
 
 | Category | What it represents |
@@ -40,14 +40,14 @@ your organisation's needs. Common examples include:
 | **Stock location** | A physical location where stock is held |
 | **Batch / lot** | A specific production batch or delivery lot |
 
-Each category carries the properties, lifecycle, and numbering scheme 
+Each category carries the properties, lifecycle, and numbering scheme
 appropriate to that item type — all configured by your administrator.
 
 ---
 
 ## Product catalogue management
 
-Products in MatStream are entities — with structured properties that 
+Products in MatStream are entities — with structured properties that
 capture everything your organisation needs to know about each product:
 
 - Product name, description, and category
@@ -60,22 +60,22 @@ capture everything your organisation needs to know about each product:
 
 ### Product lifecycle
 
-Products move through a configurable lifecycle in MatStream. A typical 
+Products move through a configurable lifecycle in MatStream. A typical
 product lifecycle might look like:
 Draft → Under review → Active → Discontinued
 ↓
 Rejected → Draft (rework required)
 
-Only approved, active products are visible to downstream systems — 
-ensuring your product catalogue always reflects your current, approved 
+Only approved, active products are visible to downstream systems —
+ensuring your product catalogue always reflects your current, approved
 range.
 
 ---
 
 ## Supplier management
 
-Suppliers are entities in MatStream — linked to every product and 
-purchased part they supply, every purchase order placed with them, 
+Suppliers are entities in MatStream — linked to every product and
+purchased part they supply, every purchase order placed with them,
 and every quality record raised against their deliveries.
 
 A supplier entity might carry:
@@ -94,42 +94,42 @@ Prospective → Under evaluation → Approved → Conditionally approved
 ↓
 Suspended → Re-evaluation required
 
-Only approved or conditionally approved suppliers can be linked to 
-active products — enforcing your approved supplier list (ASL) directly 
+Only approved or conditionally approved suppliers can be linked to
+active products — enforcing your approved supplier list (ASL) directly
 in the platform.
 
 ---
 
 ## Stock management
 
-Stock is not stored as a property you overwrite. Every change is written 
-to an immutable **ledger**, and the quantities you see — on hand, 
-reserved, on order, available — are derived from it. That means a stock 
-figure can always be explained: who changed it, when, by how much, and 
+Stock is not stored as a property you overwrite. Every change is written
+to an immutable **ledger**, and the quantities you see — on hand,
+reserved, on order, available — are derived from it. That means a stock
+figure can always be explained: who changed it, when, by how much, and
 which order or adjustment caused it.
 
-Quantities are tracked per item **per location**, so the same part can be 
-held on several shelves and in several warehouses with a separate balance 
+Quantities are tracked per item **per location**, so the same part can be
+held on several shelves and in several warehouses with a separate balance
 for each.
 
-Alongside the ledger, stock item entities carry the descriptive properties 
-you would expect — reorder point, reorder quantity, unit of measure, 
+Alongside the ledger, stock item entities carry the descriptive properties
+you would expect — reorder point, reorder quantity, unit of measure,
 batch or lot links — as ordinary editable properties.
 
 ### From demand to delivery
 
 MatStream distinguishes what is *needed* from what is *ordered*:
 
-1. An engineer marks an item in a project as ready to procure. A 
-   **material requirement** is raised automatically, recording the 
+1. An engineer marks an item in a project as ready to procure. A
+   **material requirement** is raised automatically, recording the
    quantity and the date it is needed. Nothing has moved in stock yet.
-2. A buyer reviews open requirements and decides per line whether to 
-   **reserve** existing stock or **order** it from a supplier. Both routes 
+2. A buyer reviews open requirements and decides per line whether to
+   **reserve** existing stock or **order** it from a supplier. Both routes
    can be used on the same requirement.
-3. Ordering writes an on-order quantity; receipt turns that into on-hand 
+3. Ordering writes an on-order quantity; receipt turns that into on-hand
    stock.
 
-Each requirement tracks how much of it is still uncovered, so a buyer's 
+Each requirement tracks how much of it is still uncovered, so a buyer's
 working list is simply everything not yet fully sourced.
 
 See [Stock management](../features/stock.md) for the detail.
@@ -138,20 +138,20 @@ See [Stock management](../features/stock.md) for the detail.
 
 ## Integration with webshops and external systems
 
-MatStream's API makes it straightforward to integrate stock and product 
+MatStream's API makes it straightforward to integrate stock and product
 data with external systems:
 
 ### Webshop integration
 
-Product entities in MatStream can serve as the source of truth for 
+Product entities in MatStream can serve as the source of truth for
 your webshop catalogue. The MatStream API allows external systems to:
 
 - Read current product data — name, description, price, unit of measure
 - Read current stock levels — updated in MatStream as stock moves
-- Push stock updates back into MatStream from warehouse management 
+- Push stock updates back into MatStream from warehouse management
   systems or point-of-sale systems
 
-This means your webshop always reflects your current approved product 
+This means your webshop always reflects your current approved product
 catalogue and up-to-date stock levels — without manual synchronisation.
 
 ### ERP integration
@@ -163,18 +163,18 @@ MatStream can exchange data with ERP systems via the API:
 - Purchase orders in the ERP can be linked to supplier entities in MatStream
 
 !!! note
-    Webshop and ERP integrations require custom development using the 
-    MatStream API. MatStream provides the API and data model — 
-    the integration layer is built to match your specific external 
-    system. Contact your MatStream administrator or implementation 
+    Webshop and ERP integrations require custom development using the
+    MatStream API. MatStream provides the API and data model —
+    the integration layer is built to match your specific external
+    system. Contact your MatStream administrator or implementation
     partner for guidance.
 
 ---
 
 ## Units of measure
 
-MatStream has a built-in units of measure system — particularly 
-important for inventory management where items are measured in 
+MatStream has a built-in units of measure system — particularly
+important for inventory management where items are measured in
 different physical units:
 
 | Dimension | Example units |
@@ -184,16 +184,13 @@ different physical units:
 | Volume | ml, l, m³, gallon |
 | Quantity | pieces, pairs, boxes, pallets |
 
-Numeric properties on stock items and products are linked to a 
-specific dimension — so the system knows that a weight property 
-represents kilograms, not litres. This prevents unit confusion 
-and supports downstream data quality.
+Stock and order quantities use Units of Quantity, managed in **Configuration → System Settings**. Physical conversions use a separate reference list in the Unit Converter; the current property editor does not offer a Dimension assignment. See [Units of Measure](../admin/units-of-measure.md).
 
 ---
 
 ## Traceability across inventory, engineering, and quality
 
-The real power of inventory management in MatStream is the ability 
+The real power of inventory management in MatStream is the ability
 to trace any item across the full breadth of your organisational data:
 Product
 └── Linked to engineering specification (PLM)
@@ -207,15 +204,15 @@ Product
 └── Linked to customer complaints
 └── Linked to corrective actions
 
-Every link is bidirectional and permanent. From the product record 
-you can navigate to its specification, its supplier history, its 
+Relationships can be navigated in both directions while retained and accessible. From the product record
+you can navigate to its specification, its supplier history, its
 stock movements, and its quality records — without leaving MatStream.
 
 ---
 
 ## Satisfying inventory control requirements
 
-MatStream's inventory management capability supports common inventory 
+MatStream's inventory management capability supports common inventory
 control requirements:
 
 | Requirement | How MatStream satisfies it |
@@ -278,28 +275,27 @@ Product made available on webshop
 
 ## Getting started with inventory management in MatStream
 
-1. **Configure inventory categories** — define your product, supplier, 
+1. **Configure inventory categories** — define your product, supplier,
    and stock item types. See [Categories](../admin/categories.md).
-2. **Configure lifecycle definitions** — define your product and supplier 
+2. **Configure lifecycle definitions** — define your product and supplier
    approval workflows. See [Lifecycle](../entities/lifecycle.md).
-3. **Configure numbering schemes** — define your product and supplier 
+3. **Configure numbering schemes** — define your product and supplier
    numbering templates. See [Numbering schemes](../admin/numbering.md).
-4. **Configure units of measure** — set up the physical dimensions and 
-   units relevant to your products.
-5. **Set up user groups** — define who can manage products, suppliers, 
+4. **Configure quantity units** — review stock and order units in System Settings and confirm their meaning before entering quantities.
+5. **Set up user groups** — define who can manage products, suppliers,
    and stock. See [Users & groups](../admin/users-groups.md).
-6. **Connect external systems** — integrate your webshop or ERP via 
+6. **Connect external systems** — integrate your webshop or ERP via
    the MatStream API.
 
 ---
 
 ## Next steps
 
-- [PLM](plm.md) — manage engineering parts and assemblies linked to 
+- [PLM](plm.md) — manage engineering parts and assemblies linked to
   your products
-- [Quality Management](quality-management.md) — manage NCRs and CAPAs 
+- [Quality Management](quality-management.md) — manage NCRs and CAPAs
   linked to your inventory records
-- [Document Control](document-control.md) — manage specifications and 
+- [Document Control](document-control.md) — manage specifications and
   procedures linked to your products
-- [Core concepts](../platform/core-concepts.md) — the building blocks 
+- [Core concepts](../platform/core-concepts.md) — the building blocks
   of the platform

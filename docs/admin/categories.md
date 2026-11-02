@@ -43,6 +43,16 @@ built-in logic.
 | **Material Requirement** | Marks the category as a statement of *demand* rather than a movement. Required quantity and required-by date are stored on the line itself; nothing is posted to stock until a buyer reserves or orders against it. |
 | **Stock Location** | Marks the category as a physical or logical stock location, showing on-hand, reserved, available, and on-order quantities. |
 | **Filter Item** | Gives entities of this category a saved, re-runnable search instead of fixed content — used for smart, query-driven folders. |
+| **Purchase Order** | Identifies a purchase-order header for procurement actions. |
+| **Required Vendor Document** | A vendor-document requirement fulfilled by an occurrence-owned document; shared Library requirements are templates. |
+| **Hour Rate** | Effective-dated cost and sales rates. See [Time tracking](../features/time-tracking.md#hour-rates). |
+| **Service** | A procurable service used by planning. |
+| **Resource** | A person, team, machine or supplier used for capacity planning. |
+| **Photo** | An image occurrence managed through a [Photo Gallery](../features/photo-gallery.md). |
+| **Supply Source** | An item-owned supplier reference with purchasing terms. |
+| **Hour Type** | Effective-dated time classification, factors and target-counting rules. |
+| **Time Balance** | A leave or banked-hours balance bucket. See [Leave and time balances](../features/time-balances.md). |
+
 
 Most categories don't need a behavior at all. Assign one only when the 
 category needs the specific extra data or logic listed above — for 

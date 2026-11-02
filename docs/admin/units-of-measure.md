@@ -1,88 +1,29 @@
 # Units of Measure
 
-MatStream's Units of Measure (UoM) system lets numeric property values carry unit context. This is important for engineering properties like mass, length, pressure, and volume — it ensures that a value of `25` is understood as `25 mm` or `25 kg`, not just a bare number.
+MatStream distinguishes physical measurement units from Units of Quantity used by stock, BOMs and orders. These are separate reference lists; a quantity unit does not by itself define a physical conversion.
 
----
+## Configure Units of Quantity
 
-## Accessing UoM configuration
+Open **Configuration → System Settings → Units of Quantity**. This requires `admin.workspace.settings`.
 
-Go to **Configuration → Units of Measure** in the workspace settings.
+1. To add a unit, enter its **Symbol**, workspace **Name**, and **Available** setting, then click **Add unit**.
+2. To change an existing unit, edit its workspace name or availability and click **Save unit** on that row.
+3. Save each row separately; **Save settings** applies the workspace defaults above the unit list.
 
----
+Names and availability are local to the workspace, including overrides of global units. Existing symbols are stable identifiers and cannot be changed. Add a new unit for a different symbol; duplicate symbols are refused. Disabling a unit removes it from normal new selections while existing records retain their unit identity.
 
-## Dimensions
+The Stock tab retains its currently assigned unit in the list even if disabled. A stock unit cannot be changed while on-hand stock, reservations or on-order commitments exist. See [Stock management](../features/stock.md).
 
-A **dimension** is a physical or logical category of measurement — Length, Mass, Temperature, Pressure, Volume, and so on. Dimensions are the top-level grouping for units.
+For **Stock Unit** property option descriptions, open **Configuration → Property Definitions**, edit the property, and use **Editor source settings**. Stored option values are quantity-unit IDs; preserve those IDs. See [Editor source settings](properties.md#editor-source-settings).
 
-### Adding a dimension
+## Physical dimensions and conversion
 
-1. Click **New Dimension**.
-2. Enter a **Name** (e.g. `Length`).
-3. Optionally add a **Description**.
-4. Save.
+The [Unit Converter](../features/unit-converter.md) reads the available physical dimensions and units, including factors and offsets needed for conversions such as temperature. Only units in the same dimension can be converted.
 
----
-
-## Units
-
-A **unit** belongs to a dimension and represents a specific measurement scale (e.g. mm, cm, m, in, ft all belong to the Length dimension).
-
-### Adding a unit
-
-1. Select a dimension.
-2. Click **New Unit**.
-3. Fill in:
-
-| Field | Description |
-|---|---|
-| Name | Full name (e.g. `Millimetre`) |
-| Abbreviation | Short label (e.g. `mm`) |
-| Conversion factor | Multiplier to convert this unit to the dimension's base unit |
-| Is base unit | Tick for the reference unit of this dimension (e.g. `m` for Length) |
-
-4. Save.
-
-**Conversion example:** If the base unit for Length is `m` (metres), then `mm` has a conversion factor of `0.001` (1 mm = 0.001 m).
-
----
-
-## Unit of Quantity (UoQ)
-
-In addition to physical measurement units, MatStream supports **quantity units** for procurement and inventory contexts:
-
-- Pieces (pcs)
-- Metres (m)
-- Kilograms (kg)
-- Litres (l)
-- Sets, Rolls, Sheets, etc.
-
-UoQ values are used on stock positions, order quantities, and BOM quantity fields. They are configured separately from physical dimensions.
-
----
-
-## Linking units to property definitions
-
-Once dimensions and units are configured, numeric property definitions can be linked to a dimension. This tells MatStream what kind of measurement the value represents.
-
-To link a property to a dimension:
-
-1. Go to **Configuration → Properties**.
-2. Select a numeric property definition.
-3. In the **Dimension** field, pick the relevant dimension.
-4. Save.
-
-When users enter a value for this property, the unit abbreviation is shown as a suffix in the input field (e.g. `25 mm`).
-
----
-
-## Unit Converter
-
-The built-in [Unit Converter](../features/unit-converter.md) tool uses the dimensions and units defined here. All custom units are automatically available in the converter without any extra configuration.
-
----
+The current Configuration screen has no physical Units of Measure editor, **New Dimension** command or **New Unit** command. The property-definition editor also has no **Dimension** field. If the converter lacks a required physical unit, ask your MatStream support contact about the installed reference data. Adding a Unit of Quantity in System Settings does not add a unit to the converter.
 
 ## Related
 
-- [Properties](properties.md) — link properties to dimensions
-- [Unit Converter](../features/unit-converter.md) — in-app conversion tool
-- [Stock management](../features/stock.md) — UoQ fields on stock positions and lines
+- [System settings](system-settings.md) — workspace defaults and quantity-unit administration
+- [Property definitions](properties.md) — numeric formats and option lists
+- [Unit Converter](../features/unit-converter.md) — convert physical measurements

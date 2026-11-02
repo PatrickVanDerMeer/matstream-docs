@@ -18,7 +18,7 @@ Every item in MatStream follows the same fundamental loop:
 3. **Approve** — the entity moves through lifecycle states via controlled 
    transitions, with permission gates at each step
 4. **Release** — the entity is formally released with a revision label, 
-   creating a permanent, immutable milestone
+   marking a milestone according to configured revision and retention rules
 5. **Revise** — when changes are needed, a new revision is created and 
    the loop begins again — with the full history preserved
 
@@ -41,8 +41,7 @@ lifecycle state — typically **Draft**.
 
 User selects category → MatStream assigns number → Entity created in Draft state
 
-No manual numbering. No risk of duplicate identifiers. No configuration 
-needed at creation time — everything is pre-defined by the category.
+Numbering is automatic when the category has a numbering scheme; otherwise users supply the name/identifier. Initial state names and required fields come from workspace configuration.
 
 ---
 
@@ -87,37 +86,17 @@ transition history is always visible on the entity detail page.
 
 ## Step 4 — Release
 
-When an entity is approved and released, MatStream:
+A configured lifecycle transition moves the item into its release state. Revision labels advance only through the configured revision action or automation. State and record permissions determine who can still modify the released item; the caption Released does not itself make it read-only.
 
-1. Moves the entity to the **Released** lifecycle state
-2. Assigns a formal **revision label** from the configured revision 
-   scheme (e.g. revision **A**)
-3. Makes the entity **read-only** to most users — a released item 
-   cannot be accidentally edited
-4. Records the release permanently in the **revision history**
-
-The released revision is now the official, authoritative version of 
-the entity. It can be referenced by other entities, linked in BOMs, 
-and used as the basis for downstream processes.
-Approved → Released state → Revision A assigned → Read-only → Permanent record
+Use the released version as the agreed reference, and pin a relationship when it must continue to resolve that exact version. Configure version creation and retention to preserve the records your process needs. See [Revisions](../entities/revisions.md).
 
 ---
 
 ## Step 5 — Revise
 
-When a released entity needs to change, you do not edit it in place — 
-you create a **new revision**. This preserves the integrity of the 
-released record while allowing work to begin on the next version.
+Follow the configured lifecycle path back to an editable state, make the changes and repeat the review process. The destination need not be called Draft. Category version policy determines whether a save creates a separate version.
 
-MatStream creates a new Draft copy of the entity — with all the 
-properties, files, and links of the previous revision as a starting 
-point. The revision label advances when this new revision is eventually 
-released (e.g. revision **A** → revision **B**).
-
-The previous revision remains permanently in the record. You can always 
-view exactly what revision A looked like — its properties, files, and 
-the transition history that led to its release.
-New revision created → Back to Draft → Enrich → Approve → Release → Revision B
+A configured automation or the permitted **Change Revision** command advances the revision label. Neither an edit nor a state caption alone guarantees a new revision. Previous versions can be reviewed while retained; guarded history purge is available to authorized users. See [Revisions](../entities/revisions.md).
 
 ---
 

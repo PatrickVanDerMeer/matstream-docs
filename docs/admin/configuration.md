@@ -65,7 +65,7 @@ A numbering scheme is a template that automatically generates unique, human-read
 
 ### System settings
 
-Set the planning time zone and workspace defaults, or rebuild the search index. Read the current limitations before relying on the Run purge action.
+Set the planning time zone, timesheet submission rules, replenishment destination and quantity units, or rebuild the search index. History purge offers a dry run and requires explicit confirmation before deletion.
 
 → [System settings and purge](system-settings.md)
 
