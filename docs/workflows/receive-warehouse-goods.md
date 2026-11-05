@@ -1,52 +1,61 @@
-# Receive goods into the warehouse
+# Receive a complete supplier delivery
 
-**Department: Warehouse receiving.** Record goods delivered by a supplier against their Purchase Order and place them into the correct storage location. This workflow ends with received stock available for the next warehouse operation.
+**Department: Incoming Goods / Warehouse receiving.** Check one complete supplier delivery and receive **all outstanding quantities into one storage location** using the simple whole-order action.
 
-A receipt records a supplier delivery. It increases stock **On Hand** at the receiving location and reduces the outstanding **On Order** quantity. It does not record customer picking, packing or shipment.
+<video controls preload="metadata" poster="../../images/department-workflows/receiving-04-location.jpg" style="width:100%;max-height:75vh" aria-label="Receive a complete supplier delivery walkthrough">
+  <source src="../../media/department-workflows/MatStream-Receiving-Workflow.mp4" type="video/mp4">
+  Your browser does not support embedded video. Use the download link below.
+</video>
 
-!!! tip "Receiving and customer delivery are separate"
-    A PO becoming Received means the supplier's goods have arrived. The customer's Sales Order still needs its own picking, packing and shipment confirmation.
+[Download movie](../media/department-workflows/MatStream-Receiving-Workflow.mp4) · [Download subtitles](../media/department-workflows/MatStream-Receiving-Workflow.srt)
 
 ## Before you start
 
-- Procurement has [arranged the missing stock](arrange-missing-stock.md) and a PO line has outstanding quantity.
-- You have receiving permissions and access to the destination storage location.
-- The article and order units are correct. For stock items, check the Library article's **Stock Unit**; choosing pc on an order line alone does not configure it.
+- Procurement has [created and issued the PO](arrange-missing-stock.md).
+- Every outstanding piece has arrived and is accepted into the same location.
+- You have receiving permission and access to the PO and destination location.
+- Article units are correct; the Library article's **Stock Unit** matches the quantities handled.
 
-## 1. Match the delivery to its Purchase Order
+If only part arrived, or goods need different destinations, do not use **Receive Order**. Use the administrator-supported line-level receiving process. Simple Manage setup does not seed a partial-receipt or scanner workflow.
 
-Open **Purchasing → Open Purchase Orders** and find the supplier PO using the delivery paperwork. Expand the PO to see its **Purchase Order Lines**.
+## 1. Match the complete delivery
 
-Check the article, unit and quantity actually delivered. Record only goods you have checked and are accepting into stock. Resolve damaged, incorrect or unidentified goods through your organisation's process before posting them as accepted stock.
+Open **Purchasing → Open Purchase Orders** and find the **Issued** PO using the supplier paperwork. Check vendor, articles, units and actual quantities. Resolve damaged, incorrect or unidentified goods before posting accepted stock.
 
-## 2. Choose the receiving location
+![Issued supplier PO ready for receipt](../images/department-workflows/receiving-01-issued.jpg)
 
-Select the appropriate Purchase Order Line and choose **Procurement → Receive**. Choose the destination storage location and check the quantity to receive.
+## 2. Print the Receiving List
 
-The standard Sales Orders setup creates **Warehouse → Rack 01 / Rack 02 → Storage Locations**, such as **01-A**. Stock belongs at the storage-location leaf, not the Warehouse or Rack container.
+Select the **PO header**, open **Export**, choose **Purchase Order - Receiving List - A4 Portrait**, and click **PDF**. Physically check **Outstanding**, tick **Done**, and record the delivery-note reference on paper.
 
-!!! tip "Choose the shelf where the goods will be stored"
-    A correct article received into the wrong location gives the next person the wrong stock picture. Check both the physical destination and the location selected in the dialog.
+![Receiving List before receipt: ordered 4, received 0, outstanding 4](../images/department-workflows/receiving-before-page.jpg)
 
-## 3. Record what arrived
+Outstanding follows the remaining on-order ledger balance, including releases and cancellations; it can differ from ordered minus received. Printing never posts stock.
 
-Enter the actual received quantity and click **Receive**. For example, if 5 are outstanding and only 2 arrived, receive **2**. The other 3 remain outstanding.
+## 3. Receive the whole order
 
-Inspect the result, including quantities accepted, remaining quantities, skipped lines and warnings. Do not assume the entered quantity was posted in full without checking the result.
+Select the **PO header → Procurement → Receive Order**. Review the read-only lines, choose **Receive into**, then click **Receive Order**. There are no quantity inputs: every outstanding line quantity is received.
 
-## 4. Verify the receipt
+Choose a storage-location leaf such as **Warehouse → Rack 01 → 01-A**, rather than Warehouse or Rack. A location is suggested only when enabled by the administrator and unambiguous.
 
-- Open the article's **Stock** tab or the destination storage location and check its on-hand quantity.
-- Check the ledger for the **PO Receipt** and the corresponding reduction in on-order commitment.
-- Check the PO's remaining quantities. Fully received orders can move to **Received** once all lines are settled.
-- If these goods support a Sales Order, reopen its **Stock availability**. Existing reservations still count against availability; receiving does not release customer demand.
+![Whole-order receiving dialog with four pieces and shelf 01-A](../images/department-workflows/receiving-04-location.jpg)
+![Four pieces received; the requirement is Delivered and PO fully received](../images/department-workflows/receiving-05-result.jpg)
 
-![Example after receipt showing available pieces and a Stock Unit configuration message](../images/sales-orders/stock-after-receipt.jpg)
+Inspect received lines, skipped lines and warnings before closing. In the example, **4 pc** were received, one MR became **Delivered**, and the PO became **Received**.
 
-The screenshot illustrates a configuration problem as well as stock received. If **Choose a stock unit before reserving stock** appears, have the responsible user correct the article's Stock Unit and recheck the order before continuing.
+!!! note "Review warnings before retrying"
+    Each purchase line commits separately. A later failure does not undo earlier receipts. Refresh and review the result; retry receives only quantities still outstanding. A lifecycle warning can happen after stock was posted. Do not receive goods again merely to repair a state; ask the responsible administrator to resolve it.
+
+## 4. Verify stock and outstanding quantities
+
+Open the Library article's **Stock** tab or destination location. Check shelf, **On Hand** and **On Order**. For ledger inspection, check the **PO Receipt** and corresponding release of on-order commitment.
+
+![Stock tab: 01-A holds four pieces and has zero on order](../images/department-workflows/receiving-07-stock.jpg)
+
+Verify the PO is **Received**. Regenerate its list if needed: **Received 4**, **Outstanding 0**. The settled whole-order dialog cannot post those same quantities again.
 
 ## Result and handoff
 
-The received quantity is recorded at its storage location, and any undelivered PO quantity remains outstanding. Let the dispatch team know which goods arrived and continue with [Open orders, picking, packing and sending](pick-pack-send.md).
+Accepted goods are recorded at the correct shelf, with no outstanding supplier quantity. Give Dispatch the customer reference and goods location, then follow [Pick, pack and send a full order](pick-pack-send.md).
 
-For corrections, use your approved receipt/stock correction process with a clear reason. Posting the same delivery again is not a way to correct a previous receipt. See [Stock management](../features/stock.md) for positions and ledger inspection.
+Receiving increases stock; it does not pick, pack or ship a customer order. See [Stock management](../features/stock.md) for inspection and approved correction processes.

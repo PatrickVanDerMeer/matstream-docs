@@ -42,10 +42,12 @@ nav:
   - Work Flows:
     - Overview: workflows/index.md
     - Inventor assembly and BOM: workflows/inventor-assembly-bom.md
-    - Sales Orders and invoice documents: features/sales-orders.md
-    - Arrange missing stock: workflows/arrange-missing-stock.md
-    - Receive goods into the warehouse: workflows/receive-warehouse-goods.md
-    - Open orders picking packing and sending: workflows/pick-pack-send.md
+    - Sales - Create a Sales Order: workflows/create-sales-order.md
+    - Sales - Invoice documents: features/sales-orders.md
+    - Procurement - Create a PO from MR: workflows/arrange-missing-stock.md
+    - Whole-order pick, pack and receive: workflows/whole-order-pick-pack-receive.md
+    - Incoming Goods - Complete delivery: workflows/receive-warehouse-goods.md
+    - Dispatch - Full-order picking and packing: workflows/pick-pack-send.md
     - Share a PO with a vendor: workflows/vendor-purchase-order.md
     - Supplier portal workflow: workflows/supplier-portal.md
   - Administration:

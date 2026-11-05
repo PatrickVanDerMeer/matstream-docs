@@ -1,0 +1,120 @@
+1
+00:00:00,500 --> 00:00:05,140
+This Procurement workflow starts with
+a material requirement from Sales.
+
+2
+00:00:05,920 --> 00:00:10,740
+We will create the linked supplier order,
+review its details, and issue it for
+
+3
+00:00:10,760 --> 00:00:11,940
+the Incoming Goods team.
+
+4
+00:00:14,500 --> 00:00:17,220
+Step one: Review the Material Requirements.
+
+5
+00:00:18,380 --> 00:00:21,440
+Open Purchasing, then Pending Material Requirements.
+
+6
+00:00:22,640 --> 00:00:27,640
+Select the demand to buy and check the
+required quantity and its originating Sales
+
+7
+00:00:27,660 --> 00:00:28,180
+Order.
+
+8
+00:00:30,833 --> 00:00:33,413
+Step two: Create the Purchase Order.
+
+9
+00:00:33,913 --> 00:00:36,693
+Choose Create Purchase Order from the Procurement tab.
+
+10
+00:00:37,393 --> 00:00:41,813
+Review the selected requirements and whether
+identical articles should be merged.
+
+11
+00:00:44,542 --> 00:00:46,922
+Create the order and inspect the result.
+
+12
+00:00:47,502 --> 00:00:53,262
+This example created one Purchase Order with
+one line covering the selected requirement.
+
+13
+00:00:54,082 --> 00:00:57,762
+Check any skipped rows or warnings before continuing.
+
+14
+00:01:00,375 --> 00:01:03,075
+Step three: Review the supplier order.
+
+15
+00:01:03,675 --> 00:01:09,355
+Open the new Purchase Order and check the
+vendor, ordering company, currency, delivery and
+
+16
+00:01:09,375 --> 00:01:11,895
+invoice addresses, and purchasing instructions.
+
+17
+00:01:14,875 --> 00:01:16,195
+Review the order lines.
+
+18
+00:01:16,855 --> 00:01:20,315
+The supplier price is separate from the customer selling price.
+
+19
+00:01:20,995 --> 00:01:26,795
+Here, four pieces cost fifteen euros
+and forty cents each, for a total of
+
+20
+00:01:26,815 --> 00:01:29,135
+sixty-one euros and sixty cents.
+
+21
+00:01:31,833 --> 00:01:34,313
+Step four: Issue the Purchase Order.
+
+22
+00:01:35,013 --> 00:01:36,333
+Select its header in Explorer.
+
+23
+00:01:37,073 --> 00:01:40,273
+Choose Change State, select Issued, and apply.
+
+24
+00:01:41,273 --> 00:01:45,233
+Vendor portal sharing and sending the
+order are separate purchasing steps.
+
+25
+00:01:48,000 --> 00:01:50,260
+Verify that the transition succeeded.
+
+26
+00:01:51,000 --> 00:01:56,140
+Give Incoming Goods the supplier order
+reference and agreed delivery information.
+
+27
+00:01:56,560 --> 00:01:58,840
+Issuing an order does not receive stock.
+
+28
+00:02:01,458 --> 00:02:04,078
+Pause for details and follow the full guide.

@@ -1,79 +1,73 @@
-# Open orders picking packing and sending
+# Pick, pack and send a full order
 
-**Department: Warehouse dispatch.** Find a confirmed customer order, collect and pack the goods, and record the quantity sent. Sales [creates and confirms the order](../features/sales-orders.md); Procurement [sources shortages](arrange-missing-stock.md); Warehouse receiving [records supplier deliveries](receive-warehouse-goods.md).
+**Department: Warehouse dispatch.** Handle every line of a Confirmed Sales Order together: print lists, collect and pack the goods, then record full shipment. Use the simple **Mark Picked** and **Mark Packed** actions.
+
+<video controls preload="metadata" poster="../../images/department-workflows/dispatch-06-mark-packed.jpg" style="width:100%;max-height:75vh" aria-label="Pick, pack and send a full order walkthrough">
+  <source src="../../media/department-workflows/MatStream-Dispatch-Workflow.mp4" type="video/mp4">
+  Your browser does not support embedded video. Use the download link below.
+</video>
+
+[Download movie](../media/department-workflows/MatStream-Dispatch-Workflow.mp4) · [Download subtitles](../media/department-workflows/MatStream-Dispatch-Workflow.srt)
 
 ## Before you start
 
-Your account needs access to the Sales Order and permission to perform the warehouse actions. Scanner writes require an Editor seat. Stock-item shipment also requires stock-management permission and permission to change the Sales Order's state. If you can pick but cannot confirm shipment, ask the administrator to check the dispatch role's lifecycle permissions.
+- Sales has [created and confirmed the order](create-sales-order.md).
+- [Incoming Goods](receive-warehouse-goods.md) has recorded supplier deliveries; physical goods are available.
+- You can read the order and update fulfilment properties. Stock-item shipment also needs stock-management and lifecycle permissions.
+- All remaining lines will be handled together. For a partial delivery, use the separately configured process agreed with your administrator; do not mark the entire order complete prematurely.
 
-Use configured **stock items** for the stock-controlled dispatch flow. Shipment deducts physical stock and releases the shipped reservation for those items. Other articles can have their progress recorded, but the same physical-stock reconciliation must not be assumed; agree the supported process with the administrator.
+!!! note "Customized labels in the demonstration"
+    This workspace calls **Mark Picked** “Collect entire order”, its complete status “Collection complete”, and its Pick List template “Warehouse collection sheet”. Administrators can customize these names without changing the whole-order operation.
 
-## 1. Find an open Sales Order
+## 1. Review the Confirmed order
 
-Open **Sales → Sales Orders** and use the lifecycle-state column or its filter to find **Confirmed** orders. Open the order and check its delivery address, article quantities and **Stock → Stock availability**.
+Open **Sales → Sales Orders** or **Sales → Open Sales Orders**. Find the **Confirmed** order, check its address and quantities, and review **Lines → Stock → Stock availability**. Verify physical goods and shelf yourself; reserved or picked counters do not prove goods have arrived.
 
-For a partly shipped order, arrange any missing goods and return it to **Confirmed** before continuing fulfilment. A confirmed reservation does not prove that every piece has physically arrived.
+![Confirmed four-piece customer order selected for Dispatch](../images/department-workflows/dispatch-01-order.jpg)
 
-!!! tip "Read the quantities as cumulative totals"
-    Ordered is the customer's total demand. Picked, Packed and Shipped are totals recorded so far. If 5 of 7 have shipped, the next delivery adds the remaining 2; it does not restart the counters at zero.
+## 2. Print the Pick List
 
-## 2. Print a warehouse list if needed
+Select the **Sales Order header → Export → Sales Order - Pick List - A4 Portrait → PDF**, or use its customized template name.
 
-Select the Sales Order in Explorer, open **Export**, choose a template under **Print Templates**, and click **PDF**:
+Collect every article, verify quantities and source locations, and tick **Done** on paper. The list contains full ordered and cumulative picked quantities without prices. Printing does not change progress or stock.
 
-- **Sales Order - Pick List - A4 Portrait** shows ordered and cumulative picked quantities, without prices.
-- **Sales Order - Packing List - A4 Portrait** shows ordered and cumulative packed quantities, without prices.
+![Paper Pick List for four pieces](../images/department-workflows/pick-list-page.jpg)
 
-Both are whole-order checklists. They do not allocate articles to individual parcels or partial deliveries. Printing does not record a pick, pack or shipment. If the templates are absent, ask an administrator to rerun Sales Orders Configuration using the current Manage application.
+## 3. Mark the whole order Picked
 
-## 3. Pick the articles
+After collecting every line, select the header and choose **Actions → Mark Picked**. Confirm its description and inspect the result. The demo label is **Collect entire order**.
 
-1. Open the saved order's **Lines** tab and choose **Scanner → Pick**.
-2. Use the scanner dialog, or scan its QR code on a phone / choose **Open on this device** and sign in with an authorized workspace account.
-3. Scan or enter the article's barcode or part number and click **Find**.
-4. Check the matched article, enter the quantity physically collected, and confirm **Pick**.
-5. Check the **Order lines** summary. Pick in batches if needed; picked quantity cannot exceed ordered quantity.
+![Confirm whole-order picking after collecting all lines](../images/department-workflows/dispatch-03-mark-picked.jpg)
 
-![Sales Order Lines with Scanner commands](../images/sales-orders/scanner.jpg)
+Remaining picked counters are completed. A retry skips lines already complete. If one sales line cannot be updated, the entire sales action rolls back; do not assume earlier lines committed.
 
-![Picking summary showing two pieces picked and none packed](../images/sales-orders/picked.jpg)
+## 4. Print the Packing List
 
-!!! note "Check the physical source location"
-    The scanner records an article quantity. It does not validate a shelf barcode or reserve the physical pick against a specific storage location. Verify the article and shelf yourself; a successful pick counter is not proof that received stock was available.
+Choose **Export → Sales Order - Packing List - A4 Portrait → PDF**. Pack all goods, check the delivery address and physical contents, then tick **Done**.
 
-## 4. Pack the delivery
+![Whole-order Packing List with a Done column](../images/department-workflows/packing-list-page.jpg)
 
-Choose **Scanner → Pack** on the Lines tab. Find the article, enter the additional quantity being packed, and confirm **Pack**. Check the delivery address and the physical contents. Packing cannot exceed the quantity picked.
+This list shows cumulative whole-order quantities. It does not allocate parcels or individual partial deliveries.
 
-![Pack confirmation for two pieces](../images/sales-orders/pack-confirm.jpg)
+## 5. Mark the whole order Packed
 
-!!! tip "Packed does not mean sent"
-    When all pieces are packed, the scanner may say **This order is complete or closed**. That ends scanner work; you must still confirm shipment on the Sales Order.
+Choose **Actions → Mark Packed** and confirm after all goods are packed. Every line must already be fully picked. Review the result and progress summary.
 
-The current packing flow stores cumulative line quantities, not individual parcel contents. Keep any parcel labels and carrier information through your agreed dispatch process.
+![Result showing picking and packing complete](../images/department-workflows/dispatch-07-packed.jpg)
 
-## 5. Send and confirm shipment
+Picking and packing leave lifecycle states and stock unchanged. There are no separate Picked or Packed header states. The order stays **Confirmed** until shipment.
 
-When the goods are being dispatched, close the scanner and order details. Select the Sales Order in Explorer and choose **Change State**:
+## 6. Confirm the full shipment
 
-Choose **Shipped** when every ordered quantity has been packed and is being sent. Keep the order **Confirmed** while quantities remain outstanding.
+When actually dispatching, select the header, choose **Change State**, set **New State → Shipped**, and click **Apply**. Inspect the result. Reopen **Lines**: fully delivered lines become **Complete**. Inspect Shipped and Back Order quantities when following up.
 
-Set **New State**, click **Apply**, and check the result. MatStream records the newly shipped quantity and calculates **Back Order Quantity**. Fully delivered lines become **Complete**; outstanding lines become **Incomplete**.
+![Successful Shipped transition](../images/department-workflows/dispatch-09-shipped.jpg)
+![Delivered customer line marked Complete](../images/department-workflows/dispatch-10-complete-line.jpg)
 
-![Successful Sales Order shipment transition](../images/sales-orders/shipped.jpg)
-
-For configured stock items, shipment deducts received shelf stock and releases the corresponding reservation. Insufficient received stock or reserved demand prevents shipment. The current implementation chooses shelf balances automatically rather than consuming a persisted source-location pick. Check stock records against the shelves actually used.
-
-## 6. Check the result and finish outstanding deliveries
-
-Reopen **Lines** and verify Shipped, Back Order Quantity and line states. Check stock positions and ledger movements for stock items.
-
-![Sales Order line marked Complete after shipment](../images/sales-orders/complete-line.jpg)
-
-For example, if Ordered is 7 and cumulative Packed is 5, keep the order **Confirmed**. When the other 2 arrive, pick and pack **2 more**, then move the order to **Shipped**. Cumulative Shipped becomes 7 and Back Order becomes 0.
-
-If the quantities or physical contents are wrong, stop and resolve the discrepancy. The scanner has no standard unpick/unpack action, and cancellation is not a shipment reversal or customer-return workflow. Coordinate changes to an already shipped order with the responsible administrator and Sales.
+For **Is Stock Item** articles, shipment deducts received shelf stock and releases reserved demand; insufficient stock or reservation prevents shipment. Shelf balances are selected automatically, rather than from a persisted shelf-specific pick. Other articles can record progress and shipment without that same physical-stock reconciliation. Do not infer stock deduction from a Shipped status alone.
 
 ## Result
 
-The dispatched quantity is recorded, stock-item movements have been checked, and any remaining delivery is visible as a backorder. For commercial paperwork, return to the [Sales Order invoice document](../features/sales-orders.md#5-create-the-sales-order-invoice-document); the standard invoice template uses full ordered quantities rather than one partial dispatch.
+The full order is collected, packed and recorded as shipped. Use your agreed carrier process for parcel labels and tracking. Returns, unpick/unpack and shipment corrections are separate processes; cancellation is not shipment reversal.
+
+See [whole-order setup and behavior](whole-order-pick-pack-receive.md) for administrator settings. Invoice preparation remains a [Sales task](../features/sales-orders.md#5-create-the-sales-order-invoice-document).

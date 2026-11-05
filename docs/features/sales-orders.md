@@ -85,3 +85,12 @@ The Sales Order is **Confirmed**, its lines and prices have been reviewed, and t
 | Warehouse dispatch | [Open orders, picking, packing and sending](../workflows/pick-pack-send.md) |
 
 If an unshipped order will not proceed, Sales can change it from **Draft** or **Confirmed** to **Cancelled**. Cancellation releases its reservations; it does not undo a previous shipment or automatically cancel a supplier's PO. Coordinate purchased goods with Procurement.
+
+
+### Reuse the last client addresses
+
+Sales Orders setup adds **Sales Order: Reuse Last Client Addresses** to **Configuration > Automations** and attaches **Run Property Script** to the Sales Order **Client** property, after the company-default copy automation. Selecting a Client fills an empty Delivery Address or Invoice Address from that client's latest existing Sales Order. Each address is handled independently; entered addresses stay unchanged. The saved address selections are copied alongside the text. With no previous address, the existing company defaults remain available. Changes are shown in the editor; Save commits them and Cancel discards them.
+
+The default lookup orders by Sales Order Date descending, then entity ID descending, excludes the current order, and checks read permissions. Administrators can edit the JavaScript, lookup category, matching Client property, sort, and address mappings in the automation's parameters. Setup reruns preserve the existing script, parameters, enabled state, and trigger settings.
+
+The generic Property Change script host exposes the editor values through `matstream.entity.getProperty` and accepts only `setProperty` actions. An optional `Lookup` parameter contains `CategoryId`, `MatchPropertyDefId`, `PropertyDefIds`, and `Sort` (stored `pd_<id>` fields or `EntityID`). It matches the newly selected entity reference and supplies the latest matching row as JSON in `matstream.params.get("LookupRows")`. Lookup properties are redacted according to read permissions; output properties follow write permissions.

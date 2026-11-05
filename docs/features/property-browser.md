@@ -33,6 +33,8 @@ The same editor works on a multi-selection: saving applies the chosen image, or 
 
 Select several rows in the grid and the Property Browser switches to aggregate mode. This is the fastest way to set a material, a vendor or a project code across a whole selection.
 
+In the **Library**, use **Ctrl+click** to add or remove individual rows, or **Shift+click** to select a range. Selected rows are highlighted; there are no selection checkboxes. Click a row without a modifier key to return to a single selection.
+
 ### What you see
 
 The pane shows how many entities and how many categories are in the selection, then the properties they have **in common**:

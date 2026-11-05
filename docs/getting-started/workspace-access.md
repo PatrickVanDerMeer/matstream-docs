@@ -28,6 +28,20 @@ screen with a **Create a workspace** button.
 Click it and follow the steps to set up your workspace. You will 
 become the owner and administrator of that workspace.
 
+### Guided creation in MatStream Manage
+
+When you open MatStream Manage with no workspaces, contextual help appears automatically. You do not need to start a tour manually. The guidance points to the controls for creating your first workspace:
+
+1. Choose **+ New workspace**.
+2. Enter a **Name**. The slug is generated automatically; a description is optional. Click **Next** in the help balloon to see the save guidance.
+3. Choose **Save & Close** to create the workspace.
+
+If you cancel, the guidance returns to **+ New workspace**. It remains available while you have no workspaces, including after a page refresh or a later sign-in.
+
+The **Show Tour** checkbox is hidden while no workspace exists. Once your first workspace is created, the initial guidance ends and the checkbox becomes available. The existing workspace tour then follows your saved **Show Tour** preference. Initial workspace guidance does not change that preference or the existing tour's completion state.
+
+See [Workspace setup](workspace-setup.md) for the configuration available after creation.
+
 !!! note
     If you are expecting to be added to an existing workspace by an 
     administrator, you do not need to create one. Once the administrator 

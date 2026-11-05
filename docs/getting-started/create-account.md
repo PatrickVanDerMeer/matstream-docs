@@ -36,10 +36,18 @@ After registering, MatStream sends a confirmation email from
 Open the email and click **Confirm registration**. Your account is 
 activated immediately and you are redirected to the sign-in screen.
 
-!!! tip
-    If the email does not arrive within a few minutes, check your spam 
-    or junk folder. If it is not there either, go to the sign-in screen, 
-    enter your email address, and click **Resend Confirmation Email**.
+### Resend a confirmation email
+
+If the email does not arrive within a few minutes, check your spam or junk folder. A company mail system may block or quarantine the first message; ask your mail administrator to check if necessary.
+
+You do not need to create another account. Use **Resend confirmation email** for the account that is still waiting for confirmation:
+
+- **In app.matstream.com:** enter your email address on the sign-in screen and click **Next**. If the address is unconfirmed, the resend button appears. It also appears if a password sign-in fails and MatStream finds that the account is still awaiting confirmation.
+- **In MatStream Manage:** the button appears after registration. If you try to register the same unconfirmed account again, or try to sign in with it, MatStream explains that confirmation is pending and offers the resend button.
+
+Click **Resend confirmation email** and check the result shown on screen. If sending fails, you can try again. Sending another email does not confirm the account: open the email and follow its confirmation link before signing in.
+
+Accounts that are already confirmed continue through the normal sign-in flow; they do not need another confirmation email.
 
 ---
 

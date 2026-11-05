@@ -14,29 +14,31 @@ Create an assembly with existing fittings and a new part, fill in its informatio
 
 [Follow the Inventor workflow](inventor-assembly-bom.md)
 
-### Sales Orders and invoice documents
+### Sales — Create a Sales Order
 
-Sales creates a customer order, adds and prices its articles, checks stock demand, confirms the order, and prepares the draft invoice document.
+Create and price the customer order, check availability, then confirm demand.
 
-[Follow the Sales workflow](../features/sales-orders.md)
+[Sales guide and movie](create-sales-order.md)
 
-### Arrange missing stock
+### Procurement — Create a PO from MR
 
-Procurement reviews shortages and replenishment requirements, creates supplier Purchase Orders, and issues the orders before handing the delivery information to Warehouse.
+Select Material Requirements, create their linked supplier orders, review and issue them.
 
-[Follow the Procurement workflow](arrange-missing-stock.md)
+[Procurement guide and movie](arrange-missing-stock.md)
 
-### Receive goods into the warehouse
+### Incoming Goods — Complete supplier delivery
 
-Warehouse receiving matches a supplier delivery to its PO, records the quantity accepted into a storage location, and checks the outstanding quantities and stock ledger.
+Print a Receiving List, check the complete delivery, receive all outstanding quantities into one shelf, and verify stock.
 
-[Follow the Receiving workflow](receive-warehouse-goods.md)
+[Incoming Goods guide and movie](receive-warehouse-goods.md)
 
-### Open orders picking packing and sending
+### Dispatch — Full-order picking, packing and shipment
 
-Warehouse dispatch finds confirmed Sales Orders, records picking and packing, confirms full or partial shipment, and checks the remaining backorder.
+Print Pick and Packing Lists, mark the whole order picked and packed, then confirm full shipment.
 
-[Follow the Dispatch workflow](pick-pack-send.md)
+[Dispatch guide and movie](pick-pack-send.md)
+
+The four departmental movies use one connected example. Receiving and dispatch demonstrate complete deliveries; partial and scanner workflows are not required for this simple setup. For configuration, see [whole-order setup and behavior](whole-order-pick-pack-receive.md). Invoice-document preparation remains a separate [Sales feature](../features/sales-orders.md#5-create-the-sales-order-invoice-document).
 
 ### Supplier portal workflow
 

@@ -1,0 +1,171 @@
+1
+00:00:00,500 --> 00:00:04,920
+This Dispatch workflow handles the
+whole customer order in one delivery.
+
+2
+00:00:05,640 --> 00:00:10,160
+We will print the pick and packing lists,
+complete each operation for the full
+
+3
+00:00:10,180 --> 00:00:11,900
+order, and confirm shipment.
+
+4
+00:00:14,583 --> 00:00:17,123
+Step one: Review the Confirmed order.
+
+5
+00:00:17,683 --> 00:00:23,343
+Find the customer order and check its delivery
+address, quantities, and availability of the
+
+6
+00:00:23,363 --> 00:00:25,063
+physical goods before starting.
+
+7
+00:00:27,583 --> 00:00:29,723
+Step two: Print the Pick List.
+
+8
+00:00:30,383 --> 00:00:36,323
+Select the order, open Export, choose
+its pick template, and generate the PDF.
+
+9
+00:00:36,983 --> 00:00:42,943
+Administrators can customize template names;
+this example uses Warehouse collection sheet.
+
+10
+00:00:45,542 --> 00:00:48,642
+Use the paper list to collect all four pieces.
+
+11
+00:00:49,362 --> 00:00:53,262
+Check the article and physical source shelf, then tick Done.
+
+12
+00:00:53,782 --> 00:00:55,762
+Printing does not mark anything picked.
+
+13
+00:00:58,417 --> 00:01:01,117
+Step three: Mark the whole order Picked.
+
+14
+00:01:01,797 --> 00:01:03,117
+Choose Mark Picked from Actions.
+
+15
+00:01:03,897 --> 00:01:08,257
+In this customized workspace the
+button is called Collect entire order.
+
+16
+00:01:08,877 --> 00:01:11,617
+Confirm only after collecting every line.
+
+17
+00:01:14,167 --> 00:01:15,527
+Check the completion result.
+
+18
+00:01:16,107 --> 00:01:19,407
+The line is fully picked and packing has not started.
+
+19
+00:01:19,887 --> 00:01:22,767
+This records progress; it does not confirm shipment.
+
+20
+00:01:25,542 --> 00:01:27,842
+Step four: Print the Packing List.
+
+21
+00:01:28,702 --> 00:01:31,742
+Return to Export and choose the packing template.
+
+22
+00:01:32,442 --> 00:01:36,222
+Check the delivery address and
+contents against the complete order.
+
+23
+00:01:38,875 --> 00:01:43,775
+Pack all four pieces and tick the paper
+checklist after checking the contents.
+
+24
+00:01:44,535 --> 00:01:49,495
+The list describes the whole order rather
+than individual parcel allocations.
+
+25
+00:01:52,417 --> 00:01:55,157
+Step five: Mark the whole order Packed.
+
+26
+00:01:55,597 --> 00:01:58,837
+Choose Mark Packed and confirm after all goods are packed.
+
+27
+00:01:59,477 --> 00:02:01,857
+Every line must already be fully picked.
+
+28
+00:02:04,500 --> 00:02:07,880
+Verify that picking and packing are complete.
+
+29
+00:02:08,540 --> 00:02:11,800
+The Sales Order remains Confirmed until you record dispatch.
+
+30
+00:02:12,680 --> 00:02:16,260
+Repeating a completed action does not add more quantity.
+
+31
+00:02:18,917 --> 00:02:21,397
+Step six: Confirm the full shipment.
+
+32
+00:02:22,077 --> 00:02:27,077
+When the complete order is actually being
+dispatched, choose Change State, select Shipped,
+
+33
+00:02:27,297 --> 00:02:27,637
+and apply.
+
+34
+00:02:30,375 --> 00:02:31,835
+Check the transition result.
+
+35
+00:02:32,455 --> 00:02:35,595
+This example records a successful full shipment.
+
+36
+00:02:36,495 --> 00:02:41,095
+Physical stock deduction also depends on the
+article being configured as a stock item;
+
+37
+00:02:41,575 --> 00:02:44,635
+picking and packing alone never deduct stock.
+
+38
+00:02:47,292 --> 00:02:52,132
+Reopen the order lines and verify
+that the delivered line is Complete.
+
+39
+00:02:52,772 --> 00:02:55,072
+The full-order Dispatch workflow is finished.
+
+40
+00:02:57,833 --> 00:03:00,453
+Pause for details and follow the full guide.

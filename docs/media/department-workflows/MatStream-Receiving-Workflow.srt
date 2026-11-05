@@ -1,0 +1,121 @@
+1
+00:00:00,500 --> 00:00:05,900
+In this Incoming Goods workflow, we will
+receive one complete supplier delivery.
+
+2
+00:00:06,600 --> 00:00:11,860
+We will print its receiving list, check the
+goods, post all outstanding quantities to
+
+3
+00:00:11,880 --> 00:00:14,160
+one shelf, and verify stock.
+
+4
+00:00:16,833 --> 00:00:19,333
+Step one: Match the complete delivery.
+
+5
+00:00:20,113 --> 00:00:23,373
+Find the issued Purchase Order in Open Purchase Orders.
+
+6
+00:00:24,093 --> 00:00:28,233
+Check the supplier, articles and
+units against the delivery paperwork.
+
+7
+00:00:30,833 --> 00:00:33,433
+Step two: Print the Receiving List.
+
+8
+00:00:34,353 --> 00:00:39,733
+Select the Purchase Order header, open Export,
+choose the Receiving List template, and
+
+9
+00:00:39,753 --> 00:00:40,733
+generate the PDF.
+
+10
+00:00:43,750 --> 00:00:48,090
+The list shows four ordered, none received, and four outstanding.
+
+11
+00:00:48,830 --> 00:00:51,730
+Check the physical goods and tick the paper checklist.
+
+12
+00:00:52,510 --> 00:00:54,650
+Printing alone does not update stock.
+
+13
+00:00:57,333 --> 00:01:00,113
+Step three: Receive the whole order.
+
+14
+00:01:00,813 --> 00:01:05,933
+Once every outstanding piece has arrived and
+passed your checks, select the Purchase Order
+
+15
+00:01:05,953 --> 00:01:08,053
+header and choose Receive Order.
+
+16
+00:01:10,667 --> 00:01:14,987
+Choose the receiving shelf and review all outstanding quantities.
+
+17
+00:01:15,727 --> 00:01:18,767
+This simple dialog has no quantity-entry fields.
+
+18
+00:01:19,467 --> 00:01:24,067
+Confirm Receive Order only for a
+complete delivery into this location.
+
+19
+00:01:26,792 --> 00:01:29,452
+Review the actual result before closing.
+
+20
+00:01:29,972 --> 00:01:35,512
+Four pieces were received, the requirement
+moved to Delivered, and the Purchase Order is
+
+21
+00:01:35,532 --> 00:01:40,392
+fully received. If there are warnings,
+inspect them before retrying.
+
+22
+00:01:43,000 --> 00:01:46,920
+Step four: Verify stock and outstanding quantities.
+
+23
+00:01:47,660 --> 00:01:48,840
+Open the article Stock tab.
+
+24
+00:01:49,320 --> 00:01:54,040
+The shelf now holds four pieces and
+has no remaining quantity on order.
+
+25
+00:01:56,667 --> 00:02:01,407
+The regenerated Receiving List confirms
+four received and zero outstanding.
+
+26
+00:02:02,127 --> 00:02:03,807
+Incoming Goods is complete.
+
+27
+00:02:04,607 --> 00:02:08,247
+Hand the accepted goods to Dispatch for picking and packing.
+
+28
+00:02:10,917 --> 00:02:13,537
+Pause for details and follow the full guide.

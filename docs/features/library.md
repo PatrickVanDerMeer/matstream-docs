@@ -66,6 +66,18 @@ To add, replace, or remove a picture, open the item or use its [Property Browser
 
 ---
 
+## Selecting rows
+
+The Library uses highlighted rows for selection, without selection checkboxes.
+
+- **Click** a row to select it on its own.
+- **Ctrl+click** rows to add them to or remove them from the selection.
+- **Shift+click** another row to select a range.
+
+To change a property for several entities, select the rows, then open the property in the **Property Browser** using its pencil button or by double-clicking its value. Saving applies the value to the editable selected entities. Check the result for any skipped rows. See [Editing many entities at once](property-browser.md#editing-many-entities-at-once).
+
+---
+
 ## Actions
 
 Right-click a row or select it and use the ribbon to:

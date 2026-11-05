@@ -1,0 +1,99 @@
+1
+00:00:00,500 --> 00:00:05,940
+In this Sales workflow, we will create a
+customer order, add its articles, review
+
+2
+00:00:05,960 --> 00:00:09,000
+availability, and confirm the order for the next department.
+
+3
+00:00:11,708 --> 00:00:14,028
+Step one: Create a Sales Order.
+
+4
+00:00:14,588 --> 00:00:18,108
+In Explorer, open Sales, then Sales Orders.
+
+5
+00:00:18,848 --> 00:00:20,828
+Choose New and select Sales Order.
+
+6
+00:00:23,417 --> 00:00:25,417
+Accept the generated order number.
+
+7
+00:00:25,977 --> 00:00:27,837
+The new customer order starts in Draft.
+
+8
+00:00:30,583 --> 00:00:34,523
+Select the customer and the delivery and invoice addresses.
+
+9
+00:00:35,303 --> 00:00:40,243
+Enter the customer reference, then review
+the order date, currency and price list.
+
+10
+00:00:42,917 --> 00:00:45,337
+Step two: Add the order lines.
+
+11
+00:00:46,077 --> 00:00:47,297
+Add an article from the Library.
+
+12
+00:00:47,957 --> 00:00:53,617
+This example orders four pieces at twenty-two
+euros each, for a total of eighty-eight
+
+13
+00:00:53,637 --> 00:00:55,957
+euros. Save and close the order.
+
+14
+00:00:58,542 --> 00:01:01,122
+Step three: Review stock availability.
+
+15
+00:01:01,822 --> 00:01:04,522
+Open Stock availability from the Lines tab.
+
+16
+00:01:05,042 --> 00:01:08,002
+Four pieces are required and none are available.
+
+17
+00:01:08,822 --> 00:01:10,882
+Review the shortage before confirming.
+
+18
+00:01:13,458 --> 00:01:15,538
+Step four: Confirm the order.
+
+19
+00:01:16,298 --> 00:01:18,458
+Select the saved Sales Order in Explorer.
+
+20
+00:01:19,498 --> 00:01:23,378
+Choose Change State, set the new state to Confirmed, then apply.
+
+21
+00:01:26,125 --> 00:01:27,865
+Check that the transition succeeded.
+
+22
+00:01:28,745 --> 00:01:34,785
+In this example, confirmation creates a material
+requirement for the uncovered four pieces.
+
+23
+00:01:35,545 --> 00:01:37,945
+Hand that demand to Procurement.
+
+24
+00:01:40,500 --> 00:01:43,120
+Pause for details and follow the full guide.

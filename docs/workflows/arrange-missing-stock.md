@@ -1,58 +1,54 @@
-# Arrange missing stock
+# Create a Purchase Order from Material Requirements
 
-**Department: Procurement.** Turn demand from confirmed Sales Orders into supplier Purchase Orders. This workflow ends when the order has been placed and Warehouse has the information needed to receive it.
+**Department: Procurement.** Turn confirmed demand into a linked supplier PO, review it, and issue it for Incoming Goods. Creating or issuing a PO does not receive stock.
 
-A **Sales Order** records what the customer wants. A **Material Requirement (MR)** records what needs sourcing. A **Purchase Order (PO)** records what is ordered from a supplier. These are linked entities with their own properties and lifecycle states; placing a PO does not receive goods or ship the customer order.
+<video controls preload="metadata" poster="../../images/department-workflows/procurement-03-review.jpg" style="width:100%;max-height:75vh" aria-label="Create a PO from Material Requirements walkthrough">
+  <source src="../../media/department-workflows/MatStream-Procurement-Workflow.mp4" type="video/mp4">
+  Your browser does not support embedded video. Use the download link below.
+</video>
+
+[Download movie](../media/department-workflows/MatStream-Procurement-Workflow.mp4) · [Download subtitles](../media/department-workflows/MatStream-Procurement-Workflow.srt)
 
 ## Before you start
 
-- Sales has [confirmed the Sales Order](../features/sales-orders.md).
-- Your account has purchasing permissions and access to the relevant requirements and suppliers.
-- Articles have the correct units and supplier sources. Check supplier price, currency and ordering text before placing an order.
+Sales has [confirmed the customer order](create-sales-order.md), or stock replenishment has raised an MR. You need purchasing permissions and access to the requirements, articles and suppliers. Review source, supplier price, currency, unit and ordering text.
 
-## 1. Identify how the shortage is sourced
+For stock items, **Stock Unit**, **Is Stock Item**, **Minimum Stock Qty** and **Maximum Stock Qty** govern replenishment. Both limits are needed: minimum is nonnegative and maximum exceeds minimum. The background job considers **On Hand − Reserved + On Order** and can buy more than one customer order's shortage to restore the maximum. See [automatic stock replenishment](../features/stock.md#automatic-stock-replenishment) if a requirement is missing.
 
-Open the Sales Order's **Lines** tab and choose **Stock → Stock availability**. Review Required, Available, Reserved for this line and Shortage.
+## 1. Review the Material Requirements
 
-| Article setting | How demand is handled |
-|---|---|
-| **Is Stock Item** enabled | Confirmation reserves the full remaining customer demand. Stock replenishment raises purchasing requirements according to stock levels and min/max settings. |
-| Other articles | Confirmation reserves available stock and creates MRs for the uncovered quantities beneath the relevant order lines. |
+Open **Purchasing → Pending Material Requirements (MR)**. Select the requirements to buy and check their quantities, state, source and originating Sales Order or replenishment demand. The example MR requests **4 pc** for **SO-2026.0002**.
 
-!!! tip "A negative available quantity records unmet demand"
-    For a stock item with 10 on hand and customer demand of 12, confirmation can reserve 12 and show Available **−2**. That is a shortage to source, not permission to dispatch goods that have not arrived.
+![Selected four-piece MR and Procurement commands](../images/department-workflows/procurement-02-command.jpg)
 
-## 2. Check replenishment settings for stock items
+## 2. Create the Purchase Order
 
-On the Library article's **Stock** tab, check **Stock Unit**, **Is Stock Item**, **Minimum Stock Qty** and **Maximum Stock Qty**. Both limits must be entered: minimum must be nonnegative and maximum must exceed minimum.
+Choose **Procurement → Create Purchase Order**. Review the selection and **Merge identical items into one order line** option. When enabled, quantities are summed and the earliest date is retained; each requirement remains tracked separately.
 
-Replenishment runs in the background. Projected stock is **On Hand − Reserved + On Order**. If projected stock is below minimum, the requirement brings it back to maximum. Purchasing quantity can therefore exceed the shortage on one Sales Order.
+Click **Create purchase order**, then inspect created orders, skipped rows and warnings. MatStream creates one PO per **supplier and currency**. Resolve missing source information for skipped requirements rather than assuming everything was ordered.
 
-For example, On Hand 10, Reserved 12 and On Order 0 give projected stock −2. With Minimum 0 and Maximum 5, replenishment requests **7**, covering the shortage and restoring the target stock.
+![Create Purchase Order selection and merge option](../images/department-workflows/procurement-03-review.jpg)
+![Created PO-2026.0002 covering one requirement](../images/department-workflows/procurement-04-created.jpg)
 
-The current Sales Orders setup provides **Warehouse → Stock Replenishment**. If a requirement does not appear, ask the administrator to check the background job, min/max settings, folder configuration and permissions. Saving article settings does not run replenishment immediately. See [Stock management](../features/stock.md#automatic-stock-replenishment).
+## 3. Review the supplier order
 
-## 3. Create the Purchase Order
+Open the new order under **Purchasing → Open Purchase Orders**. Check vendor, ordering company, supplier contact/email, delivery and invoice addresses, currency and commercial terms. On **Lines**, review quantity, unit, supplier price and ordering text.
 
-1. Open **Purchasing → Pending Material Requirements (MR)**.
-2. Select the requirements to buy. Check their open quantities and source information.
-3. Choose **Procurement → Create Purchase Order**.
-4. Review suppliers, quantities, units and any grouping of identical articles.
-5. Create the orders and inspect the result, including skipped requirements and warnings.
+The example buys **4 pc × EUR 15.40 = EUR 61.60**. Supplier cost is separate from the customer's selling price.
 
-MatStream creates one PO per vendor. Resolve missing supplier/source information for skipped requirements rather than creating an unrelated line manually. See [Procurement](../features/procurement.md) for requirement quantities and supplier selection.
+![Supplier order header and addresses](../images/department-workflows/procurement-05-header.jpg)
+![Four supplier pieces at EUR 15.40 each](../images/department-workflows/procurement-06-lines.jpg)
 
-!!! tip "A requirement is not a supplier order"
-    An MR makes demand visible. The buyer still needs to create, review and issue the PO. Do not assume the replenishment job has contacted the supplier.
+## 4. Issue the Purchase Order
 
-## 4. Review and issue the supplier order
+Close details, select the **PO header**, and choose **Change State → Issued → Apply**. Check the transition result.
 
-Open **Purchasing → Open Purchase Orders**. Check the Vendor, Supplier Contact where applicable, Supplier Email, supplier address, quantities, prices and ordering text.
+![Purchase Order issue transition](../images/department-workflows/procurement-07-issue.jpg)
 
-When using the bundled vendor-portal Word template, [prepare the vendor share](vendor-purchase-order.md) **before** moving the PO to **Issued**. The standard issue automation attaches the PO PDF with its portal QR code and URL. Inspect the PDF and send the issued order through your normal purchasing process.
+Issuing and sending are separate actions. When using the vendor-portal Word template, follow [Share a PO with a vendor](vendor-purchase-order.md) to prepare the share before generating that document. Review the issued PDF and send it through your purchasing process. The demonstration does not create a vendor share or send an invitation.
 
 ## Result and handoff
 
-The supplier PO is placed and the outstanding quantities are visible. Give Warehouse the PO reference and any agreed delivery information. Warehouse continues with [Receive goods into the warehouse](receive-warehouse-goods.md).
+The supplier PO is **Issued** and its outstanding quantities are visible. Give Incoming Goods the PO reference and delivery information, then follow [Receive a complete supplier delivery](receive-warehouse-goods.md).
 
-If the customer cancels, coordinate with Sales before changing supplier orders. Cancelling a customer order does not automatically cancel purchasing commitments.
+A customer cancellation does not automatically cancel the supplier order. Coordinate commitment changes with Sales.
