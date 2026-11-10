@@ -28,7 +28,7 @@ Templates are scoped to the workspace. Reading templates requires entity-read pe
 
 ## Variables and text preservation
 
-The editor offers **Name**, **State**, **Revision** and **Version** tokens (`{{Name}}`, `{{State}}`, `{{Revision}}`, `{{Version}}`) through **Select variable… → Insert variable**. Insertion appends the selected token to the text. Saved templates preserve whitespace, line breaks and tokens exactly.
+The editor offers **Name**, **State**, **Revision** and **Version**, plus the entity's available system and custom properties, through **Select variable… → Insert variable**. For example, Description and Material insert `{{Description}}` and `{{Material}}`. Available choices follow the entity/category and readable property metadata. Insertion appends the selected token to the text. Saved templates preserve whitespace, line breaks and tokens exactly.
 
 The long-text template picker supplies starting text; selecting or saving a template does not itself establish runtime token expansion. Do not assume `{PD_Description}` placeholders, auto-description assignment, notification rendering or export filename generation are provided by this workflow. Use each consuming feature's documented syntax and behavior.
 

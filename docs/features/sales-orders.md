@@ -24,9 +24,12 @@ In **manage.matstream.com**, create or select your workspace and open **Setup Wi
 
 The setup provides the order categories, lifecycle, pricing, stock locations, and purchasing configuration. Sample data includes articles, suppliers, and a sample EUR price list.
 
+Choose the customer from the **Client** category. Supplier records are separate, even for a
+business that has both roles. See [Suppliers, clients and addresses](suppliers-clients.md).
+
 ![Wizard review with only Sales Orders configuration and sample data selected](../images/sales-orders/setup-review.jpg)
 
-Your user needs the appropriate permissions for sales, warehouse, or purchasing work. Articles should have the correct stock unit, stock settings, and prices before you use them on an order. The sample article used here needs its **Stock Unit** set to **Piece (pc)** before stock reservation can work. Selecting pc on the order line alone does not configure the article's stock unit.
+Your user needs the appropriate permissions for sales, warehouse, or purchasing work. Articles should have the correct stock unit, stock settings, and prices before you use them on an order. An article without a Stock Unit uses the workspace default, initially **Piece (pc)**; save the article to commit that choice. Selecting pc on an order line alone does not configure the article's stock unit. Administrators can change **Default Stock Unit** in System Settings.
 
 ## 1. Create a Sales Order
 

@@ -31,7 +31,7 @@ The Project category (seeded by the Setup Wizard) carries:
 | **Title** | The project's name |
 | **Description** | Free-text summary |
 | **Project Number** | Your own reference for it |
-| **Client** | A link to a Company entity |
+| **Client** | A link to a Client record |
 | **Customer Contact** | The person you deal with there |
 | **Client PO Number / SO Number** | Purchase and sales order references |
 | **Project Manager** | Who is running it, picked from workspace members |
@@ -88,7 +88,7 @@ See [Opportunities & quotations](../features/opportunities-quotations.md#activit
 ## Where a project comes from
 
 A project can be created directly, or it can arrive from the commercial
-side: a **Company** you are selling to, an **Opportunity** you are
+side: a **Client** you are selling to, an **Opportunity** you are
 pursuing, a **Quotation** you offered, and — once the customer accepts
 it — a project carrying the client, the contact, the currency and the
 contracted revenue across.
@@ -185,7 +185,7 @@ for the full wizard walkthrough.
    Project Configuration (leave Engineering Project Sample Data checked
    if you want a worked example).
 2. **Create your first project** — give it a Title, a Project Number, a
-   Client and a Project Manager. The Company library that Client points
+   Client and a Project Manager. The Client library that Client points
    at is set up for you as part of the same option.
 3. **Add milestones and tasks** — use the Milestones and Tasks tabs on
    the project to track what needs to happen and by when.

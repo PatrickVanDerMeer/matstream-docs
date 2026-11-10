@@ -13,7 +13,10 @@ The root is always copied. Rows below a reused or excluded parent are disabled b
 
 ## Names and properties
 
-When a category has a numbering scheme, the dialog previews the next number and the server allocates the real number only when **Copy** is pressed. You can type a name instead by editing the preview. Unique properties are cleared automatically; expand **Properties to clear** to clear additional values on every copied item.
+When a category has a numbering scheme, the dialog previews the next number and the server allocates the real number only when **Copy** is pressed. You can type a name instead by editing the preview. Unique properties are cleared automatically. Other copied values remain available for review and manual editing afterward; the dialog has no **Properties to clear** checklist.
+
+After a successful copy in Library or Explorer, the created entities are indexed for search.
+Search for the new name to find the copy without rebuilding the workspace index manually.
 
 ## Documents
 

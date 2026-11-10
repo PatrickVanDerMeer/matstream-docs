@@ -19,7 +19,7 @@ The tab list shows all display tabs currently assigned to this category. Drag ro
 | Type | What it shows |
 |---|---|
 | **General** | Editable property fields for the entity version |
-| **Uses** | BOM children — entities this entity links to |
+| **Uses** | Configurable lists of structural/BOM children, associations or requirements outside the BOM |
 | **Where-Used** | BOM parents — entities that link to this entity |
 | **History** | All past revisions of the entity with dates and authors |
 | **Ledger** | Stock movement history (on-hand delta, reserved delta, on-order delta per movement) |
@@ -67,6 +67,7 @@ A Uses definition separates row/source selection, display settings and ribbon co
 
 | Setting | Description |
 |---|---|
+| Relationship | **Structural children / BOM**, **Associations to existing items**, or **Requirements outside the BOM**. The relationship determines whether rows contribute to the structural BOM. |
 | Allow Add from Library | Show the **Add from Library** button. Turn this **off** for tabs whose rows must be created by a process rather than by hand. |
 | Allow Remove | Allow rows to be unlinked |
 | Bump version when link is added | Create a new entity version whenever a row is added |
@@ -86,6 +87,18 @@ The **Filter** tab's category tree separates categories by family:
 For an assembly BOM, select the desired definition categories such as Part and Assembly, and the occurrence category used by its rows, such as BOM Position. Selecting only a definition category does not configure the occurrence rows. Check cascaded child selections before saving. The optional Property Filter further narrows the results.
 
 The Milestones tab is a Uses definition with Milestone occurrence rows and a New action for that template. Its seeded configuration does not require a Library item for each checkpoint.
+
+### Spare Parts tabs
+
+For spare parts, use **Uses** with **Requirements outside the BOM** and an occurrence category carrying the requirement properties. Engineering setup supplies **Spare Part Requirements**, displayed as **Spare Parts**, with **Spare Part Requirement** as its default occurrence category.
+
+Configure the allowed Library definition categories separately from the displayed occurrence categories. Engineers use **Add from Library** to create requirement rows. Structural **New** and file creation are not offered for this relationship. The **Show rows from the linked definition (read-only)** setting is disabled: project recommendations become independently owned requirement rows linked to their source recommendations.
+
+On the requirement category's **Properties** assignments, choose **Source requirement** as the inheritance source for properties that should support project overrides. Assign **Requirement Quantity** to the numeric property used for demand totals. The spare's Library part reference remains separate from the source recommendation relationship.
+
+Administrators can change service-period options, labels and descriptions in the property-definition editor; configure tab labels, columns and actions here; and set category-tab permissions on the assignments. Existing settings are preserved when Engineering setup is rerun. See [Spare parts](../features/spare-parts.md), including the current shared-inherited-line limitation.
+
+For an existing installation, deploy the spare-parts API and web updates, apply `20261110_requirement_relationships.sql` through the normal database migration process, then rerun Engineering setup to seed the configuration. Creating a display tab alone does not install the required database support.
 
 ### Uses ribbons
 

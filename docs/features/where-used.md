@@ -8,14 +8,15 @@ Where Used is the question that matters before a change: *if I revise this part,
 
 ## Uses — looking down
 
-The **Uses** tab shows what an entity contains. It comes in two forms, and an administrator chooses which one a category gets:
+The **Uses** tab renders a flat list. An administrator configures which relationship the list represents:
 
-| Tab type | Shows |
+| Relationship | Shows |
 |---|---|
-| **Uses (flat list)** | Direct children only, as a single-level grid |
-| **Uses (tree)** | The full multi-level structure, expandable |
+| **Structural children / BOM** | Direct structural children and their build quantities |
+| **Associations to existing items** | Non-structural references to existing items |
+| **Requirements outside the BOM** | Editable requirement occurrences, such as spare parts, with their own properties and project overrides |
 
-Each row carries the quantity and unit of quantity of the relationship, not just the child's identity — so an assembly that uses four of a bolt reads as four.
+For a structural BOM, each row carries the quantity and unit of quantity of the relationship, not just the child's identity — so an assembly that uses four of a bolt reads as four. Spare-part quantities are occurrence properties and do not contribute to build quantities or BOM cost rollups. See [Spare parts](spare-parts.md) for service periods, project overrides and project lists.
 
 Relationships can be created, edited and removed from the tab, subject to the lifecycle state of the parent: an entity in a state that forbids modification cannot have its structure changed.
 
@@ -57,6 +58,8 @@ Where a row came from is part of the answer:
 | **Inherited BOM child** | Materialised automatically beneath an occurrence from its library assembly's BOM |
 | **Definition link** | The bond between a project occurrence and the library definition it represents |
 | **Requirement source** | A material requirement line back to the occurrence that caused it |
+| **Requirement owner** | Non-structural ownership of a spare-part requirement by an item or project occurrence |
+| **Source requirement** | A project spare requirement back to its definition recommendation, separately from its referenced Library part |
 | **Fulfilment link** | A purchase-order line to the requirement it fulfils |
 | **Filter item** | A saved filter placed in the tree — deliberately excluded from BOM counts and Uses tabs |
 | **Snapshot member** | A frozen filter membership row |

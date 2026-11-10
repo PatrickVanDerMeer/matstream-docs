@@ -26,7 +26,7 @@ A small set of base categories is created:
 | **Document** | Definition | For file-based library entities. |
 | **Item** | Definition | Generic item definition. |
 | **Person** | Definition | For person records. |
-| **Company** | Definition | For company / supplier / customer records. |
+| **Company** | Definition | Base party category; retained for your own company and unclassified parties after wizard setup. |
 
 All of these except **Root** and **Folder** are assigned the default lifecycle (see below).
 
@@ -144,8 +144,10 @@ builds a complete engineering and procurement workspace.
 - **Contacts**, **Documents**, **Tasks** and **Milestones** tabs, so 
   a Project immediately has somewhere to track people, files, work and 
   dated checkpoints.
-- A **Company** library with Is Client / Is Supplier / Is a Lead flags — the 
-  same record serves as customer and supplier.
+- Separate **Supplier** and **Client** Library categories with contacts, addresses,
+  documents and commercial details. A business with both roles uses two records.
+  **Company** remains for your own company and unclassified parties. See
+  [Suppliers, clients and addresses](../features/suppliers-clients.md).
 
 **The engineering model**
 
@@ -252,11 +254,20 @@ tells you how many of each were created versus skipped. Role grants are delibera
 when a template role already exists, the wizard adds any missing template grants without removing
 extra grants an administrator assigned manually.
 
-The flip side is that matching by name means the wizard will **not update most configuration**
-that already exists. If a category, property or lifecycle is already present, its settings are
-left exactly as they are — even if the template would now create it differently. Grants are the
-intentional exception described above. To pick up other changed template settings you either
-adjust the item by hand or start from a new workspace.
+The wizard adds missing configuration and applies targeted upgrades to recognizable former
+defaults while preserving administrator choices. Standard business roles allow supported
+categories to be found after their display names change. Review the completion warnings:
+custom picker filters may need updating manually, and a former Company with both client and
+supplier roles needs a deliberate split of its existing references.
+
+The final **Separate suppliers and clients** step creates the two party categories and moves
+single-role Company records without changing their IDs or links. It preserves own-company and
+unclassified records. See [Upgrading existing parties](../features/suppliers-clients.md#upgrade-an-existing-workspace).
+
+Sample records carry the Boolean custom property **Sample Data = Yes**, so users can filter
+them in the Library and review them for deletion later. No badge or name prefix is added.
+Existing customized records are not indiscriminately marked as samples. See
+[Finding sample data](../features/library.md#finding-sample-data).
 
 If the wizard reports *"did not fully apply"*, fix the reported problem and 
 click **Run again** — it resumes from where it stopped.

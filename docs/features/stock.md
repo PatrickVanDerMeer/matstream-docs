@@ -10,6 +10,17 @@ MatStream's stock management layer tracks on-hand inventory quantities for items
 
 In MatStream, both inventory **items** (parts, materials, products) and **locations** (warehouses, shelves, bins) are regular entities in the workspace. Any entity in the correct category can be an item or a location. Your administrator defines which categories serve as item types and which serve as location types.
 
+### Stock unit
+
+An item's **Stock Unit** applies to all its stock quantities and is saved on the item as a
+reference to a Unit of Quantity. An item without one uses the workspace **Default Stock Unit**,
+initially **Piece (pc)**. Save the item to commit the default; an existing assigned unit is
+preserved. Once stock or commitments exist, the assigned unit cannot be changed.
+
+An administrator can change the fallback, or select **No default**, in
+**Configuration → System Settings → Default Stock Unit**. Unit names and availability are
+managed in the **Units of Quantity** panel on that page.
+
 ### Stock position
 
 A **stock position** is the current quantity of a specific item at a specific location. It tracks four quantities:

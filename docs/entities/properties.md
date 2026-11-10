@@ -57,6 +57,8 @@ If your category has a Thumbnail property, its editor shows a picture preview an
 3. Check the preview. Click the picture to open a larger preview; click **Remove** to clear it.
 4. Click **Save and Close** to store changes made in the item dialog. **Cancel** discards those pending thumbnail changes.
 
+You can also right-click the thumbnail and choose **Edit**, **Delete**, or **Paste Image from Clipboard**. Edit opens image selection; Delete clears the pending image; Paste reads an image from the clipboard directly into the preview. Save the item to commit the change. Clipboard access may depend on browser support and permission.
+
 From the [Property Browser](../features/property-browser.md), open the property's edit dialog instead. Its **Save** button writes the thumbnail immediately; **Cancel** leaves the saved image unchanged. A multi-selection can set or remove the same thumbnail on several items, subject to their permissions and lifecycle locks.
 
 Supported formats are **PNG, JPEG, WebP, BMP, and GIF**, with a **25 MB** upload limit. MatStream centre-crops the image to a square and stores a **512 × 512 WebP** thumbnail. Animated GIFs use the first frame. This is a visual identifier, not storage for the full original image.

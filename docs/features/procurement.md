@@ -4,6 +4,22 @@ Procurement in MatStream runs on the same entities as engineering. A material re
 
 This page covers the buyer's workflow. For the stock quantities behind it, see [Stock management](stock.md).
 
+The standard Vendor picker and item Suppliers tab use the **Supplier** Library category.
+Use a separate **Client** record when the same business is also a customer. See
+[Suppliers, clients and addresses](suppliers-clients.md) for setup and migration of older Company records.
+
+### Supplier price dates
+
+**Price Updated On** is editable on an item's Suppliers tab. The seeded
+**Supplier: Set Price Updated On** script dates a changed Unit Price on save, unless
+Price Updated On was also submitted in that save. A manually entered date, including a cleared
+date, takes precedence regardless of the order in which you edit the fields.
+
+Administrators can edit or disable this script in **Configuration → Automations** and review
+its assignment on **Supply Source → Properties → Unit Price → Automations**. Setup reruns
+preserve an existing script. The date behavior is configured through this automation rather
+than a hidden database price-update trigger.
+
 ---
 
 ## The chain
@@ -29,6 +45,71 @@ A **Material Requirement** records that something is needed: this quantity, by t
 Requirements are normally raised automatically. Attach the **Create Material Requirement** automation to a lifecycle transition — typically the one that moves an item to *Ready for Procurement* — and releasing an item raises a requirement against its owning project, linked back to the item that caused it.
 
 The owning project is found by walking up the folder tree from the item, so one automation configuration serves every project in the workspace.
+
+### Release project BOM items for purchasing or production
+
+Engineering Project configuration installs **BOM: Route Released Item** in **Configuration → Automations**.
+Finalize the linked Library definition, move the project **BOM position** to **Engineering Ready**,
+then choose **Change State → Release for Fulfilment**. Release individual BOM positions that need
+fulfilment; releasing an assembly does not automatically release all its children.
+
+The default automation uses the first row in the Library item's **Suppliers** tab, in supplier priority order:
+
+| Selected supplier | Default output |
+| --- | --- |
+| Company with **Is Own Company** checked | A **Production Order** in the owning project |
+| Third-party supplier | An **MR** for the uncovered requirement, linked to the project and BOM position |
+
+New source pickers include **Company** and **Supplier** so the own legal entity can be selected.
+An existing customized or supplier-only picker is preserved; an administrator can include **Company**
+in the Suppliers display tab's Library category filter when internal sources are needed.
+
+A missing or unlinked supplier produces an automation error instead of guessing a route. Inspect the
+transition result and automation run history before continuing. Existing **Release to Procurement**
+remains an explicit purchasing handoff. **Release to Production** uses the separately editable
+**BOM: Create Production Order** automation.
+
+Production orders start in **Draft**. Their quantity and unit come from the source BOM position;
+**Production Item** and **Source BOM Position** provide navigation back to the item and project demand.
+The generated output retains the triggering source version, and the source item's definition is pinned
+to the released revision. Repeated releases reuse the existing production order for that source and
+output category. Review the existing output before changing a position from purchasing to production
+or the reverse. Changes to BOM quantities do not silently revise an existing production order.
+
+The default production lifecycle is **Draft → Released → In Progress → Completed**, with cancellation
+paths. Completing an order records workflow progress; material consumption, finished-goods stock posting
+and machine scheduling require your own configured process.
+
+#### Configure your company's process
+
+Open **Configuration → Automations → BOM: Route Released Item**. Both its JavaScript and its
+**Parameters (JSON)** are editable in the application:
+
+| Parameter | Purpose |
+| --- | --- |
+| `RouteMode` | `Supplier` selects by the first supplier; `Production` or `Purchase` makes the route explicit. |
+| `OwnCompanyRoute`, `ThirdPartyRoute` | Choose `Production` or `Purchase` for each supplier class. |
+| `OwnCompanyPropertyId` | Supplier boolean property that identifies an own-company source; property labels may be renamed. |
+| `SupplySourceCategoryId` | The Supply Source category read by the script runtime. |
+| `MRCategoryId`, `ProductionCategoryId` | Target categories for the two outputs. |
+| `ProductionFolderId` | A fixed Explorer folder; empty uses the owning project. |
+| `ProductionNamePrefix` | Prefix for generated order names. |
+| `ItemPropertyId`, `SourcePropertyId` | Output reference properties, configured on the production-order category. |
+
+The first-supplier rule is part of the editable script. Change it or replace the automation to suit
+another process. An own-company source can also follow the purchasing route when that is the
+configured policy, for example for intercompany procurement.
+
+Use **Configuration → Lifecycles → Engineering Lifecycle → Transitions → Automations** to change where
+the automation runs or override its parameters on a specific transition. Configure production-order
+categories, fields, lifecycle states and permissions through their regular configuration screens.
+The Automation editor's API Reference describes `getSupplySources()`, `getSource()`,
+`createMaterialRequirement()` and `createLinkedEntity()`; creation actions must be the only write
+in a script run. The editor's **Run** button uses sample data and previews actions.
+
+Setup installs this workflow once. Later setup runs preserve scripts, parameters, names, enabled flags,
+removed assignments, lifecycle changes and category customizations. Installation metadata does not
+control runtime routing; the configured automation does.
 
 !!! warning "Do not create requirement lines by hand"
     Requirement and order-line categories are hidden from the New dialog deliberately. A line created by hand has no matching links or ledger entries, so its quantities read zero and the stock picture is wrong.

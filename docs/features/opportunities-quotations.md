@@ -1,6 +1,6 @@
 # Opportunities & quotations
 
-The commercial side of a job, before it becomes a project: a **Company** you are selling to, an **Opportunity** you are trying to win, one or more **Quotations** you offer, and — once one is accepted — the **Project** that carries the work.
+The commercial side of a job, before it becomes a project: a **Client** you are selling to, an **Opportunity** you are trying to win, one or more **Quotations** you offer, and — once one is accepted — the **Project** that carries the work. Client and Supplier records use separate categories; see [Suppliers, clients and addresses](suppliers-clients.md).
 
 Everything here is ordinary MatStream configuration. An opportunity is a folder with properties and a lifecycle, a quotation is a numbered item with lines and revisions, and both get their tabs and views from mechanisms the rest of the workspace already uses.
 
@@ -96,7 +96,7 @@ Refreshing does not create another output. Automation retry protection uses the 
 
 ## What a company shows
 
-A **Company** gains four tabs listing what points at it: **Opportunities**, **Quotations**, **Projects** and **Purchase Orders**. Contacts are already a Uses tab, because a contact person sits *under* the company rather than referring to it.
+The party configuration provides tabs listing what points at a record: **Opportunities**, **Quotations**, **Projects** and **Purchase Orders**, where the corresponding features are installed. Supplier and Client categories start from this shared configuration and can be configured independently. Contacts are a Uses tab because a contact person sits *under* the party rather than referring to it.
 
 ---
 

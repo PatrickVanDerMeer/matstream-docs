@@ -18,7 +18,23 @@ A new version can inherit its stored file until it is replaced. Historical versi
 
 ## PDF viewer
 
-Entity detail pages include an embedded PDF viewer (Syncfusion PdfViewer). When you click a PDF attachment, it opens inline without leaving MatStream. This is useful for reviewing drawings, certificates, and reports alongside the entity's properties.
+MatStream can open an attached PDF in a viewer when you double-click an item, instead of opening its details. Open your account menu → **Settings → Workspace Settings** and set **Open attached PDF on double-click instead of item details**. Click **Apply** to save your personal choice for the workspace. Items without an attached PDF still open details, and **Open details** remains available explicitly.
+
+Opening attached PDFs is enabled as the workspace default. An existing personal choice takes precedence. A workspace administrator can select the desired choice in the same dialog and click **Use this choice as the workspace default**; this does not overwrite other users' saved preferences.
+
+## Paste into the Documents tab
+
+1. Copy a file in Windows Explorer.
+2. Open an editable entity's **Documents** tab and click the grid outside a text editor.
+3. Press **Ctrl+V**. You can also try right-clicking the grid and choosing **Paste**, when the browser exposes the copied file to that command.
+4. In **Add documents**, review the queued files and select the appropriate category.
+5. Click **Upload** to proceed, or **Cancel** to leave them unuploaded.
+
+Pasting queues files for review; it does not upload them immediately. Pasting ordinary text into a text field keeps its normal text-editing behavior. The tab must support adding files, and your user must have the required permissions.
+
+Clipboard file support depends on the browser and what Windows exposes. If the Paste menu cannot read a file, it offers guidance to use **Ctrl+V** or **Add File** instead. Browser clipboard APIs may expose an image with a generated name; review the upload queue before continuing.
+
+In a Windows Chrome test, **Ctrl+V** preserved the name and size of a PNG file copied in Explorer. The **Paste** menu could not read that same file, even after clipboard access was allowed. If you encounter this, use **Ctrl+V** in the Documents grid.
 
 ---
 

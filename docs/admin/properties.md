@@ -116,6 +116,16 @@ For **Stock Unit**, stored values are Unit of Quantity IDs. Keep those IDs uncha
 !!! note
     Removing an option does not change items that already store it. Their value is preserved but appears as unrecognised until you add the option back or edit the item.
 
+### Spare requirement properties
+
+Engineering setup creates **Spare Quantity**, **Service Period**, **Spare Unit** and **Spare Notes**. Service Period is an Enum with a Combo box editor; its initial options are Startup, 1-year maintenance and 2-year maintenance. Use the editor source settings to change the option values, selected text and list descriptions. These are named service periods, not date ranges. Changing an option's selected text does not require changing its stored value.
+
+On the **Spare Part Requirement** category's Properties assignments, **Inherit value from → Source requirement** enables the existing local-value override behaviour: empty inherits, an entered value overrides, and clearing restores inheritance. Zero remains a valid quantity override. This source is the definition's requirement row, not the Library part referenced by the spare.
+
+Assign the **Requirement Quantity** purpose to one numeric property on the category to identify the field used for project demand totals. Supported datatypes for this purpose are Int, Double and Decimal. The role follows the assignment, so an administrator can rename the property without changing its meaning. A datatype incompatible with an assigned purpose is rejected until that purpose is changed or cleared.
+
+Existing property settings and option lists are preserved by Engineering setup reruns. See [Spare parts](../features/spare-parts.md) for the project workflow and [Display Tabs](display-tabs.md#spare-parts-tabs) for tab configuration.
+
 ### Initial values
 
 **Initial value** is filled in when a new item is created. Type a fixed value or pick one of the functions:

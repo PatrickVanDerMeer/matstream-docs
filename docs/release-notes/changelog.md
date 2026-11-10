@@ -1,6 +1,38 @@
 # Changelog
 
-## September 2026 — Current build
+## November 2026
+
+- **Spare parts:** Engineering setup adds configurable spare requirement occurrences and named
+  service-period options, separate from the build BOM. Project-owned occurrences reuse property
+  inheritance for local overrides, zero requirements and resetting to recommendations. A project
+  filter and full-result Excel export include effective quantities and installed totals. Requires
+  the spare-parts application/database rollout and Engineering setup; shared inherited BOM lines
+  require project copies. See [Spare parts](../features/spare-parts.md).
+
+- **Supplier and Client categories:** setup separates purchasing and customer records, upgrades
+  standard pickers, and recategorizes single-role Company records without replacing their IDs.
+  Dual-role records are reported for a deliberate split. See [Suppliers and clients](../features/suppliers-clients.md).
+- **Occurrences in Library search:** administrators can configure category visibility and
+  All, Library-owned or Explorer-owned occurrence scope. Company Addresses and Explorer BOM
+  Positions are enabled by setup, with Parent, Project and Path result columns.
+- **Sample Data:** sample records use a filterable Boolean custom property, without badges or
+  name prefixes. See [Finding sample data](../features/library.md#finding-sample-data).
+- **Stock units:** items without a unit use the administrator-configured workspace default,
+  initially pc. Existing assigned units are preserved.
+- **Addresses:** suggested names, Country choices/defaults and the Office Address Type default
+  are configurable through the category and property editors.
+- **Supplier pricing:** Price Updated On is editable. The configurable save-time script keeps a
+  manual date when Unit Price changes in the same save.
+- **Clipboard and PDF workflows:** thumbnail context actions include Edit, Delete and Paste;
+  Documents supports Ctrl+V and Paste with upload review; the PDF-first double-click workspace
+  default preserves personal choices.
+- **Ordering Text:** the variable picker includes entity properties such as Description and
+  Material. The dialog retains manual editing if templates cannot load.
+- **Copy Structure:** Library and Explorer copies update search indexing; the Properties to
+  clear checklist has been removed, leaving ordinary copied values for manual review.
+- **Configuration:** Open Manage opens the management site in a separate browser tab.
+
+## September 2026
 
 ### New features
 

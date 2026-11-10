@@ -79,10 +79,17 @@ immediately — no registration required.
 ### New user
 
 The user receives an email with the subject 
-**You've been invited to MatStream**, containing a link to the 
-registration page with their email pre-filled. After registering 
-and confirming their email, they are directed to your workspace 
-automatically.
+**You've been invited to MatStream**, containing an **Open workspace** button.
+The user opens the workspace sign-in page and chooses **Create an account**.
+
+1. Enter the invited email address and choose a password.
+2. Click **Register**. MatStream shows six boxes for an access code.
+3. Enter or paste the six-digit code from the registration email.
+4. MatStream confirms the email address, signs the user in automatically, and opens the invited workspace if their membership is still enabled.
+
+Codes expire after 10 minutes and can be used once. **Send a new code** sends a replacement; allow a minute between requests. Only the latest code works.
+If the registration page was closed or refreshed, the user can request a code from sign-in, confirm their email, and then sign in with their password.
+
 
 ---
 

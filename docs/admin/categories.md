@@ -102,6 +102,24 @@ quantities.
 
 ## Planning your categories
 
+### Library visibility and occurrence scope
+
+In the category editor's **General** tab, set **Visible in Library search** to include or omit a category from both the Library category filter and its search results. This is separate from **Show in New dialog** and does not change permissions. Definition categories are visible by default; occurrence categories require enabling.
+
+For occurrence categories, choose **Occurrence scope in Library search**:
+
+| Scope | Records included |
+|---|---|
+| **All occurrences** | Occurrences of the category regardless of ownership, including unplaced records. |
+| **Library-owned occurrences** | Occurrences owned beneath a Library definition rather than an Explorer structure. |
+| **Explorer-owned occurrences** | Occurrences owned beneath an Explorer folder or root structure. |
+
+Scope follows current ownership links, not the category of a linked definition. The same occurrence category can therefore be used in a Library BOM and an Explorer project while only its Explorer placements appear in search.
+
+Setup enables **Company Address** with All occurrences and **BOM Position** with Explorer-owned occurrences. Administrators can change either choice; setup reruns preserve configured visibility and scope. Library results include **Parent**, **Project** and **Path** where that context is readable.
+
+Supplier and Client are independently configurable Definition categories. See [Suppliers, clients and addresses](../features/suppliers-clients.md) for setup, naming and upgrading former Company records.
+
 Before configuring categories in MatStream, it is worth spending time
 planning your category structure. A well-designed category structure
 makes the platform intuitive for users and reduces the need for
@@ -352,6 +370,11 @@ an established catalogue.
   example of the Project behavior in action
 
 ## Business roles
+
+**Company**, **Supplier** and **Client** roles identify the standard party categories independently
+of their display names. Keep the appropriate role when renaming one of these categories so
+setup can find it again. Their properties, tabs, defaults, visibility and picker filters remain
+administrator configuration. See [Suppliers, clients and addresses](../features/suppliers-clients.md).
 
 In the category editor, **Business role** identifies the sales, purchasing, article or warehouse process served by a category independently of its display name. Keep that role when renaming a standard category. For example, a category named Customer Order can retain the Sales Order role. Sales Order and Sales Order Line roles each have one category per workspace; clear an old assignment before assigning a replacement.
 

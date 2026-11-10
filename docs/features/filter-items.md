@@ -57,6 +57,24 @@ Use the tree placement when the list is a thing people navigate to. Use the disp
 
 ---
 
+## Project spare-parts lists
+
+Engineering setup provides a **Project Spare Parts List** filter folder targeting **Spare Part Requirement** occurrences. Its **Parent subtree** scope makes one category reusable beneath different projects.
+
+Spare requirements are outside the BOM, so the filter reaches them through their owning project occurrences. Results use effective values, including local overrides and project-only requirements, rather than adding Library recommendations as duplicate demand. Service-period and quantity criteria use the effective property values.
+
+Add **Requirement Owner**, **Service Period**, **Spare Quantity**, **Spare Unit**, **Installed Quantity** and **Total Required Quantity** for a traceable list. Total Required Quantity multiplies the effective spare quantity by the owner's installed quantity. Rows are not automatically consolidated or converted between units.
+
+Shared inherited BOM lines do not have independent spare requirements until they become project copies. Review this limitation before treating a list as the complete installation demand. See [Spare parts](spare-parts.md) for the workflow, override rules and source-revision behaviour.
+
+## Export to Excel
+
+Use **Export Excel** above a Filter Result grid, or the Explorer **Export → Excel** action while viewing a live filter folder. The export retrieves matching rows across all pages and uses the selected columns and headings, including effective project spare quantities.
+
+The export applies read permissions and preserves part numbers as text and quantities as numbers. Its limit is **100,000 rows**; MatStream reports an incomplete export if the result exceeds that limit. Narrow the filter and export again for a complete file.
+
+---
+
 ## Snapshots
 
 By default a filter is re-evaluated every time it is opened, so it always reflects the current state. That is right for a working list and wrong for a record.

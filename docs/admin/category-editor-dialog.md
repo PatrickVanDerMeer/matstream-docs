@@ -33,6 +33,10 @@ The top section of the dialog contains the category's core settings:
 | **Is a file** | Whether entities of this category carry an attached file. |
 | **Show in New dialog** | When unticked, the category is hidden from the New dialog, Change Category, document upload and data import. It remains fully editable here. Use it for heading categories and for anything whose entities must only be created by a process. |
 | **Suppress children in Explorer** | Stops the Explorer expanding this category's entities into sub-items. |
+| **Visible in Library search** | Includes the category in Library search and its category filter. Permissions still apply. |
+| **Occurrence scope in Library search** | All occurrences, Library-owned occurrences, or Explorer-owned occurrences. Available for occurrence categories. |
+| **Name guidance** | Guidance displayed when entering a new entity's name. |
+| **Suggested names** | One suggested name per line. Users can choose a suggestion or enter their own name; numbering schemes take precedence. |
 
 Changes to these fields mark the dialog as dirty immediately.
 

@@ -9,6 +9,7 @@ Choose the settings and click **Save settings**; this requires `admin.workspace.
 | Setting | Effect |
 |---|---|
 | **Planning time zone** | Whole-day boundaries for planned starts and due dates. |
+| **Default Stock Unit** | Unit offered for items without one; initially Piece (pc). Saving the item commits it. Existing assigned units remain unchanged. Choose No default to leave unassigned items without a fallback. |
 | **Timesheet completeness** | Off, Warn with explicit shortfall confirmation, or Block incomplete weeks. |
 | **Require explicit hour types above the weekly target** | On submission, untyped working hours may fill the target remaining after absence; additional working hours need an explicit hour type. |
 | **Stock replenishment folder** | Select the destination by its ID. Renaming that folder does not change the selection. Leaving it unset uses the standard Stock Replenishment discovery. Its creator must remain enabled. |
@@ -16,6 +17,8 @@ Choose the settings and click **Save settings**; this requires `admin.workspace.
 | **Purge Retention Days** | Fallback age for historical versions without a lifecycle state. State-specific purge ages take precedence. |
 
 ## Units of Quantity
+
+The ribbon's **Open Manage** button opens MatStream Manage in a new browser tab.
 
 The **Units of Quantity** panel manages units used by stock and order quantities, such as pc or kg. Add a unit with a name and symbol, or edit its workspace name and availability. Click **Save unit** or **Add unit** for that row; this is separate from **Save settings**.
 

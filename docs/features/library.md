@@ -53,8 +53,29 @@ The Library grid displays entities in a configurable table. Default columns:
 | Revision | Current revision label |
 | State | Current lifecycle state |
 | Modified | Last modified date |
+| Parent | The current owning parent of an occurrence |
+| Project | The owning project, where applicable |
+| Path | The parent chain identifying where the record belongs |
 
 Use the **column chooser** (grid toolbar) to add or remove columns. Column widths and sort order are saved per user.
+
+### Finding occurrences
+
+Library search can include selected occurrence categories as well as definitions. Setup enables **Company Address** and **Explorer-owned BOM Position** records. Use the category filter to narrow the results, then use **Parent**, **Project** and **Path** to distinguish occurrences with similar names. These columns describe the record's current ownership; a linked Library definition is not its owning parent.
+
+An administrator controls which categories appear through **Configuration → Categories → General → Visible in Library search**. An occurrence category also has an **Occurrence scope in Library search** setting. See [Library visibility and occurrence scope](../admin/categories.md#library-visibility-and-occurrence-scope).
+
+Visibility does not grant access. Entity, category and property permissions still apply, and inaccessible parent or project context is omitted. Pickers used by other workflows retain their own category filters.
+
+### Finding sample data
+
+Sample records created by setup have a Boolean custom property named **Sample Data**, set to **Yes**. Add it through the column chooser and filter **Sample Data = Yes** to find demonstration records. It is a regular property, with no badge or name prefix.
+
+To filter without adding a column, open **Advanced filters**, select **Sample Data**, keep
+**Equals**, select **True** (the Boolean equivalent of Yes), and click **Search**. Clear any
+quick-search text first if you want sample records across the whole Library.
+
+Review the filtered results before deleting them, particularly records linked into a real project. Normal deletion permissions and reference checks still apply. Setup preserves existing values and marks recognizable older samples rather than assuming every existing record is sample data.
 
 ### Thumbnail column
 
