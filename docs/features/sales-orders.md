@@ -55,6 +55,21 @@ On the **Lines** tab, open **Stock → Stock availability**. Review the required
 
 Available stock means stock on hand minus existing reservations. Correct any unit or configuration errors before confirming the order. Reviewing this window does not itself reserve stock.
 
+The **Sales Order — Stock availability** window shows one row per order line:
+
+| Column | Meaning |
+|---|---|
+| Article | The ordered article |
+| Required | The quantity the line needs, in the order unit |
+| Available | On-hand minus reservations, in the stock unit. It can be negative. |
+| Reserved for this line | What the order will reserve for this line |
+| Shortage | The part of the requirement that stock cannot cover |
+| Material Requirement Qty | The quantity a Material Requirement will be raised for. Stock items show **—**, because their shortage goes through stock replenishment instead. |
+| Stock unit | The unit the stock is held in |
+| Status | A note for the line, or an error such as a missing unit |
+
+Stock items reserve the full remaining order demand; other articles reserve available stock and raise requirements for the shortage. Use **Refresh** to recalculate after you change a line or stock changes, and **Close** to leave the window.
+
 ## 4. Confirm the order
 
 Close the order details, select the Sales Order in Explorer, and choose **Change State**. Set its **New State** to **Confirmed**, click **Apply**, and check the result.

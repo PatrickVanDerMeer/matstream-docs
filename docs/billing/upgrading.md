@@ -113,3 +113,6 @@ Your current plan features remain active until that date.
     ensure your workspace has no other active editors assigned. 
     You can only have one Free workspace — if you already have one, 
     you must delete it before downgrading a second workspace.
+
+
+See [Workspaces and your account](workspaces-and-account.md) for deleting a workspace, transferring ownership and deleting your account.

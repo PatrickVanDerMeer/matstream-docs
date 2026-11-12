@@ -48,3 +48,6 @@ Future invoices and payment notifications will be sent to the new address.
     Use a shared mailbox (e.g. billing@yourcompany.com) rather than a 
     personal address so invoices are accessible to your finance team 
     even when individuals change roles.
+
+
+To add, edit or delete an organisation from a workspace, see [Workspaces and your account](workspaces-and-account.md#organisation).

@@ -173,6 +173,8 @@ compatibility but are not offered for new assignments.
 | Grant | Description |
 |---|---|
 | `share.create` | Share items with people outside the workspace |
+| `subscription.create` | Subscribe yourself to item changes. See [Item-change subscriptions](../features/subscriptions.md) |
+| `subscription.assign` | Subscribe other people to item changes |
 
 ### Time
 
@@ -180,6 +182,35 @@ compatibility but are not offered for new assignments.
 |---|---|
 | `time.approve` | Approve and reject submitted timesheets |
 | `time.viewall` | View other people's time entries |
+| `time.balance.view` | View leave balances. See [Leave and time balances](../features/time-balances.md) |
+| `time.balance.manage` | Grant and adjust leave balances and confirm expiry removals |
+| `time.teams.manage` | Create and manage timesheet approval teams |
+
+### Capacity
+
+| Grant | Description |
+|---|---|
+| `capacity.view` | View capacity and availability. See [Capacity and Availability](../features/capacity.md) |
+| `capacity.manage` | Manage working patterns and availability overrides |
+| `capacity.sync.manage` | Manage Microsoft 365 capacity synchronization |
+
+### Workspace teams
+
+| Grant | Description |
+|---|---|
+| `teams.view` | View workspace user teams and their membership |
+| `teams.manage` | Create teams and manage the teams you own |
+
+### User profile
+
+| Grant | Description |
+|---|---|
+| `user-profile.edit` | Edit your own workspace profile (phone number, first and last name). See [Your account menu](../getting-started/account-menu.md) |
+| `user-profile.thumbnail.upload` | Upload or delete your own profile thumbnail |
+| `user-profile.display-name.edit` | Change your own display name |
+| `user-profile.reporting-line.edit` | Change who you report to |
+
+Changing the display name or the reporting line needs `user-profile.edit` as well, because both are fields of the **Edit profile** form. Uploading a thumbnail works on its own. These grants apply only to your own profile; other people's profiles are read-only.
 
 ### Printing
 

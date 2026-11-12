@@ -39,6 +39,7 @@ nav:
     - Workspaces: getting-started/workspaces.md
     - Workspace setup: getting-started/workspace-setup.md
     - Accessing a workspace: getting-started/workspace-access.md
+    - Your account menu: getting-started/account-menu.md
   - Work Flows:
     - Overview: workflows/index.md
     - Inventor assembly and BOM: workflows/inventor-assembly-bom.md
@@ -126,6 +127,7 @@ nav:
   - Billing:
     - Overview: billing/overview.md
     - Upgrading your plan: billing/upgrading.md
+    - Workspaces and your account: billing/workspaces-and-account.md
     - Invoices: billing/invoices.md
     - Organisation settings: billing/organisation.md
   - Release notes:

@@ -58,6 +58,26 @@ To retry a payment, click the link in the failure email. You will be
 taken to the payment page where you can complete the charge with an 
 updated payment method.
 
+### The payment page
+
+The link opens a MatStream payment page at `/pay/…` in Manage. **You do not need to sign in** — the link itself identifies the invoice, so you can forward it to whoever pays your bills.
+
+The page shows:
+
+- the invoice number and billing period;
+- the invoice PDF, embedded for review (a **Download PDF** link appears if your browser cannot display it);
+- the **due date**, when there is one;
+- a **Pay** button with the currency and total including VAT.
+
+Click **Pay** to continue to Mollie's secure checkout. Afterwards you land on a result page:
+
+| Result | What it means |
+|---|---|
+| **Payment confirmed** | The invoice is paid and your subscription is active. A button takes you to your workspaces. |
+| **Payment is being processed** | The bank has not confirmed yet. You will receive an email when it completes. |
+
+If you open the link for an invoice that is already settled, the page says **Already paid**. Each link is tied to one invoice and stops working once it is paid.
+
 !!! warning
     If your workspace is suspended, your team loses access to MatStream. 
     Settling the outstanding invoice immediately reactivates the workspace.

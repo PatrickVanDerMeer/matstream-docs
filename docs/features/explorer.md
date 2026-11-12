@@ -127,6 +127,22 @@ Move is offered for placements directly under a Root or Folder. Inherited BOM ro
 
 For change notifications, select items and use [Subscribe](subscriptions.md).
 
+### Deleting a project
+
+Select a Project row in the tree and choose **Delete** to open the **Delete project** dialog.
+
+- **A project with content cannot be deleted.** If it still holds folders, tasks, milestones or documents, the dialog shows how many items remain and disables **Delete project**. Remove them first.
+- **Project-owned Library items need a decision.** For every Library item the project owns, the table shows its category and lifecycle state and lets you choose **Return to Library** (default) or **Delete with project**. **Return all** sets every row to return; **Delete all possible** sets every row that may be deleted to delete. An item that cannot be deleted — for example because it is in use — shows the reason and can only be returned.
+- **An empty project with no owned items** only asks you to confirm that deleting it cannot be undone.
+
+See [Project-specific items](library.md#project-specific-items) for how items become project-owned.
+
+### Deleting an assembly placement that has project copies
+
+When you delete an assembly placement whose BOM lines were copied into the project, the **Delete assembly occurrence** dialog lists each project-specific copy with its lifecycle state and any material requirement or order that covers it. For each copy choose **Keep in folder** — it moves to the folder that contains the assembly — or **Delete**. A copy that cannot be deleted can only be kept. **Keep all** and **Delete eligible** set every row at once; **Delete assembly** completes the deletion.
+
+If there are no project copies, a plain confirmation is shown instead.
+
 ### Selection
 
 When a row is selected, `SelectedEntityChanged` fires and the right-hand `PropertyBrowser` updates to show that entity's properties. Selection is fire-and-forget (lazy) to avoid blocking UI responsiveness.

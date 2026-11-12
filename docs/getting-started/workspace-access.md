@@ -101,3 +101,5 @@ workspace you want to switch to and click **Set [workspace name] as default**.
 - [Inviting users](../admin/inviting-users.md) — add colleagues to 
   your workspace
 - [Quick start](quick-start.md) — start working with entities
+- [Your account menu](account-menu.md) — profile, settings, theme and
+  default workspace

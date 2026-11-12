@@ -23,8 +23,11 @@ in MatStream.
 
 - When **adding** a new user, enter the full email address. MatStream 
   validates the format before saving.
-- When **editing** an existing user, the email address is read-only 
-  and cannot be changed.
+- When **editing** an existing user, workspace administrators can change the email address. Protected sample users remain read-only.
+
+Saving an existing workspace user's changed email also synchronizes Core membership. The workspace-user ID, profile, and group assignments remain the same. Core Manage roles stay with their existing accounts: changing a workspace email does not transfer workspace ownership or grant the new account a Manage role. The recipient keeps the applicable seat allocation within the workspace's capacity; a Viewer is not automatically promoted by an email change. An unconfirmed or unregistered recipient is recorded as pending until registration and email confirmation.
+
+Email updates and their retry event commit together. If Core synchronization is temporarily unavailable, the save API returns **202 Accepted** with `X-MatStream-Membership-Sync: pending`; the existing outbox dispatcher retries the synchronization. Retries reconcile the current workspace email and do not repeat a completed Core transfer. The admin page shows a pending synchronization warning, including after **Save & Close**. The user is already saved; no repeat save is needed. Changing a workspace user does not change the global account's email address.
 
 ### Display name (required)
 The name shown throughout MatStream for this user — in audit trails, 

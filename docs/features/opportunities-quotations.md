@@ -114,6 +114,23 @@ An **Activity** is something a person did about a thing: a call, an email, a mee
 
 Activities are log entries: they have no versions and no lifecycle, because they happened and there is nothing for them to progress through.
 
+### Importing Outlook email
+
+Instead of retyping an email as an activity, file the message itself. On an **Activities** tab, click **Import Email** in the ribbon (the button is shown when you can edit the tab, and administrators can place or hide it with the tab's [ribbon configuration](../admin/display-tabs.md)).
+
+1. In the **Import Outlook email** dialog, click to choose one or more `.msg` (Outlook) or `.eml` (Internet email) files. You can select up to 100 files at once; one file may be at most 100 MB and a batch at most 500 MB.
+2. Click **Import email**. Each file is listed with its result: **imported**, **already filed**, or the reason it failed.
+3. Close the dialog. The messages appear on the tab.
+
+How filed email behaves:
+
+- **Replies are grouped into one conversation.** The messages of a thread are shown under a collapsible conversation row that counts its messages. To move an activity or message into a conversation yourself, select it and use **Group email** if your tab's ribbon offers that action.
+- **A message is filed once.** MatStream recognises a message by its email Message-ID, so importing the same message again reports **already filed** and creates no duplicate.
+- **Open a message in place.** Opening an imported email shows a **View email** dialog with the sender and recipients, the sent date, the subject, the attachment names and the body text.
+- A failed file does not stop the others. Fix or remove the failing file and import it again.
+
+Importing needs the **File upload**, **Entity create** and **Entity update** grants. See [Group grants](../admin/group-grants-dialog.md).
+
 ### The timeline
 
 The timeline for an item merges two things: activities somebody logged, and events the system recorded — moved to Issued, timesheet approved, file checked in — newest first.

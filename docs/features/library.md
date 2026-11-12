@@ -111,6 +111,22 @@ Right-click a row or select it and use the ribbon to:
 | Change state | Move the entity to a different lifecycle state |
 | Export | Export selected rows to Excel |
 
+### Project-specific items
+
+A Library item can belong to one project instead of the whole workspace — for example a part you only ever need for one build. A project-owned item is hidden from the general Library, so everyone else's searches stay clean, but it can still be found and used from its project.
+
+**To make items project-specific:**
+
+1. Select one or more items in the Library results.
+2. In the ribbon, click **Make project-specific…**. It needs the `entity.update` grant.
+3. In the **Make project-specific** dialog, choose the **Owning project** and click **Apply**.
+
+**To give them back:** select the items and click **Return to Library**. They become general Library items again.
+
+**To see them:** open **Search options** (the small down-arrow at the right end of the search box) and tick **Show project items** to include project-owned items in the results. The **Project** list in the same menu narrows the results to a single project; **All / general Library** removes that filter. The **Project** column shows each item's owner.
+
+When a project is deleted, MatStream asks what happens to the items it owns. See [Deleting a project](explorer.md#deleting-a-project).
+
 ---
 
 ## Creating entities from the Library
