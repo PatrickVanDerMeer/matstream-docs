@@ -75,7 +75,10 @@ A Uses definition separates row/source selection, display settings and ribbon co
 | Default Columns | Starting visible columns. |
 | Show rows from the linked definition (read-only) | Include definition-owned rows on occurrences; those rows cannot be edited or removed here. |
 | Show selection checkboxes | Offer row selection checkboxes. |
+| Allow row reordering | In **Settings → Row ordering**, allow Editors with BOM management and entity read permission to drag structural rows into order. The existing default is enabled; administrator overrides are retained. Save the entity to persist the order, or cancel to discard it. |
 | Column total / Footer label | Sum a numeric column in loaded rows; this display total is not stored on the parent. |
+
+Row dragging requires an unsorted, unfiltered view. Use **Clear sorting and filters** in the grid notice to return to saved row order. It is unavailable in read-only views, association and requirement tabs, grouped conversations, or lists containing inherited rows. Supplier lists use the same setting; their first row remains the default supplier. Saves check parent modification access and reject foreign, historical or definition-owned link identities before writing order changes.
 
 **Filter tab — which rows appear**
 

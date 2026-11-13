@@ -137,6 +137,14 @@ Select a Project row in the tree and choose **Delete** to open the **Delete proj
 
 See [Project-specific items](library.md#project-specific-items) for how items become project-owned.
 
+### Editing nested inherited assembly lines
+
+Editing or revising an inherited assembly line creates a project-specific copy. For a nested line, MatStream also creates any containing assembly copies that are needed, from the top down, and reuses copies already created for that placement. Shared Library rows and other project placements keep their original data.
+
+The complete ancestor chain is created in one transaction. Source visibility and parent modification permissions apply at each level, including the lifecycle state of a newly copied parent. A denied permission, stale followed version, invalid pin, cycle, or failed write rolls back the whole chain. Copies preserve the resolved source-line version, properties, revision, lifecycle, quantity, unit, order and part-version reference rule.
+
+If the same shared row resolves to several project placements, MatStream asks you to create the containing assembly copy in the intended project first. Refresh Explorer and select its inherited child again. It will not choose a project automatically. A containing copy that has been retargeted or moved out of the project must also be refreshed and selected in its current placement.
+
 ### Deleting an assembly placement that has project copies
 
 When you delete an assembly placement whose BOM lines were copied into the project, the **Delete assembly occurrence** dialog lists each project-specific copy with its lifecycle state and any material requirement or order that covers it. For each copy choose **Keep in folder** — it moves to the folder that contains the assembly — or **Delete**. A copy that cannot be deleted can only be kept. **Keep all** and **Delete eligible** set every row at once; **Delete assembly** completes the deletion.
