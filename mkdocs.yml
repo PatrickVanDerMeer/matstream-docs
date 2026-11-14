@@ -42,15 +42,19 @@ nav:
     - Your account menu: getting-started/account-menu.md
   - Work Flows:
     - Overview: workflows/index.md
-    - Inventor assembly and BOM: workflows/inventor-assembly-bom.md
-    - Sales - Create a Sales Order: workflows/create-sales-order.md
-    - Sales - Invoice documents: features/sales-orders.md
-    - Procurement - Create a PO from MR: workflows/arrange-missing-stock.md
-    - Whole-order pick, pack and receive: workflows/whole-order-pick-pack-receive.md
-    - Incoming Goods - Complete delivery: workflows/receive-warehouse-goods.md
-    - Dispatch - Full-order picking and packing: workflows/pick-pack-send.md
-    - Share a PO with a vendor: workflows/vendor-purchase-order.md
-    - Supplier portal workflow: workflows/supplier-portal.md
+    - Sales Order Workflow:
+      - Overview: workflows/sales-order.md
+      - Sales - Create a Sales Order: workflows/create-sales-order.md
+      - Procurement - Create a PO from MR: workflows/arrange-missing-stock.md
+      - Procurement - Share a PO with a vendor: workflows/vendor-purchase-order.md
+      - Supplier - Supply documents through the portal: workflows/supplier-portal.md
+      - Incoming Goods - Complete delivery: workflows/receive-warehouse-goods.md
+      - Dispatch - Full-order picking and packing: workflows/pick-pack-send.md
+      - Sales - Invoice documents: features/sales-orders.md
+      - Whole-order setup and behavior: workflows/whole-order-pick-pack-receive.md
+    - Engineering Project Workflow:
+      - Overview: workflows/engineering-project.md
+      - Inventor assembly and BOM: workflows/inventor-assembly-bom.md
   - Administration:
     - Inviting users: admin/inviting-users.md
     - Editor seats: admin/editor-seats.md

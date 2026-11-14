@@ -42,11 +42,8 @@ Work with your engineering information.
 Follow the steps to complete a task from start to finish.
 
 - [About Work Flows](workflows/index.md)
-- [Sales Orders and invoice documents](features/sales-orders.md)
-- [Arrange missing stock](workflows/arrange-missing-stock.md)
-- [Receive goods into the warehouse](workflows/receive-warehouse-goods.md)
-- [Open orders, picking, packing and sending](workflows/pick-pack-send.md)
-- [Supplier portal workflow](workflows/supplier-portal.md)
+- [Sales Order Workflow](workflows/sales-order.md) — steps for Sales, Procurement, Suppliers, Incoming Goods, and Dispatch.
+- [Engineering Project Workflow](workflows/engineering-project.md) — Inventor assembly and BOM.
 
 </section>
 

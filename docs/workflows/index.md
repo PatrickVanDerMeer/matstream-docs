@@ -8,49 +8,27 @@ Detailed topic pages explain individual features, fields, and settings. Workflow
 
 ## Available workflows
 
-### Inventor assembly and BOM workflow
+### Sales Order Workflow
 
-Create an assembly with existing fittings and a new part, fill in its information in Inventor, create a drawing with a parts list, and publish the drawing and BOM to MatStream using iLogic.
+Follow a customer order across departments, from creation and procurement through receiving, dispatch, and invoice-document preparation.
 
-[Follow the Inventor workflow](inventor-assembly-bom.md)
+- [Sales — Create a Sales Order](create-sales-order.md)
+- [Procurement — Create a PO from Material Requirements](arrange-missing-stock.md)
+- [Procurement — Share a PO with a vendor](vendor-purchase-order.md)
+- [Supplier — Use the supplier portal](supplier-portal.md)
+- [Incoming Goods — Complete a supplier delivery](receive-warehouse-goods.md)
+- [Dispatch — Pick, pack, and ship the order](pick-pack-send.md)
+- [Sales — Prepare invoice documents](../features/sales-orders.md#5-create-the-sales-order-invoice-document)
 
-### Sales — Create a Sales Order
+[Open the Sales Order Workflow](sales-order.md) for the complete sequence and setup guidance.
 
-Create and price the customer order, check availability, then confirm demand.
+### Engineering Project Workflow
 
-[Sales guide and movie](create-sales-order.md)
+Prepare design information and publish it to MatStream.
 
-### Procurement — Create a PO from MR
+- [Inventor assembly and BOM](inventor-assembly-bom.md)
 
-Select Material Requirements, create their linked supplier orders, review and issue them.
-
-[Procurement guide and movie](arrange-missing-stock.md)
-
-### Incoming Goods — Complete supplier delivery
-
-Print a Receiving List, check the complete delivery, receive all outstanding quantities into one shelf, and verify stock.
-
-[Incoming Goods guide and movie](receive-warehouse-goods.md)
-
-### Dispatch — Full-order picking, packing and shipment
-
-Print Pick and Packing Lists, mark the whole order picked and packed, then confirm full shipment.
-
-[Dispatch guide and movie](pick-pack-send.md)
-
-The four departmental movies use one connected example. Receiving and dispatch demonstrate complete deliveries; partial and scanner workflows are not required for this simple setup. For configuration, see [whole-order setup and behavior](whole-order-pick-pack-receive.md). Invoice-document preparation remains a separate [Sales feature](../features/sales-orders.md#5-create-the-sales-order-invoice-document).
-
-### Supplier portal workflow
-
-Receive a Purchase Order, download the PO and applicable documents, and upload required vendor documents such as material certificates.
-
-[Follow the supplier workflow](supplier-portal.md)
-
-### Share a PO with a vendor
-
-Prepare and share a Purchase Order with its documents and supplier portal link.
-
-[Follow the buyer workflow](vendor-purchase-order.md)
+[Open the Engineering Project Workflow](engineering-project.md).
 
 ## How to use a workflow
 
