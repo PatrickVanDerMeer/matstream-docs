@@ -138,7 +138,9 @@ matstream.actions.createEntity({
 
 Configure real workspace IDs in Parameters (JSON), for example `{"TargetCategoryId":45,"TargetFolderId":123}`; these are illustrative IDs, not defaults. The target category must exist, be enabled, and have Folder or Occurrence family. The parent must be an existing Root or Folder in the same workspace.
 
-One run can queue at most 500 actions; exceeding the cap refuses application. One run may create at most one entity. Creation cannot be combined with property writes in the same script. This action creates, places and links the output; it does not generically copy commercial properties or post financial data. Scripts have a 30-second execution timeout and a 10 MB engine memory limit. An empty script performs no work.
+One run can queue at most 500 actions; exceeding the cap refuses application. One run may create at most one entity. Creation cannot be combined with writes to the source entity in the same script. Pass an optional `properties` object to `createEntity`, keyed by target property definition ID, to populate assigned stored fields in the new entity's creation transaction. Invalid target fields, malformed typed values and foreign-workspace references are rejected. This does not post financial data. Scripts have a 30-second execution timeout and a 10 MB engine memory limit. An empty script performs no work.
+
+For an editable script example with configurable source mappings and fallback defaults, see [Automatically copy quotation fields](opportunities-quotations.md#automatically-copy-quotation-fields-to-the-project). The Automation editor provides a mapping editor when its Parameters object contains `FieldMappings`, and a button to add that array. This parameter is interpreted by the example script; arbitrary scripts must explicitly use it to perform copying.
 
 ---
 

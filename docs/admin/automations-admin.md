@@ -75,3 +75,9 @@ A run left **Running** can mean execution was interrupted or the final status co
 - [Automations](../features/automations.md)
 - [Lifecycle definitions](lifecycle.md)
 - [Print templates](print-templates-admin.md)
+
+## Generate a PDF on the open record
+
+The seeded **Generate Transmittal PDF** script renders an assigned template and attaches its PDF directly to the Transmittal. The Pdf parameter editor controls categories, preparation states, template, filename, history comment and saved-line requirement. Regeneration preserves the previous file in History. See [the workflow and configuration example](../workflows/engineering-transmittal-pdf.md). This differs from the existing Generate Print PDF action that creates a separate linked document.
+
+The Transmittal generation script also records consistency evidence. Configure **Generated PDF matches saved contents** in the issuing transition's **Criteria**, with **Error** severity, to block stale or manually replaced PDFs before the state changes. An ordinary transition automation runs after the change and cannot provide this blocking guarantee. See [issue-check configuration](../workflows/engineering-transmittal-pdf.md#configure-the-blocking-issue-criterion).

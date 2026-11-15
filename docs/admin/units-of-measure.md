@@ -4,11 +4,13 @@ MatStream distinguishes physical measurement units from Units of Quantity used b
 
 ## Configure Units of Quantity
 
-Open **Configuration → System Settings → Units of Quantity**. This requires `admin.workspace.settings`.
+Open **Configuration → System Settings**, then click **Units of Quantity** on the ribbon to open its dialog. This requires `admin.workspace.settings`.
 
 1. To add a unit, enter its **Symbol**, workspace **Name**, and **Available** setting, then click **Add unit**.
 2. To change an existing unit, edit its workspace name or availability and click **Save unit** on that row.
-3. Save each row separately; **Save settings** applies the workspace defaults above the unit list.
+3. Save each row separately. The dialog also contains **Library insertion defaults**, with its own **Save insertion defaults** button. Close the dialog when finished.
+
+![Units of Quantity dialog](../images/engineering-project/18-units-of-quantity-dialog.jpg)
 
 Names and availability are local to the workspace, including overrides of global units. Existing symbols are stable identifiers and cannot be changed. Add a new unit for a different symbol; duplicate symbols are refused. Disabling a unit removes it from normal new selections while existing records retain their unit identity.
 

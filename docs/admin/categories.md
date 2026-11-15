@@ -1,5 +1,15 @@
 # Categories
 
+## Project article insertion rule
+
+Engineering Project Configuration seeds **Project articles → BOM Position** under **Configuration → Categories → Assignment Rules**. It matches Assembly, Weld Assembly, Item or Part definitions inserted directly under a Project. The resulting occurrence uses the target category's default lifecycle and initial state.
+
+Select the rule to edit **Parent category** and the **Source category is any of** checkboxes. The rule's target category, name, enabled state and priority are editable in the grid. Category matches are exact and stored by ID, so renaming a category preserves the match. Selecting Item does not implicitly select its child categories. The rule does not set quantity units.
+
+To create another such rule, choose **New**, select the target category, then **Use Library insertion categories**. Ordinary assignment rules continue to use the property/file criteria editor. Setup preserves later changes or deletion of this seeded rule.
+
+For existing Base occurrences, use **Actions → Change Category**, then assign the intended lifecycle and initial state through **Change State**. Changing a rule alone does not reclassify existing occurrences. See the [tested assembly workflow](../workflows/engineering-add-assembly.md).
+
 Categories are the building blocks of your MatStream configuration.
 A category defines the structure of an entity type — what properties
 it carries, which lifecycle applies, which revision scheme is used,

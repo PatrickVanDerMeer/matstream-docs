@@ -158,6 +158,20 @@ Category and lifecycle-state permissions apply as they do to any other item. For
 ## Known limitations
 
 - **No print template for quotations.** The field mapping is ready; what is missing is a Word document with the merge fields in it. Until one exists, a quotation cannot be printed or sent as a PDF from MatStream.
-- Property copying and financial posting are not yet generic script actions; the first Create Entity action creates, places and links the output only.
+- Financial posting is not part of project creation. Configured field mappings can populate the new project through the acceptance script, as described below.
+
+## Automatically copy quotation fields to the project
+
+In **Configuration → Automations**, open **Create Project from Quotation**. The editable example uses `FieldMappings` parameters to copy fields into the new Project. New configuration seeds mappings for Client, Customer Contact, Description and Currency where available; Client and contact are required by the example. Administrators can change these choices.
+
+Use **Created entity field mappings** beneath Parameters to select source/target properties, optional fallback defaults and **Required**. If needed, choose **Configure created entity fields** first. An empty source uses its configured default; without a default, optional mappings leave the target's initial value alone and required mappings stop creation. Defaults can also be used without a source. Choose only targets assigned to the Project category. Field identities survive renaming.
+
+For an existing automation, the editor's API Reference contains **Quotation to Project example**. Use that script deliberately when updating an older installation; existing administrator-authored scripts are not silently replaced. Configure the target category/folder and field mappings before enabling it. The example creates the project, its mapped properties and the exact source-version link together. The editor's Run action is a mock preview, not a real quotation test.
+
+Transition-specific parameter overrides take precedence over the library script's parameters. Review existing overrides if library mapping edits seem ineffective. Fresh configuration inherits the script parameters rather than seeding a duplicate override.
+
+The script can read a property by `pd_<PropertyDefID>`. With `FieldMappings` configured, source values are read from the triggering quotation version. A mapping failure creates no partially populated project, but the quotation transition may already have succeeded: inspect automation run history and the project result before retrying. Deliberately accepting again is a new event, not a retry of the original acceptance.
+
+Do not map quotation validity to delivery date or sales price to project budget unless that is explicitly your business policy. Assembly placement remains a separate step.
 - **The timeline has no tab**, only an API call.
 - Sales currency is a per-item field. There is no workspace base currency and no conversion, so a workspace quoting in more than one currency must total each separately.

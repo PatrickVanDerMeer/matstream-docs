@@ -38,6 +38,14 @@ Each step is linked to the one before it, so any purchase order line can be trac
 
 ---
 
+## Required vendor documents: category limitation
+
+Keep exactly **one enabled occurrence category with Required Vendor Document behavior** in the workspace. The standard setup provides this category. Checklist generation requires it when creating RVD rows; multiple enabled RVD occurrence categories cause generation to fail when a new row is needed. Category filters on a display tab do not select the category used by automatic checklist generation.
+
+Use that same occurrence category for different requirements, such as Technical Datasheet, Material Certificate and Operating Manual. These requirements are separate reusable Library definitions, not separate occurrence categories. Administrators can maintain their names, descriptions and item assignments through the Library and each item's **RVD** tab, subject to configured permissions and tab actions.
+
+Library requirements describe what is needed; they do not receive supplier files. Purchase-order lines own the generated RVD checklist rows to which suppliers submit their files. Multiple RVD occurrence-category routing is not currently supported.
+
 ## Raising a requirement
 
 A **Material Requirement** records that something is needed: this quantity, by this date, for this project. Raising one moves nothing in stock and writes no ledger entry.

@@ -54,6 +54,19 @@ nav:
       - Whole-order setup and behavior: workflows/whole-order-pick-pack-receive.md
     - Engineering Project Workflow:
       - Overview: workflows/engineering-project.md
+      - Sales - Quotation and project: workflows/engineering-quotation-project.md
+      - Engineering - Add the assembly: workflows/engineering-add-assembly.md
+      - Engineering - Select the transmittal project: workflows/engineering-transmittal-project-reference.md
+      - Engineering - Select transmittal documents: workflows/engineering-project-documents.md
+      - Engineering - Generate transmittal PDF: workflows/engineering-transmittal-pdf.md
+      - Engineering - Maintain distribution channels: workflows/engineering-distribution-channels.md
+      - Engineering - Share the issued transmittal: workflows/engineering-transmittal-portal.md
+      - Client - Review and return commented PDFs: workflows/engineering-transmittal-review.md
+      - Engineering - Resolve client comments: workflows/engineering-comment-resolution.md
+      - Engineering - Update and reissue drawings: workflows/engineering-reissue-drawings.md
+      - Engineering - Release project assemblies: workflows/engineering-production-release.md
+      - Engineering - Plan against project milestones: workflows/engineering-milestone-planning.md
+      - Work Preparation - Material requirement dates: workflows/engineering-material-requirement-dates.md
       - Inventor assembly and BOM: workflows/inventor-assembly-bom.md
   - Administration:
     - Inviting users: admin/inviting-users.md

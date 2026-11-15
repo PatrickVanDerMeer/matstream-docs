@@ -24,11 +24,13 @@ Follow a customer order across departments, from creation and procurement throug
 
 ### Engineering Project Workflow
 
-Prepare design information and publish it to MatStream.
+Plan the complete lube-oil system project: quotation, project BOM, client approval, long-lead procurement, supplier documentation, payment milestones, production release, quality exceptions, and final handover.
 
+- [Sales — Quotation and project](engineering-quotation-project.md)
+- [Engineering — Add the assembly to the project](engineering-add-assembly.md)
 - [Inventor assembly and BOM](inventor-assembly-bom.md)
 
-[Open the Engineering Project Workflow](engineering-project.md).
+[Open the extensive Engineering Project Workflow plan](engineering-project.md), including department handoffs, capability gaps, and acceptance checks.
 
 ## How to use a workflow
 
