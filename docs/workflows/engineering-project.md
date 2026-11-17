@@ -1,7 +1,7 @@
 # Engineering Project Workflow
 
-!!! info "Current plan — reconciled 17 November 2026"
-    The feature slices below are implemented and tested locally. Production readiness now has a local operation-level walkthrough; the wrong-fitting replacement loop is also implemented with local test evidence. Collection, hold clearance and production execution states have also been tested; replacement stock issue is now tested too; production completion and inspection records now pass native and browser local tests; physical manufacturing, the real contractual dossier and project closure remain. Temporary receipt/document evidence used for completion tests was restored; the motor and pump test lines were left **Awaiting evidence**. No real delivery, Quality approval or payment is implied.
+!!! info "Implementation status — reconciled 17 November 2026"
+    The workflow features through **as-built documentation and final client handover are implemented and tested locally**, with linked walkthroughs and screenshots below. This includes production material consumption, reservation release, inspections, completed-output receipt and final handover recording. The remaining work is a complete fresh-workspace rehearsal with separate users and real approved evidence, plus assessment of dispatch, commercial settlement and project closure. Local synthetic tests do not represent physical manufacture or contractual acceptance.
 
 Start with a customer quotation and finish with manufactured, tested and documented assemblies. The workflow itself is our test: at each step distinguish working behavior, configuration needed and development needed. All new business settings remain workspace-admin-configurable; use editable automation scripts where possible. The latest implementation adds the as-built package and final client handover, following production completion, receipt and material issue.
 
@@ -13,7 +13,7 @@ Start with a customer quotation and finish with manufactured, tested and documen
 | Project BOM and units | Configurable BOM Position creation, Stock Unit/fallback/required review and Units of Quantity dialog; [local placement](engineering-add-assembly.md) tested | Full fresh-workspace rehearsal |
 | Transmittals | [Selection/filter/columns](engineering-project-documents.md), [PDF/history/issue consistency](engineering-transmittal-pdf.md) and [pinned portal packages](engineering-transmittal-portal.md) tested | Full historical access/retention and distinct-user checks |
 | Client remarks and drawing reissue | [Direct response states and returned PDF](engineering-transmittal-review.md), notifications, revision fix, project references and [three-channel reissue](engineering-reissue-drawings.md) tested | Real Inventor/Vault release and separate client-user rehearsal; download-only review-status wording |
-| Production/procurement release | [Materialise/pin and production-order creation](engineering-production-release.md) tested locally for both assemblies | Real manufacturing readiness and handover; local review/release decisions were simulated |
+| Production/procurement release | [Materialise/pin and production-order creation](engineering-production-release.md) tested locally for both assemblies | Real manufacturing readiness and separate-role release rehearsal; local review/release decisions were simulated |
 | Planning and MRs | [Milestone dates, target versus achievable delay and MR date mapping](engineering-milestone-planning.md) tested | Repeat late-motor scenario on the actual workflow POs as part of readiness |
 | Supplier selection and project RVDs | [Agreed supplier/terms](engineering-supplier-selection.md), [Ordered lifecycle handover](engineering-procurement-handover.md) and [frozen project requirements](engineering-project-rvd-requirements.md) tested | Controlled later checklist/commercial amendments; full supplier-role rehearsal |
 | Supplier documents and Quality | [Rename-safe upload/events](engineering-supplier-document-uploads.md) and [live accepted-RVD status](engineering-po-documentation-status.md) implemented and locally tested | Separate supplier file-transfer/read-only Accepted/Quality-reopen walkthrough |
@@ -31,9 +31,11 @@ Start with a customer quotation and finish with manufactured, tested and documen
 
 ## Recommended next step
 
-Continue with **step 21: full physical/contractual rehearsal and project closure**. [As-built package and client handover](engineering-as-built-handover.md) now pass the local browser workflow: issued pinned dossier, whole-package client state change and scripted handover record. [Production material/header issue](engineering-production-material-issue.md) now passes local native and browser tests: partial fittings, header, motor and pump, with consumed MR reservations released. [Finished-goods receipt](engineering-production-receipt.md) now passes native and positive browser tests for both assemblies; screenshots show readiness, receipts, shelf quantities and the ledger. Synthetic test stock was restored. [Production completion and inspection records](engineering-production-completion.md) are implemented and tested through the browser and native lifecycle service for both assemblies, with screenshots. The [collection workflow](engineering-resume-production.md) now issues the replacement fitting, releases its MR reservation and retains operation-specific coverage. Full physical BOM coverage, returns and separate-role rehearsal remain to be assessed alongside actual production.
+Run **one complete rehearsal from quotation to final handover in a freshly seeded workspace**, using separate client, supplier and departmental users. The individual features have passed local tests; the next check is that all handoffs work together on the same project with the intended permissions.
 
-The original production orders have not been certified ready for manufacture. Full prerequisite review, actual accepted goods, separate-role testing, physical quarantine/collection and a complete fresh-project rehearsal remain necessary.
+Follow the linked guides in the progress table. Use the complete BOM, approved drawings and genuine inspection/document evidence for a real project. Test the late-motor scenario, supplier corrections and replacement fitting along the way. Finish with the [as-built package and client handover](engineering-as-built-handover.md).
+
+After that rehearsal, assess physical dispatch/delivery, remaining invoices/payments, open tasks and the authorised project-close decision. These are separate from recording the documentation handover. Temporary stock and approvals used in local tests were restored; the existing test orders are not certified ready for manufacture.
 
 ## Worked example
 
@@ -297,9 +299,9 @@ Implemented and locally tested: [Replace a wrong fitting](engineering-fitting-re
 
 ### 20. Warehouse / Production — replacement arrival and pickup
 
-The normal receipt service and scheduled evaluator advance the case to Arrived after full receipt; personal lifecycle subscriptions notify Production and Work Preparation. Ready for Pickup has a live criterion for receipt, inspection, reservation, optional required documents, no hold and pickup instructions. Corrected receipt or withdrawn evidence reopens the appropriate state. Collected and Closed remain authorised lifecycle actions; physical stock issue, hold release and disposition are explicit warehouse/team steps.
+The normal receipt service and scheduled evaluator advance the case to Arrived after full receipt; personal lifecycle subscriptions notify Production and Work Preparation. Ready for Pickup has a live criterion for receipt, inspection, reservation, optional required documents, no hold and pickup instructions. Corrected receipt or withdrawn evidence reopens the appropriate state. Collected and Closed remain authorised lifecycle actions. The [collection script](engineering-resume-production.md) consumes the fitting stock and releases the consumed MR reservation. Hold clearance and disposition remain explicit authorised team decisions before production resumes.
 
-Local fitting tests produced a real in-app arrival/pickup message. Synthetic stock, receipt and Quality evidence were restored; no real collection or production occurred. The test case was left awaiting replacement with its operation held. A production prerequisite hold is not a global inventory quarantine; separate-role and actual stock-disposition rehearsal remain.
+Local fitting tests produced a real in-app arrival/pickup message. Synthetic stock, receipt and Quality evidence were restored; no real collection or production occurred. Later [collection and restart tests](engineering-resume-production.md) also passed; temporary stock and state changes were restored. A production prerequisite hold is not a global inventory quarantine; separate-role and actual stock-disposition rehearsal remain.
 
 ### 21. Production / Quality / Project Management — finish and hand over
 
@@ -312,10 +314,10 @@ These closing activities extend the supplied outline to reach a finished product
 3. Execute the approved inspection/test plan and resolve NCRs/punch items. Use approved engineering test parameters, not unreviewed sample defaults.
 4. Record as-built changes and issue controlled documents where required.
 5. Compile drawings, BOM, supplier evidence, manufacturing/test records and manuals/certificates for handover.
-6. Issue the final client transmittal via the validated portal route and record acceptance and contractual dispatch/delivery.
-7. Close tasks/payment actions, reconcile costs/payments and archive under configured retention.
+6. Generate and issue the final transmittal, share its pinned files, obtain the configured whole-package client response and run **Record final handover**. These documentation handover actions are implemented and tested locally.
+7. Separately record physical dispatch/delivery and contractual obligations as applicable. Close tasks/payment actions, reconcile costs/payments and make the authorised project-close decision. These closing activities remain to be assessed in the complete rehearsal.
 
-**Output:** completed, documented assembly and explicit project closure.
+**Output:** a traceable as-built documentation handover. Physical delivery, settlement and project closure require their own evidence and decisions.
 
 ## Capability and implementation backlog
 
@@ -326,7 +328,7 @@ Current local implementation and evidence are summarised above. The table below 
 | P0 | Catalogue / project RVDs | Frozen project additions/exclusions and MR → PO propagation implemented/tested. Controlled later amendments and fresh rehearsal remain. |
 | P0 | Quotation → Project | Field-copy script and admin mappings/defaults implemented/tested. Quotation print output remains to validate. |
 | P0 | Document control / portal | Selection, PDF/version checks, pinned portal access, direct response states and reissue implemented/tested. Historical retention/access, distinct identities and recorded download-only wording remain. |
-| P0 | Early-buy / production authority | Existing permissions plus materialise/pin/order creation tested. Technical review/release stays in Vault; actual handover remains. |
+| P0 | Early-buy / production authority | Existing permissions plus materialise/pin/order creation tested. Technical review/release stays in Vault; real production-authority rehearsal remains. |
 | P0 | Supplier / terms | Project selection and agreed terms to PO implemented/tested; wider commercial amendment controls remain. |
 | P0 | Supplier documents / Quality | Rename-safe upload and current accepted-RVD aggregate implemented/tested; distinct supplier/Quality rehearsal and waiver handling remain. |
 | P0 | Subscriptions | Consent-based generic script proposals and Sales/Quality examples implemented/tested; real teams, email/tasks and old orders remain to rehearse. |
@@ -335,8 +337,11 @@ Current local implementation and evidence are summarised above. The table below 
 | Implemented / tested locally | Production readiness/date alerts | Owned prerequisites, editable script, real worker and personal notifications; full production rehearsal remains. |
 | Implemented / tested locally | NCR/replacement/pickup | Category, assignment script, linked replacement MR/PO, receipt worker and consented arrival/pickup updates; real disposition and collection remain team actions. |
 | Validated locally | Collection / restart | Collected, explicit hold clearance, ready header and Released/In Progress work; [walkthrough](engineering-resume-production.md). Replacement collection now posts stock issue and reservation release; [General material/header issue](engineering-production-material-issue.md) is now locally tested; full physical BOM coverage and returns remain separate. |
-| Implemented / native tests | Production completion / inspections | Separate header and final plans/records, accepted evidence, quantity/hold/prerequisite checks and authorised completion. Separate-role and actual inspection rehearsal remain. |
-| Later | Final handover | General material/header consumption, as-built/client handover and closure rehearsal. |
+| Implemented / tested locally | Production completion / inspections | Separate header and final plans/records, accepted evidence, quantity/hold/prerequisite checks and authorised completion. Separate-role and actual inspection rehearsal remain. |
+| Implemented / tested locally | Production material issue | Pinned BOM/header stock consumption, partial issues and atomic reservation release; full physical BOM and returns rehearsal remain. |
+| Implemented / tested locally | Finished-goods receipt | Both assemblies received through native and browser tests, with duplicate protection and stock-ledger evidence; separate Warehouse-user rehearsal remains. |
+| Implemented / tested locally | As-built / final client handover | Configurable sections, pinned dossier, PDF register, whole-package client response and scripted audit journal; [walkthrough and screenshots](engineering-as-built-handover.md). Real dossier and separate-role rehearsal remain. |
+| Remaining assessment | Dispatch / settlement / project closure | Physical delivery, financial reconciliation, outstanding tasks and authorised close decision; documentation handover does not perform these actions. |
 | Other | Administration usability | Automations Used in / Hide / Show hidden remains planned; not a readiness prerequisite. |
 
 ### Automation event contract
@@ -374,9 +379,9 @@ Prefer existing entity/property/link mechanisms. New numeric IDs/references use 
 | Payments | 100% reconciled; whole-PO milestones wait for applicable lines; actual payment separately approved |
 | Final handover | Tested assembly, resolved exceptions, controlled evidence and close decision |
 
-## Planned departmental chapters
+## Departmental walkthroughs
 
-Keep this page as the extensive process plan. Add guides beneath Engineering Project Workflow as capabilities are validated: Sales quotation/project; Engineering assembly/BOM; Document Control approvals/transmittals; Work Preparation demand; Procurement offers/POs/payments; Supplier submissions; Engineering revision/release; Warehouse receipt/pickup; Quality review; Production/NCR; Project Management handover/close.
+The progress table links the implemented departmental guides, from quotation/project creation through procurement, document control, production, warehouse receipt and final client documentation handover. Use this overview to follow their order. Extend the guides with findings from the complete rehearsal; dispatch, settlement and project closure remain separate follow-up topics.
 
 Each chapter needs prerequisites, owner, exact UI actions, expected outcome, handoff, exceptions and evidence. Reuse existing Inventor and supplier portal guides. Record movies only after corresponding acceptance checks pass.
 
