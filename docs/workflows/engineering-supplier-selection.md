@@ -62,3 +62,5 @@ Administrators can configure labels, editors, available currencies, category pla
 Both MRs became **Ordered**, and the POs have the correct supplier, quantity, unit, commercial values and offer pins. The lifecycle-switch warning found in that first test has since been fixed and retested: see [Hand ordered requirements to project procurement](engineering-procurement-handover.md). The motor and pump project positions now both show Procurement Lifecycle / Ordered.
 
 This step does not resolve project-specific RVD additions/exclusions flowing to PO placeholders, MR When Required flowing to the PO line, or payment milestones. Agreed lead time is recorded on the MR and PO line; it does not automatically change project planning or populate Promised Delivery. Review those dates separately.
+
+Before creating the MR, review [project-specific RVD requirements](engineering-project-rvd-requirements.md). The PO uses the frozen MR checklist alongside the agreed supplier terms.

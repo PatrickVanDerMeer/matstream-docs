@@ -56,3 +56,7 @@ Supplier uploads the correct PO-line requirement; file/version and visible state
 ## Sources
 
 `MatStream.API/MatStream.Infrastructure/Repositories/SqlServer/Tenant/SqlDocumentRepository.cs`, UploadFileToDocumentAsync; `MatStream.API/MatStream.Application/Services/Tenant/DocumentService.cs`, UploadFileToDocumentAsync and WasFileUnchangedAsync; `MatStream.API/MatStream.API/Controllers/PortalController.cs`, Upload; `MatStream.API/MatStream.Application/Services/Tenant/SubscriptionEventConsumer.cs`; `MatStream.Web.Manage/Features/Setup/Templates/Parts/RequiredVendorDocumentsPart.cs`.
+
+## Implemented upload slice — 16 November 2026
+
+Rename-safe administrator state mapping and transactional document.uploaded events now notify eligible document/owner State-change subscribers, including replacements in the same state. Default settings and admin UI are included. See [local test evidence](engineering-project-rvd-upload-test.md). Automatic department subscription scripts and the broader completion workflow remain separate.

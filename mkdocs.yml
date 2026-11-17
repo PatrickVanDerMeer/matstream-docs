@@ -67,6 +67,19 @@ nav:
       - Engineering - Release project assemblies: workflows/engineering-production-release.md
       - Engineering - Plan against project milestones: workflows/engineering-milestone-planning.md
       - Work Preparation - Material requirement dates: workflows/engineering-material-requirement-dates.md
+      - Work Preparation - Project RVD requirements: workflows/engineering-project-rvd-requirements.md
+      - Supplier - Upload documents and notify reviewers: workflows/engineering-supplier-document-uploads.md
+      - Quality - PO documentation status: workflows/engineering-po-documentation-status.md
+      - Sales and Quality - Subscription proposals: workflows/engineering-subscription-proposals.md
+      - Project Management and Purchasing - Payment milestones: workflows/engineering-payment-milestones.md
+      - Purchasing and Quality - Complete PO lines: workflows/engineering-po-line-completion.md
+      - Production - Readiness and start-date messages: workflows/engineering-production-readiness.md
+      - Production and Quality - Replace a wrong fitting: workflows/engineering-fitting-replacement.md
+      - Production - Collect replacement and resume work: workflows/engineering-resume-production.md
+      - Production and Quality - Complete production and inspections: workflows/engineering-production-completion.md
+      - Warehouse - Receive completed production: workflows/engineering-production-receipt.md
+      - Issue BOM materials to production: workflows/engineering-production-material-issue.md
+      - As-built package and client handover: workflows/engineering-as-built-handover.md
       - Inventor assembly and BOM: workflows/inventor-assembly-bom.md
   - Administration:
     - Inviting users: admin/inviting-users.md

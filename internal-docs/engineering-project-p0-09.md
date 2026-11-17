@@ -53,3 +53,11 @@ Sales watch ignores intermediate states and reports selected delivery completion
 ## Sources
 
 `MatStream.API/MatStream.Web.Shared/Dtos/Subscription/EntitySubscriptionDtos.cs`; `MatStream.API/MatStream.Shared/Enums/EnumEntitySubscription.cs`; `MatStream.API/MatStream.Application/Services/Tenant/EntitySubscriptionService.cs`, `SubscriptionEventConsumer.cs`; existing subscription delivery/repository code; `matstream-docs/docs/features/subscriptions.md`.
+
+## Implemented upload slice — 16 November 2026
+
+Rename-safe administrator state mapping and transactional document.uploaded events now notify eligible document/owner State-change subscribers, including replacements in the same state. Default settings and admin UI are included. See [local test evidence](engineering-project-rvd-upload-test.md). Automatic department subscription scripts and the broader completion workflow remain separate.
+
+## Implemented personal lifecycle subscription proposals — 16 November 2026
+
+Generic administrator-defined script rules now propose filtered subscriptions following configured lifecycle transitions. Each recipient consents and can remember Yes/No by rule/transition in personal workspace settings; User Settings can restore Ask or change the answer. Sales delivery-completion and Quality upload examples are seeded. See [test evidence](engineering-project-subscription-proposals-test.md) and [workflow guide](../docs/workflows/engineering-subscription-proposals.md). This does not implement Payment Milestones or final technical completion.

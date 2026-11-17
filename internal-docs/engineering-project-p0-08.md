@@ -68,3 +68,7 @@ Motor has four effective requirements. Three Accepted plus one Submitted means d
 ## Sources
 
 `MatStream.Web.Manage/Features/Setup/Templates/Parts/RequiredVendorDocumentsPart.cs`; `MatStream.Web.Assembly/Features/DisplayTabs/UsesDisplayTab.razor`; `MatStream.API/MatStream.Infrastructure/Repositories/SqlServer/Tenant/SqlDocumentRepository.cs`; `MatStream.API/MatStream.Application/Services/Tenant/DocumentService.cs`; `matstream-docs/docs/admin/lifecycle.md`.
+
+## Implemented live documentation result — 16 November 2026
+
+PO lines now expose a live administrator-scripted evaluation of their frozen requirements and accepted current evidence, with blockers and counts. It avoids a cached flag and recalculates on open/refresh, including after removal or replacement. Seed/configuration UI and local motor/pump tests are included. No waiver or payment/technical-completion automation is claimed. See [test evidence](engineering-project-po-documentation-test.md) and [workflow](../docs/workflows/engineering-po-documentation-status.md).

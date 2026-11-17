@@ -2,6 +2,10 @@
 
 Source assessment: 14 November 2026. No implementation or live workspace changes. Existing tests were inspected, not run. This narrows P0-01; Quality review, submission-state mappings, notifications and payment logic belong to later P0 items.
 
+## Implementation update — 15 November 2026
+
+Project additions and reasoned exclusions now freeze on MR creation and flow to independent PO-line checklists. Local motor/pump tests passed. The original assessment below is historical; controlled later amendment UI remains outside this slice. See [test evidence](engineering-project-rvd-test.md).
+
 ## Conclusion
 
 The core catalogue and RVD propagation machinery exists. P0-01 needs assessment of project-specific checklist changes and an end-to-end readiness check. One enabled RVD occurrence category is the supported configuration; multi-category routing is excluded from P0. Do not rebuild the catalogue, MR or PO checklist mechanism.

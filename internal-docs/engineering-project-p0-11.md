@@ -1,8 +1,8 @@
 # P0-11: script-driven technical completion
 
-Source assessment: 14 November 2026. Planning only; no implementation or live tests. Use editable automation scripts for business policy and platform APIs for safe reads/writes.
+Original source assessment: 14 November 2026. The plan below is retained for scope; the delivery/RVD completion slice was implemented and tested locally on 16 November 2026. Use editable automation scripts for business policy and platform APIs for safe reads/writes.
 
-Agreed required fix: implement the script-driven technical-completion and invalidation workflow described below, including supported evidence APIs, real event attachments, guarded target transitions and integration with shared Payment Milestones. Implementation remains on hold.
+Agreed required fix: implement the script-driven technical-completion and invalidation workflow described below, including supported evidence APIs, real event attachments, guarded target transitions and integration with shared Payment Milestones. The current implementation is described at the end; quality-disposition integration and broader follow-up remain separate.
 
 ## Intended result
 
@@ -76,3 +76,11 @@ Test goods-first and documents-first, partial/rejected/quarantined goods, Qualit
 ## Sources
 
 `MatStream.API/MatStream.Application/Services/Tenant/Scripting/ScriptContext.cs`, `ScriptAutomationService.LifecycleActions.cs`; `MatStream.API/MatStream.Application/Services/Tenant/AutomationRunner.cs`; `MatStream.API/MatStream.Application/Services/Tenant/Procurement/PurchaseOrderService.cs`, CloseFullyReceivedOrdersAsync; lifecycle administrator help and P0-07/08/09/10 assessment dependencies.
+
+## Implemented: delivery and accepted-RVD completion
+
+Stored `Purchasing: Complete PO lines` script, admin Parameters, PO Line Completion Lifecycle, Completion Hold and live status editor; normal transactional lifecycle transitions with a live completion precondition; verified internal Editor event worker and configurable periodic reconciliation. Fresh Engineering Project and a focused PO-line Completion installer seed the configuration and preserve installed customizations. Existing records/default lifecycles are not silently replaced.
+
+Motor/pump local transactional tests and the running worker/browser test exercise both completion and evidence invalidation. No payment is made. Existing payment eligibility consumes the resulting entity/lifecycle events and independently rechecks whole-PO evidence. Normal lifecycle subscriptions can notify teams; a separate payment-request/reminder task is not created by this feature.
+
+Remaining: automatic quarantine/disposition integration beyond the editable Completion Hold, more advanced commercial amendments/credits and explicitly scoped escalation/reminder actions. See public `engineering-po-line-completion.md` for settings, limitations and test evidence.

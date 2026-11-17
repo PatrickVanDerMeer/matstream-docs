@@ -1,13 +1,39 @@
 # Engineering Project Workflow
 
-!!! warning "Workflow plan — proposed process"
-    This plan includes configuration and development still needed. It does not claim every action or automation is already available. The capability assessment is based on repository inspection on 14 November 2026; the target workspace still needs end-to-end validation.
+!!! info "Current plan — reconciled 17 November 2026"
+    The feature slices below are implemented and tested locally. Production readiness now has a local operation-level walkthrough; the wrong-fitting replacement loop is also implemented with local test evidence. Collection, hold clearance and production execution states have also been tested; replacement stock issue is now tested too; production completion and inspection records now pass native and browser local tests; physical manufacturing, the real contractual dossier and project closure remain. Temporary receipt/document evidence used for completion tests was restored; the motor and pump test lines were left **Awaiting evidence**. No real delivery, Quality approval or payment is implied.
 
-Start with a customer quotation and finish with manufactured, tested and documented assemblies. Keep quotation, project, BOM, approvals, transmittals, purchases, required vendor documents (RVDs), payment milestones and quality exceptions traceable.
+Start with a customer quotation and finish with manufactured, tested and documented assemblies. The workflow itself is our test: at each step distinguish working behavior, configuration needed and development needed. All new business settings remain workspace-admin-configurable; use editable automation scripts where possible. The latest implementation adds the as-built package and final client handover, following production completion, receipt and material issue.
 
-The first practical step is now documented with a local workflow test and screenshots: [Sales — Quotation and project](engineering-quotation-project.md). The next tested steps are [Engineering — Add the assembly](engineering-add-assembly.md) and [Engineering — Select transmittal documents](engineering-project-documents.md). The next tested step is [Engineering — Generate transmittal PDF](engineering-transmittal-pdf.md). [Engineering — Share the issued transmittal](engineering-transmittal-portal.md) now covers fixed package portal access. [Client — Review and return commented PDFs](engineering-transmittal-review.md) now covers approval records and returned files. [Engineering — Resolve client comments](engineering-comment-resolution.md) adds ownership, checking and traceability to revised drawings and replacement issues. [Engineering — Update and reissue drawings](engineering-reissue-drawings.md) now records the local revision B reissue to client and Work Preparation, including the gaps found. The project drawing revision action has since been fixed and tested with administrator-controlled revision schemes. [Select the transmittal’s project](engineering-transmittal-project-reference.md) now covers reusable references without copying unique project numbers, including administrator settings and the PDF test. Later stages below remain a plan until exercised in the workflow.
+## Current progress
 
-[Purchasing — Select a project supplier and agree terms](engineering-supplier-selection.md) documents the local motor and pump agreements, PO creation. [Purchasing — Hand ordered requirements to project procurement](engineering-procurement-handover.md) now covers the corrected lifecycle switch and successful motor/pump retest.
+| Workflow area | Status and evidence | Still to do |
+|---|---|---|
+| Quotation → Project | Field-copy script, admin mappings/defaults and local [walkthrough](engineering-quotation-project.md) complete | Validate quotation print output and wider role scenarios |
+| Project BOM and units | Configurable BOM Position creation, Stock Unit/fallback/required review and Units of Quantity dialog; [local placement](engineering-add-assembly.md) tested | Full fresh-workspace rehearsal |
+| Transmittals | [Selection/filter/columns](engineering-project-documents.md), [PDF/history/issue consistency](engineering-transmittal-pdf.md) and [pinned portal packages](engineering-transmittal-portal.md) tested | Full historical access/retention and distinct-user checks |
+| Client remarks and drawing reissue | [Direct response states and returned PDF](engineering-transmittal-review.md), notifications, revision fix, project references and [three-channel reissue](engineering-reissue-drawings.md) tested | Real Inventor/Vault release and separate client-user rehearsal; download-only review-status wording |
+| Production/procurement release | [Materialise/pin and production-order creation](engineering-production-release.md) tested locally for both assemblies | Real manufacturing readiness and handover; local review/release decisions were simulated |
+| Planning and MRs | [Milestone dates, target versus achievable delay and MR date mapping](engineering-milestone-planning.md) tested | Repeat late-motor scenario on the actual workflow POs as part of readiness |
+| Supplier selection and project RVDs | [Agreed supplier/terms](engineering-supplier-selection.md), [Ordered lifecycle handover](engineering-procurement-handover.md) and [frozen project requirements](engineering-project-rvd-requirements.md) tested | Controlled later checklist/commercial amendments; full supplier-role rehearsal |
+| Supplier documents and Quality | [Rename-safe upload/events](engineering-supplier-document-uploads.md) and [live accepted-RVD status](engineering-po-documentation-status.md) implemented and locally tested | Separate supplier file-transfer/read-only Accepted/Quality-reopen walkthrough |
+| Sales/Quality subscriptions | [Script proposals, consent, Remember and User Settings](engineering-subscription-proposals.md) tested | Real team access/membership and email/task transport; handle already-issued orders explicitly |
+| Payment planning/eligibility | [Shared Project/PO 30/50/20 milestones and automatic PO eligibility](engineering-payment-milestones.md) tested | Invoice/settlement evidence and controlled amendments; Project invoice eligibility is manual |
+| PO-line completion | [Full delivery + accepted RVDs + no hold; automatic completion/reopening](engineering-po-line-completion.md) tested on motor/pump | Actual goods/Quality decisions and wider goods-disposition integration beyond Completion Hold |
+| Production readiness | [Prerequisites, editable script and scheduled personal notifications](engineering-production-readiness.md) tested locally | Full BOM/resources and separate-role rehearsal; late motor on original workflow POs |
+| Wrong fitting and replacement | [Non-conformance, held prerequisite, replacement MR/PO and arrival/pickup messages](engineering-fitting-replacement.md) tested locally | Separate-role and real quarantine/return/pickup rehearsal |
+| Production completion / inspections | [Plans, inspection records, review permissions and live completion criterion](engineering-production-completion.md) passed native and browser local tests for both assemblies, including uploads, review, completion and screenshots | Separate-role rehearsal; actual physical inspections |
+| Production material issue | [Scripted pinned BOM/header consumption and atomic MR reservation release](engineering-production-material-issue.md); partial and full native/browser tests | Full physical BOM coverage, returns and separate-role rehearsal |
+| Finished-goods receipt | [Scripted full-output receipt, original revision, stock unit and duplicate protection](engineering-production-receipt.md) tested natively and through positive browser receipts for both assemblies, with screenshots | Separate Warehouse-user rehearsal |
+| Final handover | [As-built sections, issued package, portal acknowledgement and scripted handover journal](engineering-as-built-handover.md) tested locally with screenshots | Real dossier/physical delivery, separate-role rehearsal and project closure |
+
+“Tested locally” is feature evidence, not a claim that one fresh project has completed the full real-world story. Earlier tests used separate local planning/procurement fixtures and the current test account in multiple roles. Separate identities, actual receipt/inspection and a complete freshly seeded rehearsal remain outstanding.
+
+## Recommended next step
+
+Continue with **step 21: full physical/contractual rehearsal and project closure**. [As-built package and client handover](engineering-as-built-handover.md) now pass the local browser workflow: issued pinned dossier, whole-package client state change and scripted handover record. [Production material/header issue](engineering-production-material-issue.md) now passes local native and browser tests: partial fittings, header, motor and pump, with consumed MR reservations released. [Finished-goods receipt](engineering-production-receipt.md) now passes native and positive browser tests for both assemblies; screenshots show readiness, receipts, shelf quantities and the ledger. Synthetic test stock was restored. [Production completion and inspection records](engineering-production-completion.md) are implemented and tested through the browser and native lifecycle service for both assemblies, with screenshots. The [collection workflow](engineering-resume-production.md) now issues the replacement fitting, releases its MR reservation and retains operation-specific coverage. Full physical BOM coverage, returns and separate-role rehearsal remain to be assessed alongside actual production.
+
+The original production orders have not been certified ready for manufacture. Full prerequisite review, actual accepted goods, separate-role testing, physical quarantine/collection and a complete fresh-project rehearsal remain necessary.
 
 ## Worked example
 
@@ -84,7 +110,7 @@ These assignments exist in `PipingEngineeringPart.cs`; `EngineeringSampleArticle
 
 1. Configure acceptance automation to create a Project in the intended Explorer folder.
 2. Accept and verify one project with its pinned **Generated From** link to the accepted quotation version. Reuse an output already created.
-3. Populate client, owner, scope, contacts, delivery/start dates and milestones. The generic creation action creates, places and links the output; automatic copying of all quotation properties/lines is not established.
+3. Verify automatically copied Client/contact and the administrator-mapped fields/defaults against the accepted quotation. Complete any remaining owner, scope, schedule and milestone fields. Automatic quotation-line/BOM conversion is not part of this field-copy feature.
 4. Prepare project areas for BOM, drawings, transmittals, procurement, tasks, quality and handover.
 
 **Output:** traceable project with clear ownership and schedule.
@@ -103,11 +129,11 @@ Follow the illustrated [Add the assembly walkthrough](engineering-add-assembly.m
 
 ### 4. Document Control — client approval transmittal
 
-**Agreed target workflow:** the engineer creates a Transmittal with properties and expected response (For Approval, For Information, For Quotation, etc.). Its Project Documents tab shows a project-scoped list with an engineer-editable filter, checkboxes and Choose columns. Add selected documents as persistent issue lines, review/issue the pinned package, generate a PDF from the configured transmittal template and attach it to the record. Share the PDF and issued files through the portal with named clients, departments or third parties. Returned commented PDFs are separate response evidence linked to the transmittal/line, never replacements of the originals. The engineer edits the working filter and chooses columns while preparing the package. Administrator UI controls starting defaults, permissions, default columns, purposes/descriptions, response rules, templates, generation actions and permissions. Selection, PDF generation, fixed portal sharing and client responses are now implemented and tested locally; follow the step guides. Later revision and production release gates remain to be exercised.
+**Agreed target workflow:** the engineer creates a Transmittal with properties and expected response (For Approval, For Information, For Quotation, etc.). Its Project Documents tab shows a project-scoped list with an engineer-editable filter, checkboxes and Choose columns. Add selected documents as persistent issue lines, generate and attach the PDF from the configured transmittal template, then review/issue and pin the package. Share the PDF and issued files through the portal with named clients, departments or third parties. Returned commented PDFs are separate response evidence linked to the transmittal/line, never replacements of the originals. The engineer edits the working filter and chooses columns while preparing the package. Administrator UI controls starting defaults, permissions, default columns, purposes/descriptions, response rules, templates, generation actions and permissions. Selection, PDF generation, fixed portal sharing and client responses are now implemented and tested locally; follow the step guides. Revision handling and materialise/pin release have since been tested locally; actual Vault review/release and production handover remain separate.
 
 1. Create a Transmittal with client recipient, **For Approval**, owner, issue date, response due date, distribution channel and reference.
 2. Add a Document Issue Line resolving the controlled document/version containing ITM-00000.pdf. A loose filename is insufficient.
-3. Review and issue through **Ready to Issue → Issued**; verify version pinning.
+3. Generate the PDF, then review and issue through **Ready to Issue → Issued**; consistency checks and version pinning apply.
 4. Share the package using Share/Manage Access and the recipient portal. Test as the client: issued drawing accessible, internal pricing, other projects and unissued revisions inaccessible.
 5. Distribute the invitation through the agreed process and track response.
 6. Follow [Client review responses](engineering-transmittal-review.md): submit the decision and commented PDF, then inspect the separate response record. Downloading is not approval.
@@ -147,12 +173,12 @@ Follow the illustrated [Add the assembly walkthrough](engineering-add-assembly.m
 
 1. Resolve buyer, Sales/project contact and Quality reviewer, with read access and backups.
 2. Arrange Sales notification for the line's **Delivery Complete** event and Quality notification for supplier RVD upload/replacement.
-3. Automatically assign these watches at line creation/issue once a supported runner exists. Define how membership/staff changes affect recipients.
+3. Configure the seeded lifecycle-triggered subscription proposals. Each user chooses Yes/No and may Remember the answer; users can change it in User Settings. Already-issued orders need an explicit plan because proposals are not retroactive.
 4. Test channels, expiry, own-change handling, repeat behavior and exact item links.
 
 **Output:** subscriptions exist before supplier activity. This consolidates the repeated subscription steps in the initial outline.
 
-**Gap:** current subscriptions watch general state/version/revision changes. Target-state filters, automatic assignment and child-upload routing require validation or implementation. A PO-header watch does not establish notification for child uploads. Avoid stopping after the first broad state change when intermediate states precede delivery.
+**Implemented and locally tested:** delivery-only and RVD-upload event matching, child-document routing and consent-based script proposals. Validate real department access/membership and selected transport channels; email/task delivery was not exercised by the local consent test.
 
 ### 9. Procurement — create and share POs
 
@@ -167,7 +193,7 @@ Follow the illustrated [Add the assembly walkthrough](engineering-add-assembly.m
 
 ### 10. Procurement / Finance — 30/50/20 payment planning
 
-Proposed basis: agreed PO net value/currency, with explicit tax, invoice, rounding and retention rules. This is supplier payment planning, unrelated to MatStream subscription billing.
+The [shared Payment Milestone planning step](engineering-payment-milestones.md) is implemented: enter the agreed basis/currency and schedule date, then create the editable 30/50/20 example on a Project or PO. Issued-PO eligibility is now evaluated by an administrator-configurable script using whole-order delivery and accepted RVD evidence; plan creation itself only records the agreement. This is supplier payment planning, unrelated to MatStream subscription billing.
 
 | Milestone | Share | Eligibility |
 |---|---|---|
@@ -239,72 +265,49 @@ Example only: EUR 10,000 net gives EUR 3,000 / EUR 5,000 / EUR 2,000; these are 
 3. Review item/tag/serial/batch, revision, document type and acceptance criteria.
 4. Accept/reject each document with reviewer/date/reason; request corrections where needed.
 5. Configure Accepted as read-only for suppliers. Quality must reopen a requirement through an authorised transition before supplier correction; reopening invalidates completion and replacement evidence requires review again.
-6. Documentation is complete only when all applicable requirements are accepted or authoritatively waived. Define zero-requirement behavior so a missing checklist cannot accidentally qualify.
+6. Use the live documentation status: every included frozen requirement needs accepted current evidence. Project exclusions are recorded before freezing; a general post-order waiver/amendment workflow is not supplied by this feature. Administrators configure explicit empty-checklist behavior; a missing checklist cannot qualify.
 
 **Output:** accepted evidence, distinct from file submission. Internal header/system manufacturing evidence is separate from supplier pump/motor RVDs.
 
-**Gap:** Accepted/Rejected lifecycle states and replacement reset to Submitted already exist. Validate Quality permissions and review usability; add configurable submission-state mapping, upload notifications, waiver policy and aggregate completion where missing. The current reset resolves the literal state name Submitted and must respect administrator customisation.
+**Implemented and locally tested:** upload reset uses configured state IDs, upload/replacement events notify eligible subscribers, and the live documentation script verifies current evidence. Separate supplier/Quality permission rehearsal and a controlled waiver/amendment process remain open.
 
 ### 17. Automation / Procurement — complete lines and request final payment
 
-Proposed decision rule:
+The [automatic PO-line completion step](engineering-po-line-completion.md) is implemented. The stored workspace script combines full receipt quantities, acceptance of every required current RVD and Completion Hold. It moves only lines in the configured managed lifecycle states:
 
 ```text
-DeliveryComplete = accepted received quantity >= current required quantity
-DocumentationComplete = every applicable RVD accepted or authorised waived
-TechnicalComplete = DeliveryComplete AND DocumentationComplete
-                    AND no blocking quality hold AND line not cancelled
-FinalPaymentEligible = every applicable line TechnicalComplete
-                       AND commercial milestone/invoice checks satisfied
+Awaiting evidence → Complete: full delivery + all required RVDs accepted + no hold
+Complete → Awaiting evidence: any required evidence stops qualifying or a hold is set
+Cancelled: unchanged by the worker
 ```
 
-1. Re-evaluate after receipt/correction, document review/replacement/waiver, quantity change, cancellation and quality-hold change.
-2. Read persisted evidence and update atomically through supported APIs/transitions, handling either event order.
-3. Set configured line **Complete** once while retaining independent delivery/document statuses.
-4. Create one final-payment action for Procurement per eligibility cycle, linking the evidence.
-5. Audit rule/configuration version, inputs, result and failures; retry without duplicate transitions/tasks.
-6. Later invalidation holds unpaid requests and alerts the owner. Already paid milestones create an exception, not rewritten payment history.
+Events and configurable reconciliation re-read saved evidence. Normal lifecycle transitions enforce permissions and a live completion criterion, record history and notify ordinary lifecycle subscribers. The motor and pump were verified locally in both directions. Receiving goods alone or uploading an unaccepted file does not complete the line.
 
-**Gap:** current scripts support revision changes, lifecycle switching, assignment and notifications. They do not establish this cross-item receipt/RVD evaluator or a generic PO-line transition to Complete. Specify the supported aggregation reads, guarded transition/action and evidence-change runners before implementing the script. Earlier help stating these lifecycle helpers are unsupported is stale.
+The existing [payment milestone evaluator](engineering-payment-milestones.md) separately rechecks whole-PO evidence following those events. Technical completion is not payment approval or proof of payment. Request/approve/pay remain authorized lifecycle steps; the new completion feature does not create an extra payment-request task or transfer money. Invoice/settlement evidence checks, automatic quality-disposition integration beyond Completion Hold and any additional reminders/escalation remain separate follow-up work.
 
 ### 18. Work Preparation / Production — readiness and start-date messages
 
-Use two separate signals:
+Implemented: [Production readiness and start-date messages](engineering-production-readiness.md). Each production order has a reviewed Prerequisites Uses tab and planning activity. An editable script evaluates allocated physical materials, preceding orders, holds and optional accepted supplier-document evidence. A real background worker publishes changes and dated warnings through personal subscriptions. Mappings, labels, states, defaults and timing remain admin-configurable.
 
-- **Ready for Production:** released/approved baseline, operation materials accepted/allocated, work instructions/resources available and quality prerequisites satisfied.
-- **Production Start Due:** date reached; alert even when blocked and list blockers. The date itself never authorises production.
-
-Evaluate per operation: header fabrication can precede pump arrival if its own prerequisites qualify. Final assembly has its own gate. Send a handover task with exact drawings, BOM, allocations/locations and instructions. Notify once per relevant readiness/baseline cycle and handle rescheduling explicitly.
-
-**Gap:** validate or implement dependency-change evaluation and a real scheduled runner; a Scheduled Job context option alone is not a timer.
+Local tests showed the header can become ready while final assembly stays blocked, and delivered actual in-app ready/start warnings. Temporary stock and dates were restored. The signal never starts production or replaces Inventor/Vault release. Full BOM/instructions/resources and the original project's late-motor PO scenario remain to be rehearsed.
 
 ### 19. Production / Quality / Work Preparation — wrong fitting
 
-1. Stop use, identify and quarantine the fitting.
-2. Create a Q-call / Non-conformance linked to project, affected occurrence/version, original PO line and receipt. Attach photos, required/actual specification and impact.
-3. Assign Work Preparation for replacement coordination; Quality owns disposition. Record return/rework/scrap/concession separately.
-4. Confirm correct specification and create a linked replacement MR/PO without silently increasing design demand.
-5. Link replacement to NCR/original supply; record chargeable, warranty or credit treatment.
-6. Subscribe Work Preparation and Production to accepted receipt/ready-to-collect. Broad state watches can support a rehearsal with manual review.
-7. Monitor replacement due date and update production planning.
-
-**Output:** controlled replacement; wrong stock cannot satisfy readiness.
+Implemented and locally tested: [Replace a wrong fitting](engineering-fitting-replacement.md). Create a Non-conformance linked to the original MR/PO line and held production prerequisite. Record the defect, owner and disposition. The request transition runs an editable script to create one source-linked replacement MR, keeping design demand and the pinned item/RVD baseline intact. Normal MR purchasing creates the replacement PO.
 
 ### 20. Warehouse / Production — replacement arrival and pickup
 
-1. Receive against the replacement line; verify specification, quantity, traceability and required inspection/documents.
-2. Allocate to the project and record location. Receipt alone does not allow pickup while inspection is pending.
-3. Set configured accepted/available state and notify both teams with item, quantity, location, project and NCR reference.
-4. Record issue/collection to prevent double pickup; recheck readiness before restarting.
-5. Verify corrective result and close the NCR through authorised disposition, preserving original/replacement history.
+The normal receipt service and scheduled evaluator advance the case to Arrived after full receipt; personal lifecycle subscriptions notify Production and Work Preparation. Ready for Pickup has a live criterion for receipt, inspection, reservation, optional required documents, no hold and pickup instructions. Corrected receipt or withdrawn evidence reopens the appropriate state. Collected and Closed remain authorised lifecycle actions; physical stock issue, hold release and disposition are explicit warehouse/team steps.
 
-**Output:** correct fitting reaches Production with closure evidence.
+Local fitting tests produced a real in-app arrival/pickup message. Synthetic stock, receipt and Quality evidence were restored; no real collection or production occurred. The test case was left awaiting replacement with its operation held. A production prerequisite hold is not a global inventory quarantine; separate-role and actual stock-disposition rehearsal remain.
 
 ### 21. Production / Quality / Project Management — finish and hand over
 
+Follow [As-built documentation package and final client handover](engineering-as-built-handover.md) for the implemented selection, checklist, PDF, portal acknowledgement and handover record, with local screenshots.
+
 These closing activities extend the supplied outline to reach a finished product:
 
-1. Manufacture ITM-00006 to the released package; record certificates, weld traceability, inspection and tests.
+1. Manufacture ITM-00006 to the released package; record certificates, weld traceability, inspection and tests. Follow the [production completion and inspection records](engineering-production-completion.md) walkthrough for each production order.
 2. Assemble ITM-00000 with accepted equipment/header; capture installed tags/serials and deviations.
 3. Execute the approved inspection/test plan and resolve NCRs/punch items. Use approved engineering test parameters, not unreviewed sample defaults.
 4. Record as-built changes and issue controlled documents where required.
@@ -316,25 +319,25 @@ These closing activities extend the supplied outline to reach a finished product
 
 ## Capability and implementation backlog
 
-Established means supporting source/help was inspected; validate means scenario testing remains; proposed means required behavior is not yet evidenced. No live workspace execution has been verified.
+Current local implementation and evidence are summarised above. The table below distinguishes implemented slices from remaining validation and development; local tests do not imply production deployment or completed manufacture.
 
 | Priority | Capability | Assessment / next action |
 |---|---|---|
-| P0 | Catalogue, drawings, BOM and RVD sample | Required fix: project RVD additions/authorised exclusions must propagate through MR to PO with provenance and controlled freeze/change handling; validate existing catalogue and units |
-| P0 | Accepted quotation creates project | Required fix: acceptance script automatically copies Client, contact and administrator-mapped relevant quotation fields; extend existing generic create/link path |
-| P0 | Transmittal pinning | Established issue action; validate document references, rights and retention |
-| P0 | Client portal and response capture | Validate exact share/review route and version access; implement missing UI |
-| P0 | Preliminary versus production authority | Configure purposes and enforce approval/release gates |
-| P0 | Long-lead/offer traceability | Required fix: project-selected supplier and agreed offer terms drive procurement with durable provenance; retain independent Library defaults |
-| P0 | Supplier RVD submission | Required fixes: administrator-selected submission state and durable supplier upload/replacement signal; reuse existing upload/checklist/access mechanisms |
-| P0 | Quality acceptance/roll-up | Required fixes: evidence-bound documentation aggregate, configurable semantics and authorised-change invalidation; use existing Accepted read-only permissions and Quality reopening |
-| P0 | Specific/automatic subscriptions | Required script-first fixes: target-state/upload matching, child ownership routing, automatic assignment, supported APIs/runners and documented administrator examples; reuse delivery services |
-| P0 | Payment milestones | Required shared Payment Milestone category/Uses tab for Project invoice planning and PO payment planning; script-driven schedules/eligibility and configurable fields, lifecycles, approvals and evidence |
-| P0 | Script completion | Proposed aggregation APIs, transition action, event triggers, retry and hold rules |
-| P1 | Production readiness/date alerts | Proposed dependency evaluation and scheduled runner validation |
-| P1 | NCR/replacement | Validate category/lifecycle, assignees, quarantine and replacement demand |
-| P1 | Quotation print output | Current help records missing template; verify and provide if needed |
-| P1 | Worklists/handover | Configure overdue client responses/RVDs, review queue, payment readiness, production blockers, replacement arrivals and closure |
+| P0 | Catalogue / project RVDs | Frozen project additions/exclusions and MR → PO propagation implemented/tested. Controlled later amendments and fresh rehearsal remain. |
+| P0 | Quotation → Project | Field-copy script and admin mappings/defaults implemented/tested. Quotation print output remains to validate. |
+| P0 | Document control / portal | Selection, PDF/version checks, pinned portal access, direct response states and reissue implemented/tested. Historical retention/access, distinct identities and recorded download-only wording remain. |
+| P0 | Early-buy / production authority | Existing permissions plus materialise/pin/order creation tested. Technical review/release stays in Vault; actual handover remains. |
+| P0 | Supplier / terms | Project selection and agreed terms to PO implemented/tested; wider commercial amendment controls remain. |
+| P0 | Supplier documents / Quality | Rename-safe upload and current accepted-RVD aggregate implemented/tested; distinct supplier/Quality rehearsal and waiver handling remain. |
+| P0 | Subscriptions | Consent-based generic script proposals and Sales/Quality examples implemented/tested; real teams, email/tasks and old orders remain to rehearse. |
+| P0 | Payment Milestones | Shared planning and issued-PO eligibility implemented/tested; invoice/settlement evidence and controlled amendments remain. |
+| P0 | Script completion | Delivery/RVD/hold completion and reopening implemented/tested; wider goods-disposition integration and any additional escalation remain. |
+| Implemented / tested locally | Production readiness/date alerts | Owned prerequisites, editable script, real worker and personal notifications; full production rehearsal remains. |
+| Implemented / tested locally | NCR/replacement/pickup | Category, assignment script, linked replacement MR/PO, receipt worker and consented arrival/pickup updates; real disposition and collection remain team actions. |
+| Validated locally | Collection / restart | Collected, explicit hold clearance, ready header and Released/In Progress work; [walkthrough](engineering-resume-production.md). Replacement collection now posts stock issue and reservation release; [General material/header issue](engineering-production-material-issue.md) is now locally tested; full physical BOM coverage and returns remain separate. |
+| Implemented / native tests | Production completion / inspections | Separate header and final plans/records, accepted evidence, quantity/hold/prerequisite checks and authorised completion. Separate-role and actual inspection rehearsal remain. |
+| Later | Final handover | General material/header consumption, as-built/client handover and closure rehearsal. |
+| Other | Administration usability | Automations Used in / Hide / Show hidden remains planned; not a readiness prerequisite. |
 
 ### Automation event contract
 
@@ -398,3 +401,24 @@ Related: [Quotations](../features/opportunities-quotations.md), [Document Contro
 Create an assembly with existing fittings and a new part, fill in its information in Inventor, create a drawing with a parts list, and publish the drawing and BOM to MatStream using iLogic.
 
 [Follow the Inventor assembly and BOM guide](inventor-assembly-bom.md)
+
+Review [project-specific RVD requirements](engineering-project-rvd-requirements.md) before MR creation; the frozen decisions flow to each PO line.
+
+The implemented procurement steps include [supplier document upload and reviewer notification](engineering-supplier-document-uploads.md), with administrator-configured submission states that survive renaming.
+
+Quality can now check the [PO-line documentation status](engineering-po-documentation-status.md): a live script evaluates the frozen required checklist against current accepted evidence.
+
+Sales and Quality can now receive [personal subscription proposals](engineering-subscription-proposals.md) after configured lifecycle changes, with remembered Yes/No choices editable in User Settings.
+
+Plan customer invoicing and supplier payments with the shared [Payment Milestones category and 30/50/20 Uses tabs](engineering-payment-milestones.md). Creating the schedule records the agreement; eligibility, invoice issue and actual payment remain separate decisions.
+
+Project Management and Purchasing can now create [shared Payment Milestone plans](engineering-payment-milestones.md) on projects and POs, with an administrator-editable 30/50/20 example. Issued-PO eligibility now updates automatically from whole-order evidence; approval and actual payment remain separate.
+
+Purchasing and Quality can now [complete PO lines automatically](engineering-po-line-completion.md) from full delivery and accepted project-specific RVDs. Completion Hold and invalidation return a managed line to Awaiting evidence; payment approval and actual payment stay separate.
+
+### Collect the replacement and resume production
+
+The [collection and restart walkthrough](engineering-resume-production.md) tests Collected, explicit prerequisite hold clearance, readiness, Released/In Progress and independent final-assembly blockers, with screenshots. These existing actions work locally. Replacement collection now consumes its warehouse stock and releases its MR reservation; [General material/header issue](engineering-production-material-issue.md) is now locally tested; full physical BOM coverage and returns remain separate.
+
+
+The [finished-output warehouse receipt](engineering-production-receipt.md) is now an explicit stored script action. It does not consume the input BOM. [Issue the manufactured header into final assembly](engineering-production-material-issue.md) to avoid treating both loose and incorporated material as available stock; this action is now implemented and locally tested.

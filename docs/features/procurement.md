@@ -304,3 +304,11 @@ The Setup Wizard seeds **Purchasing** with `procurement.order`, **Warehouse** wi
 - [Automations](automations.md) — how the built-in procurement automations are configured
 - [Categories](../admin/categories.md) — category behaviours, including Material Requirement and Purchase Order
 - [Workspace setup](../getting-started/workspace-setup.md) — what the Engineering Project template seeds
+
+Project BOM positions can add RVD requirements or record reasoned exclusions. MR creation freezes the decisions, and each PO line receives the included checklist with pinned provenance. See [Project RVD requirements](../workflows/engineering-project-rvd-requirements.md).
+
+RVD uploads use an administrator-selected submission state by identity and publish durable upload notifications for document/owning-occurrence subscribers. See [supplier uploads](../workflows/engineering-supplier-document-uploads.md).
+
+The [PO-line documentation status](../workflows/engineering-po-documentation-status.md) live panel evaluates frozen RVD requirements through an editable read-only script. It requires accepted current evidence and cannot silently treat a missing/deleted checklist as complete.
+
+[Subscription proposals](../workflows/engineering-subscription-proposals.md) use administrator-configured scripts and personal consent. Seed examples offer delivery-completion watches to Sales and supplier-upload watches to Quality when a PO is issued.
