@@ -200,5 +200,5 @@ These routes require `automation.manage`. Use the numeric workspace ID and the r
 
 - [Lifecycle definitions](../admin/lifecycle.md) — configure the states and transitions that trigger lifecycle automations
 - [Import Definitions](import-definitions.md) — configure imports that trigger import automations
-- [Configuration overview](../admin/configuration.md) — all configuration areas
+- [Configuration overview](../admin/configuration/index.md) — all configuration areas
 - [Properties](../entities/properties.md) — calculated properties handle simple arithmetic without a script

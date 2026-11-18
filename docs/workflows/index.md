@@ -20,7 +20,7 @@ Follow a customer order across departments, from creation and procurement throug
 - [Dispatch — Pick, pack, and ship the order](pick-pack-send.md)
 - [Sales — Prepare invoice documents](../features/sales-orders.md#5-create-the-sales-order-invoice-document)
 
-[Open the Sales Order Workflow](sales-order.md) for the complete sequence and setup guidance.
+[Open the Sales Order Workflow](sales-order/index.md) for the complete sequence and setup guidance.
 
 ### Engineering Project Workflow
 
@@ -30,7 +30,7 @@ Plan the complete lube-oil system project: quotation, project BOM, client approv
 - [Engineering — Add the assembly to the project](engineering-add-assembly.md)
 - [Inventor assembly and BOM](inventor-assembly-bom.md)
 
-[Open the extensive Engineering Project Workflow plan](engineering-project.md), including department handoffs, capability gaps, and acceptance checks.
+[Open the extensive Engineering Project Workflow plan](engineering-project/index.md), including department handoffs, capability gaps, and acceptance checks.
 
 ## How to use a workflow
 

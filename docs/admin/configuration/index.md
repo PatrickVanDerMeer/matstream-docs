@@ -23,7 +23,7 @@ The **Configuration** navigation item appears when you have at least one grant f
 
 The API enforces these grants even if a request is made without using the MatStream interface. The interface hides or disables unavailable tabs and actions to make the user's access clear. Members of the system **Administrators** group pass all grant checks.
 
-See [Group grants](group-grants-dialog.md) to assign grants and understand how grants from multiple groups are combined.
+See [Group grants](../group-grants-dialog.md) to assign grants and understand how grants from multiple groups are combined.
 
 ---
 
@@ -35,13 +35,13 @@ Categories are the foundation of your workspace. A category defines a type of en
 
 Everything about an entity's structure is determined by its category. Before creating entities, your administrator must configure the categories that match your organisation's needs.
 
-→ [Categories](categories.md)
+→ [Categories](../categories.md)
 
 ### Property definitions
 
 Properties are the data fields that appear on entities. Your administrator defines which properties are available in the workspace and assigns them to categories. Properties can be simple text fields, dates, numbers, booleans, or controlled lists.
 
-→ [Property definitions](properties.md)
+→ [Property definitions](../properties.md)
 
 ### Lifecycle definitions
 
@@ -49,25 +49,25 @@ A lifecycle definition describes the states an entity moves through — from Dra
 
 Lifecycle definitions are reusable — one definition can be assigned to multiple categories.
 
-→ [Lifecycle definitions](lifecycle.md)
+→ [Lifecycle definitions](../lifecycle.md)
 
 ### Revision schemes
 
 A revision scheme defines the sequence of labels used when an entity is formally revised — for example A, B, C or 1, 2, 3. Schemes are built from configurable sequences of values and can combine up to three levels with a delimiter character.
 
-→ [Revision schemes](revision-schemes.md)
+→ [Revision schemes](../revision-schemes.md)
 
 ### Numbering schemes
 
 A numbering scheme is a template that automatically generates unique, human-readable identifiers for new entities. Templates combine static prefixes, date tokens, and auto-incrementing counters.
 
-→ [Numbering schemes](numbering.md)
+→ [Numbering schemes](../numbering.md)
 
 ### System settings
 
 Set the planning time zone, timesheet submission rules, replenishment destination and quantity units, or rebuild the search index. History purge offers a dry run and requires explicit confirmation before deletion.
 
-→ [System settings and purge](system-settings.md)
+→ [System settings and purge](../system-settings.md)
 
 ---
 
@@ -90,12 +90,12 @@ This order avoids having to revisit earlier steps when configuring categories.
 
 ## What is seeded automatically
 
-When a workspace is first created, MatStream seeds a base configuration to give you a starting point — including a default lifecycle, base categories, and common properties. See [Workspace setup](../getting-started/workspace-setup.md) for the full list.
+When a workspace is first created, MatStream seeds a base configuration to give you a starting point — including a default lifecycle, base categories, and common properties. See [Workspace setup](../../getting-started/workspace-setup.md) for the full list.
 
 ---
 
 ## Related
 
-- [Workspace setup](../getting-started/workspace-setup.md) — what is seeded when a workspace is created
-- [Categories](categories.md) — the central configuration object that ties everything together
-- [Users & groups](../admin/users-groups.md) — configure who can do what in the workspace
+- [Workspace setup](../../getting-started/workspace-setup.md) — what is seeded when a workspace is created
+- [Categories](../categories.md) — the central configuration object that ties everything together
+- [Users & groups](../users-groups.md) — configure who can do what in the workspace

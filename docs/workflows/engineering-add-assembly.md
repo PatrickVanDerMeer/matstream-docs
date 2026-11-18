@@ -110,7 +110,7 @@ These checks remain before production release:
 - Verify the required drawing versions, document access and revision controls during the transmittal step. This test saw the drawing rows but did not download or approve their PDFs.
 - Test ordinary Engineering-role permissions separately. This walkthrough used the local workspace owner account.
 
-No purchase demand, production release or client transmittal was created by this step. Continue with the [Engineering Project Workflow plan](engineering-project.md#4-document-control-client-approval-transmittal) for the approval transmittal.
+No purchase demand, production release or client transmittal was created by this step. Continue with the [Engineering Project Workflow plan](engineering-project/index.md#4-document-control-client-approval-transmittal) for the approval transmittal.
 
 ### Category and unit retests
 

@@ -63,4 +63,4 @@ Use the **Filter** tab for the starting category/property rules and **Settings**
 
 Document Control Setup installs Project Documents and the dedicated Document Issue Lines register. The older shared Documents tab remains available for its existing uses; the saved issue register is Document Issue Lines. Existing administrator changes are retained on a rerun, including disabling or removing the installed tab. New document categories installed later can be enabled here. A project with more than 1,500 candidate documents currently reports a limit; it does not silently return a partial list.
 
-Continue with the remaining client approval transmittal steps in the [Engineering Project Workflow](engineering-project.md).
+Continue with the remaining client approval transmittal steps in the [Engineering Project Workflow](engineering-project/index.md).

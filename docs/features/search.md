@@ -114,6 +114,6 @@ The quick search bar uses the Lucene index. Advanced filter panels (property-bas
 
 ## Related
 
-- [Library](../features/library.md) — the primary search surface
-- [Explorer](../features/explorer.md) — structure-based browsing
+- [Library](library.md) — the primary search surface
+- [Explorer](explorer.md) — structure-based browsing
 - [Property definitions](../admin/properties.md) — marking properties as searchable

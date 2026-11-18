@@ -153,4 +153,4 @@ automatically have rights inside the workspace.
 - [Inviting users](inviting-users.md) — add people to your workspace
 - [Users & groups](users-groups.md) — control what they can see and do
 - [Upgrading your plan](../billing/upgrading.md) — buy more seats
-- [Billing overview](../billing/overview.md) — how seats are charged
+- [Billing overview](../billing/overview/index.md) — how seats are charged

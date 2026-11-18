@@ -53,5 +53,5 @@ The assistant may not find every relevant section. If the help does not establis
 ## Related
 
 - [Quick start](../getting-started/quick-start.md)
-- [Configuration overview](../admin/configuration.md)
+- [Configuration overview](../admin/configuration/index.md)
 - [Automations](automations.md)

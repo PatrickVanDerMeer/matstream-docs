@@ -94,4 +94,4 @@ The workspace administrator continues to control property/category definitions, 
 
 Drawing files and earlier issued transmittals were not changed. Material availability, workshop readiness and the Production Order's own release remain separate steps. The sample PDFs still have their previous Work in Progress metadata; this local data test is not authority to manufacture.
 
-Continue with the [Engineering Project Workflow](engineering-project.md).
+Continue with the [Engineering Project Workflow](engineering-project/index.md).

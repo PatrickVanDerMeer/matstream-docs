@@ -188,9 +188,9 @@ Design for the exception, not just the happy path. Make sure there is always a t
 ## Related
 
 - [Categories](categories.md) — assign lifecycle definitions to categories
-- [Configuration overview](configuration.md) — recommended configuration order
+- [Configuration overview](configuration/index.md) — recommended configuration order
 - [Lifecycle](../entities/lifecycle.md) — how users interact with lifecycle states and transitions
-- [Users & groups](../admin/users-groups.md) — configure group permissions for transitions
+- [Users & groups](users-groups.md) — configure group permissions for transitions
 
 ## State business roles
 

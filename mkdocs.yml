@@ -16,6 +16,7 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
   features:
+    - navigation.indexes
     - search.suggest
     - search.highlight
 
@@ -41,9 +42,9 @@ nav:
     - Accessing a workspace: getting-started/workspace-access.md
     - Your account menu: getting-started/account-menu.md
   - Work Flows:
-    - Overview: workflows/index.md
+    - workflows/index.md
     - Sales Order Workflow:
-      - Overview: workflows/sales-order.md
+      - workflows/sales-order/index.md
       - Sales - Create a Sales Order: workflows/create-sales-order.md
       - Procurement - Create a PO from MR: workflows/arrange-missing-stock.md
       - Procurement - Share a PO with a vendor: workflows/vendor-purchase-order.md
@@ -53,7 +54,7 @@ nav:
       - Sales - Invoice documents: features/sales-orders.md
       - Whole-order setup and behavior: workflows/whole-order-pick-pack-receive.md
     - Engineering Project Workflow:
-      - Overview: workflows/engineering-project.md
+      - workflows/engineering-project/index.md
       - Sales - Quotation and project: workflows/engineering-quotation-project.md
       - Engineering - Add the assembly: workflows/engineering-add-assembly.md
       - Engineering - Select the transmittal project: workflows/engineering-transmittal-project-reference.md
@@ -93,7 +94,7 @@ nav:
     - API keys: admin/api-keys.md
     - Backup and restore: admin/backup-restore.md
   - Configuration:
-    - Overview: admin/configuration.md
+    - admin/configuration/index.md
     - Categories: admin/categories.md
     - Categories Editor: admin/category-editor-dialog.md
     - Property definitions: admin/properties.md
@@ -155,7 +156,7 @@ nav:
     - Inventor 3D model: integrations/inventor-3d-model.md
     - Syncing with Vault: vault-integration/sync.md
   - Billing:
-    - Overview: billing/overview.md
+    - billing/overview/index.md
     - Upgrading your plan: billing/upgrading.md
     - Workspaces and your account: billing/workspaces-and-account.md
     - Invoices: billing/invoices.md

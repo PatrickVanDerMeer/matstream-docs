@@ -60,12 +60,12 @@ MatStream is a Dutch company. VAT is applied as follows:
 | Outside EU | N/A | 0% |
 
 Your VAT number is stored on your organisation profile. See 
-[Organisation settings](organisation.md) for how to add or update it.
+[Organisation settings](../organisation.md) for how to add or update it.
 
 ---
 
 ## Next steps
 
-- [Upgrading your plan](upgrading.md) — choose a plan and set up payment
-- [Invoices](invoices.md) — view and download your invoices
-- [Organisation settings](organisation.md) — billing address and VAT number
+- [Upgrading your plan](../upgrading.md) — choose a plan and set up payment
+- [Invoices](../invoices.md) — view and download your invoices
+- [Organisation settings](../organisation.md) — billing address and VAT number

@@ -91,4 +91,4 @@ Document Control Setup enables the check as an Error on every existing enabled t
 
 The generation automation remains an editable script. The blocking criterion runs before the state change because ordinary transition automations run afterwards and cannot prevent issuance. Generation stores server-owned evidence; users cannot satisfy the check by changing a normal property.
 
-Continue with [sharing the issued Transmittal](engineering-transmittal-portal.md), then the client response steps in the [Engineering Project Workflow](engineering-project.md).
+Continue with [sharing the issued Transmittal](engineering-transmittal-portal.md), then the client response steps in the [Engineering Project Workflow](engineering-project/index.md).

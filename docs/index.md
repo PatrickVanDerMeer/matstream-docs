@@ -42,8 +42,8 @@ Work with your engineering information.
 Follow the steps to complete a task from start to finish.
 
 - [About Work Flows](workflows/index.md)
-- [Sales Order Workflow](workflows/sales-order.md) — steps for Sales, Procurement, Suppliers, Incoming Goods, and Dispatch.
-- [Engineering Project Workflow](workflows/engineering-project.md) — Inventor assembly and BOM.
+- [Sales Order Workflow](workflows/sales-order/index.md) — steps for Sales, Procurement, Suppliers, Incoming Goods, and Dispatch.
+- [Engineering Project Workflow](workflows/engineering-project/index.md) — Inventor assembly and BOM.
 
 </section>
 
@@ -87,7 +87,7 @@ Explore changes and additional guidance.
 - [Print templates](print-templates/print-templates-user.md)
 - [Item-change subscriptions](features/subscriptions.md)
 - [Photo Gallery](features/photo-gallery.md)
-- [Billing and plans](billing/overview.md)
+- [Billing and plans](billing/overview/index.md)
 
 </section>
 
