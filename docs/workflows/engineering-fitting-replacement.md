@@ -83,3 +83,16 @@ The worker defaults to a 60-second workspace interval and a batch of 100 active 
 Local tests used the fitting ITM-00001 under the separate readiness/RVD test project: original MR 16122 / PO-2026.0005, non-conformance 16131 and replacement MR 16132 / PO-2026.0006. Normal receipt and lifecycle services, the scheduled worker and an actual in-app notification were exercised. Partial receipt and a missing RVD blocked the appropriate progress. Temporary stock/reservation/receipt and inspection/document acceptance were reversed or restored afterwards. The test case was left awaiting replacement and the affected production prerequisite held. No real supplier delivery, Quality decision, collection, production or payment is implied. Screenshots of successful pickup evidence show the temporary simulation before restoration. Separate team identities and real quarantine/return handling still require a practical rehearsal.
 
 Continue with [collecting the replacement, clearing its hold and resuming production](engineering-resume-production.md). The local walkthrough now covers these existing record/lifecycle actions; replacement stock consumption and MR reservation release are now implemented and tested. A general whole-BOM issue/return process remains separate.
+
+## Collection stock evidence
+
+A successful replacement collection creates an ordinary stock transaction entity beneath the non-conformance, linked to the existing Production Issue stock-ledger movement. Its protected Memo context records the NCR, prerequisite, production order, allocation MR and pinned item revision. Quantities remain authoritative in the stock ledger; the separate replacement-collection table is no longer used. Existing MR ledger sources are preserved so reservation and readiness calculations continue to work.
+
+Configure the transaction category, read-only Memo property and collection name prefix under **Configuration → System Settings → Workspace Defaults → Stock transaction records**. Existing recorded reversals remain visible in the retained context. This change does not add an automatic return/reversal action: cancelling or reopening the NCR never silently restores stock.
+
+
+### Fresh connected replacement rehearsal — 19 November 2026
+
+On PRJ-2026.0001, the held tee prerequisite referred to the original 3 pc MR. One tee had already been issued. The test released one reservation and removed one unusable synthetic tee from usable 01-A stock before requesting replacement. NCR 18572 created one additional 1 pc MR and PO-2026.0003 without changing the original demand. Its certificate was uploaded through the supplier portal, accepted internally and the fitting received. Allocation went to the original MR, not both MRs.
+
+The evaluator reached Arrived; inspection/pickup evidence enabled Ready for Pickup and Collected. Collection posted one issue and reservation release. Header Production then showed 2 issued / 1 remaining, so issuing the final good tee completed exactly 3. The hold was cleared, the NCR closed, both assemblies completed and final handover recorded. This was synthetic same-account UI testing; real quarantine, supplier commercial settlement and separate-role authority were not simulated as real actions.

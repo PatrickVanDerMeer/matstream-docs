@@ -37,6 +37,8 @@ The existing **BOM: Create Production Order** automation remains an editable scr
 
 Existing copy-on-write behavior may create the independent position during an earlier state/property edit, such as moving an inherited row to Engineering Ready. Release reuses that copy and pins it; it does not create another copy. A row already pinned retains its selected version on retry. A stale inherited row requires refreshing or reopening the containing assembly before retrying.
 
+Explorer reconciles definitions that follow the latest version whenever their children are expanded, including after a Library lifecycle release creates new version-scoped BOM links. A clean path flag no longer leaves an older inherited cache in use. Pinned definitions retain their selected baseline. The fresh-workspace rehearsal on 19 November verified all 22 child project positions reaching Engineering Ready after releasing the Library items, with the stale-row safeguard intact.
+
 A release requested against a shared catalogue position without its project context is rejected. Permission or criterion failures stop the release. Pinning and the state write share a transaction; a failed state write rolls back that pin. Transition automations run after the state is saved, as in the existing lifecycle flow.
 
 ## Local test — ITM-00006 and ITM-00000

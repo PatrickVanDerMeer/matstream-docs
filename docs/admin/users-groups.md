@@ -116,7 +116,7 @@ an Engineering Approver normally also belongs to Engineering Authors.
 
 To create a group:
 
-1. Navigate to **Administration → Groups**
+1. Navigate to **Access → Workspace User Groups**
 2. Click **New group**
 3. Enter a name for the group
 4. Configure the group's grants

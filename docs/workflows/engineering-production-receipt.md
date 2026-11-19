@@ -48,7 +48,7 @@ The button runs **Warehouse: Receive completed production**:
 matstream.actions.receiveProduction();
 ```
 
-The native action rechecks the saved current order, permission and evidence inside the stock transaction. It adds the full completed quantity to the chosen shelf, using a **pinned item version**. It writes a Production Receipt stock-ledger movement and a receipt journal containing the order/source/item versions, quantity, unit, location, receiving user and UTC timestamp.
+The native action rechecks the saved current order, permission and evidence inside the stock transaction. It adds the full completed quantity to the chosen shelf, using a **pinned item version**. It writes a Production Receipt stock-ledger movement linked to an ordinary stock transaction entity beneath the production order. A protected Memo context and pinned Generated From links preserve the order/source/item versions and unit. Quantity, item revision, location, receiving user and posting time come from the ledger. There is no separate production-receipt table.
 
 The panel then shows **Finished goods received**, the receipt number and its original details. The production order stays Completed. This receipt does not change purchase-order delivery, payment milestones or supplier receipt quantities.
 
@@ -130,3 +130,13 @@ This receipt posts the manufactured output only. It does not issue the input BOM
 In the real sequence, a header taken from stock and incorporated into ITM-00000 must also be issued to that final assembly. Otherwise keeping both the loose header and finished assembly as available stock would overstate inventory. The two receipt tests above prove each output-receipt mechanism independently; they do not prove a balanced whole-BOM manufacturing flow.
 
 [Production material/header issue and reservation release](engineering-production-material-issue.md) are now implemented and tested locally. Rehearse the full physical BOM and separate roles, then finish the as-built package, final client handover and project closure.
+
+## Stock transaction configuration
+
+In **Configuration → System Settings → Workspace Defaults → Stock transaction records**, a workspace administrator can choose the transaction occurrence category and its assigned read-only Memo context property, and edit record name prefixes. Rename the category, property and descriptions through Categories and Property Definitions. Changes affect new records; earlier postings retain their original context and exact source versions.
+
+The existing receipt action still receives the full completed output once per order. This storage consolidation does not introduce partial receipts or automatically repost stock when an order changes. Retrying returns the existing receipt entity.
+
+### Storage and configuration
+
+This existing Engineering workflow stores evidence in ordinary entities/properties and uses the shared stock ledger or durable scheduler checkpoints. Its dedicated table, view and writer procedure are unnecessary. Its existing scripts and business safeguards remain active; there is no separate category action engine. See [workflow record storage settings](../admin/automations-admin.md#workflow-record-storage). Sales Order-only workspaces do not need to install this Engineering workflow.

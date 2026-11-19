@@ -99,7 +99,7 @@ The selected state's **Purge Behavior** tab stores Never purge and Purge after (
 
 ## Managing lifecycle definitions
 
-Navigate to **Configuration → Lifecycle definitions** to manage your workspace lifecycles.
+Navigate to **Configuration → Lifecycle Definitions** to manage your workspace lifecycles.
 
 ### Creating a lifecycle definition
 

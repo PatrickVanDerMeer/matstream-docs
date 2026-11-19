@@ -58,9 +58,9 @@ One issue transaction:
 1. Rechecks the current production order, reviewed prerequisite, project, holds, document policy, demand, unit, item pin, shelf and actor permissions.
 2. Releases only the consumed amount from that MR's reservation ledger positions.
 3. Deducts the same quantity from the selected pinned physical shelf position.
-4. Writes a **Production Issue** stock movement and a journal with order/prerequisite versions, MR or predecessor, item version, unit, shelf, quantity, issuing actor and UTC time.
+4. Writes a **Production Issue** stock movement linked to an ordinary stock transaction entity. Its protected context records order/prerequisite versions, MR or predecessor and unit; the ledger records the pinned item, shelf, quantity, actor and UTC time.
 
-Open the item's **Stock → Ledger** to inspect stock movements. The ledger note includes the consuming production order; MR issues retain the MR as their stock-ledger source so reservation/readiness totals stay connected. The manufactured-header movement uses the consuming production order as its source. `tbl_ProductionIssue` retains both source and destination provenance.
+Open the item's **Stock → Ledger** to inspect stock movements. The ledger note includes the consuming production order; MR issues retain the MR as their stock-ledger source so reservation/readiness totals stay connected. The manufactured-header movement uses the consuming production order as its source. A protected Memo property on the stock transaction entity retains both source and destination provenance, with pinned Generated From links. Quantities come from the linked ledger movement; the dedicated production-issue table is no longer used.
 
 If stock or the journal write fails, reservation release and physical consumption both roll back. A repeated request reuses the original journal. Concurrent requests cannot issue beyond remaining demand; a conflicting request can require a refresh/retry. A new partial issue receives a new request identity.
 
@@ -76,6 +76,7 @@ New **Engineering Project** setups include this feature. Existing workspaces can
 | Automations → Production readiness policy | Order/prerequisite/MR categories, material/predecessor/quantity/hold/review/document mappings, inactive MR states, issued-material coverage and start-notification states |
 | Categories → Production Prerequisite | Preceding Output Required Quantity default (seed 1), visibility, label and permissions; engineers edit actual required quantity |
 | Property Definitions → Production Material Issues | Memo editor **Production material issue**, label and category placement |
+| Workspace Defaults → Stock transaction records | Transaction category, assigned read-only Memo property and issue/receipt/collection name prefixes. Categories and Property Definitions control their labels and descriptions. Changes affect new records and preserve existing evidence. |
 | Units of Quantity / item properties | Enabled units and pinned item's Stock Unit; demand units must match without implicit conversion |
 | Users / Groups, category/state/record permissions | Internal Editor access, Stock View for reading, Stock Manage and Stock Reserve for issuing, plus read access to all evidence/items/locations |
 
@@ -88,3 +89,14 @@ matstream.actions.issueProduction(matstream.params.get("IssueRequest"));
 `IssueRequest` contains the selected prerequisite, shelf, quantity, expected order version and request identity. Administrators can add company-specific checks before this action. Keep it as the script's only write action; native permission, pin, quantity, reservation, stock and duplicate checks always remain in force. Each HTTP attempt has its own automation audit while retries retain the same stock-issue request identity.
 
 Next: rehearse the complete physical BOM with separate Warehouse/Production users, then complete production, receive the finished skid and [prepare the as-built package and record client handover](engineering-as-built-handover.md). General stock returns and project closure remain separate work.
+
+### Storage and configuration
+
+This existing Engineering workflow stores evidence in ordinary entities/properties and uses the shared stock ledger or durable scheduler checkpoints. Its dedicated table, view and writer procedure are unnecessary. Its existing scripts and business safeguards remain active; there is no separate category action engine. See [workflow record storage settings](../admin/automations-admin.md#workflow-record-storage). Sales Order-only workspaces do not need to install this Engineering workflow.
+
+
+### Fresh full-BOM rehearsal — 19 November 2026
+
+The new wizard-seeded project consumed all 21 purchased BOM requirements and the manufactured header through the application. All production issues used explicitly pinned item versions; MR reservations were released only as their quantities were consumed. The tee requirement combined a partial ordinary issue, one collected replacement and the remaining ordinary issue, totaling exactly its original 3 pc demand. The header was received once, then consumed once by final assembly. Final Inventory held one ITM-00000 and no component stock, reservations or on-order quantity.
+
+Stock-covered BOM materials need demand MRs before they can be used as MR prerequisites. The earlier synthetic rehearsal prepared them with temporary opening-balance reversals/restorations. That workaround is superseded by [full-demand MR release](engineering-material-requirement-dates.md): record the complete quantity, reserve compatible stock, and purchase only shortages. New Engineering setups enable this policy; existing workspaces configure it through Automations. Production consumes the full demand through the existing issue action. Identify manual opening stock's actual revision through [Adjust Stock](engineering-production-readiness.md#opening-stock-and-pinned-item-versions); unidentified stock is deliberately refused against a pinned production issue. Real physical picking, returns and distinct Warehouse/Production identities remain separate checks.

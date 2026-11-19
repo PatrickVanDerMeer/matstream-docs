@@ -122,7 +122,7 @@ The Vault plugin is a separate component installed on the Vault server or a clie
 **Configuration required:**
 
 1. MatStream workspace slug and API base URL
-2. An API key with write permissions (Configuration → API Keys)
+2. An API key with write permissions (MatStream Manage → Workspaces → API Keys tab; see [API keys](../admin/api-keys.md))
 3. Mapping of Vault categories to MatStream category keys
 4. Mapping of Vault user-defined properties (UDP) to MatStream property definition keys
 
@@ -134,13 +134,13 @@ The Vault plugin is a separate component installed on the Vault server or a clie
 The GUID in the payload does not match any stored `E_Guid`. Check that the Vault plugin sends the correct Vault GUID.
 
 **Properties not updating:**
-Verify that property definition keys in the payload match those in MatStream (Configuration → Properties). Keys are case-sensitive.
+Verify that property definition keys in the payload match those in MatStream (Configuration → Property Definitions). Keys are case-sensitive.
 
 **Category not found:**
 The `categoryKey` must match the internal key of a category defined in the workspace. Check Configuration → Categories.
 
 **401 Unauthorized:**
-The API key is missing or revoked. Generate a new key in Configuration → API Keys.
+The API key is missing or revoked. Generate a new key under MatStream Manage → Workspaces → API Keys tab (see [API keys](../admin/api-keys.md)).
 
 ---
 

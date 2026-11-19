@@ -108,7 +108,7 @@ The first-supplier rule is part of the editable script. Change it or replace the
 another process. An own-company source can also follow the purchasing route when that is the
 configured policy, for example for intercompany procurement.
 
-Use **Configuration → Lifecycles → Engineering Lifecycle → Transitions → Automations** to change where
+Use **Configuration → Lifecycle Definitions → Engineering Lifecycle → Transitions → Automations** to change where
 the automation runs or override its parameters on a specific transition. Configure production-order
 categories, fields, lifecycle states and permissions through their regular configuration screens.
 The Automation editor's API Reference describes `getSupplySources()`, `getSource()`,

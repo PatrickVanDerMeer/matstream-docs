@@ -204,3 +204,7 @@ These routes require `automation.manage`. Use the numeric workspace ID and the r
 - [Import Definitions](import-definitions.md) — configure imports that trigger import automations
 - [Configuration overview](../admin/configuration/index.md) — all configuration areas
 - [Properties](../entities/properties.md) — calculated properties handle simple arithmetic without a script
+
+## Workflow evidence storage
+
+Existing Engineering workflows store their records through MatStream's ordinary entities/properties, links, stock ledger and shared scheduler checkpoints. This storage replacement does not introduce another action engine or change the existing Sales Order and Inventory workflows. See [workflow record storage](../admin/automations-admin.md#workflow-record-storage) for administrator mappings.

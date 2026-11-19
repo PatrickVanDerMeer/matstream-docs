@@ -8,7 +8,7 @@ MatStreamConnect is a small Windows desktop app that bridges local tools — Aut
 
 MatStreamConnect is a portable Windows x64 application. [Download, extract and run it](inventor-downloads.md) from a writable folder such as `%LOCALAPPDATA%\MatStream\MatStreamConnect`. No installer, administrator rights, or separate .NET installation is required.
 
-Workspace administrators can change **MatStream Connect download URL** under **Workspace Defaults**. The browser's **Connect required** dialog reads that setting whenever Connect is unavailable. The default points to the public portable ZIP; an organization may supply its own HTTPS ZIP or setup page. Leave the field blank to hide the download button. Changes and intentionally blank values survive setup and migration reruns.
+Workspace administrators can change **MatStream Connect download URL** under **Configuration → System Settings → Workspace Defaults**. The browser's **Connect required** dialog reads that setting whenever Connect is unavailable. The default points to the public portable ZIP; an organization may supply its own HTTPS ZIP or setup page. Leave the field blank to hide the download button. Changes and intentionally blank values survive setup and migration reruns.
 
 On launch Connect registers the `matstream://` URI scheme and `HKCU\Software\MatStream\MatStreamConnect\ExecutablePath` for the current Windows user. The iLogic rules use that executable registration, with a fallback to the legacy startup entry. Launch Connect once after moving its folder. **Open on Windows logon** is optional and off for new users.
 

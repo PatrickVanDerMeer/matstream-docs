@@ -210,7 +210,7 @@ Numbering schemes are managed under **Configuration → Numbering Schemes**.
 
 ### Creating a numbering scheme
 
-1. Navigate to **Configuration → Numbering schemes**
+1. Navigate to **Configuration → Numbering Schemes**
 2. Click **New**
 3. Enter a name for the scheme (e.g. "Projects")
 4. Enter the template (e.g. `PR{yyyy}{000000}`) — use **Insert variable** 

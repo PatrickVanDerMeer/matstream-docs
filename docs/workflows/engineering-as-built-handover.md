@@ -7,6 +7,15 @@ For this example, ITM-00000 is the final manufactured skid and ITM-00006 is its 
 !!! info "Local verification — 17 November 2026"
     The local test package contained **19 pinned entries**: two drawings, one BOM, one manuals/certificates index, ten supplier documents and five inspection/test records. Its PDF register was generated and issued. The browser verified acknowledgement **0/1 → 1/1**, the client's whole-package **Approved** response and **Final handover recorded**. This was clearly labelled synthetic test data, including placeholder BOM/manual and supplier/test evidence; it is not a real as-built dossier or contractual acceptance. Original current production/evidence/stock/settings were restored, and the test share was revoked. The synthetic package and handover audit remain for traceability.
 
+!!! info "Fresh wizard-seeded rehearsal — 19 November 2026"
+    PRJ-2026.0001 in the new local Engineering workspace completed both production orders, all five inspections and the full material issue. Its final transmittal contained **21 pinned files**: two drawings, twelve supplier documents (including the replacement certificate), five inspection records, one BOM and one manuals/certificates index. The named client portal acknowledged the whole package, changing **0/1 → 1/1**, and the app recorded **Final handover recorded** against that exact package/share. One finished skid remained in Inventory. This used synthetic evidence and the same signed-in account for internal/client paths; no physical delivery, legal acceptance, invoice or payment is implied.
+
+The final two-page register was generated, issued, downloaded from the client portal and visually checked:
+
+![Fresh rehearsal: generated final register, page 1](../images/engineering-project/2026-11-19-fresh-handover-register-1.png)
+
+![Fresh rehearsal: generated final register, page 2](../images/engineering-project/2026-11-19-fresh-handover-register-2.png)
+
 ## 1. Prepare the actual deliverables
 
 Engineering, Quality and the project manager review the contract before selecting files. Typical contents are:
@@ -57,7 +66,7 @@ The local example showed five sections with 19 selected files and no client ackn
 
 Use **Generate Transmittal PDF** from the existing document register. It generates the cover/register directly on the Transmittal using the administrator's template and mappings. Regeneration during preparation creates a history version. If you change the selection, classification, header or template, regenerate before issue.
 
-Move through **Ready to Issue → Issued**. The seeded transition checks both current PDF consistency and the as-built checklist. Ordinary transmittals without the final-handover flag do not need the as-built sections.
+Move to **Ready to Issue**, generate the PDF for that current version, then move to **Issued**. A PDF generated in Draft must be regenerated after the state change. The seeded transition checks both current PDF consistency and the as-built checklist. Ordinary transmittals without the final-handover flag do not need the as-built sections.
 
 Share the issued package through the Client channel or the normal sharing dialog. Enable package review for the named client reviewer(s), allow download and use the intended expiry. The portal receives the generated register and the **pinned document versions**; subsequent Library uploads do not replace those issued files. New evidence can be included only through a reviewed replacement issue.
 
@@ -85,7 +94,7 @@ Choose **Record final handover**. The stored script checks the current scope, is
 
 ![Final handover recorded against the exact package and share](../images/engineering-project/227-as-built-final-handover-recorded.png)
 
-The handover journal retains the exact package/share, document pins, section register, production-order reference, acknowledgement response versions/states, recipient identities, responsible user, UTC time and policy used. Repeating the action reuses the same record. Independent concurrent requests cannot create two records for the same package.
+A protected Memo property on the exact issued package version retains the package/share, document pins, section register, production-order reference, acknowledgement response versions/states, recipient identities, responsible user, UTC time and policy used. There is no separate handover table. Repeating the action reuses the same record. Independent concurrent requests cannot create two records for the same package.
 
 The example recorded **handover 1**, package version **22342**, share **17**. It remains a historical fact if a share later expires or is revoked; it does not assert that the portal link is still live. Amendments need a new/replacement transmittal and acknowledgement. Do not overwrite the previous handover or reinterpret an old share as a new delivery.
 
@@ -99,6 +108,7 @@ New Engineering Project setups include **As-built Package and Client Handover**.
 |---|---|
 | Automations → Project: Evaluate as-built handover | `AsBuiltHandover` section names/descriptions/counts, document categories/states, property/category mappings, definition-link owners, procurement/occurrence scope, production/receipt requirements, completed/issued state IDs, acknowledgement/download policy, responsible groups, labels and recording automation ID; editable evaluation script |
 | Automations → Project: Record final client handover | Recording script; it must keep the native handover action as its only write action |
+| Workspace Defaults → Workflow evidence | Read-only Memo mappings for handover and the last published readiness snapshot. Mapping changes affect future records; existing evidence stays readable. |
 | Categories / Property Definitions | Final flag, scope review, final production-order picker, Handover Section options/labels, field visibility/defaults and permissions; Memo editor **As-built and final handover** |
 | Display Tabs → As-built Project Documents | Engineer filter editing, default columns, checkboxes, document/owner categories, file-occurrence and procurement-evidence options, pinning and preparation states |
 | Lifecycle Definitions | Issue transition and **As-built package scope is ready** criterion, alongside PDF consistency; client response states and permissions |
@@ -122,4 +132,14 @@ The synthetic package and its audit were retained, but the local client share wa
 
 ![Revoked local handover test share](../images/engineering-project/228-as-built-test-share-revoked.png)
 
-The two production fixtures returned to Draft; temporary finished stock, receipt journals and synthetic current evidence/settings were restored. These test results prove the software mechanism. A fresh Setup UI installation, separate project-team/client identities and the complete real physical/contractual dossier remain part of the wider workflow rehearsal.
+The two production fixtures returned to Draft; temporary finished stock, receipt journals and synthetic current evidence/settings were restored. These test results prove the software mechanism. The fresh Setup UI installation and connected synthetic workflow were completed on 19 November. Separate project-team/client identities and the complete real physical/contractual dossier remain practical checks.
+
+## Recorded evidence and amendments
+
+Copying or creating a later package version does not create another handover or move the original record. Recorded evidence, its package version, project and share remain protected against ordinary deletion or rewriting. Use a replacement package for an amendment. Revoking the client share remains a separate action; it does not erase the handover history. Normal authorized workspace deletion can still remove all workspace data.
+
+In **Configuration → System Settings → Workspace Defaults → Workflow evidence**, choose the enabled Memo used for final handover and assign it read-only to the package category. The seeded property is assigned automatically. Rename it or change its description/visibility through Property Definitions and Categories; posted evidence remains protected.
+
+### Storage and configuration
+
+This existing Engineering workflow stores evidence in ordinary entities/properties and uses the shared stock ledger or durable scheduler checkpoints. Its dedicated table, view and writer procedure are unnecessary. Its existing scripts and business safeguards remain active; there is no separate category action engine. See [workflow record storage settings](../admin/automations-admin.md#workflow-record-storage). Sales Order-only workspaces do not need to install this Engineering workflow.

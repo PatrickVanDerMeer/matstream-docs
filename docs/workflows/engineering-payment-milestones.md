@@ -12,6 +12,8 @@ Use **Payment Milestones** on a Project to plan customer invoicing, or on a Purc
 
 ![Motor purchase order with its own 30/50/20 plan](../images/engineering-project/155-motor-payment-milestones.jpg)
 
+The currency displayed from a configured category default can be used when no currency is stored yet; initialization freezes it on the saved parent version and its milestones. Stored overrides win, and an explicitly saved blank remains invalid.
+
 The agreed basis is entered explicitly; this action does not calculate a sales contract value from BOM purchase costs or automatically sum PO lines. An administrator can map an existing agreed-total property instead. Verify that the basis, currency and tax treatment match the agreement before creating the plan.
 
 | Default installment | Percentage | Recorded condition |
@@ -144,3 +146,17 @@ Changing the agreed basis or currency, removing part of the 100% plan, or leavin
 The separate local motor and pump POs were prepared as issued fixtures without dispatching to suppliers. The running worker then moved both order installments to **Eligible** through the normal lifecycle service. The delivery and documentation installments stayed **Not eligible**. A browser test saved a motor Payment Hold, observed automatic withdrawal, then removed the hold and restored eligibility. The pump browser view was checked separately.
 
 Transactional tests against both local POs covered partial/full receipts, all required documents accepted, loss of an accepted file, a hold, repeated evaluation and an already-paid milestone needing review. Those simulated receipt/document/payment changes were rolled back; they were not left as real warehouse or financial evidence. Integration tests additionally cover multiple PO lines, released commitments without receipts, inaccessible evidence, portal actors, changed amounts/currency, stale versions and an atomic rollback when a lifecycle transition fails. The motor's planned delivery milestone date remains **15 December 2026**.
+
+
+### Fresh connected rehearsal — 19 November 2026
+
+The wizard-seeded Project and its three actual workflow POs created independent plans through the application UI:
+
+| Parent | Basis | 30% | 50% | 20% |
+|---|---:|---:|---:|---:|
+| PRJ-2026.0001 | EUR 125,000.00 | 37,500.00 | 62,500.00 | 25,000.00 |
+| PO-2026.0001 — original tees | EUR 178.50 | 53.55 | 89.25 | 35.70 |
+| PO-2026.0002 — pump and motor together | EUR 1,124.00 | 337.20 | 562.00 | 224.80 |
+| PO-2026.0003 — replacement tee | EUR 59.50 | 17.85 | 29.75 | 11.90 |
+
+Repeating Project plan creation retained exactly three installments. Whole-PO eligibility passed for all three received/documented POs, including both Acme lines together. A temporary replacement Payment Hold changed all three installments to Not eligible; clearing it restored Eligible. Project invoice milestones remained Not eligible for manual review. These are software planning checks, not actual invoices, approvals, payments or a warranty settlement.

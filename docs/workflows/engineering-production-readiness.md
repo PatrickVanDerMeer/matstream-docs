@@ -83,3 +83,22 @@ Automated tests also cover fixed target versus five working days' forecast delay
 ![Restored test order: missing fitting reservation, original start date](../images/engineering-project/173-restored-production-readiness.jpg)
 
 Continue with the [wrong-fitting replacement](engineering-fitting-replacement.md) and [collection, hold clearance and production restart](engineering-resume-production.md) walkthroughs. Holds remain explicit team decisions; the replacement collection script posts the replacement stock issue and MR reservation release. Issued quantities remain operation-specific.
+
+## Readiness evidence and start-warning history
+
+Every check still calculates readiness from current saved facts. **Evaluate and publish** and the background worker save the last published report in a configured read-only Memo on the production order. New publications record the checked version and time; it does not authorize production or replace the live prerequisite checks. Later order versions do not silently reset the previous published decision.
+
+Configure the Memo under **Configuration → System Settings → Workspace Defaults → Workflow evidence**. The seeded property is assigned automatically to the order category. A custom Memo must be enabled and assigned read-only to that category. Property Definitions and Categories control its name, description and placement. Changing the mapping preserves older snapshots.
+
+Start warnings now use shared automation checkpoints and persistent event execution claims. Existing warning dates, first publication and latest warning times survive migration. Rechecking the same schedule does not resend its initial warning, including after event-history cleanup. Changing the planning activity/start time creates a new occasion; configured local time, repeat interval, subscription consent and evidence-access checks remain unchanged. There are no separate readiness or production-start-notice tables. Legacy readiness reports retain their original decisions, report text and timestamps; their original checked version was not stored, so migration leaves that version unknown.
+
+### Storage and configuration
+
+This existing Engineering workflow stores evidence in ordinary entities/properties and uses the shared stock ledger or durable scheduler checkpoints. Its dedicated table, view and writer procedure are unnecessary. Its existing scripts and business safeguards remain active; there is no separate category action engine. See [workflow record storage settings](../admin/automations-admin.md#workflow-record-storage). Sales Order-only workspaces do not need to install this Engineering workflow.
+
+
+### Opening stock and pinned item versions
+
+Before reserving manually entered opening stock for Engineering production, identify the actual item revision. **Inventory → Stock → Adjust → Item version** offers automatic count correction or the displayed current item version. Select the displayed version only when the physical stock matches it. Existing purchase receipts retain their pinned revision automatically. An unidentified opening balance does not satisfy a production issue pinned to a particular version.
+
+When all on-hand stock at that location is unidentified, correct its attribution by reversing that balance with a documented automatic adjustment, then adding the same quantity against the confirmed version. Review mixed-version locations individually; an automatic correction may span their existing balances. Keep both ledger entries and reconcile the overall quantity and reservations. This is an explicit warehouse correction; production does not silently reinterpret unidentified stock. The server rejects versions belonging to a different item or workspace.

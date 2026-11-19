@@ -22,7 +22,7 @@ Open **Lines** and review the scope and price. The sample contains engineering a
 
 ![Quotation scope and prices](../images/engineering-project/04-quotation-lines.jpg)
 
-This walkthrough tests internal acceptance and project creation. Preparing and sending a customer quotation PDF is a separate check; it was not exercised here.
+The fresh local rehearsal on 19 November 2026 also exported and inspected the quotation PDF. It includes the three priced lines, EUR 125,000.00 total, quotation date, validity and delivery terms. Print headers resolve configured defaults, such as currency and quotation date, with property permissions still enforced. Sending a real customer quotation remains a separate business action.
 
 ## 2. Check the administrator's mappings
 

@@ -1,5 +1,7 @@
 # As-built package and final client handover — local verification
 
+> Storage update, 19 November 2026: dedicated handover/readiness/start-notice tables have been replaced with protected entity properties and shared automation checkpoints/claims. See [the consolidation report](workflow-evidence-consolidation-2026-11-19.md).
+
 17 November 2026. Local services only; workspace 108, Engineering Workflow Test.
 
 ## Implemented

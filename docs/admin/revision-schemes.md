@@ -32,7 +32,7 @@ System sequences (marked with a lock icon) are shared across all workspaces and 
 
 ## Configuring revision schemes
 
-Navigate to **Administration → Revision Schemes** to manage your workspace revision schemes.
+Navigate to **Configuration → Revision Schemes** to manage your workspace revision schemes.
 
 ### Creating a new scheme
 
@@ -82,7 +82,7 @@ Select a workspace-specific sequence and click **Delete**. System sequences cann
 
 ## Assigning a revision scheme to a category
 
-Revision schemes are assigned per category. Navigate to **Administration → Categories**, select a category, and set the **Revision scheme** field in the General tab.
+Revision schemes are assigned per category. Navigate to **Configuration → Categories**, select a category, and set the **Revision scheme** field in the General tab.
 
 Once assigned, every entity of that category will use the configured scheme for its formal revision labels.
 

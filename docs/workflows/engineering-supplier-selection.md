@@ -43,6 +43,8 @@ These POs are Open; they have not been issued or emailed to suppliers.
 
 ## Administrator configuration
 
+With [full-demand MR release](engineering-material-requirement-dates.md), Required Qty includes materials already in stock. Purchasing subtracts the MR's reserved, ordered and issued quantities: demand 3 with 2 reserved purchases only 1. A fully stock-covered MR remains available for production traceability and does not need a PO. After receiving purchased shortages, use **Reserve from Stock** for the remaining unreserved/unissued demand; purchase coverage and physical allocation are separate quantities.
+
 In **Configuration → Automations**, edit **Purchasing: Prepare Agreed Supplier Terms**. The JavaScript and **Parameters (JSON)** are editable in the application:
 
 | Setting | Purpose |

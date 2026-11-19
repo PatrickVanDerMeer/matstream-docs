@@ -8,7 +8,7 @@ No driver or integration is needed. Any keyboard-wedge scanner works: it types t
 
 ## The Barcode property type
 
-Add a property with the **Barcode** data type in Configuration → Property definitions, then assign it to the categories that need it.
+Add a property with the **Barcode** data type in Configuration → Property Definitions, then assign it to the categories that need it.
 
 | Aspect | Behaviour |
 |---|---|
@@ -66,7 +66,7 @@ The quantity has **+** and **−** steppers beside it, so scanning five of the s
 
 ## Setting it up
 
-1. **Create the property.** Configuration → Property definitions → new property, data type **Barcode**. Name it something you will reuse everywhere.
+1. **Create the property.** Configuration → Property Definitions → new property, data type **Barcode**. Name it something you will reuse everywhere.
 2. **Assign it** to the categories whose items carry barcodes — typically your Part, Assembly or Item definition categories.
 3. **Populate it.** Import the codes with an [import profile](import-definitions.md), or set them in bulk from the [Property Browser](property-browser.md).
 4. **Show the column** on the Uses tab where scanning happens, so the cells become scanner inputs.

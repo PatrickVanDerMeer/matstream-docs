@@ -1,5 +1,7 @@
 # Production readiness — local verification, 16 November 2026
 
+> Storage update, 19 November 2026: dedicated handover/readiness/start-notice tables have been replaced with protected entity properties and shared automation checkpoints/claims. See [the consolidation report](workflow-evidence-consolidation-2026-11-19.md).
+
 Scope authorized for this implementation: operation-specific blockers/readiness, ready/lost-ready notifications and scheduled start-date warnings. Later NCR/replacement and manufacturing/handover are not included. No internet deployment.
 
 ## Configuration and installation

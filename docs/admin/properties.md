@@ -175,7 +175,7 @@ A stored property definition can also carry a system key. That is how a normal, 
 
 ## Managing property definitions
 
-Navigate to **Configuration → Property definitions** to manage your workspace properties.
+Navigate to **Configuration → Property Definitions** to manage your workspace properties.
 
 ### Creating a property
 

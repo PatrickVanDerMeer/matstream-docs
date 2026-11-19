@@ -11,7 +11,7 @@ An item definition supplies the recommendations. Independently owned project occ
 
 **Service Period** is a selection property on each spare-part requirement. Engineering setup initially offers **Startup**, **1-year maintenance** and **2-year maintenance**. These are editable options, not fixed columns or start/end dates.
 
-Administrators maintain the option values, selected text and list descriptions under **Configuration → Property definitions**. Engineers select the applicable period for each requirement. Agree in the option descriptions whether a period means cumulative stock for that duration or a particular maintenance event; MatStream does not infer that meaning from its name.
+Administrators maintain the option values, selected text and list descriptions under **Configuration → Property Definitions**. Engineers select the applicable period for each requirement. Agree in the option descriptions whether a period means cumulative stock for that duration or a particular maintenance event; MatStream does not infer that meaning from its name.
 
 ## Define the recommended spare parts
 

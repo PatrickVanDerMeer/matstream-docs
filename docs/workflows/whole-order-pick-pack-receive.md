@@ -36,7 +36,7 @@ The Receiving List includes ordered, already received and outstanding quantities
 
 Run the Sales Orders and Procurement features in Manage to add missing whole-order defaults. The setup does not add new scanner or partial-receipt actions. Existing line-level and scanner configurations are preserved.
 
-In **Configuration → System settings**, edit **Whole-order picking, packing and receiving** to enable or disable each operation, change button labels and confirmation descriptions, change progress labels, and control receiving-location suggestions. Server permissions still apply: sales requires access to the order and writable fulfilment properties; receiving requires ProcurementReceive and access to the destination location.
+In **Configuration → System Settings**, edit **Whole-order picking, packing and receiving** to enable or disable each operation, change button labels and confirmation descriptions, change progress labels, and control receiving-location suggestions. Server permissions still apply: sales requires access to the order and writable fulfilment properties; receiving requires ProcurementReceive and access to the destination location.
 
 These options use MatStream's existing shared workspace settings. Personal preferences do not override them, and rerunning Manage adds only missing defaults.
 

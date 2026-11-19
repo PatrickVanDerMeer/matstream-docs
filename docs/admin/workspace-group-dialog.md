@@ -10,7 +10,7 @@ their members, and assign grants.
 
 **To create a new group:**
 
-1. Navigate to **Administration → User Access → Workspace User Groups**
+1. Navigate to **Access → Workspace User Groups**
 2. Click **Create Group** in the toolbar
 
 MatStream immediately creates a new group record in the database with 

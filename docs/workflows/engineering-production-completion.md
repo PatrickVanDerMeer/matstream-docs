@@ -9,7 +9,7 @@ Finish the **ITM-00006 header** first, then the **ITM-00000 final assembly**. Ea
 
 1. Open the production order for **ITM-00006**.
 2. Select **Production Inspection Plan → Header fabrication** and save.
-3. In **Production Completion**, choose **Prepare inspection records**. The same preparation script runs when the order moves from Draft to Released. Because that script needs the plan, the seeded **Draft → Released** transition carries a **Production Inspection Plan is required** criterion: if no plan is selected and saved, the Change State dialog says so and the order stays in Draft. An administrator can edit, disable or delete this criterion under **Configuration → Lifecycle definitions**.
+3. In **Production Completion**, choose **Prepare inspection records**. The same preparation script runs when the order moves from Draft to Released. Because that script needs the plan, the seeded **Draft → Released** transition carries a **Production Inspection Plan is required** criterion: if no plan is selected and saved, the Change State dialog says so and the order stays in Draft. An administrator can edit, disable or delete this criterion under **Configuration → Lifecycle Definitions**.
 4. Open **Inspection and Test Records**. The example plan creates:
 
 | Record | What the team records |

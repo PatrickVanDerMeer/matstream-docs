@@ -1,5 +1,7 @@
 # Production warehouse receipt — local verification
 
+> Storage update, 19 November 2026: the historical receipt journal described below has been consolidated into ordinary entities, protected Memo properties and the stock ledger. See [the consolidation report](stock-posting-entity-consolidation-2026-11-19.md).
+
 Date: 17 November 2026. Local SQL/services only. No actual manufacture, physical receipt, internet deployment or external messaging is claimed.
 
 ## Implementation

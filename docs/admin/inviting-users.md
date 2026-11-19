@@ -9,7 +9,7 @@ or in bulk — and what happens when an invitation is sent.
 
 To add one user to your workspace:
 
-1. Navigate to **Administration → Users**
+1. Navigate to **Access → Workspace Users**
 2. Click **Add user**
 3. Enter the user's email address, display name, and other details
 4. Assign the user to one or more groups
@@ -36,7 +36,7 @@ on whether they already have a MatStream account — see
 
 To add multiple users at once:
 
-1. Navigate to **Administration → Users**
+1. Navigate to **Access → Workspace Users**
 2. Click **Add users by email** in the toolbar
 3. Paste one or more email addresses into the text area
 
