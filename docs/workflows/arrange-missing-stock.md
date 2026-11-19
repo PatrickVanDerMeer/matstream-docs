@@ -15,6 +15,8 @@ Sales has [confirmed the customer order](create-sales-order.md), or stock replen
 
 For stock items, **Stock Unit**, **Is Stock Item**, **Minimum Stock Qty** and **Maximum Stock Qty** govern replenishment. Both limits are needed: minimum is nonnegative and maximum exceeds minimum. The background job considers **On Hand − Reserved + On Order** and can buy more than one customer order's shortage to restore the maximum. See [automatic stock replenishment](../features/stock.md#automatic-stock-replenishment) if a requirement is missing.
 
+For a normal Sales Order requirement, Procurement uses the article's configured supplier source by default. If the administrator enables reviewed supplier selection for Sales Orders, select a supplier source and agree its terms on the MR before creating the PO. Once a source has been explicitly selected, its agreed version and terms must remain valid; MatStream does not silently switch to another source. Engineering Project requirements keep their configured supplier-selection review process.
+
 ## 1. Review the Material Requirements
 
 Open **Purchasing → Pending Material Requirements (MR)**. Select the requirements to buy and check their quantities, state, source and originating Sales Order or replenishment demand. The example MR requests **4 pc** for **SO-2026.0002**.

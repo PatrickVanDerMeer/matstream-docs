@@ -15,6 +15,8 @@ These use the same generic feature. Administrators can configure other categorie
 
 After the lifecycle event is processed, a recipient who has MatStream open sees the question. If the recipient is offline, the proposal waits for them to return. It can take a short time for background processing and the browser's regular proposal check.
 
+A user who has never opened MatStream sees the proposal on their first visit, even if the purchase order was issued earlier. The proposal is created at the moment of the lifecycle change and delivered when the user returns, so it can appear for a PO that is already Issued.
+
 ![Subscription proposal with a personal remembered answer](../images/engineering-project/153-subscription-proposal-consent.jpg)
 
 - **Yes, subscribe** accepts the watch on this record.

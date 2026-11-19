@@ -8,7 +8,7 @@ The Dashboard is the workspace home page at `/w/{workspaceSlug}/`. Its tiles sho
 |---|---|
 | **Favourites** | Your saved shortcuts. |
 | **Tasks** | Your outstanding task items. See [Tasks](tasks.md). |
-| **Watching** | Up to ten active item-change subscriptions, their change types, expiry and report counts. **My Subscriptions** opens the full list. |
+| **Watching** | Up to ten active item-change subscriptions, their change types, expiry and report counts. The compact toolbar beside **Watching** has **Manage subscriptions** (sliders) to open the full list in a dialog and **Refresh watching items** (circular arrow). Both remain available when the card has no active items. Closing the dialog refreshes the card. |
 | **Workspace KPIs** | Workspace counts for entities, versions, files, storage, users and categories. The current tile does not offer configurable business metrics or thresholds. |
 | **Activity** | Recently modified entity rows with the modifying person and time. This is not a complete event audit trail. |
 

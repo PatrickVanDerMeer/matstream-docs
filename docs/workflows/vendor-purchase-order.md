@@ -24,7 +24,7 @@ The normal Share action sends the portal invitation. Printing does not send anot
 
 ## 3. Issue and generate the PDF
 
-Move the order to **Issued**. The standard issue automation generates the PO PDF and attaches it beneath the order. It uses the prepared portal share for both the QR code and the URL. You can also select the Word PO template under **Export** and generate a PDF.
+Move the order to **Issued**. In the seeded configuration, **Open → Issued** carries a **Vendor share is ready** criterion: if the Supplier Email or the vendor share is missing, the Change State dialog shows why and the order stays **Open**, so nothing is half done. An administrator can edit, disable or delete this criterion under **Configuration → Lifecycle definitions**. The standard issue automation generates the PO PDF and attaches it beneath the order. It uses the prepared portal share for both the QR code and the URL. You can also select the Word PO template under **Export** and generate a PDF.
 
 Check the PDF before mailing it: the QR code and text should point to the same portal. If generation reports a vendor-share setup problem, correct the Supplier Email, share, or external group permissions and retry PDF generation.
 

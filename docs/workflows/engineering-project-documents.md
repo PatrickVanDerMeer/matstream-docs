@@ -1,6 +1,6 @@
 # Engineering — Select documents for a transmittal
 
-Prepare the client approval package for **ITM-00000.pdf** under **Lube Oil Skid Project**. This step saves the selected drawing as a **Document Issue Line** on a draft Transmittal.
+Prepare the client approval package for **ITM-00000.pdf** under the Lube Oil Skid project (**PRJ-2026.0001**). This step saves the selected drawing as a **Document Issue Line** on a draft Transmittal.
 
 !!! note "Local workflow test"
     Tested locally in Engineering Workflow Test on 14 November 2026. This step covers document selection and the saved issue register. Continue with [generating the transmittal PDF](engineering-transmittal-pdf.md). Issuing the package, portal downloads and returned client comments remain later workflow steps.

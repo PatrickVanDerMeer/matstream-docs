@@ -48,7 +48,7 @@ Inspect received lines, skipped lines and warnings before closing. In the exampl
 
 ## 4. Verify stock and outstanding quantities
 
-Open the Library article's **Stock** tab or destination location. Check shelf, **On Hand** and **On Order**. For ledger inspection, check the **PO Receipt** and corresponding release of on-order commitment.
+Open the Library article's **Stock** tab, or open **Inventory** in the sidebar and browse to the destination location. Check shelf, **On Hand** and **On Order**. For ledger inspection, check the **PO Receipt** and corresponding release of on-order commitment.
 
 ![Stock tab: 01-A holds four pieces and has zero on order](../images/department-workflows/receiving-07-stock.jpg)
 

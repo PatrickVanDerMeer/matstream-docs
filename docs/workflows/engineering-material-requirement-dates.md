@@ -4,6 +4,10 @@ The motor and pump need to be ready for assembly on **22 January 2027**. Their c
 
 This is a snapshot when the requirement is raised. Recalculating the project does not silently replace a date the buyer has already entered.
 
+## What must be filled in before release
+
+A Need By date can only be calculated for a BOM position that has a **Supply Method** and a **Required By Task** (a milestone or task with a date). In the seeded configuration, **Engineering Ready → Release to Procurement** therefore carries two criteria, **Supply Method is required** and **Required By Task is required**. If one is empty, the Change State dialog explains what to fill in and the position stays in **Engineering Ready**; nothing is released half way. They are ordinary criteria under **Configuration → Lifecycle definitions**, so an administrator can edit their messages or severity, disable or delete them.
+
 ## Configure the automation
 
 The Engineering Project seed installs **BOM: Create Material Requirement** in **Configuration → Automations** and assigns it to the procurement release transition. Its parameters are editable by the workspace administrator:

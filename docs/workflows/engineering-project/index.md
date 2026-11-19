@@ -39,7 +39,7 @@ After that rehearsal, assess physical dispatch/delivery, remaining invoices/paym
 
 ## Worked example
 
-The two supplied drawings are revision 0 and represent one system with a manufactured child assembly:
+The two supplied drawings are revision A and represent one system with a manufactured child assembly:
 
 | Item | Role | Quantity |
 |---|---|---|
@@ -140,7 +140,7 @@ Follow the illustrated [Add the assembly walkthrough](../engineering-add-assembl
 5. Distribute the invitation through the agreed process and track response.
 6. Follow [Client review responses](../engineering-transmittal-review.md): submit the decision and commented PDF, then inspect the separate response record. Downloading is not approval.
 
-**Output:** auditable revision-0 issue and tested client access. Client transmittal sharing/review needs separate validation from supplier PO sharing.
+**Output:** auditable revision-A issue and tested client access. Client transmittal sharing/review needs separate validation from supplier PO sharing.
 
 ### 5. Document Control / Work Preparation — preliminary internal transmittal
 
@@ -365,7 +365,7 @@ Prefer existing entity/property/link mechanisms. New numeric IDs/references use 
 | Scenario | Required evidence |
 |---|---|
 | Happy path | One accepted quotation/project, linked BOM/MRs/POs, reviewed evidence, completion and authorised payment request |
-| Revision history | Original packages still open revision 0; production packages open intended new revisions |
+| Revision history | Original packages still open revision A; production packages open intended new revisions |
 | Portal isolation | Client sees only issued content; supplier sees only its shared PO/upload locations; wrong identity denied |
 | RVD seed | Pump six and motor four requirements before approved project changes; actual PO checklist matches |
 | Goods before documents | Delivery progress/50% follows scope; completion/final 20% blocked until acceptance |

@@ -122,7 +122,7 @@ Document Control Setup seeds the definitions and sample project channels. Instal
 
 ## Local workflow verification
 
-In **Engineering Workflow Test → Lube Oil Skid Project**, TR-2026-0006 was issued and shared with the current local test account, with email invitations and review requests switched off for this recipient-selection test. Its portal showed ITM-00000.pdf at captured **revision B, version 5**. The [client review workflow](engineering-transmittal-review.md) covers approval responses separately.
+In the Lube Oil Skid project (**PRJ-2026.0001**), TR-2026-0006 was issued and shared with the current local test account, with email invitations and review requests switched off for this recipient-selection test. Its portal showed ITM-00000.pdf at captured **revision B, version 5**. The [client review workflow](engineering-transmittal-review.md) covers approval responses separately.
 
 TR-2026-0007 used the **Purchasing** channel. Sending created a Distribution Record containing **Sample Buyer** and the same captured drawing version. The internal path created an in-app notification and no portal share. Both distributions retained their channel/contact details and pinned versions. These tests distribute the existing sample drawing; its visible Work in Progress state does not represent a new Vault technical release.
 

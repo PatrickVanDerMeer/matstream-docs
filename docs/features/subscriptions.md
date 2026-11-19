@@ -37,7 +37,7 @@ If nobody is subscribed, the dialog says so. Listing subscribers requires read a
 
 ## Manage your subscriptions
 
-Open **My Subscriptions**, including from the Dashboard's **Watching** tile. The list groups subscriptions created together and shows change types, delivery methods, expiry, status and report count.
+On the Dashboard's **Watching** card, choose the **Manage subscriptions** sliders icon in the toolbar beside the title to open **My Subscriptions** in a dialog. The toolbar is available even when you have no active subscriptions, so you can still find expired or cancelled entries. The list groups subscriptions created together and shows change types, delivery methods, expiry, status and report count. Close the dialog to return to the Dashboard; the Watching card refreshes automatically. Subscriptions is no longer a sidebar item. Saved links to the existing My Subscriptions page continue to work.
 
 - **Cancel** stops an active or expired subscription; **Cancel batch** handles a group together.
 - **Renew** or **Renew batch** renews expired subscriptions and requires `subscription.create`.

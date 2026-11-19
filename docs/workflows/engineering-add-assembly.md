@@ -1,10 +1,10 @@
 # Engineering — Add the assembly to the project
 
-Continue from [Sales — Quotation and project](engineering-quotation-project.md). Add the existing **ITM-00000** assembly to **Lube Oil Skid Project**, then inspect its BOM and header subassembly.
+Continue from [Sales — Quotation and project](engineering-quotation-project.md). Add the existing **ITM-00000** assembly to the Lube Oil Skid project (**PRJ-2026.0001**), then inspect its BOM and header subassembly.
 
 ## Before you start
 
-Use the project created from the accepted quotation. In this local example it is under **Explorer → Projects → 2026 → Lube Oil Skid Project**, in the **Engineering Workflow Test** workspace. The separately created **Q-2026.0001** project was only a field-default test; do not use it for this build.
+Use the project created from the accepted quotation. In this local example it is under **Explorer → Projects → 2026 → PRJ-2026.0001** (Title: Lube Oil Skid). If you created any other test project, do not use it for this build.
 
 Engineering Project Sample Data must already be installed. ITM-00000 should exist in Library as an **Assembly**, with its drawing and BOM. You need permission to read that catalogue item and add an occurrence to the project.
 
@@ -36,7 +36,7 @@ An assigned, available Stock Unit takes precedence over the fallback. A unit mer
 
 ## 1. Select the project
 
-Select **Lube Oil Skid Project** in the Explorer folder tree. Check the project name before adding anything. The main grid was empty before this test; after adding the assembly it should contain one top-level ITM-00000 occurrence.
+Select **PRJ-2026.0001** in the Explorer folder tree. Check the project name before adding anything. The main grid was empty before this test; after adding the assembly it should contain one top-level ITM-00000 occurrence.
 
 ## 2. Insert the existing assembly
 
@@ -100,7 +100,7 @@ The expanded header also showed **ITM-00006.pdf**, its three RVD requirements, a
 
 ## 5. Record the result and remaining checks
 
-The local test on **14 November 2026** added exactly one top-level ITM-00000 to Lube Oil Skid Project. Its property browser showed it was an occurrence linked to the existing definition, with quantity 1 and the correct project folder path. The definition revision displayed **0**. The expanded system and header quantities above were inspected through the application.
+The local test on **14 November 2026** added exactly one top-level ITM-00000 to the Lube Oil Skid project (PRJ-2026.0001). Its property browser showed it was an occurrence linked to the existing definition, with quantity 1 and the correct project folder path. The definition revision displayed **0**. The expanded system and header quantities above were inspected through the application.
 
 These checks remain before production release:
 
@@ -118,7 +118,7 @@ After the fix, the original ITM-00000 retained its occurrence identity, linked L
 
 ![Repaired original assembly occurrence](../images/engineering-project/12-repaired-assembly-properties.jpg)
 
-A fresh ITM-00000 inserted into the separate **Q-2026.0001** test project automatically received **BOM Position → Engineering Lifecycle → Work in Progress**. No manual category or lifecycle assignment was needed for that new occurrence. This separate project is only for rule testing; the main project still contains one top assembly.
+A fresh ITM-00000 inserted into a separate test project automatically received **BOM Position → Engineering Lifecycle → Work in Progress**. No manual category or lifecycle assignment was needed for that new occurrence. This separate project is only for rule testing; the main project still contains one top assembly.
 
 Fresh insertions of ITM-00006 (Weld Assembly) and ITM-00001 (Part) also received that category and starting lifecycle. Item is covered by the automated rule test; the seeded Item category is a heading without a sample definition of its own. The rule was saved, reopened and retained through an Engineering Project Configuration setup run.
 

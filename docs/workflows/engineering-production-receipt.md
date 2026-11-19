@@ -17,7 +17,7 @@ The receipt defaults require:
 - The completed quantity is positive and the production order's unit matches that pinned item's **Stock Unit**.
 - A real warehouse stock location in this workspace is selected and saved.
 
-For example, if the order manufactured ITM-00006 revision 0, uploading a newer Library revision later does not change what enters stock. Missing provenance is a blocker; the script never guesses the latest revision. If an older record uses a shared, unversioned BOM link and the source has since advanced, receipt also blocks until the original historical pin can be established.
+For example, if the order manufactured ITM-00006 revision A, uploading a newer Library revision later does not change what enters stock. Missing provenance is a blocker; the script never guesses the latest revision. If an older record uses a shared, unversioned BOM link and the source has since advanced, receipt also blocks until the original historical pin can be established.
 
 The normal BOM production-order script creates this source reference and copies quantity/unit. Older manually created test orders may lack them. Review and correct their known manufacturing provenance and unit explicitly before receiving; do not assume today's source revision was the one manufactured.
 
@@ -63,7 +63,7 @@ Open the warehouse shelf or the item's stock view to inspect its position. Stock
 
 ### Local browser walkthrough
 
-For **ITM-00006**, the completed header order showed its pinned revision 0, quantity **1 pc** and shelf **01-A** before receiving:
+For **ITM-00006**, the completed header order showed its pinned revision A, quantity **1 pc** and shelf **01-A** before receiving:
 
 ![Header ready for warehouse receipt](../images/engineering-project/210-header-ready-for-warehouse-receipt.png)
 

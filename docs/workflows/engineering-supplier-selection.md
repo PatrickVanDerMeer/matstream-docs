@@ -12,7 +12,7 @@ Select the supplier **on the project's Material Requirement (MR)**. This keeps t
 6. If available, select the winning quotation file in **Winning Supplier Quotation**. It can be an existing accessible file record, including a quotation uploaded under the item's documents. This field is optional in the seed.
 7. Review the values and check **Supplier Terms Agreed**. Selecting a different source normally clears the quotation and agreement confirmation and copies the new terms. Explicit values submitted in that same save are preserved. Later edits to other fields do not refresh negotiated values from the catalogue.
 
-![Motor MR uses an alternative supplier and negotiated price](../images/engineering-project/139-motor-agreed-alternate-supplier.jpg)
+![Motor MR with a selected supplier source and negotiated price (screenshot from a test that used an alternate supplier)](../images/engineering-project/139-motor-agreed-alternate-supplier.jpg)
 
 ![Pump MR uses its own supplier offer and negotiated price](../images/engineering-project/138-pump-agreed-supplier-terms.jpg)
 
@@ -26,16 +26,20 @@ An unreviewed MR is skipped with an explanation. An invalid explicit selection i
 
 ![Unreviewed pump agreement is blocked](../images/engineering-project/137-pump-terms-review-required.jpg)
 
-| Local test item | Supplier | PO | Quantity | Agreed price |
-| --- | --- | --- | --- | --- |
-| Motor ITM-00021 | LOCAL TEST - Alternate Motor Supplier | PO-2026.0001 | 1 pc | EUR 299 |
-| Pump ITM-00012 | Acme Pumps Ltd | PO-2026.0002 | 1 pc | EUR 825 |
+In the sample data that Setup installs, the pump and the motor offers are both from **Acme Pumps Ltd** in EUR. They are therefore combined into **one purchase order with two lines**:
 
-After agreeing the motor price, the test changed its catalogue offer to **EUR 399**, creating another offer version. The PO still used **EUR 299** and pinned the original offer version.
+| Item | Supplier | PO | Quantity | Agreed price |
+| --- | --- | --- | --- | --- |
+| Pump ITM-00012 | Acme Pumps Ltd | PO-2026.0001 | 1 pc | EUR 825 |
+| Motor ITM-00021 | Acme Pumps Ltd | PO-2026.0001 | 1 pc | EUR 299 |
+
+Lines are split into **separate POs** when the selected suppliers or the agreed currencies differ. To see this, add a second Supply Source for the motor from another supplier, select it on the motor MR and create the orders again. You then get one PO per supplier, for example PO-2026.0001 for the motor and PO-2026.0002 for the pump, as in the screenshots below.
+
+After agreeing a price, you can change the catalogue offer later, for example to **EUR 399**, which creates another offer version. The PO still uses the agreed price (EUR 299) and pins the original offer version.
 
 ![Motor order line keeps the agreed price](../images/engineering-project/141-motor-po-agreed-price.jpg)
 
-These are local Open POs; they have not been issued or emailed to suppliers.
+These POs are Open; they have not been issued or emailed to suppliers.
 
 ## Administrator configuration
 

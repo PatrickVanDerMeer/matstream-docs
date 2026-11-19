@@ -85,7 +85,7 @@ output category. Review the existing output before changing a position from purc
 or the reverse. Changes to BOM quantities do not silently revise an existing production order.
 
 The default production lifecycle is **Draft → Released → In Progress → Completed**, with cancellation
-paths. Completing an order records workflow progress; material consumption, finished-goods stock posting
+paths. In the seeded permissions, Administrators, Production Planning and the Production group (operators) can release, start and complete an order, but only Administrators and Production Planning can **cancel** one, because cancelling scraps a whole production run. Completing an order records workflow progress; material consumption, finished-goods stock posting
 and machine scheduling require your own configured process.
 
 #### Configure your company's process

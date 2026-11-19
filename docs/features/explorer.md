@@ -1,6 +1,6 @@
 # Explorer
 
-The Explorer is a hierarchical tree browser for navigating and managing entities in a structured, folder-based layout. It complements the Library, which is a flat search-based surface — the Explorer is for structure-first navigation: assemblies, BOMs, projects, stock locations, and any other hierarchy your workspace uses.
+The Explorer is a hierarchical tree browser for navigating and managing entities in a structured, folder-based layout. It complements the Library, which is a flat search-based surface — the Explorer is for structure-first navigation: assemblies, BOMs, projects, and other workspace structures. Warehouse folders and their contents have their own home in [Inventory](inventory.md).
 
 The Explorer navigation entry requires `explorer.view`, and reading its entity tree requires
 `entity.read`. If either grant is missing, the navigation or data is not offered; the API returns

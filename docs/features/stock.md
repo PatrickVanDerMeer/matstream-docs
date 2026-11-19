@@ -2,6 +2,8 @@
 
 MatStream's stock management layer tracks on-hand inventory quantities for items across locations. Stock data is linked to entity records, so inventory quantities live alongside the full part lifecycle, BOM, and document context.
 
+Open **Inventory** in the workspace sidebar to browse Warehouse folders, racks, storage locations and their stock. Inventory is a fixed navigation label. The physical hierarchy keeps its existing names and records; it has moved out of Explorer. See [Inventory](inventory.md).
+
 ---
 
 ## Concepts
@@ -61,7 +63,7 @@ Replenishment requirements cannot be reserved from existing stock: that would co
 they are intended to refill.
 
 **Setup and operation:** the current Sales Orders configuration creates the dedicated
-**Warehouse → Stock Replenishment** storage folder. Older workspaces may have it under Purchasing;
+**Inventory → Warehouse → Stock Replenishment** storage folder. Older workspaces may have it under Purchasing;
 the replenishment job supports either Warehouse or Purchasing parent categories. Rerun the applicable
 configuration if the folder is missing. Restart the updated API to register the job.
 The scheduler has a five-minute startup delay. Existing enabled/interval settings on the job are preserved.
@@ -91,7 +93,7 @@ Open a location entity and navigate to its **Stock** tab to see all items held a
 
 Manual adjustments are used for inventory counts, write-offs, receipts without a purchase order, and corrections.
 
-1. On the item entity's Stock tab, click **Adjust Stock** (or use the tray icon from the ribbon).
+1. On the item entity's Stock tab, click **Adjust Stock**. Alternatively, open **Inventory**, browse to a storage location, select its stock item and choose **Stock → Adjust**.
 2. Select the location.
 3. Enter the **adjustment quantity** — positive to add stock, negative to remove.
 4. Optionally enter a **note** explaining the reason.
@@ -203,6 +205,7 @@ apply to the item, location, requirement, or order being acted on.
 
 - [Display Tabs](../admin/display-tabs.md) — configure the Stock and Ledger tabs on categories
 - [Entities overview](../entities/overview.md) — entity concepts
-- [Explorer](explorer.md) — navigate to item and location entities
+- [Inventory](inventory.md) — navigate warehouses, storage locations and their stock
+- [Explorer](explorer.md) — navigate project and assembly entities
 - [Procurement](procurement.md) — requirements, purchase orders, receiving and vendor documents
 - [Barcode scanning](barcode.md) - scanning items onto orders and pick lists

@@ -46,7 +46,7 @@ On **15 November 2026**, the local test first confirmed that a non-final Library
 | Project position | Result | Created work |
 | --- | --- | --- |
 | ITM-00006 beneath ITM-00000 | Independent project position created; engineering version pinned; Release to Production | PROD-ITM-00006-15952, Draft, 1 pc |
-| ITM-00000 beneath Lube Oil Skid Project | Existing project position reused; engineering version pinned; Release to Production | PROD-ITM-00000-15861, Draft, 1 pc |
+| ITM-00000 beneath the Lube Oil Skid project (PRJ-2026.0001) | Existing project position reused; engineering version pinned; Release to Production | PROD-ITM-00000-15861, Draft, 1 pc |
 
 The shared catalogue ITM-00006 BOM position remains **Work in Progress**, with its original following link. Production Orders retain their source project-position versions. Repeating the real release transitions reused the existing orders and did not advance their original source snapshots.
 
@@ -62,7 +62,7 @@ Separate **VALIDATION ONLY** positions for both assemblies tested procurement in
 
 ## Set Required Date and verify material requirements
 
-The follow-up local test set **Lube Oil Skid Project → Required Date** to **29 January 2027**. This is an editable project value chosen for the test, not a new workspace default or a date built into the automation.
+The follow-up local test set **PRJ-2026.0001 → Required Date** to **29 January 2027**. This is an editable project value chosen for the test, not a new workspace default or a date built into the automation.
 
 1. In Explorer, right-click the project in the folder tree and choose **Details…**.
 2. On **General**, find **Required Date**, choose the intended project deadline and select **Save and Close**. **Due Date** is a separate field; planning specifically requires Required Date.

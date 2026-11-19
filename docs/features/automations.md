@@ -136,6 +136,8 @@ matstream.actions.createEntity({
 });
 ```
 
+The `name` is optional. If the script leaves it out or empty, the new entity is named from the **numbering scheme of the target category**. If the category has no numbering scheme, the action is refused, so give a name or assign a scheme.
+
 Configure real workspace IDs in Parameters (JSON), for example `{"TargetCategoryId":45,"TargetFolderId":123}`; these are illustrative IDs, not defaults. The target category must exist, be enabled, and have Folder or Occurrence family. The parent must be an existing Root or Folder in the same workspace.
 
 One run can queue at most 500 actions; exceeding the cap refuses application. One run may create at most one entity. Creation cannot be combined with writes to the source entity in the same script. Pass an optional `properties` object to `createEntity`, keyed by target property definition ID, to populate assigned stored fields in the new entity's creation transaction. Invalid target fields, malformed typed values and foreign-workspace references are rejected. This does not post financial data. Scripts have a 30-second execution timeout and a 10 MB engine memory limit. An empty script performs no work.

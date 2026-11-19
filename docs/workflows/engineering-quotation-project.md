@@ -6,6 +6,8 @@ Start the Engineering Project Workflow with a quotation for the lube-oil system.
 
 In a practice workspace, install **CRM Configuration**, **CRM Sample Opportunity**, **Engineering Project Configuration** and **Engineering Project Sample Data** from Setup. Install **Document Control Configuration** for the later drawing steps. Setup installs the quotation-to-project example automation.
 
+An opportunity is a folder, like a project. To create one, use the **...** menu in the folder tree (not the ribbon **New**); see [Creating an opportunity](../features/opportunities-quotations.md#creating-an-opportunity).
+
 ![Practice workspace setup selections](../images/engineering-project/02-setup-selection.jpg)
 
 The walkthrough uses **Lube Oil Skid Quotation** for **Northwind Manufacturing**, with **Eva de Vries** as customer contact. Your workspace may use different names and lifecycle rules.
@@ -53,7 +55,7 @@ For example, a workspace administrator could add **Default only → Title**, wit
 
 ## 4. Check the project
 
-Refresh the Explorer folder tree. Open the configured landing folder: in this sample, **Projects → 2026**. Find **Lube Oil Skid Project**. Open its properties using the folder **Edit** button.
+Refresh the Explorer folder tree. Open the configured landing folder: in this sample, **Projects → 2026**. Find the new project. Its name is a project number from the **Project Numbering** scheme, for example **PRJ-2026.0001**; it is not copied from the quotation. Open its properties using the folder **Edit** button and set **Title** to *Lube Oil Skid*. The next pages call this the Lube Oil Skid project (PRJ-2026.0001).
 
 Verify the project contains Northwind Manufacturing, Eva de Vries, the quotation description and EUR. The new project starts **In Preparation**. Complete its project number, manager, schedule and other project-specific fields according to your workspace rules.
 

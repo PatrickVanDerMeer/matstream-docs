@@ -1,6 +1,6 @@
 # Folders
 
-Folders let you organise entities into a hierarchical tree structure within the workspace. They are visible in the [Explorer](explorer.md) left pane and provide a file-system-like navigation model alongside the flat [Library](library.md) search surface.
+Folders let you organise entities into a hierarchical tree structure within the workspace. They are visible in the [Explorer](explorer.md) left pane, or in [Inventory](inventory.md) for Warehouse folders and their contents, and provide a file-system-like navigation model alongside the flat [Library](library.md) search surface.
 
 ---
 

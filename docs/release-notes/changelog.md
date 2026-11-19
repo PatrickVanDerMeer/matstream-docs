@@ -2,6 +2,8 @@
 
 ## November 2026
 
+- **Inventory:** the fixed Inventory sidebar item is now the home for Warehouse folders, racks, storage locations and existing stock actions, separate from Explorer. Existing stock records and permissions are preserved. See [Inventory](../features/inventory.md).
+
 - **Spare parts:** Engineering setup adds configurable spare requirement occurrences and named
   service-period options, separate from the build BOM. Project-owned occurrences reuse property
   inheritance for local overrides, zero requirements and resetting to recommendations. A project

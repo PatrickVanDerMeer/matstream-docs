@@ -130,6 +130,7 @@ nav:
     - Filter Items & Snapshots: features/filter-items.md
     - Folders: features/folders.md
     - Grids, columns & defaults: features/grid-defaults.md
+    - Inventory: features/inventory.md
     - Library: features/library.md
     - Suppliers, clients & addresses: features/suppliers-clients.md
     - Leave and time balances: features/time-balances.md

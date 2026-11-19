@@ -22,7 +22,19 @@ An opportunity is one pursuit: one client, one thing you are trying to win. Quot
 | Expected Close Date | When you expect to know |
 | Sales Currency | The currency the whole pursuit is quoted in |
 
-Opportunities are numbered automatically — `OPP2026 0001` and upward.
+Opportunities are numbered automatically — `OPP-2026.0001` and upward.
+
+### Creating an opportunity
+
+An opportunity is a **folder**, in the same way a **Project** is a folder. It is not an item like a quotation, so it is not created from the ribbon.
+
+1. In the Explorer **folder tree**, find the folder where the opportunity belongs, for example **Sales**.
+2. Click the **...** menu next to that folder and choose **New**.
+3. Pick the **Opportunity** category and fill in the fields above.
+
+The ribbon **New** button creates items (quotations, assemblies and similar). It does not list folder categories such as Opportunity or Project, so look for Opportunity in the folder tree menu instead.
+
+Quotations are then created inside the opportunity folder.
 
 ### The pipeline
 
@@ -51,7 +63,7 @@ A quotation is what you offered, at what price, until when. It sits under the op
 | Payment Terms / Delivery Terms | The commercial conditions; Delivery Terms uses the seeded Incoterms 2020 dropdown |
 | Sales Currency | The currency of the whole quotation |
 
-The quotation's **name is its number**, allocated automatically — `Q2026 0001`.
+The quotation's **name is its number**, allocated automatically — `Q-2026.0001`.
 
 ### Lines
 
@@ -69,7 +81,11 @@ Changing the Price List later does not silently rewrite saved lines. On an edita
 
 Quotations move **Draft → Issued**, then **Accepted**, **Declined** or **Expired**.
 
-There is deliberately no way back from Issued to Draft. The customer is holding a copy of the document, so changing it means a **new revision** — B, C, and so on — against the number they already have. Editing an issued quotation in place would leave two different papers claiming to be the same quotation.
+The customer is holding a copy of an issued document, so changing it normally means a **new revision** — B, C, and so on — against the number they already have. A declined quotation returns to **Draft** as the next revision, and so does an accepted one when an administrator reopens it (**Accepted → Draft**).
+
+Administrators also have two correction transitions that keep the **same revision**: **Accepted → Issued** and **Issued → Draft**. Use them to fix a mistake in an issued quotation, which is otherwise read-only. Every one of these transitions creates a new version, so the history shows what changed.
+
+**Client** and **Customer Contact** are required to issue a quotation (**Draft → Issued**), because an issued quotation is read-only and accepting it creates the project from these two fields. Fill them in while the quotation is still a draft.
 
 *Expired* is kept separate from *Declined* on purpose: "they said no" and "we never heard" are different outcomes, and a pipeline that treated them as one could not tell them apart.
 
@@ -81,13 +97,13 @@ An accepted quotation can trigger an ordinary stored automation on its lifecycle
 
 The output can therefore be a Project, Sales Order, Spare-Part Order or Service Order. The automation does not assume that every accepted quotation needs a Project.
 
-The created entity receives a pinned **Generated From** link to the exact source version. The entity, its Explorer placement and that link are written in one transaction.
+The created entity receives a pinned **Generated From** link to the exact source version. To see it, open the accepted quotation and look at its **Projects** tab; the quotation lists the projects generated from it. The entity, its Explorer placement and that link are written in one transaction.
 
 The action refuses rather than guesses when:
 
 - the configured category is missing, disabled or not an Explorer category;
 - the configured landing folder is missing or belongs to another workspace;
-- the output name is blank;
+- the output name is blank and the target category has no numbering scheme (with a scheme, a blank name is numbered automatically, for example a new project becomes `PRJ-2026.0001`);
 - the exact source version no longer exists.
 
 Refreshing does not create another output. Automation retry protection uses the lifecycle event identifier. An administrator can deliberately use the configured Accepted → Draft recovery transition, delete a test output, and accept again; that is a new event and produces a replacement.

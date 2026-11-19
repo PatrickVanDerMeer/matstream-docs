@@ -29,6 +29,7 @@ Your first steps in MatStream.
 Work with your engineering information.
 
 - [Explorer and navigation](features/explorer.md)
+- [Inventory](features/inventory.md)
 - [Files and documents](entities/files.md)
 - [Properties](entities/properties.md)
 - [Revisions and lifecycle](entities/revisions.md)
